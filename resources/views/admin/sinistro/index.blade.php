@@ -79,7 +79,7 @@
                { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
            ]
        } );
-   } );
+   });
 
    </script>
    {{ $sinistros->links()}}
