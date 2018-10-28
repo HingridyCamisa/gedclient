@@ -24,6 +24,7 @@ class ProspecoesController extends Controller
         $prospecaos = Prospecao::latest()->paginate(12);
 
         $hoje = Carbon::today();
+        
 
        return view('admin.prospecoes.index',compact('prospecaos','seguradora','hoje'))->with('i', (request()->input('page', 1) -1) * 12);
     }
@@ -31,10 +32,10 @@ class ProspecoesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     
+
      * @return \Illuminate\Http\Response
      */
-    
+
     public function create()
     {
         $consultors = Consultor::all();
@@ -125,7 +126,7 @@ class ProspecoesController extends Controller
         $prospecoes->detalhes_prospecao = $request->input('detalhes_prospecao');
         $prospecoes->estado = $request->input('estado');
         $prospecoes->save();
- 
+
         return redirect('/admin/prospecoes/index');
 
     }

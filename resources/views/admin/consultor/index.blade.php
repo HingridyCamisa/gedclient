@@ -7,7 +7,7 @@
     <a class="btn btn-success"  href="{{ url('admin/consultor') }}"><i class="fa fa-fw fa-file-pdf-o"></i> </a>
     <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-excel-o"></i></a>
     <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-print"></i></a></h1>
-   
+
 @stop
 
 @section('content')
@@ -36,7 +36,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-birthday-cake"></i> Data Nascimento </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-briefcase"></i> N Contratos </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções </center></th>
-          
+
         </tr>
       </thead>
       <tbody>
@@ -49,17 +49,17 @@
           <td><center>{{ Carbon\Carbon::parse($consultores->data_nascimento)->format('d-m-Y ') }}</center></td>
           <td><center> <a hreg="#">1</a></center></td>
           <td><center><a href="{{ route ('consultor.edit', $consultores->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
-              
+
               <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
               @if(Auth::user()->cargo =='1')
               {!! Form::open(['method' => 'DELETE','route' => ['consultor.destroy', $consultores->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
-          
+
           </td>
-          
-                                    
+
+
           @endforeach
       </tr>
       </tbody>
@@ -72,14 +72,24 @@
           <th scope="col"><center><i class="fa fa-fw fa-birthday-cake"></i> Data Nascimento </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-briefcase"></i> N Contratos </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções </center></th>
-          
+
         </tr>
       </tfoot>
     </table>
 
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
 
-    
+    </script>
+
    </div>
-   
- {{ $consultor->links() }}  
+
+ {{ $consultor->links() }}
 @stop

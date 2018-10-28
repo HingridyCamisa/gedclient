@@ -37,38 +37,38 @@
           <th scope="col"><center><i class="fa fa-fw fa-money"></i>  Situação </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
-          
+
         </tr>
       </thead>
       <tbody>
       @foreach($contratos as $contrato)
         <tr>
           <th><center>{{ ++$i }}</center></th>
-          <td><center>{{$contrato->consultor }}</center></td>  
-          <td><center>{{$contrato->nome_segurado }}</center></td> 
-          <td><center>{{$contrato->nome_seguradora }}</center></td> 
-          <td><center>{{$contrato->numero_apolice }}</center></td> 
-          <td><center>{{$contrato->tipo_seguro }}</center></td> 
+          <td><center>{{$contrato->consultor }}</center></td>
+          <td><center>{{$contrato->nome_segurado }}</center></td>
+          <td><center>{{$contrato->nome_seguradora }}</center></td>
+          <td><center>{{$contrato->numero_apolice }}</center></td>
+          <td><center>{{$contrato->tipo_seguro }}</center></td>
           <td><center>{{ Carbon\Carbon::parse($contrato->data_proximo_pagamento)->format('d-m-Y ') }}</center></td>
           <td><center>{{$contrato->situacao }}</center></td>
-          @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())       
+          @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())
           <td><center><i class="fa fa-close text-red"></i> Expirado</center></td>
           @else
            <td><center><i class="fa fa-check text-green"></i> Em dia</center></td>
            @endif
           <td><center><a href="{{ route ('contratos.edit', $contrato->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
-             
+
               <a href="{{ route ('contratos.show', $contrato->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
               @if(Auth::user()->cargo =='1')
               {!! Form::open(['method' => 'DELETE','route' => ['contrato.destroy', $contrato->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
-              @endif    
-              </center>   
+              @endif
+              </center>
           </td>
-          
-                                    
-         
+
+
+
       @endforeach
       </tr>
       </tbody>
@@ -84,12 +84,25 @@
             <th scope="col"><center><i class="fa fa-fw fa-money"></i>  Situação </center> </th>
             <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
             <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
-            
+
           </tr>
       </tfoot>
     </table>
    </div>
-        
+
+   <script type="text/javascript">
+
+     $(document).ready(function() {
+         $('#example').DataTable( {
+             dom: 'Bfrtip',
+             buttons: [
+                 'copy', 'csv', 'excel', 'pdf', 'print','colvis'
+             ]
+         } );
+     } );
+
+   </script>
+
  {{ $contratos->links() }}
 
 @stop

@@ -31,7 +31,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-subway"></i> Sinistro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i>Segurado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>      
+          <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
         </tr>
@@ -52,10 +52,10 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
-              </center>     
+              </center>
           </td>
-          
-          @endforeach     
+
+          @endforeach
       </tr>
       </tbody>
       <tfoot>
@@ -64,14 +64,24 @@
           <th scope="col"><center><i class="fa fa-fw fa-subway"></i> Sinistro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i>Segurado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>      
+          <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
         </tr>
       </tfoot>
     </table>
    </div>
-   
+   <script type="text/javascript">
+   $(document).ready(function() {
+       $('#example').DataTable( {
+           dom: 'Bfrtip',
+           buttons: [
+               { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+           ]
+       } );
+   } );
+
+   </script>
    {{ $sinistros->links()}}
-   
+
 @stop

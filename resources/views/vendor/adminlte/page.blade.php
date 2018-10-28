@@ -3,7 +3,9 @@
 @section('adminlte_css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-    
+
+
+
     @stack('css')
     @yield('css')
 @stop
@@ -25,11 +27,11 @@
                     <div class="navbar-header">
                     <a class="navbar-brand" href="index.html"></a>
                         <!-- <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="navbar-brand">
-                             {!! config('adminlte.logo', '<b>Admin</b>LTE') !!} 
+                             {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                         </a> -->
                          <a class="navbar-brand" href="#">
                          <img src="{{ ('/img/Capture.PNG')}}"  class="img-circle" alt="logo" width="30" height="30">
-                         </a> 
+                         </a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -63,7 +65,7 @@
 
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-        
+
                         <li class="dropdown birthday-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-birthday-cake"></i>
@@ -82,20 +84,20 @@
                             <span class="label label-primary">10</span>
                             </a>
                         </li>
-                       
+
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-warning">4</span>
                             </a>
                         </li>
-                    
+
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
                                     <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
                                 </a>
-                                
+
                             @else
                                 <a href="#"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
@@ -121,7 +123,7 @@
         @if(config('adminlte.layout') != 'top-nav')
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-                
+
             <!-- sidebar: style can be found in sidebar.less -->
              <section class="sidebar" style="height: auto;">
              <div class="user-panel">
@@ -129,15 +131,15 @@
                         <img src="{{ ('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
 
                     </div>
-                    
+
 
             <div class="pull-left info">
                 <p>&nbsp{{ Auth::user()->name }}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-                    
-                </div> 
-                
+
+                </div>
+
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
@@ -163,7 +165,7 @@
             <section class="content">
 
                 @yield('content')
-                
+
             </section>
             <!-- /.content -->
             @if(config('adminlte.layout') == 'top-nav')
@@ -183,12 +185,12 @@
 
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <!--<script src="http://code.jquery.com/jquery.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-   
-   
-    
+
+
+
     @stack('js')
     @yield('js')
 @stop
