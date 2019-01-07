@@ -83,14 +83,74 @@
                             <i class="fa fa-fw fa-briefcase"></i>
                             <span class="label label-primary">10</span>
                             </a>
+                            
+
                         </li>
 
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-warning">4</span>
+                        <li class="dropdown messages-menu open">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="label label-warning">4</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li class="header">Tem 4 novas mensagens</li>
+                    <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                        <li><!-- start message -->
+                            <a href="#">
+                            <div class="pull-left">
+                                <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                            </div>
+                            <h4>
+                                Joao Macaba
+                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                            </h4>
+                            <p>Tive um sinistro, o que devo fazer?</p>
                             </a>
                         </li>
+                        <!-- end message -->
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                            Clotilde Chongo
+                        <small><i class="fa fa-clock-o"></i> Today</small>
+                      </h4>
+                      <p>Ja mandei o comprovativo de pagamento de saude.</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Hamilton Charifo
+                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                      </h4>
+                      <p>O que e preciso para eu incluir a minha esposa no seguro de saude?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Liberty Blu
+                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                      </h4>
+                      <p>Quando vao mandar a lista dos segurados que desejam pedir o reembolso?</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">Ver todas mensagens</a></li>
+            </ul>
+          </li>
 
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))

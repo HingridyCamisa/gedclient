@@ -9,6 +9,7 @@
   <h1><a class="btn btn-primary"  href="{{ url('admin/seguradoras/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
 @stop
 
+
 @section('content')
 <div class="col-md-12">
           <!-- general form elements -->
@@ -42,5 +43,7 @@
           </div>
           <!-- /.box -->
     </div>
+
+    
 
 @stop

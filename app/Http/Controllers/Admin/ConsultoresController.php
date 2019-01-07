@@ -7,7 +7,7 @@ use App\Http\Requests\ConsultorRequest;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDF;
+
 
 
 class ConsultoresController extends Controller
@@ -117,11 +117,4 @@ class ConsultoresController extends Controller
         return redirect('/admin/consultor/index');
     }
 
-    public function export_pdf()
-    {
-
-        $pdf = PDF::loadView('admin.consultor.pdf');
-
-        return $pdf->download('admin.consultor.pdf');
-    }
 }

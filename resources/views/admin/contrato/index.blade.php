@@ -3,10 +3,7 @@
 @section('title','Prospecções')
 
 @section('content_header')
-    <h1><a class="btn btn-success"  href="{{ url('admin/contrato') }}"><i class="fa fa-fw fa-plus"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-pdf-o"></i> </a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-excel-o"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-print"></i></a></h1>
+    <h1><a class="btn btn-success"  href="{{ url('admin/contrato') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
@@ -14,15 +11,7 @@
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-folder-open"></i> Contratos </strong></h3></center>
 
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 200px;">
-                  <input name="table_search" class="form-control pull-right" placeholder="Search" type="text">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
+    
      </div>
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -44,8 +33,16 @@
       @foreach($contratos as $contrato)
         <tr>
           <th><center>{{ ++$i }}</center></th>
+          @if($contrato->consultor)
           <td><center>{{$contrato->consultor }}</center></td>
+          @else
+           <td><center>{{$contrato->nome_consultor}}</center></td>
+          @endif
+          @if($contrato->nome_cliente)
+          <td><center>{{$contrato->nome_cliente}}</center></td>
+          @else
           <td><center>{{$contrato->nome_segurado }}</center></td>
+          @endif
           <td><center>{{$contrato->nome_seguradora }}</center></td>
           <td><center>{{$contrato->numero_apolice }}</center></td>
           <td><center>{{$contrato->tipo_seguro }}</center></td>
@@ -90,18 +87,66 @@
     </table>
    </div>
 
-   <script type="text/javascript">
+<script type="text/javascript">
 
-     $(document).ready(function() {
-         $('#example').DataTable( {
-             dom: 'Bfrtip',
-             buttons: [
-                 'copy', 'csv', 'excel', 'pdf', 'print','colvis'
-             ]
-         } );
-     } );
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+              extend: 'copy',
+              text: '<i class="fa fa-files-o"></i>',
+              exportOptions: {
+                columns: ':visible'
 
-   </script>
+              }
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa fa-file-excel-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'csv',
+              text: '<i class="fa fa-file-text-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="fa fa-file-pdf-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'print',
+              text: '<i class="fa fa-fw fa-print"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'colvis',
+              text: '<i class="fa fa-fw fa-eye-slash"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+        ]
+    } );
+} );
+
+</script>
+
 
  {{ $contratos->links() }}
 

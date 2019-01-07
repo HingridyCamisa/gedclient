@@ -7,6 +7,8 @@ use App\Prospecao;
 use App\Segurado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+// use ConsoleTVs\Charts\Facades\Charts;
+// use DB;
 
 class AdminController extends Controller
 {
@@ -20,6 +22,14 @@ class AdminController extends Controller
         
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
+        
+        // $chart = Charts::database($segurado, 'bar', 'highcharts')
+        //     ->title("Users")
+        //     ->elementLabel("Total")
+        //     ->dimensions(1000,500)
+        //     ->responsive(false)
+        //     ->groupbyMonth(date('Y'), true);
+
         return view('admin.home.index',compact('prospecao','segurado'));
     }
 

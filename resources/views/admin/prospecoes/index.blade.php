@@ -2,26 +2,13 @@
 @section('title','Tabela Prospecções')
 
 @section('content_header')
-    <h1><a class="btn btn-success"  href="{{ url('admin/prospecoes') }}"><i class="fa fa-fw fa-plus"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-pdf-o"></i> </a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-excel-o"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-print"></i></a></h1>
+    <h1><a class="btn btn-success"  href="{{ url('admin/prospecoes') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
  <div class="box box-solid box-success">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-briefcase"></i> Prospecções </strong></h3></center>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 200px;">
-                  <input name="table_search" class="form-control pull-right" id="table_search" placeholder="Search" type="text">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
      </div>
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -62,7 +49,7 @@
               @endif
             </center>
              </td>
-             <td><center><button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-default">
+             <td><center><button type="button" id="tornarcontrato"  value ="{{ $prospecao->id }}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-default">
                 Contrato
               </button> </center></td>
              <!-- <a href="{{ route ('prospecoes.show', $prospecao->id)}}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-folder"></i>Contrato</a> -->
@@ -99,6 +86,13 @@
                <center> <h4 class="modal-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Contrato </h4> </center>
               </div>
               <div class="modal-body row">
+                <form method="post" action="{{route('tornarcontrato')}}" enctype="multipart/form-data" >
+                @csrf
+                <input id="id" name="id_prospecaos" hidden>
+                <input name="id_user" hidden value="{{ Auth::user()->id }}">
+                <input id="nome_segurado" name="nome_segurado" hidden>
+                <input id="consultor" name="nome_consultor" hidden>
+                <input id="ramo_negocio" name="ramo_negocio" hidden>
 
                 <p> <div class="form-group">
                     <label for="inputEmail3" class="col-md-2 control-label">Seguradora</label>
@@ -116,12 +110,12 @@
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Nº de Apólice" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Nº de Apólice" type="text" name="numero_apolice"></div>
                     </div>
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Nº de Recibo" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Nº de Recibo" type="text" name="numero_recibo"></div>
                     </div>
                   </div>
                 </p> <br><br>
@@ -131,14 +125,14 @@
                     <div class="col-md-4">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                      <input class="form-control" id="inputEmail3" type="date"></div>
+                      <input class="form-control" id="inputEmail3" type="date" name="data_inicio"></div>
                     </div>
 
                     <label for="inputEmail3" class="col-md-2 control-label"> Expira </label>
                     <div class="col-md-4">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                      <input class="form-control" id="inputEmail3"  type="date"></div>
+                      <input class="form-control" id="inputEmail3"  type="date" name="data_proximo_pagamento"></div>
                     </div>
                 </p> <br><br>
 
@@ -147,12 +141,12 @@
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Cobertos" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Cobertos" type="text" name="dias_cobertos"></div>
                     </div>
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Próximo Pagamento" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento"></div>
                     </div>
                   </div>
                 </p> <br><br>
@@ -162,7 +156,7 @@
                     <div class="col-md-10">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Capital Seguro" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Capital Seguro" type="text" name="capital_seguro"></div>
                     </div>
                   </div>
                 </p> <br><br>
@@ -172,12 +166,12 @@
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Total" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Total" type="text" name="premio_total"></div>
                     </div>
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Simples" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Simples" type="text" name="premio_simples"></div>
                     </div>
                   </div>
                 </p> <br><br>
@@ -187,12 +181,12 @@
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon">%</span>
-                      <input class="form-control" id="inputEmail3" placeholder="Taxa" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Taxa" type="text" name="taxa_corretagem"></div>
                     </div>
                     <div class="col-md-5">
                       <div class="input-group">
                       <span class="input-group-addon">MTN</span>
-                      <input class="form-control" id="inputEmail3" placeholder="Comissão" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Comissão" type="text" name="comissao"></div>
                     </div>
                   </div>
                 </p> <br><br>
@@ -200,12 +194,12 @@
                   <p> <div class="form-group">
                     <label for="inputEmail3" class="col-md-2 control-label">Periodicidade Pagamento</label>
                     <div class="col-md-10">
-                    <select class="form-control" name="periodicidade_pagamento">
-                                    <option>Mensal</option>
-                                    <option>Trimestral</option>
-                                    <option>Semestral</option>
-                                    <option>Anual</option>
-                                    <option>Não Renovável </option>
+                    <select class="form-control" name="periodicidade_pagamento" name="periodicidade_pagamento">
+                                    <option value="Mensal">Mensal</option>
+                                    <option value="Trimestral">Trimestral</option>
+                                    <option value="Semestral">Semestral</option>
+                                    <option value="Anual">Anual</option>
+                                    <option value="Não~Renovável">Não Renovável </option>
                                 </select>
                   </div>
                 </p> <br><br>
@@ -213,9 +207,9 @@
                  <p> <div class="form-group">
                     <label for="inputEmail3" class="col-md-2 control-label">Situação da Apólice</label>
                     <div class="col-md-10">
-                    <select class="form-control" name="situacao">
-                       <option>Pago</option>
-                       <option>Em Cobrança</option>
+                    <select class="form-control" name="situacao" name=" situacao">
+                       <option value="Pago">Pago</option>
+                       <option value="Em Cobrança">Em Cobrança</option>
                     </select>
                   </div>
                 </p> <br><br>
@@ -225,13 +219,13 @@
                     <div class="col-md-4">
                       <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
-                      <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text"></div>
+                      <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"></div>
                     </div>
 
                     <label for="inputEmail3" class="col-md-2 control-label">Upload Apólice</label>
                     <div class="col-md-4">
                       <div class="input-group">
-                      <input id="exampleInputFile" type="file">
+                      <input id="exampleInputFile" type="file" name="upload_apolice">
                      </div>
                     </div>
                   </div>
@@ -243,7 +237,8 @@
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submeter</button>
               </div>
             </div>
-            <!-- /.modal-content -->
+           </form>
+             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
         </div>
@@ -255,19 +250,75 @@
 
 <script type="text/javascript">
 
-  $(document).ready(function() {
-      $('#example').DataTable( {
-          dom: 'Bfrtip',
-          buttons: [
-              'copy', 'csv', 'excel', 'pdf', 'print','colvis'
-          ]
-      } );
-  } );
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+              extend: 'copy',
+              text: '<i class="fa fa-files-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa fa-file-excel-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'csv',
+              text: '<i class="fa fa-file-text-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="fa fa-file-pdf-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'print',
+              text: '<i class="fa fa-fw fa-print"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'colvis',
+              text: '<i class="fa fa-fw fa-eye-slash"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+        ]
+    } );
+} );
 
 </script>
 
 
+<script>
+  $(document).on('click', 'button[id="tornarcontrato"]', function(){
+    $valu = $(this).val();
+    // alert($valu);
+    $('#id').val($valu);
+    //alert($('#id').val());
+  } );
 
+ 
+</script>
 
 
 @stop

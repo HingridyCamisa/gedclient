@@ -79,6 +79,8 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::post('contrato','ContratoController@store')->name('contratos.store');
 
+    Route::post('tornarcontrato','ContratoController@tornarcontrato')->name('tornarcontrato');
+
     Route::get('contrato/show/{id}','ContratoController@show')->name('contratos.show');
 
     Route::get('contrato/{id}/edit', 'ContratoController@edit')->name('contratos.edit');

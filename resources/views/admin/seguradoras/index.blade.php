@@ -3,26 +3,13 @@
 @section('title', 'Seguradoras')
 
 @section('content_header')
-    <h1><a class="btn btn-success"  href="{{ url('admin/seguradoras')}}"><i class="fa fa-fw fa-plus"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-pdf-o"></i> </a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-file-excel-o"></i></a>
-    <a class="btn btn-success"  href="#"><i class="fa fa-fw fa-print"></i></a></h1>
+    <h1><a class="btn btn-success"  href="{{ url('admin/seguradoras')}}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
  <div class="box box-solid box-success">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-institution"></i> Seguradoras</strong></h3></center>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 200px;">
-                  <input name="table_search" class="form-control pull-right" placeholder="Search" type="text">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
      </div>
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -75,16 +62,65 @@
 
 
 <script type="text/javascript">
+
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+            {
+              extend: 'copy',
+              text: '<i class="fa fa-files-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa fa-file-excel-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'csv',
+              text: '<i class="fa fa-file-text-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="fa fa-file-pdf-o"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'print',
+              text: '<i class="fa fa-fw fa-print"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
+            {
+              extend: 'colvis',
+              text: '<i class="fa fa-fw fa-eye-slash"></i>',
+              exportOptions: {
+                columns: ':visible'
+
+              }
+            },
         ]
     } );
 } );
 
 </script>
+
 
 
 @stop

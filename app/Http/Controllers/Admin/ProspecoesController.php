@@ -21,7 +21,9 @@ class ProspecoesController extends Controller
     public function index()
     {
         $seguradora = Seguradora::all();
-        $prospecaos = Prospecao::latest()->paginate(12);
+        $prospecaos = Prospecao::latest()
+                                ->where('status','1')
+                                ->paginate(12);
 
         $hoje = Carbon::today();
         

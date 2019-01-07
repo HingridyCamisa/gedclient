@@ -88,22 +88,22 @@
                             <label for="generosegurado"><i class="fa fa-balance-scale"></i> Franquia</label>
                                 <div class="form-radio">
                                     <label class="radio-inline">
-                                        <input type="radio"  value="1">Sim
+                                        <input type="radio"  value="1" id="radio-sim">Sim
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" value="0">Nao
+                                        <input type="radio" value="0" id="radio-nao">Nao
                                     </label>
                                 </div>
                             </div>
                          
                         <div class="col-xs-2">
                             <label for="NomeSeguradora"><i class="fa fa-balance-scale"></i> Franquia </label>
-                            <input class="form-control" name="franquia" placeholder=" % Franquia" type="text">    
+                            <input class="form-control" id="franquia" name="franquia" placeholder=" % Franquia" type="text">    
                         </div>
 
                         <div class="col-xs-2">
                              <label for="NomeSegurado"><i class="fa fa-money"></i> Valor Franquia </label>
-                             <input class="form-control" name="valor_franquia" placeholder="Valor Franquia " type="text">               
+                             <input class="form-control" name="valor_franquia" placeholder="Valor Franquia " id="valor_franquia" type="text">               
                          </div>
                                    
                      </div><br>
@@ -164,5 +164,35 @@
            @endif
           </div>
           <!-- /.box -->
+          <script>
+$(document).ready(function() {
+  $('input[name="radio"]').on('click change', function(e) {
+      var data=($(this).val());
+      var valor_sinistro=$('#valor_sinistro').val();
+      var franquia=$('#franquia').val();
+      var valorfranquia=0;
+        if (franquia<=0) {
+
+
+          document.getElementById("radio-sim").checked = false;
+          document.getElementById("radio-nao").checked = true;
+          alert("introduza o valor da franquia");
+        }else if (data==1) {
+          valorfranquia=valor_sinistro*(franquia/100);
+          $('#valor_franquia').val(valorfranquia);
+
+          document.getElementById("valor_franquia").disabled = false;
+        }else if (data==0) {
+          $('#franquia').val("");
+          $('#valor_franquia').val(0);
+          document.getElementById("valor_franquia").disabled = true;
+
+        }
+
+      console.log(data);
+  });
+});
+</script>
+
 
 @stop
