@@ -91,11 +91,11 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ ('/img/casa.jpg')}}"  alt="AAAAA">
+                    <img class="d-block w-100" src="{{ asset('/img/casa.jpg')}}"  alt="AAAAA">
                     
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ ('/img/casa.jpg')}}"  alt="AAAAA">
+                    <img class="d-block w-100" src="{{ asset('/img/casa.jpg')}}"  alt="AAAAA">
                 </div>
                 
             </div>

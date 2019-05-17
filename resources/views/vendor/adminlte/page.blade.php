@@ -100,7 +100,7 @@
                         <li><!-- start message -->
                             <a href="#">
                             <div class="pull-left">
-                                <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                                <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
                             </div>
                             <h4>
                                 Joao Macaba
@@ -113,7 +113,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                             Clotilde Chongo
@@ -125,7 +125,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Hamilton Charifo
@@ -137,7 +137,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/img/Capture.PNG" class="img-circle" alt="User Image">
+                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Liberty Blu
@@ -188,7 +188,8 @@
              <section class="sidebar" style="height: auto;">
              <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ ('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
+                        
 
                     </div>
 

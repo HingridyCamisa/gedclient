@@ -167,9 +167,9 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
-        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
-
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+
+        
 
     ],
 
@@ -224,6 +224,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+       
+        
         
 
     ],

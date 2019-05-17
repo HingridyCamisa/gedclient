@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Admin;
 use App\Prospecao;
 use App\Segurado;
+use App\Contrato;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 // use ConsoleTVs\Charts\Facades\Charts;
 // use DB;
+use Charts;
+
 
 class AdminController extends Controller
 {
@@ -22,15 +25,16 @@ class AdminController extends Controller
         
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
+        $contrato = Contrato::all();
         
-        // $chart = Charts::database($segurado, 'bar', 'highcharts')
-        //     ->title("Users")
-        //     ->elementLabel("Total")
-        //     ->dimensions(1000,500)
-        //     ->responsive(false)
-        //     ->groupbyMonth(date('Y'), true);
+        // $chart = Charts::new('line','highcharts')
+        // ->setTitle("Contratos")
+        // ->setLabels(["Imperial","Arko","Emose"])
+        // ->setValues([100,50,20])
+        // ->setElementLabel("Total Contratos");
+    
 
-        return view('admin.home.index',compact('prospecao','segurado'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato'));
     }
 
     /**

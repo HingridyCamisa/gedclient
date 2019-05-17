@@ -9,6 +9,8 @@
 @section('content')
 <div class="row">
 @if(Auth::user()->cargo =='1')
+
+  
   <div class="col-md-3">
     <div class="small-box bg-green">
               <div class="inner">
@@ -39,7 +41,7 @@
     <div class="col-md-3">
     <div class="small-box bg-red">
               <div class="inner">
-                <h4><strong>{{ $prospecao->count('prospecaos')}}</strong></h4>
+                <h4><strong>{{ $contrato->count('contrato')}}</strong></h4>
 
                 <p>Número de Contratos</p>
               </div>

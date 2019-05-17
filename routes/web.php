@@ -117,3 +117,21 @@ Auth::routes();
 $this->get('/','Sistema\SistemaController@index')->name('home');
 
 
+//sms sender 
+Route::get('/sms', function () {
+    return view('sms.sms');
+});//formulario de sms
+Route::post('/enviarsms','SmsController@enviarsms');
+Route::get('/bulcksms',function(){
+	return view('sms.bulcksms');
+});//formulario de bulck sms contactos
+Route::post('/saveclient','BulckSmsController@saveclient');
+Route::get('/messagebulcksms',function(){
+return view('sms.messagebulcksms');
+});//formulario de bulck sms messagem
+Route::post('/savemessagen','BulckSmsController@savemessagen');
+Route::get('/sendbulcksms','BulckSmsController@sendbulcksms');//formulario de envio de sms em bulck
+Route::post('/sendsmsfinal','BulckSmsController@sendsmsfinal');
+//and sender
+
+

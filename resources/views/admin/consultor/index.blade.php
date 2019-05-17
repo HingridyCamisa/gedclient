@@ -40,7 +40,7 @@
           <td><center> <a hreg="#">1</a></center></td>
           <td><center><a href="{{ route ('consultor.edit', $consultores->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
 
-              <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
+              <a href="{{ url('/sms') }}" class="btn btn-success btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
               @if(Auth::user()->cargo =='1')
               {!! Form::open(['method' => 'DELETE','route' => ['consultor.destroy', $consultores->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}

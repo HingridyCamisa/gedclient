@@ -47,6 +47,7 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
+              <a href="{{ url('/sms') }}" class="btn btn-success btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
             </center>
              </td>
              <td><center><button type="button" id="tornarcontrato"  value ="{{ $prospecao->id }}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-default">

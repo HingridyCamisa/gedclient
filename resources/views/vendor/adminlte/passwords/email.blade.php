@@ -13,7 +13,7 @@
 </div>
 <div class="row" style="width:1400px; height:500px; margin: 0px 0 0 560px;">
         <div class="col-md-4">
-        <img src="{{ ('/img/imagem2.png')}}"   alt="logo" width="437" height="100">
+        <img src="{{asset('/img/imagem2.png')}}"     alt="logo" width="437" height="100">
           <div class="box box-solid box-success">
             <div class="box-header with-border">
             <center><h3 class="box-title"><strong><i class="fa fa-refresh"></i> Recuperar Senha</strong></h3></center>

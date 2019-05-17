@@ -218,6 +218,6 @@ class ContratoController extends Controller
         $contrato= \App\Contrato::find($id);
         $contrato->delete();
 
-        return redirect('/admin/consultor/index');
+        return redirect('/admin/contrato/index');
     }
 }
