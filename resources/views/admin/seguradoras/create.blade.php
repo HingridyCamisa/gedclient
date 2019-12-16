@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1><a class="btn btn-primary"  href="{{ url('admin/seguradoras/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/seguradoras/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
    
 @stop
 
@@ -12,7 +12,7 @@
 
 
           <!-- general form elements -->
-          <div class="box box-solid box-success">
+          <div class="box box-solid box-danger">
               <div class="box-header with-border">
               <center><h3 class="box-title"><strong><i class="fa fa-institution"></i> Adicionar Seguradora</strong></h3></center>
               </div>
@@ -25,13 +25,13 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="NomeSeguradora"><i class="fa fa-institution"></i> Nome</label>
-                          <input class="form-control" name="nome_seguradora" placeholder="Almond Brokers" type="tex">
+                          <input class="form-control" name="nome_seguradora" placeholder="Amana Corretores e Consultores de Seguro" type="tex">
                         </div>
                       </div>
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="EnderecoSeguradora"><i class="fa fa-map-pin"></i> Endereço</label>
-                        <input class="form-control" name="endereco_seguradora" placeholder="Av. Ahmed Sekou Toure, n 841, 1 andar" type="text">
+                        <input class="form-control" name="endereco_seguradora" placeholder="Av. Fernão Magalhães, n 932, RC" type="text">
                       </div>
                       </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                         <div class="form-group">
                           <label for="EmailSeguradora"><i class="fa fa-envelope"></i> Email</label>
-                          <input class="form-control" name="email_seguradora" placeholder="Email@almond.co.mz" type="email">
+                          <input class="form-control" name="email_seguradora" placeholder="Email@amanaseguros.co.mz" type="email">
                         </div>
                         </div>
                       </div>
@@ -62,7 +62,7 @@
                         </div>
                       </div>
                     <br>
-                        <center><label for="Gestor"><i class="fa fa-user-secret"></i>Gestor Almond</label></center>
+                        <center><label for="Gestor"><i class="fa fa-user-secret"></i>Gestor Amana</label></center>
                         <!-- <input class="form-control" name="gestor" placeholder="Nome Gestor" type="text"> -->
                       <div class="row"> 
                           <div class="col-md-4">
@@ -89,7 +89,7 @@
 
                   <div class="box-footer">
                    
-                    <center><button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submeter</button></center>
+                    <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
                     
                   </div>
             </form>

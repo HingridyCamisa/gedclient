@@ -30,7 +30,7 @@
                              {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                         </a> -->
                          <a class="navbar-brand" href="#">
-                         <img src="{{ ('/img/Capture.PNG')}}"  class="img-circle" alt="logo" width="30" height="30">
+                         <img src="{{ ('/img/amana1.png')}}"  class="img-circle" alt="logo" width="50" height="50">
                          </a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
@@ -75,82 +75,18 @@
                         <li class="dropdown contratos-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-folder-open"></i>
-                            <span class="label label-danger">120</span>
+                            <span class="label label-success">120</span>
                             </a>
                         </li>
                         <li class="dropdown prospecoes-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="{{ url('admin/prospecoes/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-briefcase"></i>
-                            <span class="label label-primary">10</span>
+                            <span class="label label-warning">10</span>
                             </a>
                             
 
                         </li>
 
-                        <li class="dropdown messages-menu open">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="label label-warning">4</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                    <li class="header">Tem 4 novas mensagens</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                        <li><!-- start message -->
-                            <a href="#">
-                            <div class="pull-left">
-                                <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                Joao Macaba
-                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                            </h4>
-                            <p>Tive um sinistro, o que devo fazer?</p>
-                            </a>
-                        </li>
-                        <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                            Clotilde Chongo
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Ja mandei o comprovativo de pagamento de saude.</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Hamilton Charifo
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>O que e preciso para eu incluir a minha esposa no seguro de saude?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Liberty Blu
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Quando vao mandar a lista dos segurados que desejam pedir o reembolso?</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">Ver todas mensagens</a></li>
-            </ul>
-          </li>
 
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
@@ -188,7 +124,7 @@
              <section class="sidebar" style="height: auto;">
              <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{asset('/img/Capture.PNG')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset('/img/amana1.png')}}" class="img-circle" alt="User Image">
                         
 
                     </div>
@@ -196,7 +132,7 @@
 
             <div class="pull-left info">
                 <p>&nbsp{{ Auth::user()->name }}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
             </div>
 
                 </div>
@@ -235,10 +171,16 @@
             @endif
         </div>
         <!-- /.content-wrapper -->
-        <center><footer class="main-footer">
-            <strong>Copyright © 2018 <a href="#">Hingridy Camisa</a>.</strong> All rights
+        <!-- <center><footer class="main-footer">
+            <strong>Copyright © 2019 <a href="#">Hingridy Camisa</a>.</strong> All rights
             reserved.
-        </footer></center>
+        </footer></center> -->
+        <center> <footer class="main-footer">
+            <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
+            reserved.</footer>
+        </center>
+
+        
 
     </div>
     <!-- ./wrapper -->

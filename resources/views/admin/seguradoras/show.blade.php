@@ -6,21 +6,21 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-primary"  href="{{ url('admin/seguradoras/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/seguradoras/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
 @stop
 
 
 @section('content')
 <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box  box-solid box-success">
+          <div class="box  box-solid box-danger">
                  <div class="box-header with-border">
                  <center><h3 class="box-title"><strong><i class="fa fa-fw fa-institution"></i> Ramos da Seguradora </strong> <i> {{$seguradora->nome_seguradora}} </i></h3></center>
          </div>
 
     <table class="table table-striped table-bordered table-hover">
     <thead>
-        <tr class="table-success">
+        <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Ramo</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-balance-scale"></i> Taxa de Corretagem</center></th>

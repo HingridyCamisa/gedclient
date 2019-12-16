@@ -6,12 +6,12 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-primary"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
 @stop
 
 @section('content')
 
-          <div class="box  box-solid box-success">
+          <div class="box  box-solid box-danger">
                  <div class="box-header with-border">
                  <center><h3 class="box-title"><strong><i class="fa fa-fw fa-subway"></i> Detalhes do Sinistro</strong> <i>{{ $sinistros->sinistro}}</i> <strong> do Segurado </strong> <i> {{$sinistros->nome_segurado}} </i></h3></center>
          </div>

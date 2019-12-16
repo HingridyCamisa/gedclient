@@ -9,6 +9,7 @@ use App\Contrato;
 use App\Prospecao;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use carbon;
 
 class ContratoController extends Controller
 {

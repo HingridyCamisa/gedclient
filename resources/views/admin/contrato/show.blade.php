@@ -4,13 +4,13 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-primary"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
     
 @stop
 
 @section('content')
 
-          <div class="box box-solid box-success">
+          <div class="box box-solid box-danger">
                  <div class="box-header with-border">
                  <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Contrato do Segurado </strong> <i> {{$contrato->nome_segurado}} </i></h3></center>
          </div>

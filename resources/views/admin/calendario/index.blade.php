@@ -16,7 +16,7 @@
 
 @section('content')
     <div class="container">
-        <div class="box box-solid box-success">
+        <div class="box box-solid box-danger">
             <div class="box-header with-border"><b><center><i class="fa fa-calendar-plus-o"></i> Adicionar Evento ao Calendário </center></b></div>
             <div class="box-body">
                 {!! Form::open(array('route'=>'calendario.add','method'=>'POST','files'=>'true'))!!}
@@ -39,8 +39,8 @@
                     <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
                     </ul>
               
-                    @if (Session::has('success'))
-                    <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    @if (Session::has('danger'))
+                    <div class="alert alert-danger">{{ Session::get('danger') }}</div>
                     @elseif (Session::has('warnning'))
                     <div class="alert alert-danger">{{ Session::get('warnning')}}</div>
                     @endif
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="col-xs-1 col-sm-1 col-md-1 text-center"> &nbsp;</br/>
-                     {!! Form::button('<i class="fa fa-save"></i> Submit', ['id'=>'add-new-event','class'=>'btn btn-success', 'type'=>'submit']) !!} 
+                     {!! Form::button('<i class="fa fa-save"></i> Submit', ['id'=>'add-new-event','class'=>'btn btn-danger', 'type'=>'submit']) !!} 
                     </div>
 <!--'id'=>'add-new-event'-->
                 </div>
@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="box box-solid box-success">
+        <div class="box box-solid box-danger">
             <div class="box-header with-border"> <center><i class="fa fa-calendar"></i> Calendário</center></div>
                 <div class="box-body">
                      {!! $calendario_detalhes->calendar()!!}

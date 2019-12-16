@@ -13,15 +13,15 @@
 @section('body_class', 'register-page')
 
 @section('body')
-@if(Auth::user()->cargo =='2')
+@if(Auth::user()->cargo =='1')
 <div class="container">
 <br><br><br><br><br><br><br><br>
 <div class="panel-heading text-center">
 </div>
-<div class="row" style="width:1400px; height:500px; margin: 0px 0 0 250px;">
+<div class="row" style="width:1400px; height:750px; margin: 0px 0 0 250px;">
         <div class="col-md-6">
-        <img src="{{ ('/img/imagem2.png')}}"   alt="logo" width="670" height="100">
-          <div class="box box-solid box-success">
+        <img src="{{ ('/img/amana2.png')}}"   alt="logo" width="670" height="100">
+          <div class="box box-solid box-danger">
             <div class="box-header with-border">
             <center><h3 class="box-title"><strong><i class="fa fa-user"></i> Registar Usuário</strong></h3></center>
             </div>
@@ -133,11 +133,11 @@
                     </div>
 
                     <div class="box-footer">
-                        <center><button type="submit" class="btn btn-success btn-block btn-flat"><i class="fa fa-plus"></i> Criar Conta</button></center>
+                        <center><button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fa fa-plus"></i> Criar Conta</button></center>
                     </div>
             </form>
                     <div class="auth-links">
-                     <center><a href="{{ url(config('adminlte.login_url', 'login')) }}" class="text-green">Voltar para o formulário de Inicio de Sessão </a></center>
+                     <center><a href="{{ url(config('adminlte.login_url', 'login')) }}" class="text-black">Voltar para o formulário de Inicio de Sessão </a></center>
                     </div>
                         
 
@@ -151,13 +151,17 @@
 
      
     <div class="footer text-muted">
-   <center> <strong>Copyright © 2018 <a href="#">Hingridy Camisa</a>.</strong> All rights
+   <center> <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-white">Amana Softwares</a>.</strong> All rights
             reserved.</center>
 	</div>
 </div>
 
 </div>
 
+@endif
+
+@if(Auth::user()->cargo =='2')
+ <h1> teste </h1>
 @endif
 
 @stop

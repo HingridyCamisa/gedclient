@@ -84,7 +84,7 @@ class BulckSmsController extends Controller
 		$sendMessageRequest2 = new SendMessageRequest([
 			'from'=>'Almond',
 		    'phoneNumber' => $pnumber,
-		    'message' => $subject,//pode editar a sms
+		    'message' => $subject,
 		    'deviceId' => 110782
 		]);
 
@@ -92,13 +92,7 @@ class BulckSmsController extends Controller
 		        $sendMessageRequest2
 		]);
 
-		//$respons=print_r($sendMessages);
-		//Session::flash('success', 'SMS envida com sucesso de: '.$fname.' para: '.$pnumber.' '.$dname);
-		//return view($respons);
-
-		//$output = new Symfony\Component\Console\Output\ConsoleOutput();//escrevendo na consol do navegador
-		//$output->writeln($sendMessages);
-
+		
 
 
 

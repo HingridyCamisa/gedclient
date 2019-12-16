@@ -15,7 +15,7 @@ return [
 
     'title' => ' Sistema Carteira Clientes',
 
-    'title_prefix' => 'Almond Brokers -',
+    'title_prefix' => 'Amana Seguros -',
 
     'title_postfix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Almond Brokers</b>',
+    'logo' => '<b>Amana Seguros</b>',
 
-    'logo_mini' => '<b>AB</b>',
+    'logo_mini' => '<b>AS</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'green',
+    'skin' => 'red',
 
     /*
     |--------------------------------------------------------------------------
@@ -130,6 +130,20 @@ return [
             'text'        => 'Gestão Contratos',
             'url'         => 'admin/contrato/index',
             'icon'        => 'folder-open',
+            'submenu'     => [
+                [
+                    'text'  => 'Gestão Contratos',
+                    'url'   => 'admin/contrato/index',
+                    'icon'  => 'folder-open',
+
+                ],
+                [
+                    'text'  => 'Gestão Cobranças',
+                    'url'   => '#',
+                    'icon'  => 'fax',
+
+                ],
+            ]
         ],
         [
             'text'        => 'Gestão Consultores',
@@ -154,6 +168,26 @@ return [
             'url'         => '#',
             'icon'        => 'medkit',
         ],
+        [
+            'text'        => 'Finanças',
+            'url'         => '#',
+            'icon'        => 'calculator',
+            'submenu'     => [
+                [
+                    'text'  => 'Aviso de Cobranças',
+                    'url'   => '#',
+                    'icon'  => 'warning',
+
+                ],
+                [
+                    'text'  => 'Recibo',
+                    'url'   => '#',
+                    'icon'  => 'file-text-o',
+
+                ],
+            ]
+               
+        ],
         
         'SUB MENU',
         [
@@ -161,21 +195,6 @@ return [
             'text'        => 'Relatórios',
             'url'         => '#',
             'icon'        => 'bar-chart',
-            'submenu'     => [
-                [ 
-                    'text'      => 'Metas',
-                    'url'       => 'admin/metas',
-                    'icon'      => 'line-chart',
-                ],
-                [ 
-                    'text'      => 'Histórico',
-                    'url'       => 'admin/historico',
-                    'icon'      => 'history',
-                ],
-               
-
-
-            ]
         ],
         [
             'text'        => 'Calendário',
@@ -184,7 +203,7 @@ return [
         ],
         [
             'text'        => 'Aniversários',
-            'url'         => '#',
+            'url'         => 'admin/aniversarios/index',
             'icon'        => 'birthday-cake',
         ],
     ],

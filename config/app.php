@@ -169,6 +169,13 @@ return [
 
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
+        RezaAr\Highcharts\Provider::class,
+
+        
+
+
+        
+
         
 
     ],
@@ -224,6 +231,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Chart' => RezaAr\Highcharts\Facade::class,
+        
        
         
         

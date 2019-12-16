@@ -3,7 +3,7 @@
 @section('title', 'SGCCS')
 
 @section('content_header')
-    <h1>Carteira Almond Brokers</h1>
+    <h1><strong>Amana Corretores e Consultores de Seguros, S.A </strong></h1>
 @stop
 
 @section('content')
@@ -28,14 +28,14 @@
   <div class="col-md-3">
     <div class="small-box bg-yellow">
               <div class="inner">
-                <h4><strong>{{ $segurado->count('segurados')}}</strong></h4>
+                <h4><strong>{{ $prospecao->count('prospecao')}}</strong></h4>
 
-                <p>Número de Segurados</p>
+                <p>Número de Prospecoes</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-stalker"></i>
+                <i class="ion ion-bag"></i>
               </div>
-              <a href="{{ url('admin/segurados/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/prospecoes/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
     </div>
     <div class="col-md-3">
@@ -65,52 +65,75 @@
             </div>
     </div>
 </div>
+<hr>
+<div id="app">    
+        <div class="col-md-6">
+            <div class="card">
 
-<div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Browser Usage</h3>
+                <div class="panel-body">
+                  <div>
+                    {!! $chart->container()!!}
+                 
+                  </div>  
+                </div>
+            </div>
+        </div>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="chart-responsive">
-                    <canvas id="pieChart" height="160" width="244" style="width: 244px; height: 160px;"></canvas>
-                  </div>
-                  <!-- ./chart-responsive -->
+        <div class="col-md-6">
+                <div class="card">
+
+                          <div class="panel-body">
+                                    <div>
+                                      {!! $emidio->container()!!}
+                                  
+                                    </div>  
+                          </div>
                 </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                  </ul>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">United States of America
-                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                </li>
-                <li><a href="#">China
-                  <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-              </ul>
-            </div>
-            <!-- /.footer -->
-          </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+        <!--Graficos-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fusioncharts@3.12.2/fusioncharts.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.1.0/dist/frappe-charts.min.iife.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.7/c3.min.js"></script>
+
+
+
+<script src="https://unpkg.com/vue"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+
+    });
+
+
+</script>
+ 
+
+{!! $chart->script() !!}
+{!! $emidio->script() !!}
+
+
+<style>
+.card-text{
+      color: #DDC728;
+      font-size: 3rem;
+      font-family: "bitter",Georgia,serif;
+}
+
+
+</style>    
+
+
+          
 @stop

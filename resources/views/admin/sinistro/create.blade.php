@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1><a class="btn btn-primary"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
    
 @stop
 
@@ -12,7 +12,7 @@
 
 
           <!-- general form elements -->
-          <div class="box box-solid box-success">
+          <div class="box box-solid box-danger">
               <div class="box-header with-border">
               <center><h3 class="box-title"><strong><i class="fa fa-users"></i> Adicionar Sinistro</strong></h3></center>
               </div>
@@ -151,7 +151,7 @@
 
                   <div class="box-footer">
                    
-                    <center><button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Submeter</button></center>
+                    <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
                     
                   </div>
             </form>

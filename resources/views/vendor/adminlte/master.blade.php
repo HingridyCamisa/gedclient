@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="img/Capture.PNG" type="image/png">
+    <title>Amana Seguros</title>
+    <link rel="shortcut icon" href="img/amana2.png" type="image/png">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!--datatable-->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

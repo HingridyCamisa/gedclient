@@ -3,11 +3,11 @@
 @section('title','Prospecções')
 
 @section('content_header')
-    <h1><a class="btn btn-success"  href="{{ url('admin/contrato') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
+    <h1><a class="btn btn-danger"  href="{{ url('admin/contrato') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
- <div class="box box-solid box-success">
+ <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-folder-open"></i> Contratos </strong></h3></center>
 
@@ -15,7 +15,7 @@
      </div>
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
-        <tr class="table-success">
+        <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Segurado</center></th>
@@ -46,12 +46,12 @@
           <td><center>{{$contrato->nome_seguradora }}</center></td>
           <td><center>{{$contrato->numero_apolice }}</center></td>
           <td><center>{{$contrato->tipo_seguro }}</center></td>
-          <td><center>{{ Carbon\Carbon::parse($contrato->data_proximo_pagamento)->format('d-m-Y ') }}</center></td>
+          <td><center>{{$contrato->data_proximo_pagamento}}</center></td>
           <td><center>{{$contrato->situacao }}</center></td>
           @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())
-          <td><center><i class="fa fa-close text-red"></i> Expirado</center></td>
+          <td><center><i class="fa fa-close text-red"></i> Expirado {{\Carbon\Carbon::parse($contrato->data_inicio)->addDays(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->diffInDays($contrato->data_inicio))->diffForHumans()}}</center></td>
           @else
-           <td><center><i class="fa fa-check text-green"></i> Em dia</center></td>
+           <td><center><i class="fa fa-check text-green"></i> Em dia {{\Carbon\Carbon::parse($contrato->data_inicio)->addDays(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->diffInDays($contrato->data_inicio))->diffForHumans()}}</center></td>
            @endif
           <td><center><a href="{{ route ('contratos.edit', $contrato->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
 
@@ -61,7 +61,7 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
-              <a href="{{ url('/sms') }}" class="btn btn-success btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
+              <a href="{{ url('/sms') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
               </center>
           </td>
 
@@ -71,7 +71,7 @@
       </tr>
       </tbody>
       <tfoot>
-        <tr class="table-success">
+        <tr class="table-danger">
             <th scope="col"><center> Nº</center></th>
             <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
             <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Segurado</center></th>

@@ -118,7 +118,7 @@ return [
     */
 
     'attributes' => [
-        'email_consultor' => 'Consultor Email must be @almond.co.mz',
+        'email_consultor' => 'Consultor Email must be @amanaseguros.co.mz',
     ],
 
 ];

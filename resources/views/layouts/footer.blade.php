@@ -1,8 +1,8 @@
 <div class="footer">
     <div class="pull-right">
-        Almond Brokers
+        Amana Seguros
     </div>
     <div>
-        <strong>Copyright</strong> Hingridy Camisa &copy; 2018-Current
+        <strong>Copyright</strong> Hingridy Camisa &copy; 2019-Current
     </div>
 </div>

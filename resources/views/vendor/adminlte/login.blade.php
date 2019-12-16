@@ -21,10 +21,10 @@
 <!-- <img src="{{ ('/img/imagem2.png')}}"   alt="logo" width="170" height="100"> -->
 
 
-<div class="row" style="width:1400px; height:500px; margin: 0px 0 0 550px;">
+<div class="row" style="width:1400px; height:600px; margin: 0px 0 0 450px;">
         <div class="col-md-4">
-        <img src="{{asset('/img/imagem2.png')}}"   alt="logo" width="437" height="100">
-          <div class="box box-solid box-success">
+        <img src="{{asset('/img/amana2.png')}}"   alt="logo" width="437" height="100">
+          <div class="box box-solid box-danger">
             <div class="box-header with-border">
             <center><h3 class="box-title"><strong><i class="fa fa-sign-in"></i> Iniciar Sessão</strong></h3></center>
             </div>
@@ -75,7 +75,7 @@
                         
                         <div class="col-xs-6">
                             <button type="submit"
-                                    class="btn btn-success btn-block btn-flat"><i class="fa fa-sign-in"></i> Entrar</button>
+                                    class="btn btn-danger btn-block btn-flat"><i class="fa fa-sign-in"></i> Entrar</button>
                         </div>
                     
                 </div>
@@ -83,8 +83,8 @@
                 
                 
                 <div class="auth-links">
-                    <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
-                    class="text-green">Esqueceu sua senha?</a>
+                    <!-- <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}"
+                    class="text-green">Esqueceu sua senha?</a> -->
                     <br>
                     <!-- @if (config('adminlte.register_url', 'register'))
                         <a href="{{ url(config('adminlte.register_url', 'register')) }}"
@@ -95,7 +95,7 @@
             </div>
             <!-- /.box-body -->
             <div class="footer text-muted">
-   <center> <strong>Copyright © 2018 <a href="#" class="text-white">Hingridy Camisa</a>.</strong> All rights
+   <center> <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-white">Amana Softwares</a>.</strong> All rights
             reserved.</center>
 	</div>
     </div>

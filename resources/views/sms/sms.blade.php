@@ -3,7 +3,7 @@
 @section('title', 'SMS')
 
 @section('content_header')
-<h1><a class="btn btn-primary"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i> Voltar</h1></a>
+<h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
@@ -60,7 +60,7 @@ input[type=submit]:hover {
 
 @section('content')
 
-          <div class="box box-solid box-success">
+          <div class="box box-solid box-danger">
           <div class="box-header with-border">
                  <center><h3 class="box-title"><strong><i class="fa fa-envelope"></i> Enviar SMS </strong></h3></center>
          </div>
@@ -114,7 +114,7 @@ input[type=submit]:hover {
                     
             <label for="fname"><i class="fa fa-institution"></i> De:</label>
 
-            <input type="text" id="fname" name="fname" placeholder="Almond Brokers Correctores e Consultores de Seguro" value="{{ old('fname') }}">
+            <input type="text" id="fname" name="fname" placeholder="Amana Corretores e Consultores de Seguros" value="{{ old('fname') }}">
 
             <label for="lname"><i class="fa fa-user"></i> Para:</label>
             <input type="text" id="lname" name="dname" placeholder="Nome" value="{{ old('dname') }}">
@@ -125,7 +125,7 @@ input[type=submit]:hover {
             <label for="subject"><i class="fa fa-envelope"></i> Messagem:</label>
             <textarea id="subject" name="subject" placeholder="Write something.." alue="{{ old('subject') }}" style="height:200px;height: 100px;"></textarea>
 
-            <center><button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Enviar</button></center>
+            <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Enviar</button></center>
         </form>
 </div>
 

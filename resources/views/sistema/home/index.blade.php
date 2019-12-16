@@ -8,9 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Almond Brokers | Home</title>
+    <title>Amana Seguros | Home</title>
 
-    <link rel="shortcut icon" href="img/Capture.PNG" type="image/png">
+    <link rel="shortcut icon" href="img/amana2.png" type="image/png">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
     <style>
     #div {
 
-    background-color:rgb(174,91,56);
+    background-color:rgb(237, 84, 65);
 
     }
 
@@ -39,7 +39,7 @@
         <nav id="div" class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
               <!--  <a class="navbar-brand" href="{{ url('/') }}"> -->
-              <i class="fa fa-user"></i><strong><a href="#" class="text-white"> Almond Brokers</a></strong>
+              <i class="fa fa-user"></i><strong><a href="#" class="text-white"> AMANA SEGUROS</a></strong>
                <!-- </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                     <span class="navbar-toggler-icon"></span>
@@ -91,11 +91,14 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ asset('/img/casa.jpg')}}"  alt="AAAAA">
+                    <img class="d-block w-100" src="{{ asset('/img/saude1.jpg')}}"  alt="AAAAA">
                     
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('/img/casa.jpg')}}"  alt="AAAAA">
+                    <img class="d-block w-100" src="{{ asset('/img/viagem1.jpg')}}"  alt="AAAAA">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ asset('/img/trabalho1.jpg')}}"  alt="AAAAA">
                 </div>
                 
             </div>
@@ -112,8 +115,8 @@
             @yield('content')
 
                 <div class="footer text-muted">
-                  <center> <strong>Copyright © 2018 Hingridy Camisa</a>.</strong> All rights
-                        reserved.</center>
+                        <center> <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
+            reserved.</center>
 	            </div>
         </main>
         

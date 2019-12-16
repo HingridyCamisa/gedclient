@@ -57,10 +57,6 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::post('consultor/update/{id}','ConsultoresController@update')->name('consultor.update');
 
-    Route::get('consultor', function(){
-        return view('admin.consultor.pdf');
-    });
-    
     Route::get('consultor/pdf','ConsultoresController@export_pdf');
 
     Route::get('segurados/index','SeguradoController@index')->name('segurados.index');
@@ -102,7 +98,8 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::post('sinistro/update/{id}', 'SinistroController@update')->name('sinistros.update');
 
     Route::delete('sinistro/destroy/{id}', 'SinistroController@destroy')->name('sinistros.destroy');
-
+    
+    Route::get('aniversarios/index','AniversarioController@index')->name('aniversarios.index');
 
 });
 
@@ -132,6 +129,7 @@ return view('sms.messagebulcksms');
 Route::post('/savemessagen','BulckSmsController@savemessagen');
 Route::get('/sendbulcksms','BulckSmsController@sendbulcksms');//formulario de envio de sms em bulck
 Route::post('/sendsmsfinal','BulckSmsController@sendsmsfinal');
+Route::get('chart','ChartController@index');
 //and sender
 
 

@@ -3,17 +3,17 @@
 @section('title', 'Segurados')
 
 @section('content_header')
-    <h1><a class="btn btn-success"  href="{{ url('admin/sinistro')}}"><i class="fa fa-fw fa-plus"></i></a></h1>
+    <h1><a class="btn btn-danger"  href="{{ url('admin/sinistro')}}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
- <div class="box box-solid box-success">
+ <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-subway"></i> Sinistros</strong></h3></center>
      </div>
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
-        <tr class="table-success">
+        <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-subway"></i> Sinistro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i>Segurado</center></th>
@@ -46,7 +46,7 @@
       </tr>
       </tbody>
       <tfoot>
-      <tr class="table-success">
+      <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-subway"></i> Sinistro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i>Segurado</center></th>
