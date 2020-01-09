@@ -112,8 +112,8 @@
                                          <div class="col-xs-3">
                                         <label><i class="fa fa-briefcase"></i> Estado Prospecção </label>
                                         <select class="form-control" name="estado">
-                                            <option>Espera da Cotação  (Seguradora)</option>
-                                            <option>Preenchimento de formulário</option>
+                                            <option value="Espera da Cotação  (Seguradora)">Espera da Cotação  (Seguradora)</option>
+                                            <option value="Preenchimento de formulário">Preenchimento de formulário</option>
                                             <option>Em Espera (Negociação com o cliente)</option>
                                             <option>Cotação  enviada para o cliente</option>
                                             <option>Perdida</option>

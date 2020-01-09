@@ -94,13 +94,33 @@
                 <input id="nome_segurado" name="nome_segurado" hidden>
                 <input id="consultor" name="nome_consultor" hidden>
                 <input id="ramo_negocio" name="ramo_negocio" hidden>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-md-2 control-label">Início </label>
+                      <div class="col-md-4">
+                        <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                        <input class="form-control" id="inputEmail3" type="date" name="data_inicio"></div>
+                      </div>
+                    </div>  
+                  </div>
+                  <div class="col-md-6">
+                  <label for="inputEmail3" class="col-md-2 control-label"> Expira </label>
+                    <div class="col-md-4">
+                      <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                      <input class="form-control" id="inputEmail3"  type="date" name="data_proximo_pagamento"></div>
+                    </div>
+                  </div>
+                </div>
 
                 <p> <div class="form-group">
                     <label for="inputEmail3" class="col-md-2 control-label">Seguradora</label>
                     <div class="col-md-10">
                       <select class="form-control" name="nome_seguradora">
                         @foreach($seguradora as $segu)
-                        <option>{{ $segu->nome_seguradora}}</option>
+                        <option value="{{$segu->id}}">{{ $segu->nome_seguradora}}</option>
                         @endforeach
                       </select>
                   </div>

@@ -98,8 +98,14 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::post('sinistro/update/{id}', 'SinistroController@update')->name('sinistros.update');
 
     Route::delete('sinistro/destroy/{id}', 'SinistroController@destroy')->name('sinistros.destroy');
-    
-    Route::get('aniversarios/index','AniversarioController@index')->name('aniversarios.index');
+
+    Route::get('saude/index','SaudeController@index')->name('saudes.index');
+
+    Route::get('saude','SaudeController@create')->name('saude.create');
+
+    Route::post('saude','SaudeController@store')->name('saude.store');
+
+    Route::get('saude/show/{id}', 'SaudeController@store')->name('saude.show');
 
 });
 

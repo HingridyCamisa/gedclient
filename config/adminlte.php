@@ -165,7 +165,7 @@ return [
         ],
         [
             'text'        => 'Gestão Saúde',
-            'url'         => '#',
+            'url'         => 'admin/saude/index',
             'icon'        => 'medkit',
         ],
         [

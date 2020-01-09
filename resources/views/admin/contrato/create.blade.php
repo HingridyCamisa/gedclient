@@ -60,9 +60,10 @@
                              </div>
 
                              <div class="col-xs-4">
-                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Ramo de  Negócio</label>
-                                    <input class="form-control" name="ramo_negocio" placeholder="Aluger de Viaturas" type="text">
-                                </div>
+                                    <label for="TipoSegurado"><i class="fa fa-user"></i> Tipo Seguro</label>
+                                    <input class="form-control" name="tipo_seguro" placeholder="Aluger de Viaturas" type="text">
+    
+                             </div>
                                 
                             </div><br>
 
@@ -126,7 +127,7 @@
                                     </div>
 
                                     <div class="col-xs-4">
-                                    <label for="Periodicidade Pagamento"><i class="fa fa-phone"></i>Periodicidade de Pagamento</label>
+                                    <label for="Periodicidade Pagamento"><i class="fa fa-hourglass-2 "></i>Periodicidade de Pagamento</label>
                                     <select class="form-control" name="periodicidade_pagamento">
                                             <option>Mensal</option>
                                             <option>Trimestral</option>

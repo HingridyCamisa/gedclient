@@ -41,7 +41,7 @@ class ContratoController extends Controller
         $tipo_seguro = TipoSeguro::all();
         $consultor = Consultor::all();
 
-        return view('admin.contrato.create',compact('contrato','seguradora','tipo_seguro','consultor'));
+        return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor'));
     }
 
     /**

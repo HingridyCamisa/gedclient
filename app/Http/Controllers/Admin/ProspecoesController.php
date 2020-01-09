@@ -24,6 +24,7 @@ class ProspecoesController extends Controller
         $prospecaos = Prospecao::latest()
                                 ->where('status','1')
                                 ->paginate(12);
+                                //->orderBy('data_prevista_fim','asc');
 
         $hoje = Carbon::today();
         

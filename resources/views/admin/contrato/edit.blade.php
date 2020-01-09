@@ -37,11 +37,18 @@
                                 </div>
 
                                 <div class="col-xs-4">
-                                    <label><i class="fa fa-user"></i> Ramo</label>
-                                        <select class="form-control" value="{{ $contrato->tipo_seguro}}" name="tipo_seguro">
-                                            @foreach($tipo_seguro as $tipo_seguro)
-                                            <option>{{ $tipo_seguro->ramo}}</option>
-                                            @endforeach
+                                    <label><i class="fa fa-user"></i> Tipo Seguro</label>
+                                        <select class="form-control" name="tipo_seguro" >
+                                            <option value="{{$contrato->tipo_seguro}}" selected >{{$contrato->tipo_seguro}}</option>
+                                            <option value="Acidentes Pessoais">Acidentes Pessoais</option>
+                                            <option value="Acidente de Trabalho">Acidente de Trabalho</option>
+                                            <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
+                                            <option value="Automóvel - Danos Próprios">Automóvel - Danos Próprios</option>
+                                            <option value="Garantia">Garantia</option>
+                                            <option value="Recheio">Recheio</option>
+                                            <option value="Saúde">Saúde</option>
+                                            <option value="Mercadoria">Mercadoria</option>
+                                            <option value="Multirriscos">Multirriscos</option>
                                         </select>
                                 </div>
 
@@ -61,12 +68,14 @@
 
                             <div class="col-xs-4">
                                 <label for="Periodicidade Pagamento"><i class="fa fa-phone"></i>Periodicidade de Pagamento</label>
-                                <select class="form-control" name="periodicidade_pagamento" value="{{ $contrato->periodicidade_pagamento}}">
-                                    <option>Mensal</option>
-                                    <option>Trimestral</option>
-                                    <option>Semestral</option>
-                                    <option>Anual</option>
-                                    <option>Não Renovável </option>
+                                <select class="form-control" name="periodicidade_pagamento">
+                                            <option value="{{ $contrato->periodicidade_pagamento}}" selected>{{ $contrato->periodicidade_pagamento}}</option>
+                                            <option value="Mensal">Mensal</option>
+                                            <option value="Trimestral">Trimestral</option>
+                                            <option value="Semestral">Semestral</option>
+                                            <option value="Anual">Anual</option>
+                                            <option value="Não Renovável">Não Renovável</option>
+                                            
                                 </select>
                             </div>
                                    
@@ -141,9 +150,10 @@
 
                             <div class="col-xs-3">
                                 <label><i class="fa fa-money"></i> Situação</label>
-                                        <select class="form-control" name="situacao" value="{{ $contrato->situacao}}">
-                                            <option>Pago</option>
-                                            <option>Em Cobrança</option>
+                                        <select class="form-control" name="situacao" >
+                                            <option value="{{ $contrato->situacao}}" selected>{{ $contrato->situacao}}</option>
+                                            <option value="Pago">Pago</option>
+                                            <option value="Em Cobrança">Em Cobrança</option>
                                         </select>
      
                              </div>

@@ -52,9 +52,10 @@
                                 <div class="col-xs-4">
                                     <label><i class="fa fa-user"></i> Tipo de Cliente</label>
                                     <select class="form-control" name="tipo_cliente">
-                                            <option value="{{$prospecao->tipo_cliente}}">Individual</option>
-                                            <option value="{{$prospecao->tipo_cliente}}">Empresa</option>
-                                        </select>
+                                            <option value="{{$prospecao->tipo_cliente}}" selected>{{$prospecao->tipo_cliente}}</option>
+                                            <option value="Individual">Individual</option>
+                                            <option value="Empresa">Empresa</option>
+                                    </select>
                                 </div>
 
 
@@ -120,15 +121,16 @@
                                     <div class="col-xs-3">
                                     <label><i class="fa fa-user"></i> Ramo </label>
                                         <select class="form-control" name="tipo_prospecao" >
-                                            <option value="{{$prospecao->tipo_prospecao}}">Acidentes Pessoais</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Acidente de Trabalho</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Automóvel - Responsabilidade Civil</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Automóvel - Danos Próprios</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Garantia</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Recheio</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Saúde</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Mercadoria</option>
-                                            <option value="{{$prospecao->tipo_prospecao}}">Multirriscos</option>
+                                            <option value="{{$prospecao->tipo_prospecao}}" selected >{{$prospecao->tipo_prospecao}}</option>
+                                            <option value="Acidentes Pessoais">Acidentes Pessoais</option>
+                                            <option value="Acidente de Trabalho">Acidente de Trabalho</option>
+                                            <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
+                                            <option value="Automóvel - Danos Próprios">Automóvel - Danos Próprios</option>
+                                            <option value="Garantia">Garantia</option>
+                                            <option value="Recheio">Recheio</option>
+                                            <option value="Saúde">Saúde</option>
+                                            <option value="Mercadoria">Mercadoria</option>
+                                            <option value="Multirriscos">Multirriscos</option>
                                             
                                         </select>
                                         </div>
@@ -136,24 +138,26 @@
                                          <div class="col-xs-3">
                                         <label><i class="fa fa-map-pin"></i> Origem Prospecção </label>
                                         <select class="form-control" name="origem_prospecao" >
-                                            <option value="{{$prospecao->origem_prospecao}}">Indefinido</option>
-                                            <option value="{{$prospecao->origem_prospecao}}">Corretora</option>
-                                            <option value="{{$prospecao->origem_prospecao}}">Indicado</option>
-                                            <option value="{{$prospecao->origem_prospecao}}">Site</option>
-                                            <option value="{{$prospecao->origem_prospecao}}">Jornal</option>
-                                            <option value="{{$prospecao->origem_prospecao}}">Outros</option>
+                                            <option value="{{$prospecao->origem_prospecao}}" selected >{{$prospecao->origem_prospecao}}</option>
+                                            <option value="Indefinido">Indefinido</option>
+                                            <option value="Corretora">Corretora</option>
+                                            <option value="Indicado">Indicado</option>
+                                            <option value="Site">Site</option>
+                                            <option value="Jornal">Jornal</option>
+                                            <option value="Outros">Outros</option>
                                         </select>
                                         </div>
 
                                         <div class="col-xs-3">
                                         <label><i class="fa fa-briefcase"></i> Estado Prospecção </label>
                                         <select class="form-control" name="estado" >
-                                            <option value="{{$prospecao->estado}}">Espera da Cotação  (Seguradora)</option>
-                                            <option value="{{$prospecao->estado}}">Preenchimento formulário</option>
-                                            <option value="{{$prospecao->estado}}">Em Espera (Negociação com o cliente)</option>
-                                            <option value="{{$prospecao->estado}}">Cotação enviada para o cliente</option>
-                                            <option value="{{$prospecao->estado}}">Perdida</option>
-                                            <option value="{{$prospecao->estado}}">Assinado(Tornar Contrato)</option>
+                                            <option value="{{$prospecao->estado}}" selected >{{$prospecao->estado}}</option>
+                                            <option value="Espera da Cotação  (Seguradora)">Espera da Cotação  (Seguradora)</option>
+                                            <option value="Preenchimento formulário<">Preenchimento formulário</option>
+                                            <option value="Em Espera (Negociação com o cliente)">Em Espera (Negociação com o cliente)</option>
+                                            <option value="Cotação enviada para o cliente">Cotação enviada para o cliente</option>
+                                            <option value="Perdida">Perdida</option>
+                                            <option value="Assinado(Tornar Contrato)">Assinado(Tornar Contrato)</option>
                                             
                                         </select>
                                         </div>
