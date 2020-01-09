@@ -1,29 +1,31 @@
 <?php
 
 use App\Calendario;
+use Illuminate\Support\Facades\Route;
 
 
-$this->group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+    Voyager::routes();
     
-    $this->get('calendario','CalendarioController@index')->name('admin.calendario');
+    Route::get('calendario','CalendarioController@index')->name('admin.calendario');
 
-    $this->post('calendario','CalendarioController@addEvent')->name('calendario.add');
+    Route::post('calendario','CalendarioController@addEvent')->name('calendario.add');
 
-    $this->get('metas','MetaController@index')->name('admin.metas');
+    Route::get('metas','MetaController@index')->name('admin.metas');
 
-    $this->get('seguradoras','SeguradorasController@index')->name('seguradora.index');
+    Route::get('seguradoras','SeguradorasController@index')->name('seguradora.index');
 
-    $this->get('seguradoras','SeguradorasController@create')->name('seguradora.create');
+    Route::get('seguradoras','SeguradorasController@create')->name('seguradora.create');
 
-    $this->post('seguradoras','SeguradorasController@store')->name('seguradora.store');
+    Route::post('seguradoras','SeguradorasController@store')->name('seguradora.store');
 
-    $this->delete('seguradoras/destroy/{id}','SeguradorasController@destroy')->name('seguradora.destroy');
+    Route::delete('seguradoras/destroy/{id}','SeguradorasController@destroy')->name('seguradora.destroy');
 
     Route::get('seguradoras/{id}/edit','SeguradorasController@edit')->name('seguradora.edit');
 
-    $this->post('seguradoras/update/{id}','SeguradorasController@update')->name('seguradora.update');
+    Route::post('seguradoras/update/{id}','SeguradorasController@update')->name('seguradora.update');
     
-    $this->get('/','AdminController@index')->name('admin.home');
+    Route::get('home','AdminController@index')->name('admin.home');
 
     Route::post('seguradoras','SeguradorasController@store')->name('seguradora.store');
     
@@ -117,7 +119,7 @@ Auth::routes();
 
 
  
-$this->get('/','Sistema\SistemaController@index')->name('home');
+Route::get('/','Sistema\SistemaController@index')->name('home');
 
 
 //sms sender 
