@@ -142,7 +142,7 @@
       $.ajax({
         url: '{{url('admin/allcomments')}}',
         type: "get",
-        data: {'task_id': $('#task_id').val() },
+        data: {'task_id': $('#task_id').val() , 'token_id':'prospecoes'},
           success: function (data) {
 
               $('#messages').html(data);

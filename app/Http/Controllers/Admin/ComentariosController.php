@@ -32,7 +32,7 @@ class ComentariosController extends Controller
     public function allcomments(Request $request)
     {
 
-            $task=Comentarios::where('task_id',$request->task_id)->join('users','comment.user_id','users.id')->select('comment.*','users.name','users.avatar')->get();    
+            $task=Comentarios::where('task_id',$request->task_id)->where('token_id',$request->token_id)->join('users','comment.user_id','users.id')->select('comment.*','users.name','users.avatar')->get();    
             $output='';
 
             if($task)
