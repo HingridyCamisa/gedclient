@@ -126,10 +126,10 @@
         </div>
 
     </form>
-
+      
  </div>
               
-
+<div id="toast"><div id="img"></div><div id="desc"><span id="res_message"></span></div></div>
 
 
 <script>//find all comments from the task
@@ -191,7 +191,7 @@
             $('#img').html('<i class="fa fa-floppy-o" aria-hidden="true"></i>');//toast icon
 
             coments();//all coments
-           // launch_toast();//toast show
+           launch_toast();//toast show
            
 
             $('#message').val('');
