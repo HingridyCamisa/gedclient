@@ -21,7 +21,7 @@
 <!-- <img src="{{ ('/img/imagem2.png')}}"   alt="logo" width="170" height="100"> -->
 
 
-<div class="row" style="width:1400px; height:600px; margin: 0px 0 0 450px;">
+<div class="row" style="width:1400px; height:600px; margin: 0px 0 0 35%;">
         <div class="col-md-4">
         <img src="{{asset('/img/amana2.png')}}"   alt="logo" width="437" height="100">
           <div class="box box-solid box-danger">

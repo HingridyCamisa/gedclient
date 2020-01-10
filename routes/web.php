@@ -109,6 +109,11 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('saude/show/{id}', 'SaudeController@store')->name('saude.show');
 
+    //comentarios 
+    Route::get('allcomments','ComentariosController@allcomments')->name('allcomments');
+    Route::post('comentsave','ComentariosController@comentsave')->name('comentsave');
+    //
+
 });
 
 Route::get('/', function(){

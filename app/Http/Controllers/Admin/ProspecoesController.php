@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProspecaoRequest;
 use Carbon\Carbon;
+use App\Comentarios;
 
 class ProspecoesController extends Controller
 {
@@ -24,7 +25,6 @@ class ProspecoesController extends Controller
         $prospecaos = Prospecao::latest()
                                 ->where('status','1')
                                 ->paginate(12);
-                                //->orderBy('data_prevista_fim','asc');
 
         $hoje = Carbon::today();
         

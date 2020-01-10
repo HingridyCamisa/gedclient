@@ -268,12 +268,16 @@
 
 
 
-
+<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
+        "columnDefs": [
+    { "type": "date-eu", "targets": 4 }
+  ],
+        "order": [[ 4, "desc" ]],
         buttons: [
             {
               extend: 'copy',
