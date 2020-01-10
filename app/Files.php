@@ -4,12 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contrato extends Model
+class Files extends Model
 {
+    
+    protected $table = 'files';
     protected $guarded =array();
 
     public $primaryKey = 'id';
 
     public $timestamps=true;
-    
+
+
+
 }

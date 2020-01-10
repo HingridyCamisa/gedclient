@@ -6,6 +6,9 @@
 @stop
 
 @section('content')
+
+@include('notification')
+
  <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-briefcase"></i> Prospecções </strong></h3></center>
@@ -18,7 +21,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Início</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Prevista Fim</center></th>
-          <th scope="col"><center></i>Ramo </center></th>
+          <th scope="col"><center> Ramo </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar Contrato </center></th>
@@ -87,38 +90,38 @@
                 <!-- <h4 class="modal-title"><i class="fa fa-fw fa-folder"></i>Tornar Contrato</h4> -->
                <center> <h4 class="modal-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Contrato </h4> </center>
               </div>
+              <form method="post" action="{{route('tornarcontrato')}}" enctype="multipart/form-data" >
               <div class="modal-body row">
-                <form method="post" action="{{route('tornarcontrato')}}" enctype="multipart/form-data" >
+              
+
+                
                     @csrf
                     <input id="id" name="id_prospecaos" hidden>
                     <input name="id_user" hidden value="{{ Auth::user()->id }}">
-                    <input id="nome_segurado" name="nome_segurado" hidden>
-                    <input id="consultor" name="nome_consultor" hidden>
-                    <input id="ramo_negocio" name="ramo_negocio" hidden>
 
 
                     <p> 
                         <label for="inputEmail3" class="col-md-2 control-label">Seguradora</label>
                         <div class="col-md-10">
-                          <select class="form-control" name="nome_seguradora">
+                          <select class="form-control" name="nome_seguradora" required autofocus >
                             @foreach($seguradora as $segu)
                             <option value="{{$segu->id}}">{{ $segu->nome_seguradora}}</option>
                             @endforeach
                           </select>
                       </div>
                     </p> <br><br>
-
+                
                      <p> <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Número</label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Nº de Apólice" type="text" name="numero_apolice"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Nº de Apólice" type="text" name="numero_apolice" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Nº de Recibo" type="text" name="numero_recibo"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Nº de Recibo" type="text" name="numero_recibo" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -131,14 +134,14 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" type="date" name="data_inicio"></div>
+                          <input class="form-control" id="inputEmail3" type="date" name="data_inicio" required autofocus ></div>
                         </div>
 
                     
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3"  type="date" name="data_proximo_pagamento"></div>
+                          <input class="form-control" id="inputEmail3"  type="date" name="data_proximo_pagamento" required autofocus ></div>
                         </div>
                         </div>
 
@@ -149,12 +152,12 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Cobertos" type="text" name="dias_cobertos"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Cobertos" type="text" name="dias_cobertos" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -164,7 +167,7 @@
                         <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Capital Seguro" type="text" name="capital_seguro"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Capital Seguro" type="text" name="capital_seguro" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -174,12 +177,12 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Total" type="text" name="premio_total"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Total" type="text" name="premio_total" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Simples" type="text" name="premio_simples"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -189,12 +192,12 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">%</span>
-                          <input class="form-control" id="inputEmail3" placeholder="Taxa" type="text" name="taxa_corretagem"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">MTN</span>
-                          <input class="form-control" id="inputEmail3" placeholder="Comissão" type="text" name="comissao"></div>
+                          <input class="form-control" id="inputEmail3" placeholder="Comissão" type="text" name="comissao"  ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -202,7 +205,7 @@
                       <p> 
                         <label for="inputEmail3" class="col-md-2 control-label">Periodicidade Pagamento</label>
                         <div class="col-md-10">
-                        <select class="form-control" name="periodicidade_pagamento" name="periodicidade_pagamento">
+                        <select class="form-control" name="periodicidade_pagamento" required autofocus ">
                                         <option value="Mensal">Mensal</option>
                                         <option value="Trimestral">Trimestral</option>
                                         <option value="Semestral">Semestral</option>
@@ -215,37 +218,159 @@
                      <p> 
                         <label for="inputEmail3" class="col-md-2 control-label">Situação da Apólice</label>
                         <div class="col-md-10">
-                        <select class="form-control" name="situacao" >
+                        <select class="form-control" name="situacao" required autofocus >
                            <option value="Pago">Pago</option>
                            <option value="Em Cobrança">Em Cobrança</option>
                         </select>
                       </div>
                     </p> <br><br>
-
                     <p> <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Item Segurado</label>
                         <div class="col-md-4">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"></div>
-                        </div>
-
-                        <label for="inputEmail3" class="col-md-2 control-label">Upload Apólice</label>
-                        <div class="col-md-4">
-                          <div class="input-group">
-                          <input id="exampleInputFile" type="file" name="upload_apolice">
-                         </div>
+                          <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>
                         </div>
                       </div>
                     </p> <br><br>
+                    <!--files-->
+                  <hr />
+                    
+                    
+                   <div class="row col-md-12" style="margin-left:5px">   
+                    <h4>Upload<a style="color: red">*</a></h4>  
+                      <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
+                      <div class="">
+                        <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                           <option disabled selected>Seleciona tipo de ficheiro...</option>
+                                    <option value="BI">
+                                        BI
+                                    </option>                                       
+                                    <option value="Apolice de Seguro">
+                                        Apolice de Seguro
+                                    </option>                                    
+                                    <option value="Carta de Condução">
+                                        Carta de Condução
+                                    </option>                                    
+                                    <option value="Carta de Nomeação">
+                                        Carta de Nomeação
+                                    </option>                                    
+                                    <option value="Livrete/Verbete">
+                                        Livrete/Verbete
+                                    </option>                                    
+                                    <option value="Imagem">
+                                        Imagem
+                                    </option>                                    
+                                    <option value="Formulario de Peritagem">
+                                        Formulario de Peritagem
+                                    </option>                                    
+                                    <option value="Passaporte">
+                                        Passaporte
+                                    </option>                                    
+                                    <option value="Comprovativo de pagamento">
+                                        Comprovativpo de pagamento
+                                    </option>                                   
+                                    <option value="Factura">
+                                        Factura
+                                    </option>                                   
+                                    <option value="Recibos">
+                                        Recibos
+                                    </option>                                    
+                                    <option value="Alvará">
+                                        Alvará
+                                    </option>                                    
+                                    <option value="Recibo de Água">
+                                        Recibo de Água
+                                    </option>                                    
+                                    <option value="Certidão">
+                                        Certidão
+                                    </option>                                    
+                                    <option value="Outros">
+                                        Outros
+                                    </option>
+                        </select>
+                      </div>
+                    <div class="input-group control-group increment" >
+                      <input type="file" name="file[]" class="form-control" >
+                      <div class="input-group-btn" > 
+                        <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
+                      </div>
+          
+                    </div>
+
+
+                    <div class="clone hide" >
+                    <div class="control-group">
+                      <div class="" style="margin-top:10px">
+                        <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                           <option disabled selected>Seleciona...</option>
+                                    
+                                    <option value="BI">
+                                        BI
+                                    </option>                                       
+                                    <option value="Apolice de Seguro">
+                                        Apolice de Seguro
+                                    </option>                                    
+                                    <option value="Carta de Condução">
+                                        Carta de Condução
+                                    </option>                                    
+                                    <option value="Carta de Nomeação">
+                                        Carta de Nomeação
+                                    </option>                                    
+                                    <option value="Livrete/Verbete">
+                                        Livrete/Verbete
+                                    </option>                                    
+                                    <option value="Imagem">
+                                        Imagem
+                                    </option>                                    
+                                    <option value="Formulario de Peritagem">
+                                        Formulario de Peritagem
+                                    </option>                                    
+                                    <option value="Passaporte">
+                                        Passaporte
+                                    </option>                                    
+                                    <option value="Comprovativo de pagamento">
+                                        Comprovativo de pagamento
+                                    </option>                                   
+                                    <option value="Factura">
+                                        Factura
+                                    </option>                                   
+                                    <option value="Recibos">
+                                        Recibos
+                                    </option>                                    
+                                    <option value="Alvará">
+                                        Alvará
+                                    </option>                                    
+                                    <option value="Recibo de Água">
+                                        Recibo de Água
+                                    </option>                                    
+                                    <option value="Certidão">
+                                        Certidão
+                                    </option>                                    
+                                    <option value="Outros">
+                                        Outros
+                                    </option>
+                        </select>
+                      </div>
+                      <div class=" input-group" >
+                        <input type="file" name="file[]" class="form-control" >          
+                        <div class="input-group-btn"> 
+                          <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                   </div>
+
 
                 </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button>
-                  </div>
-                </div>
-            </form>
-             <!-- /.modal-content -->
+                   <!--and files-->
+                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button>
+                      </div>
+                </form>
+                 <!-- /.modal-content -->   
+
           </div>
           <!-- /.modal-dialog -->
    </div>
@@ -253,7 +378,7 @@
 
 
 
-<script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -330,5 +455,22 @@ $(document).ready(function() {
  
 </script>
 
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script>
 
 @stop
