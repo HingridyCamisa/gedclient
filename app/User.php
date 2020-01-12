@@ -15,9 +15,11 @@ class User extends \TCG\Voyager\Models\User
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password','apelido','endereco','contacto','cargo'
-    ];
+    protected $guarded =array();
+
+    public $primaryKey = 'id';
+
+    public $timestamps=true;
 
     /**
      * The attributes that should be hidden for arrays.
