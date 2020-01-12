@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProspecaoRequest;
 use Carbon\Carbon;
-use App\Comentarios;
+
 
 class ProspecoesController extends Controller
 {
@@ -71,7 +71,7 @@ class ProspecoesController extends Controller
        $prospecoes->estado = $request->input('estado');
        $prospecoes->save();
 
-       return redirect('/admin/prospecoes/index');
+       return back()->with('success','Contrato criado com sucesso.');
 
 
     }

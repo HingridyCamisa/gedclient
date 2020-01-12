@@ -51,7 +51,7 @@ class ComentariosController extends Controller
                         <div class="direct-chat-msg '.$my.'">
                           <div class="direct-chat-info clearfix">
                             <span class="direct-chat-name pull-left">'.$tasks->name.' '.$tasks->lname.'</span>
-                            <span class="direct-chat-timestamp pull-right">'.$tasks->created_at->diffForHumans().'</span>
+                            <span class="direct-chat-timestamp pull-right">'.$tasks->created_at." | ".$tasks->created_at->diffForHumans().'</span>
                           </div>
                 
                           <img class="direct-chat-img" src="'.asset($url).'" alt="User Image">

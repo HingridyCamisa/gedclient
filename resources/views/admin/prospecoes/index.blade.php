@@ -238,7 +238,7 @@
                     
                     
                    <div class="row col-md-12" style="margin-left:5px">   
-                    <h4>Upload<a style="color: red">*</a></h4>  
+                    <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
                       <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
                       <div class="">
                         <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >

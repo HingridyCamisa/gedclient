@@ -25,7 +25,7 @@ class ProspecaoRequest extends FormRequest
     {
         return [
             'nome_cliente'=>'required|min:3',
-            'nome_consultor'=>'required|min:3',
+            'nome_consultor'=>'required',
             'tipo_cliente' =>'required',
             'endereco_cliente' => 'required|min:5',
             'contacto_cliente' => 'required|numeric|min:8',

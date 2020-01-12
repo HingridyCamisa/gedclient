@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+@include('notification')
  <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-folder-open"></i> Contratos </strong></h3></center>
@@ -93,6 +94,10 @@
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
+        "order": [[ 6, "desc" ]],
+        "columnDefs": [
+                        { "type": "date-eu", "targets": 6 }
+                      ],
         buttons: [
             {
               extend: 'copy',

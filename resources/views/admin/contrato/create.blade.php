@@ -10,6 +10,7 @@
 @stop
 
 @section('content')
+@include('notification')
 
 
           <!-- general form elements -->
@@ -207,10 +208,6 @@
                                         <input class="form-control" name="taxa_corretagem"  type="float">
      
                                     </div>
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-upload"></i> Upload Apólice</label>
-                                          <input id="exampleInputFile" type="file">
-                                    </div>
                                     
                                 </div>
                                 
@@ -221,7 +218,137 @@
                                     <label for="DetalhesProspecao"><i class="fa fa-info"></i> Detalhes Item Segurado</label>
                                     <textarea class="form-control" name="detalhes_item_segurado" rows="2" placeholder="Detalhes ..." ></textarea>
                                 </div>
+
+                            <hr />
+                           <div class="row col-md-12" style="margin-left:5px"> 
+                                  
+
+                            <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
+                              <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
+                              <div class="">
+                                <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                   <option disabled selected>Seleciona tipo de ficheiro...</option>
+                                            <option value="BI">
+                                                BI
+                                            </option>                                       
+                                            <option value="Apolice de Seguro">
+                                                Apolice de Seguro
+                                            </option>                                    
+                                            <option value="Carta de Condução">
+                                                Carta de Condução
+                                            </option>                                    
+                                            <option value="Carta de Nomeação">
+                                                Carta de Nomeação
+                                            </option>                                    
+                                            <option value="Livrete/Verbete">
+                                                Livrete/Verbete
+                                            </option>                                    
+                                            <option value="Imagem">
+                                                Imagem
+                                            </option>                                    
+                                            <option value="Formulario de Peritagem">
+                                                Formulario de Peritagem
+                                            </option>                                    
+                                            <option value="Passaporte">
+                                                Passaporte
+                                            </option>                                    
+                                            <option value="Comprovativo de pagamento">
+                                                Comprovativpo de pagamento
+                                            </option>                                   
+                                            <option value="Factura">
+                                                Factura
+                                            </option>                                   
+                                            <option value="Recibos">
+                                                Recibos
+                                            </option>                                    
+                                            <option value="Alvará">
+                                                Alvará
+                                            </option>                                    
+                                            <option value="Recibo de Água">
+                                                Recibo de Água
+                                            </option>                                    
+                                            <option value="Certidão">
+                                                Certidão
+                                            </option>                                    
+                                            <option value="Outros">
+                                                Outros
+                                            </option>
+                                </select>
+                              </div>
+                            <div class="input-group control-group increment" >
+                              <input type="file" name="file[]" class="form-control" >
+                              <div class="input-group-btn" > 
+                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
+                              </div>
+          
+                            </div>
+
+
+                            <div class="clone hide" >
+                            <div class="control-group">
+                              <div class="" style="margin-top:10px">
+                                <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                   <option disabled selected>Seleciona...</option>
+                                    
+                                            <option value="BI">
+                                                BI
+                                            </option>                                       
+                                            <option value="Apolice de Seguro">
+                                                Apolice de Seguro
+                                            </option>                                    
+                                            <option value="Carta de Condução">
+                                                Carta de Condução
+                                            </option>                                    
+                                            <option value="Carta de Nomeação">
+                                                Carta de Nomeação
+                                            </option>                                    
+                                            <option value="Livrete/Verbete">
+                                                Livrete/Verbete
+                                            </option>                                    
+                                            <option value="Imagem">
+                                                Imagem
+                                            </option>                                    
+                                            <option value="Formulario de Peritagem">
+                                                Formulario de Peritagem
+                                            </option>                                    
+                                            <option value="Passaporte">
+                                                Passaporte
+                                            </option>                                    
+                                            <option value="Comprovativo de pagamento">
+                                                Comprovativo de pagamento
+                                            </option>                                   
+                                            <option value="Factura">
+                                                Factura
+                                            </option>                                   
+                                            <option value="Recibos">
+                                                Recibos
+                                            </option>                                    
+                                            <option value="Alvará">
+                                                Alvará
+                                            </option>                                    
+                                            <option value="Recibo de Água">
+                                                Recibo de Água
+                                            </option>                                    
+                                            <option value="Certidão">
+                                                Certidão
+                                            </option>                                    
+                                            <option value="Outros">
+                                                Outros
+                                            </option>
+                                </select>
+                              </div>
+                              <div class=" input-group" >
+                                <input type="file" name="file[]" class="form-control" >          
+                                <div class="input-group-btn"> 
+                                  <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                           </div>
                         </div>
+                            
+
                         <!-- /.box-body -->
                         <div class="box-footer">
                                 
@@ -229,14 +356,7 @@
                             </div>
                            
                         </form>
-                        
-                     @if($errors->any())
-                        <ul class="alert alert-warning">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                      @endif
+
 
                       
           </div>
@@ -244,5 +364,23 @@
 
 
    
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script>
+
 
 @stop

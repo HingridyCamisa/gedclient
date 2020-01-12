@@ -54,37 +54,74 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
-        $contrato = new Contrato();
-        $contrato->nome_segurado = $request->input('nome_segurado');
-        $contrato->nome_seguradora = $request->input('nome_seguradora');
-        $contrato->tipo_seguro = $request->input('tipo_seguro');
-        $contrato->numero_apolice = $request->input('numero_apolice');
-        $contrato->numero_recibo = $request->input('numero_recibo');
-        $contrato->periodicidade_pagamento = $request->input('periodicidade_pagamento');
-        $contrato->data_inicio = $request->input('data_inicio');
-        $contrato->data_proximo_pagamento = $request->input('data_proximo_pagamento');
-        $contrato->dias_cobertos = $request->input('dias_cobertos');
-        $contrato->dias_proximo_pagamento = $request->input('dias_proximo_pagamento');
-        $contrato->capital_seguro = $request->input('capital_seguro');
-        $contrato->premio_total = $request->input('premio_total');
-        $contrato->premio_simples = $request->input('premio_simples');
-        $contrato->taxa_corretagem = $request->input('taxa_corretagem');
-        $contrato->comissao = $request->input('comissao');
-        $contrato->item_segurado = $request->input('item_segurado');
-        $contrato->situacao = $request->input('situacao');
-        $contrato->consultor = $request->input('consultor');
-        $contrato->detalhes_item_segurado = $request->input('detalhes_item_segurado');
-        $contrato->tipo_cliente = $request->input('tipo_cliente');
-        $contrato->data_nascimento = $request->input('data_nascimento');
-        $contrato->genero = $request->input('genero');
-        $contrato->endereco = $request->input('endereco');
-        $contrato->pessoa_contacto = $request->input('pessoa_contacto');
-        $contrato->email_pessoa_contacto = $request->input('email_pessoa_contacto');
-        $contrato->contacto_pessoa_contacto = $request->input('contacto_pessoa_contacto');
-        $contrato->ramo_negocio = $request->input('ramo_negocio');
-        $contrato->save();
+         $validatedata=$request->validate([
+        'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        'filetype.*' => 'required',
+        'nome_segurado'=>'required|string|min:3|max:100',
+        'tipo_seguro'=>'required|string|min:3|max:100',
+        'nome_seguradora'=>'required',
+        'numero_apolice'=>'required|string|min:3|max:100',
+        'numero_recibo'=>'required|string|min:3|max:100',
+        'periodicidade_pagamento'=>'required|string',
+        'data_inicio'=>'required|date',
+        'data_proximo_pagamento'=>'required|date',
+        'capital_seguro'=>'required|numeric|min:1',
+        'premio_total'=>'required|numeric|min:1',
+        'premio_simples'=>'required|numeric|min:1',
+        'taxa_corretagem'=>'required|numeric',
+        'comissao'=>'required|numeric|min:1',
+        'item_segurado'=>'required|numeric|min:1',
+        'situacao'=>'required|string',
+        'consultor'=>'required|string',
+        'detalhes_item_segurado'=>'required|string',
+        'tipo_cliente'=>'required|string',
+        'data_nascimento'=>'required|data',
+        'genero'=>'required|string',
+        'ramo_negocio'=>'required|string',
+        'endereco'=>'required|string',
+        'pessoa_contacto'=>'nullable|string',
+        'email_pessoa_contacto'=>'nullable|email',
+        'contacto_pessoa_contacto'=>'nullable|string',
 
-        return redirect('/admin/contrato/index');
+
+       ]);
+       
+       //file name
+        $namefile = Str::random(32).'anexo'.time();
+
+
+
+        $prospecao=Prospecao::find($request->id_prospecaos);
+      
+        $prospecao->status=0;
+        $prospecao->save();
+
+        $data=$request->all();
+        unset($data['filetype']);//remove time from array before save
+        unset($data['file']);//remove time from array before save
+        $data["nome_segurado"]=$prospecao->nome_cliente;
+        $data["consultor"]=$prospecao->nome_consultor;
+        $data["ramo_negocio"]=$prospecao->tipo_prospecao;
+        $data["token_id"]=$namefile;
+
+        
+        Contrato::create($data);
+
+        //storag file
+        foreach($request->file('file') as $key=>$file)
+        {
+            $origname=$file->getClientOriginalName();
+            $name=$origname . time() . '-'.$key.'.'. $file->getClientOriginalExtension();
+            $file->storeAs('anexos', $name);
+            $file= new Files();
+            $file->filename=$name;
+            $file->token_id=$namefile;
+            $file->filetype=$request->filetype[$key];
+            $file->save();
+
+        }
+
+        return redirect('/admin/contrato/index')->with('success','Contrato criado com sucesso.');
     }
 
     /**
@@ -136,7 +173,7 @@ class ContratoController extends Controller
         'item_segurado'=>'required',
        ]);
        
-       //file
+       //file name
         $namefile = Str::random(32).'anexo'.time();
 
 
@@ -154,10 +191,10 @@ class ContratoController extends Controller
         $data["ramo_negocio"]=$prospecao->tipo_prospecao;
         $data["token_id"]=$namefile;
 
-        //dd($data);
+        
         Contrato::create($data);
 
-        
+        //storag file
         foreach($request->file('file') as $key=>$file)
         {
             $origname=$file->getClientOriginalName();
@@ -171,7 +208,7 @@ class ContratoController extends Controller
 
         }
         
-        return back()->with('success','Contrato criado com sucesso.');;
+        return back()->with('success','Contrato criado com sucesso.');
     }
 
     /**
