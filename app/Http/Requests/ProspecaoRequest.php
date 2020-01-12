@@ -29,7 +29,7 @@ class ProspecaoRequest extends FormRequest
             'tipo_cliente' =>'required',
             'endereco_cliente' => 'required|min:5',
             'contacto_cliente' => 'required|numeric|min:8',
-            'email_cliente' => 'required|email|min:6',
+            'email_cliente' => 'nullable|email',
             'data_inicio'=>'required|date|after_or_equal:today',
             'data_prevista_fim'=>'required|date|after:data_inicio',
             'tipo_prospecao'=>'required',

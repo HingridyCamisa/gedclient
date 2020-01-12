@@ -18,11 +18,19 @@ class EmailController extends Controller
         $client=DB::table($source)->where('id',$id)->first();
         if($source=="prospecaos")
         {
+            if($client->email_cliente==null)
+            {
+                return back()->with('error','Cliente sem email');
+            };
             $nome_cliente=$client->nome_cliente;
             $email_cliente=$client->email_cliente;
         }
         elseif($source=="contratos")
         {
+            if($client->email_segurado==null)
+            {
+                return back()->with('error','Cliente sem email');
+            };
             $nome_cliente=$client->nome_segurado;
             $email_cliente=$client->email_segurado;
         }else

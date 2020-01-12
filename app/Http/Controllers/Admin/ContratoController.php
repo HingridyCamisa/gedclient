@@ -22,11 +22,13 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        $contratos = Contrato::latest()->leftjoin('prospecaos','contratos.id_prospecaos','prospecaos.id')
-                                       ->select('contratos.*','prospecaos.nome_cliente','prospecaos.nome_consultor')
+        $contratos = Contrato::where("contratos.status",1)
+                                       ->join('consultors','contratos.consultor','consultors.id') 
+                                       ->latest()->leftjoin('prospecaos','contratos.id_prospecaos','prospecaos.id')
+                                       ->select('contratos.*','prospecaos.nome_cliente','prospecaos.nome_consultor','consultors.nome_consultor as consultorx')
                                        ->paginate(12);
 
-
+        
         return view('admin.contrato.index',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
     
     }
@@ -60,6 +62,7 @@ class ContratoController extends Controller
         'nome_segurado'=>'required|string|min:3|max:100',
         'tipo_seguro'=>'required|string|min:3|max:100',
         'nome_seguradora'=>'required',
+        'email_segurado'=>'required|email',
         'numero_apolice'=>'required|string|min:3|max:100',
         'numero_recibo'=>'required|string|min:3|max:100',
         'periodicidade_pagamento'=>'required|string',
@@ -121,7 +124,7 @@ class ContratoController extends Controller
 
         }
 
-        return redirect('/admin/contrato/index')->with('success','Contrato criado com sucesso.');
+        return redirect('/admin/contrato/index')->with('success','Contrato criado.');
     }
 
     /**
@@ -150,7 +153,7 @@ class ContratoController extends Controller
         $tipo_seguro = TipoSeguro::all();
         $contrato = Contrato::findOrFail($id);
 
-        return view('admin.contrato.edit',compact('contrato','seguradora','consultor','tipo_seguro'));
+        return view('admin.contrato.edit',compact('contrato','seguradora','consultor','tipo_seguro'))->with('success','Contrato editado.');
     }
 
     public function tornarcontrato(Request $request)
@@ -190,6 +193,7 @@ class ContratoController extends Controller
         $data["consultor"]=$prospecao->nome_consultor;
         $data["ramo_negocio"]=$prospecao->tipo_prospecao;
         $data["token_id"]=$namefile;
+        $data["email_segurado"]=$prospecao->email_cliente;
 
         
         Contrato::create($data);
@@ -222,6 +226,7 @@ class ContratoController extends Controller
     {
         $contrato = Contrato::findOrFail($id);
         $contrato->nome_segurado = $request->input('nome_segurado');
+        $contrato->email_segurado = $request->input('email_segurado');
         $contrato->nome_seguradora = $request->input('nome_seguradora');
         $contrato->tipo_seguro = $request->input('tipo_seguro');
         $contrato->numero_apolice = $request->input('numero_apolice');
@@ -250,7 +255,7 @@ class ContratoController extends Controller
         $contrato->ramo_negocio = $request->input('ramo_negocio');
         $contrato->save();
 
-        return redirect('/admin/contrato/index');
+        return redirect('/admin/contrato/index')->with('success','Editado criado.');
     }
 
     /**
@@ -262,8 +267,9 @@ class ContratoController extends Controller
     public function destroy(Contrato $contrato, $id)
     {
         $contrato= \App\Contrato::find($id);
-        $contrato->delete();
+        $contrato->status=0;
+        $contrato->save();
 
-        return redirect('/admin/contrato/index');
+        return redirect('/admin/contrato/index')->with('success','Contrato eliminado.');
     }
 }

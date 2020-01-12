@@ -35,7 +35,7 @@
         <tr>
           <th><center>{{ ++$i }}</center></th>
           @if($contrato->consultor)
-          <td><center>{{$contrato->consultor }}</center></td>
+          <td><center>{{$contrato->consultorx}}</center></td>
           @else
            <td><center>{{$contrato->nome_consultor}}</center></td>
           @endif
@@ -62,7 +62,7 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
-              <a href="{{ url('/sms') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
+              <a href="{{ url('admin/email/'.$contrato->id.'/contratos') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
               </center>
           </td>
 

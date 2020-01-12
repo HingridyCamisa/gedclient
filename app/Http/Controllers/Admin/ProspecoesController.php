@@ -75,7 +75,7 @@ class ProspecoesController extends Controller
        $prospecoes->estado = $request->input('estado');
        $prospecoes->save();
 
-       return back()->with('success','Contrato criado com sucesso.');
+       return back()->with('success','Prospeção criado.');
 
 
     }
@@ -149,7 +149,7 @@ class ProspecoesController extends Controller
         $prospecao= \App\Prospecao::find($id);
         $prospecao->delete();
 
-        return redirect('/admin/prospecoes/index');
+        return redirect('/admin/prospecoes/index')->with('success','Prospeção eliminda.');;
 
     }
 }
