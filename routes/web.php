@@ -107,7 +107,13 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::post('saude','SaudeController@store')->name('saude.store');
 
-    Route::get('saude/show/{id}', 'SaudeController@store')->name('saude.show');
+    Route::get('saude/show/{id}', 'SaudeController@show')->name('saude.show');
+
+    Route::delete('saude/destroy/{id}', 'SaudeController@destroy')->name('saude.destroy');
+
+    Route::get('saude/{id}/edit', 'SaudeController@edit')->name('saude.edit');
+
+    Route::post('saude/update/{id}', 'SaudeController@update')->name('saude.update');
 
 });
 

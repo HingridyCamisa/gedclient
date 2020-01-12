@@ -27,7 +27,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-venus-mars"></i> Tipo Membro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>Inicio Cobertura </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>Fim Cobertura </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação </center></th>
+          <th width="150px"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i>Acções </center></th>
 
         </tr>
@@ -48,10 +48,14 @@
           @else
             <td><center><i class="fa fa-check text-green"></i> Em dia Expirado {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}}</center></td>
            @endif
-          <td><center><a href="#" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
-          <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-          <a href="{{ url('/sms') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
-               
+          <td><center><a href="{{ route ('saude.edit', $saudes->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
+          <a href="{{ route ('saude.show', $saudes->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
+          @if(Auth::user()->cargo =='1')
+              {!! Form::open(['method' => 'DELETE','route' => ['saude.destroy', $saudes->id],'style'=>'display:inline']) !!}
+              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+              {!! Form::close() !!}
+              @endif       
+          <a href="{{ url('/sms') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>    
           </td>
 
 
@@ -68,7 +72,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-venus-mars"></i> Tipo Membro </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>Inicio Cobertura </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>Fim Cobertura </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i>Acções </center></th>
         </tr>
       </tfoot>

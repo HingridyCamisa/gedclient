@@ -53,9 +53,10 @@
                         <div class="form-group">
                         <label for="EmailSeguradora">Tipo</label>
                           <select class="form-control" name="tipo_seguro">
-                              <option value="{{$seguradora->tipo_seguro}}">Vida</option>
-                              <option value="{{$seguradora->tipo_seguro}}">Não Vida</option>
-                              <option value="{{$seguradora->tipo_seguro}}">Vida e Não Vida</option>
+                             <option value="{{$seguradora->tipo_seguro}}" selected>{{ $seguradora->tipo_seguro}}</option>
+                              <option value="Vida">Vida</option>
+                              <option value="Não Vida">Não Vida</option>
+                              <option value="Vida e Não Vida">Vida e Não Vida</option>
                           </select>
                       </div>
                         </div>
