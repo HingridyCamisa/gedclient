@@ -124,7 +124,7 @@
              <section class="sidebar" style="height: auto;">
              <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{asset('/img/amana1.png')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset(('storage/'.Auth()->user()->avatar))}}" class="img-circle" alt="User Image">
                         
 
                     </div>
