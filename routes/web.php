@@ -117,8 +117,13 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //comentarios 
     Route::get('allcomments','ComentariosController@allcomments')->name('allcomments');
+
     Route::post('comentsave','ComentariosController@comentsave')->name('comentsave');
-    //
+
+    Route::get('email/{id}/{source}', 'EmailController@index');
+    
+    Route::post('enviaremail', 'EmailController@enviaremail');
+    
 
 });
 

@@ -182,6 +182,9 @@
 
     </style>
 
+    <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
+    
      <script>
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;
