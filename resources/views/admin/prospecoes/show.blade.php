@@ -94,7 +94,7 @@
  <div class="box box-solid box-danger">
 
     <div class="box-header with-border">
-        <h3 class="box-title">Comentarios</h3>
+        <h3 class="box-title"><strong><i class="fa fa-commenting"></i> Comentários</strong></h3>
     </div>
 
     <!-- form start -->
@@ -121,7 +121,8 @@
     </div>
         <div class="box-footer">
             <span class="input-group-btn" >
-                <button type="submit" class="btn btn-primary btn-flat btn-sm" id="save_coment"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+         
+                <button type="submit" class="btn btn-danger" id="save_coment"><i class="fa fa-save" aria-hidden="true"></i> Submeter</button>
             </span>
         </div>
 
