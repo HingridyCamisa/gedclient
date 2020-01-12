@@ -6,10 +6,13 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/sinistro/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
+  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a></h1>
 @stop
 
 @section('content')
+
+<page id="printableArea" name="printableArea">  
 
           <div class="box  box-solid box-danger">
                  <div class="box-header with-border">
@@ -88,7 +91,7 @@
         </tr>
       </tbody>
     </table>
-      
+</page>    
    
 
 

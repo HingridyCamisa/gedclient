@@ -4,8 +4,8 @@
 
 @section('content_header')
 
-  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/prospecoes/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
-  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-info"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/prospecoes/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
+  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a></h1>
 @stop
 
 @section('content')
