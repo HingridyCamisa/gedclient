@@ -128,7 +128,70 @@
         }
     </style>
 
+    <style type="text/css">
 
+    page {
+      background: white;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 0.5cm;
+    }
+    page[size="A4"] {  
+      width: 35cm;
+      font-size: 12px;
+   
+    }
+    page[size="A4"][layout="portrait"] {
+      width: 29.7cm;
+      height: 21cm;
+      font-size: 12px;  
+    }
+    page[size="A3"] {
+      width: 29.7cm;
+      height: 42cm;
+    }
+    page[size="A3"][layout="portrait"] {
+      width: 42cm;
+      height: 29.7cm;  
+    }
+    page[size="A5"] {
+      width: 14.8cm;
+      height: 21cm;
+    }
+    page[size="A5"][layout="portrait"] {
+      width: 21cm;
+      height: 14.8cm;  
+    }
+    @media print {
+      body, page {
+        margin: 0;
+        box-shadow: 0;
+        font-size: 9.5px;
+      }
+    }
+
+    .signature {
+        border: 0;
+        border-bottom: 1px solid #000;
+    }
+
+    .b {
+       -webkit-text-decoration-line: underline; /* Safari */
+       text-decoration-line: underline; 
+    }
+
+    </style>
+
+     <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+
+        }
+    </script>
 
     <!--end emidio-->
 
@@ -152,6 +215,8 @@
         <!--by emidio -->
         <script src="https://cdn.datatables.net/plug-ins/1.10.12/sorting/date-eu.js"></script>
         <!--end emidio -->
+        
+        
 
     <!--/datatable-->
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
