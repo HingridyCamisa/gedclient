@@ -125,7 +125,7 @@
                                         
                                         <div class="col-xs-3">
                                         <label><i class="fa fa-money"></i> Valor Estipulado da Carteira </label>
-                                        <input class="form-control" name="valor_estipulado_carteira" placeholder="Valor estipulado " type="double">
+                                        <input class="form-control" name="valor_estipulado_carteira" placeholder="Valor estipulado " type="number" pattern="([0-9]{1,3}).([0-9]{1,3})">
                                         </div>
                                 </div>
                                 

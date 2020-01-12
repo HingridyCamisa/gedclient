@@ -134,7 +134,7 @@ class ProspecoesController extends Controller
         $prospecoes->estado = $request->input('estado');
         $prospecoes->save();
 
-        return redirect('/admin/prospecoes/index');
+        return redirect('/admin/prospecoes/index')->with('success','Editado com sucesso.');
 
     }
 
