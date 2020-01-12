@@ -22,9 +22,13 @@ class ProspecoesController extends Controller
     public function index()
     {
         $seguradora = Seguradora::all();
-        $prospecaos = Prospecao::latest()
+        $prospecaos = Prospecao::select('prospecaos.*','consultors.nome_consultor as consultor')
+                                ->join('consultors','prospecaos.nome_consultor','consultors.id')
+                                ->latest()
                                 ->where('status','1')
-                                ->paginate(12);
+                                ->paginate(12)
+                                ;
+                      
 
         $hoje = Carbon::today();
         
