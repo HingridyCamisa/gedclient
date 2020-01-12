@@ -29,8 +29,9 @@
                                 
                                  <div class="col-xs-4">
                                     <label><i class="fa fa-institution"></i> Nome Seguradora</label>
-                                        <select class="form-control" value="{{ $contrato->nome_seguradora}}" name="nome_seguradora">
+                                        <select class="form-control"  name="nome_seguradora">
                                             @foreach($seguradora as $seguradora)
+                                            <option value="{{ $contrato->nome_seguradora}}"selected>{{$contrato->nome_seguradora}}</option>
                                             <option>{{ $seguradora->nome_seguradora}}</option>
                                             @endforeach
                                         </select>
@@ -141,8 +142,9 @@
 
                             <div class="col-xs-3">
                                 <label><i class="fa fa-user"></i> Consultor </label>
-                                        <select class="form-control" name="consultor" value="{{ $contrato->consultor}}">
+                                        <select class="form-control" name="consultor" >
                                             @foreach($consultor as $consultor)
+                                            <option value="{{ $contrato->consultor}}"selected>{{ $contrato->consultor}}</option>
                                             <option>{{ $consultor->nome_consultor}}</option>
                                             @endforeach
                                         </select>

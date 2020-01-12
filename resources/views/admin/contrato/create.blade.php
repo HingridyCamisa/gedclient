@@ -100,9 +100,16 @@
                                 <div class="col-xs-4">
                                     <label><i class="fa fa-user"></i> Ramo</label>
                                         <select class="form-control" name="tipo_seguro">
-                                            @foreach($tipo_seguro as $tipo_seguro)
-                                            <option>{{ $tipo_seguro->ramo}}</option>
-                                            @endforeach
+                                            <option>Acidentes Pessoais</option>
+                                            <option>Acidente de Trabalho</option>
+                                            <option>Automóvel - Responsabilidade Civil</option>
+                                            <option>Automóvel - Danos Próprios</option>
+                                            <option>Garantia</option>
+                                            <option>Recheio</option>
+                                            <option>Saúde</option>
+                                            <option>Mercadoria</option>
+                                            <option>Multirriscos</option>
+                                            
                                         </select>
                                 </div>
                                 <div class="col-xs-4">
