@@ -59,30 +59,35 @@
                                     </label>
                                 </div>   
                              </div>
-
-                             <div class="col-xs-4">
-                                    <label for="TipoSegurado"><i class="fa fa-user"></i> Tipo Seguro</label>
-                                    <input class="form-control" name="tipo_seguro" placeholder="Aluger de Viaturas" type="text">
+                             <!-- <div class="col-xs-4">
+                                    <label for="EmailSegurado"><i class="fa fa-envelope"></i> Email Segurado</label>
+                                    <input class="form-control" name="email_segurado" placeholder="Email Segurado" type="email">
     
-                             </div>
+                             </div> -->
                                 
                             </div><br>
 
                             <div class="row">
-                                 <div class="col-xs-4">
-                                    <label><i class="fa fa-user"></i> Pessoa de Contacto</label>
-                                    <input class="form-control" name="pessoa_contacto" placeholder="Hingridy Camisa" type="text">
-                                </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-3">
                                     <label><i class="fa fa-phone"></i> Contacto</label>
                                     <input class="form-control" name="contacto_pessoa_contacto" placeholder="Numero de celular" type="text">
                                 </div>
-                                <div class="col-xs-4">
-                                    <label><i class="fa fa-envelope"></i> Email </label>
-                                    <input class="form-control" name="email_pessoa_contacto" placeholder="email" type="email">
+
+                                 <div class="col-xs-3">
+                                    <label><i class="fa fa-user"></i> Pessoa de Contacto</label>
+                                    <input class="form-control" name="pessoa_contacto" placeholder="Hingridy Camisa" type="text">
                                 </div>
                                 
-                               
+                                <div class="col-xs-3">
+                                    <label><i class="fa fa-envelope"></i> Email Pessoa Contacto </label>
+                                    <input class="form-control" name="email_pessoa_contacto" placeholder="Email Pessoa Contacto" type="email">
+                                </div>
+                                
+                                <div class="col-xs-3">
+                                        <label for="TipoSegurado"><i class="fa fa-user"></i> Tipo Seguro</label>
+                                        <input class="form-control" name="tipo_seguro" placeholder="Aluger de Viaturas" type="text">
+        
+                                </div>
                                
                                 
                                 </div><br>

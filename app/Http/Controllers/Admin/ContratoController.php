@@ -62,7 +62,6 @@ class ContratoController extends Controller
         'nome_segurado'=>'required|string|min:3|max:100',
         'tipo_seguro'=>'required|string|min:3|max:100',
         'nome_seguradora'=>'required',
-        'email_segurado'=>'required|email',
         'numero_apolice'=>'required|string|min:3|max:100',
         'numero_recibo'=>'required|string|min:3|max:100',
         'periodicidade_pagamento'=>'required|string',

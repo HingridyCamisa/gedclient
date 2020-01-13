@@ -63,7 +63,7 @@ input[type=submit]:hover {
 
           <div class="box box-solid box-danger">
           <div class="box-header with-border">
-                 <center><h3 class="box-title"><strong><i class="fa fa-envelope"></i> Enviar Email </strong></h3></center>
+                 <center><h3 class="box-title"><strong><i class="fa fa-edit"></i> Compor Novo Email </strong></h3></center>
          </div>
  
 
@@ -74,19 +74,16 @@ input[type=submit]:hover {
 
             <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}" />
 
-            <label for="lname"><i class="fa fa-info"></i> Assunto:</label>
-            <input type="text" id="assunto" name="assunto" placeholder="Assunto do Email">
+            <input type="text" id="assunto" name="assunto" placeholder="Assunto do Email:">
 
-            <label for="lname"><i class="fa fa-user"></i> Para:</label>
             <input type="text" id="name_cliente" name="name_cliente" placeholder="Nome" value="{{$nome_cliente }}">
 
-            <label for="lname"><i class="fa fa-envelope"></i> Email:</label>
+           
             <input type="text" id="to" name="to" value="{{$email_cliente }}">
             
-            <label for="subject"><i class="fa fa-envelope"></i> Messagem:</label>
             <textarea id="message" class="textarea" name="message" placeholder="Escreva aqui o seu email..." value="{{ old('subject') }}" style="height:200px;height: 100px;"></textarea>
 
-            <center><button type="submit" class="btn btn-danger"><i class="fa fa-send"></i> Enviar</button></center>
+            <center><button type="submit" class="btn btn-danger"><i class="fa fa-envelope"></i>  Enviar</button></center>
         </form>
 </div>
 
