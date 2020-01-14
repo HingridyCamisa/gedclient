@@ -115,11 +115,11 @@ return [
             'icon'        => 'home',
         ],
        
-        // [
-        //     'text'        => 'Gestão Segurados',
-        //     'url'         => 'admin/segurados/index',
-        //     'icon'        => 'users',
-        // ],
+        [
+            'text'        => 'Gestão Clientes',
+             'url'        => 'admin/clientes',
+            'icon'        => 'users',
+         ],
         [
             'text'        => 'Gestão Prospecções',
             'url'         => 'admin/prospecoes/index',

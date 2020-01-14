@@ -123,6 +123,12 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('email/{id}/{source}', 'EmailController@index');
     
     Route::post('enviaremail', 'EmailController@enviaremail');
+
+    //clientes 
+    Route::resource('clientes','ClientesController');
+    //states
+    Route::get('get-state-list','ClientesController@getStateList');
+    Route::get('get-city-list','ClientesController@getCityList');
     
 
 });
