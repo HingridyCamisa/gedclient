@@ -18,9 +18,9 @@
     <thead>
         <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Segurado</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-users"></i> País </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Cidade</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice</center></th>
           <th scope="col"><center> Ramo</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Próximo Pagamento </center></th>
@@ -34,8 +34,9 @@
       @foreach($clientes as $cliente)
         <tr>
             <th><center>{{ ++$i }}</center></th>
-            <td>{{$cliente->nome_cliente }}</td>
-            <td>{{$cliente->endereco_cliente }}</td>
+            <td>{{$cliente->cliente_nome }}</td>
+            <td>{{$cliente->client_country_city->country_name}}</td>
+            <td>{{$cliente->client_country_city->state_name}}</td>
 
 
 

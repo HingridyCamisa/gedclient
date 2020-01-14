@@ -13,5 +13,15 @@ class Cliente extends Model
     public $primaryKey = 'id';
 
     public $timestamps=true;
+
+     public function client_country_city()
+    {
+        return $this->belongsTo('App\CountryCity','cliente_state_id','id');
+    }
+
+    public function pessoa_country_city()
+    {
+        return $this->belongsTo('App\CountryCity','pessoa_contacto_state_id','id');
+    }
 }
 
