@@ -26,6 +26,9 @@
       <style>
        .error{ color:red; } 
       </style>
+      <style>
+       .sucess{ color:green; } 
+      </style>
    
   <style>
 

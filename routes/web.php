@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('prospecoes/index','ProspecoesController@index')->name('prospecoes.index');
 
-    Route::get('prospecoes','ProspecoesController@create')->name('prospecoes.create');
+    Route::get('prospecoes/{id}','ProspecoesController@create')->name('prospecoes.create');
 
     Route::post('prospecoes','ProspecoesController@store')->name('prospecoes.store');
 
@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('contrato/index','ContratoController@index')->name('contratos.index');
 
-    Route::get('contrato','ContratoController@create')->name('contratos.create');
+    Route::get('contrato/{id}','ContratoController@create')->name('contratos.create');
 
     Route::post('contrato','ContratoController@store')->name('contratos.store');
 

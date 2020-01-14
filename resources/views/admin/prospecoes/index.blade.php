@@ -2,7 +2,7 @@
 @section('title','Tabela Prospecções')
 
 @section('content_header')
-    <h1><a class="btn btn-danger"  href="{{ url('admin/prospecoes') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
+   
 @stop
 
 @section('content')
@@ -32,7 +32,7 @@
       @foreach($prospecaos as $prospecao)
         <tr>
           <th><center>{{ ++$i }}</center></th>
-          <td>{{$prospecao->nome_cliente }}</td>
+          <td>{{$prospecao->cliente->cliente_nome }}</td>
           <td>{{$prospecao->consultor }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>

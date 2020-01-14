@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use carbon;
 use Illuminate\Support\Str;
 use App\Files;
+use App\Cliente;
 
 class ContratoController extends Controller
 {
@@ -25,7 +26,7 @@ class ContratoController extends Controller
         $contratos = Contrato::where("contratos.status",1)
                                        ->join('consultors','contratos.consultor','consultors.id') 
                                        ->latest()->leftjoin('prospecaos','contratos.id_prospecaos','prospecaos.id')
-                                       ->select('contratos.*','prospecaos.nome_cliente','prospecaos.nome_consultor','consultors.nome_consultor as consultorx')
+                                       ->select('contratos.*','consultors.nome_consultor as consultorx')
                                        ->paginate(12);
 
         
@@ -38,14 +39,15 @@ class ContratoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $contrato = Contrato::all();
         $seguradora = Seguradora::all();
         $tipo_seguro = TipoSeguro::all();
         $consultor = Consultor::all();
+        $cliente=Cliente::where('status',1)->where('id',$id)->first();
 
-        return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor'));
+        return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor','cliente'));
     }
 
     /**
@@ -59,8 +61,6 @@ class ContratoController extends Controller
          $validatedata=$request->validate([
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
-        'nome_segurado'=>'required|string|min:3|max:100',
-        'tipo_seguro'=>'required|string|min:3|max:100',
         'nome_seguradora'=>'required',
         'numero_apolice'=>'required|string|min:3|max:100',
         'numero_recibo'=>'required|string|min:3|max:100',
@@ -76,14 +76,10 @@ class ContratoController extends Controller
         'situacao'=>'required|string',
         'consultor'=>'required|string',
         'detalhes_item_segurado'=>'required|string',
-        'tipo_cliente'=>'required|string',
-        'data_nascimento'=>'required|data',
-        'genero'=>'required|string',
-        'ramo_negocio'=>'required|string',
-        'endereco'=>'required|string',
-        'pessoa_contacto'=>'nullable|string',
-        'email_pessoa_contacto'=>'nullable|email',
-        'contacto_pessoa_contacto'=>'nullable|string',
+        'tipo_ramo'=>'required|string',
+        'user_id'=>'required',
+        'client_id' =>'required',
+        'client_token' => 'required',
 
 
        ]);
@@ -91,19 +87,9 @@ class ContratoController extends Controller
        //file name
         $namefile = Str::random(32).'anexo'.time();
 
-
-
-        $prospecao=Prospecao::find($request->id_prospecaos);
-      
-        $prospecao->status=0;
-        $prospecao->save();
-
         $data=$request->all();
         unset($data['filetype']);//remove time from array before save
         unset($data['file']);//remove time from array before save
-        $data["nome_segurado"]=$prospecao->nome_cliente;
-        $data["consultor"]=$prospecao->nome_consultor;
-        $data["ramo_negocio"]=$prospecao->tipo_prospecao;
         $data["token_id"]=$namefile;
 
         
