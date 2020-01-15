@@ -146,14 +146,14 @@ class ContratoController extends Controller
         'id_prospecaos'=>'required',
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
-        'data_inicio'=>'required',
-        'dias_cobertos'=>'required',
-        'dias_proximo_pagamento'=>'required',
-        'capital_seguro'=>'required',
-        'premio_total'=>'required',
-        'premio_simples'=>'required',
-        'taxa_corretagem'=>'required',
-        'comissao'=>'required',
+        'data_inicio'=>'required|date',
+        'dias_cobertos'=>'required|numeric',
+        'dias_proximo_pagamento'=>'required|date',
+        'capital_seguro'=>'required|numeric',
+        'premio_total'=>'required|numeric',
+        'premio_simples'=>'required|numeric',
+        'taxa_corretagem'=>'required|numeric',
+        'comissao'=>'required|numeric',
         'periodicidade_pagamento'=>'required',
         'situacao'=>'required',
         'item_segurado'=>'required',
@@ -211,38 +211,26 @@ class ContratoController extends Controller
      * @param  \App\Contrato  $contrato
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contrato $contrato, $id)
+    public function update(Request $request, $id)
     {
-        $contrato = Contrato::findOrFail($id);
-        $contrato->nome_segurado = $request->input('nome_segurado');
-        $contrato->email_segurado = $request->input('email_segurado');
-        $contrato->nome_seguradora = $request->input('nome_seguradora');
-        $contrato->tipo_seguro = $request->input('tipo_seguro');
-        $contrato->numero_apolice = $request->input('numero_apolice');
-        $contrato->numero_recibo = $request->input('numero_recibo');
-        $contrato->periodicidade_pagamento = $request->input('periodicidade_pagamento');
-        $contrato->data_inicio = $request->input('data_inicio');
-        $contrato->data_proximo_pagamento = $request->input('data_proximo_pagamento');
-        $contrato->dias_cobertos = $request->input('dias_cobertos');
-        $contrato->dias_proximo_pagamento = $request->input('dias_proximo_pagamento');
-        $contrato->capital_seguro = $request->input('capital_seguro');
-        $contrato->premio_total = $request->input('premio_total');
-        $contrato->premio_simples = $request->input('premio_simples');
-        $contrato->taxa_corretagem = $request->input('taxa_corretagem');
-        $contrato->comissao = $request->input('comissao');
-        $contrato->item_segurado = $request->input('item_segurado');
-        $contrato->situacao = $request->input('situacao');
-        $contrato->consultor = $request->input('consultor');
-        $contrato->detalhes_item_segurado = $request->input('detalhes_item_segurado');
-        $contrato->tipo_cliente = $request->input('tipo_cliente');
-        $contrato->data_nascimento = $request->input('data_nascimento');
-        $contrato->genero = $request->input('genero');
-        $contrato->endereco = $request->input('endereco');
-        $contrato->pessoa_contacto = $request->input('pessoa_contacto');
-        $contrato->email_pessoa_contacto = $request->input('email_pessoa_contacto');
-        $contrato->contacto_pessoa_contacto = $request->input('contacto_pessoa_contacto');
-        $contrato->ramo_negocio = $request->input('ramo_negocio');
-        $contrato->save();
+    
+       $validatedata=$request->validate([
+        'data_inicio'=>'required|date',
+        'dias_cobertos'=>'required|numeric',
+        'dias_proximo_pagamento'=>'required|numeric',
+        'capital_seguro'=>'required|numeric',
+        'premio_total'=>'required|numeric',
+        'premio_simples'=>'required|numeric',
+        'taxa_corretagem'=>'required|numeric',
+        'comissao'=>'required|numeric',
+        'periodicidade_pagamento'=>'required',
+        'situacao'=>'required',
+        'item_segurado'=>'required',
+        'nome_seguradora'=>'required',
+        'data_proximo_pagamento'=>'required|date',
+       ]);
+        $request=$request->except('_token');
+        Contrato::where('id',$id)->update($request); 
 
         return redirect('/admin/contrato/index')->with('success','Editado criado.');
     }

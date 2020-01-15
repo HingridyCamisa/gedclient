@@ -4,7 +4,7 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/clientes')}}"><i class="fa  fa-arrow-left"></i></a>
   <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a>
   </h1>
     
@@ -23,25 +23,41 @@
      
       <tbody>
 
-         <tr>
-          <th>Secret Key</th>
+        <tr >
+          <th width="300px">Secret Key</th>
           <td><i class="fa fa-key"></i> &nbsp; {{ $cliente->token_id}}</td> 
         </tr>
         <tr>
           <th>Nome </th>
           <td><i class="fa fa-user"></i> &nbsp; {{$cliente->cliente_nome }}</td>
         </tr>
+         @if($cliente->cliente_tipo=='Individual')
+        <tr>
+          <th>Tipo de ID </th>
+          <td><i class="fa fa-user"></i> &nbsp; {{$cliente->cliente_id_tipo }}</td>
+        </tr>
+        
+        <tr>
+          <th>Nº ID </th>
+          <td><i class="fa fa-user"></i> &nbsp; {{$cliente->cliente_id_numero }}</td>
+        </tr>
+        <tr>
+        <tr>
+          <th>Genero </th>
+          <td><i class="fa fa-transgender"></i> &nbsp; {{$cliente->cliente_genero }}</td>
+        </tr>
+         @endif
         <tr>
           <th>Endereço</th>
           <td><i class="fa fa-institution"></i> &nbsp; {{$cliente->cliente_endereco }}</td>
         </tr>
         <tr>
           <th>País</th>
-          <td><i class="fa fa-fw fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->country_name }}</td>
+          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->country_name }}</td>
         </tr>
         <tr>
           <th>Província</th>
-          <td><i class="fa fa-fw fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->state_name }}</td>
+          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->state_name }}</td>
         </tr>
         <tr>
         <tr>
@@ -59,75 +75,88 @@
         </tr>
         <tr>
         <tr>
-          <th>Ramo</th>
-          <td><i class="fa fa-fw fa-map-pin"></i> &nbsp; {{$cliente->tipo_seguro }}</td>
+          <th>Tipo de Cliente</th>
+          <td> &nbsp; {{$cliente->cliente_tipo }}</td>
         </tr>
         <tr>
-          <th>Periodicidade Pagamento</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$cliente->periodicidade_pagamento }}</td>
+          <th>Data de Nascimento</th>
+          <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($cliente->cliente_data_nascimento)->format('d-m-Y') }}</td>
         </tr>
         <tr>
-          <th>Data Início</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($cliente->data_inicio)->format('d-m-Y') }}</td>
-        </tr>
-        <tr>
-          <th>Data Próximo  Pagamento</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($cliente->data_proximo_pagamento)->format('d-m-Y') }}</td>
-        </tr>
-        <tr>
-          <th>Dias Cobertos</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ $cliente->dias_cobertos }}</td>
-        </tr>
-        <tr>
-          <th>Data Próximo  Pagamento</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ $cliente->dias_proximo_pagamento }}</td>
-        </tr>
-        <tr>
-          <th>Capital Seguro</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{  'MTN '.number_format($cliente->capital_seguro, 2, ',', '.') }}  </td>
-        </tr>
-        <tr>
-          <th>Prémio Total</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{  'MTN '.number_format($cliente->premio_total, 2, ',', '.') }}  </td>
-        </tr>
-        <tr>
-          <th>Prémio Simples</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{  'MTN '.number_format($cliente->premio_simples, 2, ',', '.') }}  </td>
-        </tr>
-        <tr>
-          <th>Comissão Corretagem</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{  'MTN '.number_format($cliente->comissao, 2, ',', '.') }}  </td>
-        </tr>
-        <tr>
-          <th>Taxa Corretagem</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{ $cliente->taxa_corretagem}}  </td>
-        </tr>
-        <tr>
-          <th>Item Segurado</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{ $cliente->item_segurado}}  </td>
-        </tr>
-        <tr>
-          <th>Situação</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{ $cliente->situacao}}  </td>
-        </tr>
-
-        <tr>
-          <th>Detalhes Item Segurado</th>
-          <td><i class="fa fa-info"></i> &nbsp; {{$cliente->detalhes_item_segurado}}</td>
-        </tr>
-        <tr>
-          <th>Estado Contrato</th>
-          @if(\Carbon\Carbon::parse($cliente->data_proximo_pagamento)->isPast())         
-          <td><i class="fa fa-close text-red"></i> Expirado</td>
-          @else
-           <td><i class="fa fa-check text-green"></i> Em dia</td>
-           @endif
-
+          <th>Notas</th>
+          <td><i class="fa fa-info"></i> &nbsp; {{$cliente->notas}}</td>
         </tr>
       </tbody>
     </table> 
     </div>
        <!-- /.box-header -->
+
+
+    @if($cliente->cliente_tipo!='Individual')
+       <div class="box box-solid box-danger">
+         <div class="box-header with-border">
+                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes de Pessoa de Contacto </strong> <i> {{$cliente->nome_segurado}} </i></h3></center>
+         </div>
+
+            <table class="table table-striped table-bordered table-hover">
+     
+              <tbody>
+                <tr>
+                  <th width="300px">Nome </th>
+                  <td><i class="fa fa-user"></i> &nbsp; {{$cliente->pessoa_contacto_nome }}</td>
+                </tr>
+                <tr>
+                  <th>Tipo de ID </th>
+                  <td><i class="fa fa-user"></i> &nbsp; {{$cliente->pessoa_contacto_id_tipo }}</td>
+                </tr>
+                <tr>
+                  <th>Nº ID </th>
+                  <td><i class="fa fa-user"></i> &nbsp; {{$cliente->pessoa_contacto_id_numero }}</td>
+                </tr>
+                <tr>
+                <tr>
+                  <th>Genero </th>
+                  <td><i class="fa fa-transgender"></i> &nbsp; {{$cliente->pessoa_contacto_genero }}</td>
+                </tr>
+                <tr>
+                  <th>Endereço</th>
+                  <td><i class="fa fa-institution"></i> &nbsp; {{$cliente->pessoa_contacto_endereco }}</td>
+                </tr>
+                @if(isset($cliente->pessoa_country_city))
+                <tr>
+                  <th>País</th>
+                  <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->pessoa_country_city->country_name }}</td>
+                </tr>
+                <tr>
+                  <th>Província</th>
+                  <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->pessoa_country_city->state_name }}</td>
+                </tr>
+                  @endif
+                <tr>
+                <tr>
+                  <th>Telefone 1</th>
+                  <td><i class="fa fa-phone"></i> &nbsp; {{$cliente->pessoa_contacto_telefone_1 }}</td>
+                </tr>
+                <tr>
+                  <th>Telefone 2</th>
+                  <td><i class="fa fa-phone"></i> &nbsp; {{$cliente->pessoa_contacto_telefone_2 }}</td>
+                </tr>
+                <tr>
+                <tr>
+                  <th>Email</th>
+                  <td><i class="fa fa-envelope"></i> &nbsp; {{$cliente->pessoa_contacto_email }}</td>
+                </tr>
+                <tr>
+                 @if(isset($cliente->pessoa_contacto_data_nascimento))
+                <tr>
+                  <th>Data de Nascimento</th>
+                  <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($cliente->pessoa_contacto_data_nascimento)->format('d-m-Y') }}</td>
+                </tr>
+                 @endif
+              </tbody>
+            </table> 
+    </div>
+    @endif
 </page>
 
 <div class="box box-solid box-danger">

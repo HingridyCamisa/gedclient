@@ -14,40 +14,44 @@
           <!-- general form elements -->
   <div class="box box-solid box-danger">
          <div class="box-header with-border">
-                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Prospecção do Cliente </strong> <i> {{$prospecao->nome_cliente}} </i></h3></center>
+                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Prospecção do Cliente </strong> <i> {{$prospecao->cliente->cliente_nome}} </i></h3></center>
          </div>
 
     <table class="table table-striped table-bordered table-hover">
      
       <tbody>
         <tr>
-          <th>ID</th>
-          <td><i class="fa fa-key"></i> &nbsp; {{ $prospecao->id}}</td> 
+          <th width="250px">Scret key</th>
+          <td><i class="fa fa-key"></i> &nbsp; {{ $prospecao->client_token}}</td> 
         </tr>
         <tr>
           <th>Nome Cliente</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->nome_cliente }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->cliente->cliente_nome }}</td>
         </tr>
         <tr>
           <th>Nome Consultor</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->nome_consultor }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->consultor->nome_consultor }}</td>
         </tr>
         <tr>
           <th>Tipo Cliente</th>
-          <td><i class="fa fa-fw fa-user"></i> &nbsp; {{$prospecao->tipo_cliente }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->cliente->cliente_tipo }}</td>
         </tr>
         <tr>
         <tr>
           <th>Endereço Cliente</th>
-          <td><i class="fa fa-fw fa-map-pin"></i> &nbsp; {{$prospecao->endereco_cliente }}</td>
+          <td><i class="fa fa-map-pin"></i> &nbsp; {{$prospecao->cliente->cliente_endereco}}</td>
         </tr>
         <tr>
-          <th>Contacto Cliente</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$prospecao->contacto_cliente }}</td>
+          <th>Telefone 1</th>
+          <td><i class="fa fa-phone"></i> &nbsp; {{$prospecao->cliente->cliente_telefone_1 }}</td>
+        </tr>
+        <tr>
+          <th>Telefone 2</th>
+          <td><i class="fa fa-phone"></i> &nbsp; {{$prospecao->cliente->cliente_telefone_2 }}</td>
         </tr>
         <tr>
           <th>Email Cliente</th>
-          <td><i class="fa fa-envelope"></i> &nbsp; {{$prospecao->email_cliente }}</td>
+          <td><i class="fa fa-envelope"></i> &nbsp; {{$prospecao->cliente->cliente_email }}</td>
         </tr>
         <tr>
           <th>Data Início</th>
@@ -59,7 +63,7 @@
         </tr>
         <tr>
           <th>Ramo</th>
-          <td>&nbsp;{{$prospecao->tipo_prospecao }}</td>
+          <td>&nbsp;{{$prospecao->tipo_ramo }}</td>
         </tr>
         <tr>
           <th>Origem Prospecção</th>

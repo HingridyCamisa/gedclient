@@ -10,10 +10,11 @@
 @stop
 
 @section('content')
+@include('notification')
 
 <div class="box box-solid box-danger">
     <div class="box-header with-border">
-            <center><h3 class="box-title"><strong><i class="fa fa-folder-open"></i> Editar Contrato</strong></h3></center>
+            <center><h3 class="box-title"><strong><i class="fa fa-folder-open"></i> Editar Contrato: {{$contrato->cliente->cliente_nome }}</strong></h3></center>
     </div>
     <!-- /.box-header -->
                         <!-- form start -->
@@ -22,25 +23,20 @@
                 <div class="box-body">
                             
                     <div class="row">
-                                <div class="col-xs-4">
-                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Nome Segurado</label>
-                                    <input class="form-control" name="nome_segurado" value="{{ $contrato->nome_segurado}}" placeholder="Hingridy Camisa" type="text">
-                                </div>
-                                
                                  <div class="col-xs-4">
                                     <label><i class="fa fa-institution"></i> Nome Seguradora</label>
                                         <select class="form-control"  name="nome_seguradora">
+                                            <option value="" disabled selected>Select</option>
                                             @foreach($seguradora as $seguradora)
-                                            <option value="{{ $contrato->nome_seguradora}}"selected>{{$contrato->nome_seguradora}}</option>
-                                            <option>{{ $seguradora->nome_seguradora}}</option>
+                                            <option value="{{ $seguradora->id}}">{{ $seguradora->nome_seguradora}}</option>
                                             @endforeach
                                         </select>
                                 </div>
 
                                 <div class="col-xs-4">
                                     <label><i class="fa fa-user"></i> Tipo Seguro</label>
-                                        <select class="form-control" name="tipo_seguro" >
-                                            <option value="{{$contrato->tipo_seguro}}" selected >{{$contrato->tipo_seguro}}</option>
+                                        <select class="form-control" name="tipo_ramo" >
+                                            <option value="{{$contrato->tipo_ramo}}" selected >{{$contrato->tipo_ramo}}</option>
                                             <option value="Acidentes Pessoais">Acidentes Pessoais</option>
                                             <option value="Acidente de Trabalho">Acidente de Trabalho</option>
                                             <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
@@ -68,7 +64,7 @@
                             </div>
 
                             <div class="col-xs-4">
-                                <label for="Periodicidade Pagamento"><i class="fa fa-phone"></i>Periodicidade de Pagamento</label>
+                                <label for="Periodicidade Pagamento"><i class="fa fa-phone"></i> Periodicidade de Pagamento</label>
                                 <select class="form-control" name="periodicidade_pagamento">
                                             <option value="{{ $contrato->periodicidade_pagamento}}" selected>{{ $contrato->periodicidade_pagamento}}</option>
                                             <option value="Mensal">Mensal</option>
@@ -96,12 +92,12 @@
                             </div>
 
                             <div class="col-xs-3">
-                                <label for="Dias_Cobertos"><i class="fa fa-money"></i> Dias Cobertos </label>
+                                <label for="Dias_Cobertos"> Dias Cobertos </label>
                                     <input class="form-control " name="dias_cobertos" value="{{ $contrato->dias_cobertos}}" type="text">
                             </div>
 
                             <div class="col-xs-3">
-                                <label for="Dias_Proximo_Pagamento"><i class="fa fa-money"></i> Dias Próximo  Pagamento </label>
+                                <label for="Dias_Proximo_Pagamento"> Dias Próximo  Pagamento </label>
                                     <input class="form-control" name="dias_proximo_pagamento" value="{{ $contrato->dias_proximo_pagamento}}" type="text">
                              </div>
                     </div>
@@ -143,9 +139,9 @@
                             <div class="col-xs-3">
                                 <label><i class="fa fa-user"></i> Consultor </label>
                                         <select class="form-control" name="consultor" >
+                                            <option value="" disabled selected>select</option>
                                             @foreach($consultor as $consultor)
-                                            <option value="{{ $contrato->consultor}}"selected>{{ $contrato->consultor}}</option>
-                                            <option>{{ $consultor->nome_consultor}}</option>
+                                            <option value="{{ $consultor->id}}">{{ $consultor->nome_consultor}}</option>
                                             @endforeach
                                         </select>
                             </div>
@@ -183,14 +179,7 @@
                         </div>
                            
             </form>
-                        
-                     @if($errors->any())
-                        <ul class="alert alert-warning">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                      @endif
+
     
         
 </div> <!-- /.box -->
