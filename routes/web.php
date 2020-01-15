@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //clientes 
     Route::resource('clientes','ClientesController');
+    Route::post('clientes/atualizar/{id}','ClientesController@update');
     //states
     Route::get('get-state-list','ClientesController@getStateList');
     Route::get('get-city-list','ClientesController@getCityList');

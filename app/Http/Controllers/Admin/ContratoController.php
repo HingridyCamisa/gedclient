@@ -24,9 +24,7 @@ class ContratoController extends Controller
     public function index()
     {
         $contratos = Contrato::where("contratos.status",1)
-                                       ->join('consultors','contratos.consultor','consultors.id') 
-                                       ->latest()->leftjoin('prospecaos','contratos.id_prospecaos','prospecaos.id')
-                                       ->select('contratos.*','consultors.nome_consultor as consultorx')
+                                       ->latest()
                                        ->paginate(12);
 
         
@@ -164,9 +162,13 @@ class ContratoController extends Controller
        //file name
         $namefile = Str::random(32).'anexo'.time();
 
-
-
-        $prospecao=Prospecao::find($request->id_prospecaos);
+        $prospecao=Prospecao::where('status',1)->where('id',$request->id_prospecaos)->first();
+        if (!$prospecao)
+        {
+        	return back()->with('error','Prospenção desativada');
+        };
+        
+       
       
         $prospecao->status=0;
         $prospecao->save();
@@ -174,11 +176,13 @@ class ContratoController extends Controller
         $data=$request->all();
         unset($data['filetype']);//remove time from array before save
         unset($data['file']);//remove time from array before save
-        $data["nome_segurado"]=$prospecao->nome_cliente;
+        $data["client_token"]=$prospecao->client_token;
+        $data["client_id"]=$prospecao->client_id;
+        $data["tipo_ramo"]=$prospecao->tipo_ramo;
+        $data["id_prospecaos"]=$request->id_prospecaos;
         $data["consultor"]=$prospecao->nome_consultor;
-        $data["ramo_negocio"]=$prospecao->tipo_prospecao;
+        $data["detalhes_item_segurado"]=$prospecao->detalhes_prospecao;
         $data["token_id"]=$namefile;
-        $data["email_segurado"]=$prospecao->email_cliente;
 
         
         Contrato::create($data);

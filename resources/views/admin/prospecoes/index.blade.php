@@ -2,7 +2,7 @@
 @section('title','Tabela Prospecções')
 
 @section('content_header')
-   
+       <h1><a class="btn btn-danger"  href="{{ url('admin/clientes') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
@@ -97,7 +97,7 @@
                 
                     @csrf
                     <input id="id" name="id_prospecaos" hidden>
-                    <input name="id_user" hidden value="{{ Auth::user()->id }}">
+                   <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
 
 
                     <p> 
@@ -226,7 +226,7 @@
                     </p> <br><br>
                     <p> <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Item Segurado</label>
-                        <div class="col-md-4">
+                        <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
                           <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>

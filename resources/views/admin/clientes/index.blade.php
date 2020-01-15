@@ -49,8 +49,20 @@
                 @endif
             </td>
              <td><center>
+                 <a href="{{ route('clientes.edit', $cliente->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
+                 <a href="{{ route ('clientes.show', $cliente->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
                  <a href="{{url('admin/contrato',$cliente->id)}}" class="btn btn-danger btn-xs">Contrato</a>
                  <a href="{{url('admin/prospecoes',$cliente->id)}}" class="btn bg-orange  btn-xs">Prospeção</a>
+                  @if($cliente->status =='1')
+                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
+                  {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+                  {!! Form::close() !!}
+                  @endif
+                  @if($cliente->status !='1')
+                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
+                  {!! Form::button('<i class="fa fa-recycle"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+                  {!! Form::close() !!}
+                  @endif
              </center></td>
         </tr>  
       @endforeach

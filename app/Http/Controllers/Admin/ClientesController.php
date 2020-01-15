@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Str;
 use App\Files;
+use Illuminate\Validation\Rule;
 
 class ClientesController extends Controller
 {
@@ -146,9 +147,21 @@ class ClientesController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $cliente=Cliente::find($id);
+        if ($cliente->status==0)
+        {
+        	$messagem='Cliente desativado';
+            $status='error';
+        }else
+         {
+         	$messagem='Cliente Ativo';
+            $status='success';
+         };
+         
+
+        return view('admin.clientes.show',compact('cliente'))->with($status,$messagem);
     }
 
     /**
@@ -157,11 +170,11 @@ class ClientesController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente, $id)
+    public function edit($id)
     {
         $cliente = Cliente::find($id);
-
-        return view('cliente.edit', compact('cliente'));
+        $countries = DB::table("uvw_country_states")->groupby("country_name")->pluck("country_name");
+        return view('admin.clientes.edit', compact('cliente','countries'));
         
     }
 
@@ -172,9 +185,67 @@ class ClientesController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $teste_cliente=Cliente::find($id);
+        if ($teste_cliente->status==0)
+        {
+        	return back()->with('error','Cliente desativado');
+        }
+        
+        $cliente=$request->all();
+        $request->validate([
+            'cliente_tipo'=>'required|string|min:1',
+        ]);
+
+        if ($cliente['cliente_tipo']=='Individual')
+        {
+         $validatedata=$request->validate([
+        'cliente_nome'=>['nullable','string','min:3','max:100',Rule::unique('clientes','cliente_nome')->ignore($id,'id')],
+        'cliente_endereco'=>'nullable|string|min:3|max:100',
+        'cliente_data_nascimento'=>'nullable|date',
+        'cliente_genero'=>'nullable|string|min:3|max:100',
+        'cliente_email'=>['nullable','email',Rule::unique('clientes','cliente_email')->ignore($id,'id')],
+        'cliente_telefone_1'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
+        'cliente_telefone_2'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
+        'cliente_state_id'=>'nullable|numeric',
+        'cliente_id_tipo'=>'nullable|string|min:1',
+        'cliente_id_numero'=>['nullable','string','min:1',Rule::unique('clientes','cliente_id_numero')->ignore($id,'id')],
+        'notas'=>'nullable|string',
+        'cliente_tipo'=>'required|string|min:1',
+       ]);
+        }elseif ($cliente['cliente_tipo']=='Empresa')
+        {
+         $validatedata=$request->validate([
+        'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        'filetype.*' => 'nullable|string|',
+        'cliente_nome'=>'nullable|string|min:3|max:100',
+        'cliente_endereco'=>'nullable|string|min:3|max:100',
+        'cliente_email'=>'nullable|email',
+        'cliente_telefone_1'=>'nullable|digits:9',
+        'cliente_telefone_2'=>'nullable|digits:9',
+        'cliente_state_id'=>'nullable|numeric',
+        'notas'=>'nullable|string',
+        'cliente_tipo'=>'required|string|min:1',
+            
+        //pessoa de contacto
+        'pessoa_contacto_nome'=>'required|string|min:3|max:100',
+        'pessoa_contacto_endereco'=>'nullable|string|min:3|max:100',
+        'pessoa_contacto_data_nascimento'=>'nullable|date',
+        'pessoa_contacto_genero'=>'nullable|string|min:3|max:100',
+        'pessoa_contacto_email'=>'nullable|email',
+        'pessoa_contacto_telefone_1'=>'required|digits:9',
+        'pessoa_contacto_telefone_2'=>'nullable|digits:9',
+        'pessoa_contacto_state_id'=>'nullable|numeric',
+        'pessoa_contacto_id_tipo'=>'nullable|string|min:1',
+        'pessoa_contacto_id_numero'=>'nullable|string|min:1',
+
+        ]);
+        }
+
+        Cliente::where('id',$id)->update($validatedata);  
+
+         return redirect('/admin/clientes')->with('success','Cliente Atualizado.');
     }
 
     /**
@@ -183,8 +254,21 @@ class ClientesController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        $cliente= \App\Cliente::find($id);
+        if ($cliente->status==1)
+        {
+         $cliente->status=0;	
+        }else
+         {
+         	$cliente->status=1;
+         }
+         
+        
+       
+        $cliente->save();
+
+        return redirect('/admin/clientes')->with('success','Cliente alterado com sucesso.');
     }
 }
