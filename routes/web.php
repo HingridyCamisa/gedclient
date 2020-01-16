@@ -130,6 +130,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     //states
     Route::get('get-state-list','ClientesController@getStateList');
     Route::get('get-city-list','ClientesController@getCityList');
+    Route::get('aviso-de-cobranca/{tipo}/{id}','AvisoDeCobrancaController@aviso');
     
 
 });

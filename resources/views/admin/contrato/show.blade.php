@@ -6,14 +6,15 @@
   
   <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa  fa-arrow-left"></i></a>
   <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a>
-  <button type="button" class="btn btn-danger pull-right" style="margin-right: 5px;">
+  <a href="{{url('admin/aviso-de-cobranca/contratos',$contrato->id)}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Aviso Cobrança
-          </button>
+  </a>
   </h1>
     
 @stop
 
 @section('content')
+@include('notification')
 
 <page id="printableArea" name="printableArea">  
 
