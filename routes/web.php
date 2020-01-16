@@ -131,6 +131,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('get-state-list','ClientesController@getStateList');
     Route::get('get-city-list','ClientesController@getCityList');
     Route::get('aviso-de-cobranca/{tipo}/{id}','AvisoDeCobrancaController@aviso');
+    Route::get('gerar-aviso-de-cobranca/{contrato}/{cliente}/{numero}/{valor_a_pagar}/{data}','AvisoDeCobrancaController@gerar_aviso_de_cobranca');
     
 
 });

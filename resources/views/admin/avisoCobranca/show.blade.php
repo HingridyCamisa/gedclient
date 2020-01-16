@@ -41,10 +41,6 @@
           <td><i class="fa fa-calendar"></i> &nbsp; {{ $dias_cobertos}}</td> 
         </tr>
          <tr>
-          <th>Periodicidade de Pagamento (dias)</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ $dia_periodo}}</td> 
-        </tr>
-         <tr>
           <th>Tipo de renovação</th>
           <td><i class="fa fa-calendar"></i> &nbsp; {{$contrato->periodicidade_pagamento }}</td> 
         </tr>
@@ -57,10 +53,10 @@
         @for ($i = 1; $i <= $denominador; $i++) 
          <tr>
           <th> {{$i}}º </th>
-          <th><i class="fa fa-calendar"></i> {{$data->addDays($dia_periodo)->format('d-m-Y') }}</th>
+          <th><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
           <td width="17%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
              <td><center>
-                 <a href="{{url('admin/geraravisocobranca',$cliente->token_id,$contrato->token_id,$i)}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                 <a href="{{url('admin/gerar-aviso-de-cobranca',[$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
                  <a href="" class="btn bg-orange  btn-xs"><i class="fa fa-file-pdf-o"></i> PDF</a>
              </center></td>
          </tr>
