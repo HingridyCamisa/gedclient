@@ -2,7 +2,7 @@
 @section('title','Tabela Prospecções')
 
 @section('content_header')
-    <h1><a class="btn btn-danger"  href="{{ url('admin/prospecoes') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
+       <h1><a class="btn btn-danger"  href="{{ url('admin/clientes') }}"><i class="fa fa-fw fa-plus"></i></a></h1>
 @stop
 
 @section('content')
@@ -32,7 +32,7 @@
       @foreach($prospecaos as $prospecao)
         <tr>
           <th><center>{{ ++$i }}</center></th>
-          <td>{{$prospecao->nome_cliente }}</td>
+          <td>{{$prospecao->cliente->cliente_nome }}</td>
           <td>{{$prospecao->consultor }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>
@@ -50,7 +50,7 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif
-              <a href="{{ url('admin/email/'.$prospecao->id.'/prospecaos') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
+              <a href="{{ url('admin/email/'.$prospecao->client_id.'/clientes') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
             </center>
              </td>
              <td><center><button type="button" id="tornarcontrato"  value ="{{ $prospecao->id }}" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-default">
@@ -97,7 +97,7 @@
                 
                     @csrf
                     <input id="id" name="id_prospecaos" hidden>
-                    <input name="id_user" hidden value="{{ Auth::user()->id }}">
+                   <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
 
 
                     <p> 
@@ -226,7 +226,7 @@
                     </p> <br><br>
                     <p> <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Item Segurado</label>
-                        <div class="col-md-4">
+                        <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
                           <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>

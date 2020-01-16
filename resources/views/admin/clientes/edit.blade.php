@@ -1,197 +1,484 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Contrato')
+@section('title', 'Adicionar Cliente')
 
 @section('content_header')
 
-    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
+    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-arrow-left"></i></a></h1>
     
    
 @stop
 
 @section('content')
+@include('notification')
 
-<div class="box box-solid box-danger">
-    <div class="box-header with-border">
-            <center><h3 class="box-title"><strong><i class="fa fa-folder-open"></i> Editar Contrato</strong></h3></center>
-    </div>
-    <!-- /.box-header -->
+
+          <!-- general form elements -->
+          <div class="box box-solid box-danger">
+                        <div class="box-header with-border">
+                        <center><h3 class="box-title"><strong><i class="fa fa-folder-open"></i> Editar Cliente: {{$cliente->cliente_nome}}</strong></h3></center>
+                        </div>
+                        <!-- /.box-header -->
                         <!-- form start -->
-            <form role="form" method="POST" action="{{ route('contratos.update', $contrato['id'])}}">
-                 @csrf
-                <div class="box-body">
-                            
-                    <div class="row">
+                        <form role="form" method="POST" action="{{ url('admin/clientes/atualizar', $cliente->id)}}" enctype="multipart/form-data">
+                            @csrf
+                        <div class="box-body">
+                             <div class="row">
                                 <div class="col-xs-4">
-                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Nome Segurado</label>
-                                    <input class="form-control" name="nome_segurado" value="{{ $contrato->nome_segurado}}" placeholder="Hingridy Camisa" type="text">
+                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Cliente Nome</label>
+                                    <input class="form-control" name="cliente_nome" placeholder="Nome" type="text" value="{{old('cliente_nome',$cliente->cliente_nome)}}">
                                 </div>
                                 
                                  <div class="col-xs-4">
-                                    <label><i class="fa fa-institution"></i> Nome Seguradora</label>
-                                        <select class="form-control"  name="nome_seguradora">
-                                            @foreach($seguradora as $seguradora)
-                                            <option value="{{ $contrato->nome_seguradora}}"selected>{{$contrato->nome_seguradora}}</option>
-                                            <option>{{ $seguradora->nome_seguradora}}</option>
-                                            @endforeach
-                                        </select>
+                                    <label><i class="fa fa-institution"></i> Cliente Endereço</label>
+                                    <input class="form-control" name="cliente_endereco" placeholder="Av. Josina Machel" type="text"  value="{{old('cliente_endereco',$cliente->cliente_endereco)}}">
                                 </div>
-
                                 <div class="col-xs-4">
-                                    <label><i class="fa fa-user"></i> Tipo Seguro</label>
-                                        <select class="form-control" name="tipo_seguro" >
-                                            <option value="{{$contrato->tipo_seguro}}" selected >{{$contrato->tipo_seguro}}</option>
-                                            <option value="Acidentes Pessoais">Acidentes Pessoais</option>
-                                            <option value="Acidente de Trabalho">Acidente de Trabalho</option>
-                                            <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
-                                            <option value="Automóvel - Danos Próprios">Automóvel - Danos Próprios</option>
-                                            <option value="Garantia">Garantia</option>
-                                            <option value="Recheio">Recheio</option>
-                                            <option value="Saúde">Saúde</option>
-                                            <option value="Mercadoria">Mercadoria</option>
-                                            <option value="Multirriscos">Multirriscos</option>
+                                    <label><i class="fa fa-user"></i> Tipo de Segurado</label>
+                                        <select class="form-control" name="cliente_tipo" id="cliente_tipo" onchange="tipocliente(this.value)">
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="Individual">Individual</option>
+                                            <option value="Empresa">Empresa</option>
                                         </select>
                                 </div>
+                            </div><br>
 
-                    </div>
-                            <br>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label for="cliente_data_nascimento"><i class="fa fa-birthday-cake"></i> Cliente Data de Nascimento</label>
+                                    <input  class="form-control desabilitar_empresa" name="cliente_data_nascimento"  type="date" value="{{old('cliente_data_nascimento',$cliente->cliente_data_nascimento)}}">
+                                </div>
+                                
+                                 <div  class="col-xs-2">
+                                    <label for="cliente_genero"><i class="fa fa-venus-mars"></i> Cliente Género</label>
+                                    <div class="form-radio">
+                                        <label class="radio-inline">
+                                            <input class="desabilitar_empresa" type="radio" name="cliente_genero" value="Femenino">Femenino
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input class="desabilitar_empresa" type="radio" name="cliente_genero" value="Masculino">Masculino
+                                    </label>
+                                </div>   
+                             </div>
+                                <div class="col-xs-4">
+                                    <label for="cliente_email"><i class="fa fa-envelope"></i> Cliente email</label>
+                                    <input class="form-control" name="cliente_email"  type="email" placeholder="email@amana.co.mz" value="{{old('cliente_email',$cliente->cliente_email)}}">
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="cliente_telefone_1"><i class="fa fa-phone"></i> Cliente Telefone 1</label>
+                                    <input class="form-control" name="cliente_telefone_1" placeholder="Numero de celular" type="text" value="{{old('cliente_telefone_1',$cliente->cliente_telefone_1)}}">
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="cliente_telefone_2"><i class="fa fa-phone"></i> Cliente Telefone 2</label>
+                                    <input class="form-control" name="cliente_telefone_2" placeholder="Numero de celular" type="text" value="{{old('cliente_telefone_2',$cliente->cliente_telefone_2)}}">
+                                </div>
+                            </div><br>
 
-                    <div class="row">
-                             <div class="col-xs-4">
-                                <label for="Numero Apolice"><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice </label>
-                                <input class="form-control" name="numero_apolice" value="{{ $contrato->numero_apolice}}" placeholder="Numero Apólice " type="text">         
-                            </div>
+                            <div class="row">
 
-                            <div class="col-xs-4">
-                                <label for="Numero Recibo"><i class="fa fa-phone"></i> Nº Recibo</label>
-                                <input class="form-control" name="numero_recibo" value="{{ $contrato->numero_recibo}}" placeholder="Numero Recibo " type="text">      
-                            </div>
 
-                            <div class="col-xs-4">
-                                <label for="Periodicidade Pagamento"><i class="fa fa-phone"></i>Periodicidade de Pagamento</label>
-                                <select class="form-control" name="periodicidade_pagamento">
-                                            <option value="{{ $contrato->periodicidade_pagamento}}" selected>{{ $contrato->periodicidade_pagamento}}</option>
-                                            <option value="Mensal">Mensal</option>
-                                            <option value="Trimestral">Trimestral</option>
-                                            <option value="Semestral">Semestral</option>
-                                            <option value="Anual">Anual</option>
-                                            <option value="Não Renovável">Não Renovável</option>
+                                 <div class="col-xs-3">
+                                    <label> País</label>
+                                        <select class="form-control"  id="country">
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach($countries as $key => $country)
+                                                <option value="{{$country}}"> {{$country}}</option>
+                                           @endforeach
                                             
+                                        </select>
+                                </div>
+                                
+                                <div class="col-xs-3">
+                                    <label>Provincia</label>
+                                        <select class="form-control" name="cliente_state_id" id="cliente_state_id" >
+                                        </select>
+                                </div>
+                                <div class="col-xs-4 desabilitar_empresa">
+                                    <label>Cliente Documento de Identificação</label>
+                                     <div class="input-group">
+                                        <div class="input-group-btn " >
+                                            <select class="btn btn-default dropdown-toggle" name="cliente_id_tipo" id="cliente_id_tipo" >
+                                                <option  value="{{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}" selected disabled> {{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}</option>
+                                                <option value="BI" >BI</option>
+                                                <option value="Passaporte" >Passaporte</option>
+                                                <option value="DIR" >DIR</option>
+                                            </select>
+                                        </div>
+                                        <!-- /btn-group -->
+                                        <input type="text" class="form-control" name="cliente_id_numero" value="{{old('cliente_id_numero',$cliente->cliente_id_numero)}}">
+                                      </div>
+                                </div>
+                                
+ 
+                                
+                                </div><hr>
+
+
+                     <!--pessoa de contacto-->
+                           <div id="div_pessoa_contacto">
+                             <div class="row">
+                                <div class="col-xs-4">
+                                    <label for="pessoa_contacto_nome"><i class="fa fa-user"></i> Pessoa de Contacto Nome</label>
+                                    <input class="form-control" name="pessoa_contacto_nome" placeholder="Nome" type="text" value="{{old('pessoa_contacto_nome',$cliente->pessoa_contacto_nome)}}">
+                                </div>
+                                
+                                 <div class="col-xs-4">
+                                    <label><i class="fa fa-institution"></i> Pessoa de Contacto de  Endereço</label>
+                                    <input class="form-control" name="pessoa_contacto_endereco" placeholder="Av. Josina Machel" type="text" value="{{old('pessoa_contacto_nome',$cliente->pessoa_contacto_nome)}}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="pessoa_contacto_data_nascimento"><i class="fa fa-birthday-cake"></i> Pessoa de Contacto  Data de Nascimento</label>
+                                    <input class="form-control" name="pessoa_contacto_data_nascimento"  type="date" value="{{old('pessoa_contacto_data_nascimento',$cliente->pessoa_contacto_data_nascimento)}}">
+                                </div>
+
+                            </div><br>
+
+                            <div class="row">
+
+                                
+                                 <div class="col-xs-2">
+                                    <label for="pessoa_contacto_genero"><i class="fa fa-venus-mars"></i> Pessoa de Contacto Género</label>
+                                    <div class="form-radio">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="pessoa_contacto_genero" value="Femenino" >Femenino
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="pessoa_contacto_genero" value="Masculino">Masculino
+                                    </label>
+                                </div>   
+                             </div>
+                                <div class="col-xs-4">
+                                    <label for="pessoa_contacto_email"><i class="fa fa-envelope"></i> Pessoa de Contacto email</label>
+                                    <input class="form-control" name="pessoa_contacto_email"  type="email" placeholder="email@amana.co.mz" value="{{old('pessoa_contacto_email',$cliente->pessoa_contacto_email)}}" >
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="pessoa_contacto_telefone_1"><i class="fa fa-phone"></i> Pessoa de Contacto Telefone 1</label>
+                                    <input class="form-control" name="pessoa_contacto_telefone_1" placeholder="Numero de celular" type="text" value="{{old('pessoa_contacto_telefone_1',$cliente->pessoa_contacto_telefone_1)}}">
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="pessoa_contacto_telefone_2"><i class="fa fa-phone"></i> Pessoa de Contacto Telefone 2</label>
+                                    <input class="form-control" name="pessoa_contacto_telefone_2" placeholder="Numero de celular" type="text" value="{{old('pessoa_contacto_telefone_2',$cliente->pessoa_contacto_telefone_2)}}">
+                                </div>
+                            </div><br>
+
+                            <div class="row">
+
+
+                                 <div class="col-xs-3">
+                                    <label> País</label>
+                                        <select class="form-control"  id="country_2">
+                                            <option value="" selected disabled>Select</option>
+                                            @foreach($countries as $key => $country)
+                                                <option value="{{$country}}"> {{$country}}</option>
+                                           @endforeach
+                                            
+                                        </select>
+                                </div>
+                                
+                                <div class="col-xs-3">
+                                    <label>Provincia</label>
+                                        <select class="form-control" name="pessoa_contacto_state_id" id="pessoa_contacto_state_id" >
+
+                                        </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>Pessoa de Contacto Documento de Identificação</label>
+                                     <div class="input-group">
+                                        <div class="input-group-btn " >
+                                            <select class="btn btn-default dropdown-toggle" name="pessoa_contacto_id_tipo" id="pessoa_contacto_id_tipo" >
+                                                <option value="{{old('pessoa_contacto_id_tipo',$cliente->pessoa_contacto_id_tipo)}}" selected disabled>{{old('pessoa_contacto_id_tipo',$cliente->pessoa_contacto_id_tipo)}}</option>
+                                                <option value="BI" >BI</option>
+                                                <option value="Passaporte" >Passaporte</option>
+                                                <option value="DIR" >DIR</option>
+                                            </select>
+                                        </div>
+                                        <!-- /btn-group -->
+                                        <input type="text" class="form-control" name="pessoa_contacto_id_numero" value="{{old('pessoa_contacto_id_numero',$cliente->pessoa_contacto_id_numero)}}">
+                                      </div>
+                                </div>
+                                
+ 
+                                
+                                </div>
+                                
+                                 <br>
+                                
+                           </div>   
+                                <div class="form-group">
+                                    <label for="DetalhesProspecao"><i class="fa fa-info"></i> Notas</label>
+                                    <textarea class="form-control" name="notas" rows="2" placeholder="Notas ..." value="{{old('notas',$cliente->notas)}}"></textarea>
+                                </div>
+                           
+
+                            <hr />
+                           <div class="row col-md-12" style="margin-left:5px"> 
+                                  
+
+                            <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
+                              <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
+                              <div class="">
+                                <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                   <option disabled selected>Seleciona tipo de ficheiro...</option>
+                                            <option value="BI">
+                                                BI
+                                            </option>                                       
+                                            <option value="Apolice de Seguro">
+                                                Apolice de Seguro
+                                            </option>                                    
+                                            <option value="Carta de Condução">
+                                                Carta de Condução
+                                            </option>                                    
+                                            <option value="Carta de Nomeação">
+                                                Carta de Nomeação
+                                            </option>                                    
+                                            <option value="Livrete/Verbete">
+                                                Livrete/Verbete
+                                            </option>                                    
+                                            <option value="Imagem">
+                                                Imagem
+                                            </option>                                    
+                                            <option value="Formulario de Peritagem">
+                                                Formulario de Peritagem
+                                            </option>                                    
+                                            <option value="Passaporte">
+                                                Passaporte
+                                            </option>                                    
+                                            <option value="Comprovativo de pagamento">
+                                                Comprovativpo de pagamento
+                                            </option>                                   
+                                            <option value="Factura">
+                                                Factura
+                                            </option>                                   
+                                            <option value="Recibos">
+                                                Recibos
+                                            </option>                                    
+                                            <option value="Alvará">
+                                                Alvará
+                                            </option>                                    
+                                            <option value="Recibo de Água">
+                                                Recibo de Água
+                                            </option>                                    
+                                            <option value="Certidão">
+                                                Certidão
+                                            </option>                                    
+                                            <option value="Outros">
+                                                Outros
+                                            </option>
                                 </select>
+                              </div>
+                            <div class="input-group control-group increment" >
+                              <input type="file" name="file[]" class="form-control" >
+                              <div class="input-group-btn" > 
+                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
+                              </div>
+          
                             </div>
-                                   
-                    </div> 
-                            <br>
 
-                    <div class="row">
-                            <div class="col-xs-3">
-                                <label for="Data_Inicio"><i class="fa fa-calendar"></i> Data Início do Seguro</label>
-                                 <input class="form-control" name="data_inicio" value="{{ $contrato->data_inicio}}" placeholder="Data Inicio" type="date">
-                            </div>
-                                
-                            <div class="col-xs-3">
-                                <label for="Data_Inicio"><i class="fa fa-calendar"></i> Data Próximo  Pagamento </label>
-                                <input class="form-control " name="data_proximo_pagamento" value="{{ $contrato->data_proximo_pagamento}}" type="date">
+
+                            <div class="clone hide" >
+                            <div class="control-group">
+                              <div class="" style="margin-top:10px">
+                                <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                   <option disabled selected>Seleciona...</option>
                                     
+                                            <option value="BI">
+                                                BI
+                                            </option>                                       
+                                            <option value="Apolice de Seguro">
+                                                Apolice de Seguro
+                                            </option>                                    
+                                            <option value="Carta de Condução">
+                                                Carta de Condução
+                                            </option>                                    
+                                            <option value="Carta de Nomeação">
+                                                Carta de Nomeação
+                                            </option>                                    
+                                            <option value="Livrete/Verbete">
+                                                Livrete/Verbete
+                                            </option>                                    
+                                            <option value="Imagem">
+                                                Imagem
+                                            </option>                                    
+                                            <option value="Formulario de Peritagem">
+                                                Formulario de Peritagem
+                                            </option>                                    
+                                            <option value="Passaporte">
+                                                Passaporte
+                                            </option>                                    
+                                            <option value="Comprovativo de pagamento">
+                                                Comprovativo de pagamento
+                                            </option>                                   
+                                            <option value="Factura">
+                                                Factura
+                                            </option>                                   
+                                            <option value="Recibos">
+                                                Recibos
+                                            </option>                                    
+                                            <option value="Alvará">
+                                                Alvará
+                                            </option>                                    
+                                            <option value="Recibo de Água">
+                                                Recibo de Água
+                                            </option>                                    
+                                            <option value="Certidão">
+                                                Certidão
+                                            </option>                                    
+                                            <option value="Outros">
+                                                Outros
+                                            </option>
+                                </select>
+                              </div>
+                              <div class=" input-group" >
+                                <input type="file" name="file[]" class="form-control" >          
+                                <div class="input-group-btn"> 
+                                  <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
+                                </div>
+                              </div>
                             </div>
-
-                            <div class="col-xs-3">
-                                <label for="Dias_Cobertos"><i class="fa fa-money"></i> Dias Cobertos </label>
-                                    <input class="form-control " name="dias_cobertos" value="{{ $contrato->dias_cobertos}}" type="text">
                             </div>
+                           </div>
+                        </div>
+                            
 
-                            <div class="col-xs-3">
-                                <label for="Dias_Proximo_Pagamento"><i class="fa fa-money"></i> Dias Próximo  Pagamento </label>
-                                    <input class="form-control" name="dias_proximo_pagamento" value="{{ $contrato->dias_proximo_pagamento}}" type="text">
-                             </div>
-                    </div>
-                                 <br>
-                                
-
-                    <div class="row">
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Capital Seguro </label>
-                                    <input class="form-control" name="capital_seguro" value="{{ $contrato->capital_seguro}}"  placeholder="Capital Seguro "type="float">
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Prémio Total </label>
-                                        <input class="form-control" name="premio_total" value="{{ $contrato->premio_total}}" placeholder="Premio Total " type="float">
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Prémio Simples</label>
-                                        <input class="form-control" name="premio_simples" value="{{ $contrato->premio_simples}}" placeholder="Premio Simples " type="float">
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Comissão Corretagem</label>
-                                        <input class="form-control" name="comissao" value="{{ $contrato->comissao}}" placeholder="Comissão corretagem " type="float">
-                            </div>
-                    </div>
-                                
-                                 <br>
-
-                    <div class="row">
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-users"></i> Item Segurado </label>
-                                        <input class="form-control" name="item_segurado" value="{{ $contrato->item_segurado}}" placeholder="Item Segurado "type="text">
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-user"></i> Consultor </label>
-                                        <select class="form-control" name="consultor" >
-                                            @foreach($consultor as $consultor)
-                                            <option value="{{ $contrato->consultor}}"selected>{{ $contrato->consultor}}</option>
-                                            <option>{{ $consultor->nome_consultor}}</option>
-                                            @endforeach
-                                        </select>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Situação</label>
-                                        <select class="form-control" name="situacao" >
-                                            <option value="{{ $contrato->situacao}}" selected>{{ $contrato->situacao}}</option>
-                                            <option value="Pago">Pago</option>
-                                            <option value="Em Cobrança">Em Cobrança</option>
-                                        </select>
-     
-                             </div>
-
-                            <div class="col-xs-3">
-                                <label><i class="fa fa-money"></i> Taxa Corretagem</label>
-                                <input class="form-control" name="taxa_corretagem" value="{{ $contrato->taxa_corretagem}}"  type="float">
-     
-                            </div>
-                                    
-                    </div>
-                                
-                                 <br>
-                                
-                               
-                            <div class="form-group">
-                                <label for="DetalhesProspecao"><i class="fa fa-info"></i> Detalhes Item Segurado</label>
-                                <textarea class="form-control" name="detalhes_item_segurado"rows="2" placeholder="Detalhes ..." >{{ $contrato->detalhes_item_segurado}}</textarea>
-                            </div>
-                </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                                 
                                 <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
-                        </div>
+                            </div>
                            
-            </form>
-                        
-                     @if($errors->any())
-                        <ul class="alert alert-warning">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                      @endif
-    
+                        </form>
+
+
+                      
+          </div>
+          <!-- /.box --> 
+
+<script>
+    $(document).ready(function () {
+        $data = $("#cliente_tipo").val();
+        if ($data=='Individual') {
+            $("#div_pessoa_contacto *").prop('disabled', true);
+            $(".desabilitar_empresa *").removeAttr('disabled');
+            $(".desabilitar_empresa").removeAttr('disabled');
+        } else if($data=='Empresa') {
+            $("#div_pessoa_contacto *").removeAttr('disabled');
+            $(".desabilitar_empresa").prop('disabled', true);
+            $(".desabilitar_empresa *").prop('disabled', true);
+        }
+    });
+
+    function tipocliente(val) {
+        if (val=='Individual') {
+            $("#div_pessoa_contacto *").prop('disabled', true);
+            $(".desabilitar_empresa *").removeAttr('disabled');
+            $(".desabilitar_empresa").removeAttr('disabled');
+        } else {
+            $("#div_pessoa_contacto *").removeAttr('disabled');
+            $(".desabilitar_empresa").prop('disabled', true);
+            $(".desabilitar_empresa *").prop('disabled', true);
+        }
         
-</div> <!-- /.box -->
+    }
+</script>
+
+<script type="text/javascript">
+    $('#country').change(function(){
+    var countryID = $(this).val();    
+    if(countryID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('admin/get-state-list')}}?country_id="+countryID,
+           success:function(res){               
+               if (res) {
+                $("#cliente_state_id").empty();
+                $("#cliente_state_id").append('<option  value=""  selected disabled>Select</option>');
+                $.each(res,function(key,value){
+                    $("#cliente_state_id").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#cliente_state_id").empty();
+            }
+           }
+        });
+    }else{
+        $("#cliente_state_id").empty();
+       // $("#city").empty();
+    }      
+    });
+
+</script>
+
+<script type="text/javascript">
+    $('#country_2').change(function(){
+    var countryID = $(this).val();    
+    if(countryID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('admin/get-state-list')}}?country_id="+countryID,
+           success:function(res){               
+               if (res) {
+                $("#pessoa_contacto_state_id").empty();
+                $("#cliente_stpessoa_contacto_state_idate_id").append('<option  value=""  selected disabled>Select</option>');
+                $.each(res,function(key,value){
+                    $("#pessoa_contacto_state_id").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#pessoa_contacto_state_id").empty();
+            }
+           }
+        });
+    }else{
+        $("#pessoa_contacto_state_id").empty();
+       // $("#city").empty();
+    }      
+    });
+
+</script>
+<script>
+    $('#state').on('change',function(){
+    var stateID = $(this).val();    
+    if(stateID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-city-list')}}?state_id="+stateID,
+           success:function(res){               
+            if(res){
+                $("#city").empty();
+                $.each(res,function(key,value){
+                    $("#city").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#city").empty();
+            }
+           }
+        });
+    }else{
+        $("#city").empty();
+    }
+        
+   });
+</script>
+   
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script>
+
+
 @stop

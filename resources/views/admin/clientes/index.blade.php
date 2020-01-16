@@ -21,10 +21,10 @@
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i> País </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Cidade</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice</center></th>
-          <th scope="col"><center> Ramo</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Próximo Pagamento </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-money"></i>  Situação </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
+          <th scope="col"><center><i class="fa fa-envelope"></i>  Email</center></th>
+          <th scope="col"><center><i class="fa fa-user"></i> Tipo </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>   Gerado em </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
 
@@ -37,26 +37,49 @@
             <td>{{$cliente->cliente_nome }}</td>
             <td>{{$cliente->client_country_city->country_name}}</td>
             <td>{{$cliente->client_country_city->state_name}}</td>
-
-
-
+            <td>{{$cliente->cliente_telefone_1 }}</td>
+            <td>{{$cliente->cliente_email }}</td>
+            <td>{{$cliente->cliente_tipo }}</td>
+            <td>{{($cliente->created_at)->diffForHumans() }}</td>
+            <td>
+                @if($cliente->status==1)
+                <span class="sucess">Ativo</span>
+                @else
+                <span class="error">Desativado</span>
+                @endif
+            </td>
+             <td><center>
+                 <a href="{{ route('clientes.edit', $cliente->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
+                 <a href="{{ route ('clientes.show', $cliente->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
+                 <a href="{{url('admin/contrato',$cliente->id)}}" class="btn btn-danger btn-xs">Contrato</a>
+                 <a href="{{url('admin/prospecoes',$cliente->id)}}" class="btn bg-orange  btn-xs">Prospeção</a>
+                  @if($cliente->status =='1')
+                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
+                  {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+                  {!! Form::close() !!}
+                  @endif
+                  @if($cliente->status !='1')
+                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
+                  {!! Form::button('<i class="fa fa-recycle"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+                  {!! Form::close() !!}
+                  @endif
+             </center></td>
         </tr>  
       @endforeach
      
       </tbody>
       <tfoot>
         <tr class="table-danger">
-            <th scope="col"><center> Nº</center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Segurado</center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice</center></th>
-            <th scope="col"><center> Ramo</center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Próximo Pagamento </center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-money"></i>  Situação </center> </th>
-            <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
-            <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
-
+          <th scope="col"><center> Nº</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-users"></i> País </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Cidade</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
+          <th scope="col"><center><i class="fa fa-envelope"></i>  Email</center></th>
+          <th scope="col"><center><i class="fa fa-user"></i> Tipo </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>   Gerado em </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
           </tr>
       </tfoot>
     </table>

@@ -4,55 +4,64 @@
 
 @section('content_header')
   
+<<<<<<< HEAD
   <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
   <a class="btn btn-danger pull-right"  href="{{ url('admin/contrato/aviso')}}"><i class="fa fa-fw fa-download"></i> Aviso Cobrança</a>
   <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a>
+=======
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/contrato/index')}}"><i class="fa  fa-arrow-left"></i></a>
+  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a>
+  <a href="{{url('admin/aviso-de-cobranca/contratos',$contrato->id)}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> Aviso Cobrança
+  </a>
+>>>>>>> dc53e883d23e6dd4a5275e246f98017af95950c7
   </h1>
     
 @stop
 
 @section('content')
+@include('notification')
 
 <page id="printableArea" name="printableArea">  
 
-          <div class="box box-solid box-danger">
+    <div class="box box-solid box-danger">
                  <div class="box-header with-border">
-                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Contrato do Segurado </strong> <i> {{$contrato->nome_segurado}} </i></h3></center>
+                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Contrato do Segurado </strong> <i> {{$contrato->cliente->cliente_nome}} </i></h3></center>
          </div>
 
     <table class="table table-striped table-bordered table-hover">
      
       <tbody>
         <tr>
-          <th>ID</th>
-          <td><i class="fa fa-key"></i> &nbsp; {{ $contrato->id}}</td> 
+          <th>Scret key</th>
+          <td><i class="fa fa-key"></i> &nbsp; {{ $contrato->token_id}}</td> 
         </tr>
         <tr>
           <th>Nome Consultor</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$contrato->consultor }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$contrato->consultorx->nome_consultor }}</td>
         </tr>
         <tr>
           <th>Nome Seguradora</th>
-          <td><i class="fa fa-institution"></i> &nbsp; {{$contrato->nome_seguradora }}</td>
+          <td><i class="fa fa-institution"></i> &nbsp; {{$contrato->seguradora->nome_seguradora }}</td>
         </tr>
         <tr>
         <tr>
           <th>Nome Segurado</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$contrato->nome_segurado }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$contrato->cliente->cliente_nome }}</td>
         </tr>
         <tr>
           <th>Nº Apólice</th>
-          <td><i class="fa fa-fw fa-user"></i> &nbsp; {{$contrato->numero_apolice }}</td>
+          <td><i class="fa  fa-user"></i> &nbsp; {{$contrato->numero_apolice }}</td>
         </tr>
         <tr>
         <tr>
           <th>Nº Recibo</th>
-          <td><i class="fa fa-fw fa-user"></i> &nbsp; {{$contrato->numero_recibo }}</td>
+          <td><i class="fa  fa-user"></i> &nbsp; {{$contrato->numero_recibo }}</td>
         </tr>
         <tr>
         <tr>
           <th>Ramo</th>
-          <td><i class="fa fa-fw fa-map-pin"></i> &nbsp; {{$contrato->tipo_seguro }}</td>
+          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$contrato->tipo_ramo }}</td>
         </tr>
         <tr>
           <th>Periodicidade Pagamento</th>
@@ -117,7 +126,9 @@
 
         </tr>
       </tbody>
-    </table>               <!-- /.box-header -->
+    </table>  
+   </div>     
+    <!-- /.box-header -->
 </page>
 
 <div class="box box-solid box-danger">

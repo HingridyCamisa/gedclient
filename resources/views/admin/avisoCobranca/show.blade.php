@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/prospecoes/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
+  <h1><a class="btn btn-social-icon btn-github"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i></a>
   <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a></h1>
 @stop
 
@@ -14,81 +14,53 @@
           <!-- general form elements -->
   <div class="box box-solid box-danger">
          <div class="box-header with-border">
-                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Detalhes Prospecção do Cliente </strong> <i> {{$prospecao->cliente->cliente_nome}} </i></h3></center>
+                 <center><h3 class="box-title"><strong><i class="fa fa-briefcase"></i> Aviso de Cobrança: </strong> <i> {{$cliente->cliente_nome}} </i></h3></center>
          </div>
 
     <table class="table table-striped table-bordered table-hover">
      
       <tbody>
         <tr>
-          <th width="250px">Scret key</th>
-          <td><i class="fa fa-key"></i> &nbsp; {{ $prospecao->client_token}}</td> 
+          <th width="15%">Codigo do Contrato</th>
+          <td width="30%"><i class="fa fa-key"></i> &nbsp; {{ $contrato->token_id}}</td> 
         </tr>
         <tr>
-          <th>Nome Cliente</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->cliente->cliente_nome }}</td>
+          <th>Valor Total do Premio</th>
+          <td><i class="fa fa-money"></i> &nbsp; {{number_format($contrato->premio_total, 2, ',', ' ') }}</td> 
         </tr>
-        <tr>
-          <th>Nome Consultor</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->consultor->nome_consultor }}</td>
+         <tr>
+          <th>Data inicio do contrato</th>
+          <td><i class="fa fa-calendar"></i> &nbsp; {{ $data=\Carbon\Carbon::parse($contrato->data_inicio)}}</td> 
         </tr>
-        <tr>
-          <th>Tipo Cliente</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$prospecao->cliente->cliente_tipo }}</td>
+         <tr>
+          <th>Data fim do contrato</th>
+          <td><i class="fa fa-calendar"></i> &nbsp; {{ \Carbon\Carbon::parse($contrato->data_proximo_pagamento)}}</td> 
         </tr>
-        <tr>
-        <tr>
-          <th>Endereço Cliente</th>
-          <td><i class="fa fa-map-pin"></i> &nbsp; {{$prospecao->cliente->cliente_endereco}}</td>
+         <tr>
+          <th>Dias Cobertos</th>
+          <td><i class="fa fa-calendar"></i> &nbsp; {{ $dias_cobertos}}</td> 
         </tr>
-        <tr>
-          <th>Telefone 1</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$prospecao->cliente->cliente_telefone_1 }}</td>
+         <tr>
+          <th>Tipo de renovação</th>
+          <td><i class="fa fa-calendar"></i> &nbsp; {{$contrato->periodicidade_pagamento }}</td> 
         </tr>
-        <tr>
-          <th>Telefone 2</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$prospecao->cliente->cliente_telefone_2 }}</td>
-        </tr>
-        <tr>
-          <th>Email Cliente</th>
-          <td><i class="fa fa-envelope"></i> &nbsp; {{$prospecao->cliente->cliente_email }}</td>
-        </tr>
-        <tr>
-          <th>Data Início</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y') }}</td>
-        </tr>
-        <tr>
-          <th>Data Prevista Fim</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y') }}</td>
-        </tr>
-        <tr>
-          <th>Ramo</th>
-          <td>&nbsp;{{$prospecao->tipo_ramo }}</td>
-        </tr>
-        <tr>
-          <th>Origem Prospecção</th>
-          <td><i class="fa fa-map-pin"></i> &nbsp; {{$prospecao->origem_prospecao }}</td>
-        </tr>
-        <tr>
-          <th>Estado Prospecção</th>
-          <td><i class="fa fa-briefcase"></i> &nbsp; {{$prospecao->estado }}</td>
-        </tr>
-        <tr>
-          <th>Valor Estipulado Carteira</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{  'MTN '.number_format($prospecao->valor_estipulado_carteira, 2, ',', '.') }}  </td>
-        </tr>
-        <tr>
-          <th>Detalhes Prospecção</th>
-          <td><i class="fa fa-info"></i> &nbsp; {{$prospecao->detalhes_prospecao }}</td>
-        </tr>
-        <tr>
-          <th>Estado Prospecção</th>
-              @if(\Carbon\Carbon::parse($prospecao->data_prevista_fim)->isPast())         
-                <td><i class="fa fa-close text-red"></i> Expirada</td>
-              @else
-                <td><i class="fa fa-check text-green"></i> Em dia</td>
-              @endif
-        </tr>
+         <tr>
+          <th>
+          </th>
+          <th>
+          </th>
+         </tr>
+        @for ($i = 1; $i <= $denominador; $i++) 
+         <tr>
+          <th> {{$i}}º </th>
+          <th><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
+          <td width="17%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
+             <td><center>
+                 <a href="{{url('admin/gerar-aviso-de-cobranca',[$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                 <a href="" class="btn bg-orange  btn-xs"><i class="fa fa-file-pdf-o"></i> PDF</a>
+             </center></td>
+         </tr>
+         @endfor
 
       </tbody>
     </table>
@@ -116,9 +88,9 @@
     @csrf
     <div class="box-body">
     <div class="input-group">
-        <input type="hidden" name="task_id" id="task_id" value="{{$prospecao->id}}" />
+        <input type="hidden" name="task_id" id="task_id" value="{{$contrato->id}}" />
         <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}" /> 
-        <input type="hidden" name="token_id" id="token_id" value="prospecoes" /> 
+        <input type="hidden" name="token_id" id="token_id" value="aviso_cobranca" /> 
 
 
     </div>
@@ -149,7 +121,7 @@
       $.ajax({
         url: '{{url('admin/allcomments')}}',
         type: "get",
-        data: {'task_id': $('#task_id').val() , 'token_id':'prospecoes'},
+        data: {'task_id': $('#task_id').val() , 'token_id':'aviso_cobranca'},
           success: function (data) {
 
               $('#messages').html(data);

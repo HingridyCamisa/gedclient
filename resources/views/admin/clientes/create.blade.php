@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
+    <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-arrow-left"></i></a></h1>
     
    
 @stop

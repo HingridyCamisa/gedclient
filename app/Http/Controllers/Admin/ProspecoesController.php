@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProspecaoRequest;
 use Carbon\Carbon;
+use App\Cliente;
 
 
 class ProspecoesController extends Controller
@@ -43,10 +44,11 @@ class ProspecoesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+    public function create($id)
     {
         $consultors = Consultor::all();
-        return view('admin.prospecoes.create',compact('consultors'));
+        $cliente=Cliente::where('status',1)->where('id',$id)->first();
+        return view('admin.prospecoes.create',compact('consultors','cliente'));
     }
 
     /**
@@ -58,22 +60,8 @@ class ProspecoesController extends Controller
     public function store(ProspecaoRequest $request)
     {
 
-       $prospecoes = new Prospecao();
-       $prospecoes->nome_cliente = $request->input('nome_cliente');
-       $prospecoes->nome_consultor = $request->input('nome_consultor');
-       $prospecoes->tipo_cliente = $request->input('tipo_cliente');
-       $prospecoes->endereco_cliente = $request->input('endereco_cliente');
-       $prospecoes->contacto_cliente = $request->input('contacto_cliente');
-       $prospecoes->pessoa_contacto = $request->input('pessoa_contacto');
-       $prospecoes->email_cliente = $request->input('email_cliente');
-       $prospecoes->data_inicio = $request->input('data_inicio');
-       $prospecoes->data_prevista_fim = $request->input('data_prevista_fim');
-       $prospecoes->tipo_prospecao = $request->input('tipo_prospecao');
-       $prospecoes->origem_prospecao = $request->input('origem_prospecao');
-       $prospecoes->valor_estipulado_carteira = $request->input('valor_estipulado_carteira');
-       $prospecoes->detalhes_prospecao = $request->input('detalhes_prospecao');
-       $prospecoes->estado = $request->input('estado');
-       $prospecoes->save();
+       Prospecao::create($request->all());
+
 
        return back()->with('success','Prospeção criado.');
 
@@ -115,24 +103,21 @@ class ProspecoesController extends Controller
      * @param  \App\Prospecao  $prospecao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prospecao $prospecao, $id)
+    public function update(Request $request, $id)
     {
-        $prospecoes =  Prospecao::findOrFail($id);
-        $prospecoes->nome_cliente = $request->input('nome_cliente');
-        $prospecoes->nome_consultor = $request->input('nome_consultor');
-        $prospecoes->tipo_cliente = $request->input('tipo_cliente');
-        $prospecoes->endereco_cliente = $request->input('endereco_cliente');
-        $prospecoes->contacto_cliente = $request->input('contacto_cliente');
-        $prospecoes->pessoa_contacto = $request->input('pessoa_contacto');
-        $prospecoes->email_cliente = $request->input('email_cliente');
-        $prospecoes->data_inicio = $request->input('data_inicio');
-        $prospecoes->data_prevista_fim = $request->input('data_prevista_fim');
-        $prospecoes->tipo_prospecao = $request->input('tipo_prospecao');
-        $prospecoes->origem_prospecao = $request->input('origem_prospecao');
-        $prospecoes->valor_estipulado_carteira = $request->input('valor_estipulado_carteira');
-        $prospecoes->detalhes_prospecao = $request->input('detalhes_prospecao');
-        $prospecoes->estado = $request->input('estado');
-        $prospecoes->save();
+
+       $validatedata=$request->validate([
+            'data_inicio'=>'nullable|date|after_or_equal:today',
+            'data_prevista_fim'=>'nullable|date|after:data_inicio',
+            'tipo_ramo'=>'nullable',
+            'origem_prospecao'=>'nullable',
+            'estado'=>'nullable',
+            'valor_estipulado_carteira' => 'numeric',
+            'nome_consultor' => 'nullable',
+            'detalhes_prospecao'=>'nullable|min:6'
+       ]);
+        $request=$request->except('_token');
+        Prospecao::where('id',$id)->update($request); 
 
         return redirect('/admin/prospecoes/index')->with('success','Editado com sucesso.');
 

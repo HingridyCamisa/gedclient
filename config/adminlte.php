@@ -132,13 +132,18 @@ return [
             'icon'        => 'folder-open',
             'submenu'     => [
                 [
-                    'text'  => 'Gestão Contratos',
+                    'text'  => 'Contratos',
                     'url'   => 'admin/contrato/index',
                     'icon'  => 'folder-open',
 
                 ],
                 [
-                    'text'  => 'Gestão Cobranças',
+                    'text'        => ' Saúde',
+                    'url'         => 'admin/saude/index',
+                    'icon'        => 'medkit',
+                ],
+                [
+                    'text'  => 'Cobranças',
                     'url'   => '#',
                     'icon'  => 'fax',
 
@@ -163,11 +168,7 @@ return [
             'icon'        => 'subway',
             
         ],
-        [
-            'text'        => 'Gestão Saúde',
-            'url'         => 'admin/saude/index',
-            'icon'        => 'medkit',
-        ],
+
         [
             'text'        => 'Finanças',
             'url'         => '#',

@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('prospecoes/index','ProspecoesController@index')->name('prospecoes.index');
 
-    Route::get('prospecoes','ProspecoesController@create')->name('prospecoes.create');
+    Route::get('prospecoes/{id}','ProspecoesController@create')->name('prospecoes.create');
 
     Route::post('prospecoes','ProspecoesController@store')->name('prospecoes.store');
 
@@ -73,9 +73,13 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('contrato/index','ContratoController@index')->name('contratos.index');
 
+<<<<<<< HEAD
     Route::get('contrato/aviso','ContratoController@aviso')->name('contratos.aviso');
 
     Route::get('contrato','ContratoController@create')->name('contratos.create');
+=======
+    Route::get('contrato/{id}','ContratoController@create')->name('contratos.create');
+>>>>>>> dc53e883d23e6dd4a5275e246f98017af95950c7
 
     Route::post('contrato','ContratoController@store')->name('contratos.store');
 
@@ -130,9 +134,12 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //clientes 
     Route::resource('clientes','ClientesController');
+    Route::post('clientes/atualizar/{id}','ClientesController@update');
     //states
     Route::get('get-state-list','ClientesController@getStateList');
     Route::get('get-city-list','ClientesController@getCityList');
+    Route::get('aviso-de-cobranca/{tipo}/{id}','AvisoDeCobrancaController@aviso');
+    Route::get('gerar-aviso-de-cobranca/{contrato}/{cliente}/{numero}/{valor_a_pagar}/{data}','AvisoDeCobrancaController@gerar_aviso_de_cobranca');
     
 
 });

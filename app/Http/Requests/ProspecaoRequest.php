@@ -24,15 +24,13 @@ class ProspecaoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome_cliente'=>'required|min:3',
+            'user_id'=>'required',
             'nome_consultor'=>'required',
-            'tipo_cliente' =>'required',
-            'endereco_cliente' => 'required|min:5',
-            'contacto_cliente' => 'required|numeric|min:8',
-            'email_cliente' => 'nullable|email',
+            'client_id' =>'required',
+            'client_token' => 'required',
             'data_inicio'=>'required|date|after_or_equal:today',
             'data_prevista_fim'=>'required|date|after:data_inicio',
-            'tipo_prospecao'=>'required',
+            'tipo_ramo'=>'required',
             'origem_prospecao'=>'required',
             'valor_estipulado_carteira' => 'required',
             'detalhes_prospecao'=>'required|min:6'

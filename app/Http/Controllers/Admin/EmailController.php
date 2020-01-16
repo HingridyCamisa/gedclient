@@ -16,23 +16,14 @@ class EmailController extends Controller
     public function index($id, $source)
     {
         $client=DB::table($source)->where('id',$id)->first();
-        if($source=="prospecaos")
+        if($source=="clientes")
         {
-            if($client->email_cliente==null)
+            if($client->cliente_email==null)
             {
                 return back()->with('error','Cliente sem email');
             };
-            $nome_cliente=$client->nome_cliente;
-            $email_cliente=$client->email_cliente;
-        }
-        elseif($source=="contratos")
-        {
-            if($client->email_segurado==null)
-            {
-                return back()->with('error','Cliente sem email');
-            };
-            $nome_cliente=$client->nome_segurado;
-            $email_cliente=$client->email_segurado;
+            $nome_cliente=$client->cliente_nome;
+            $email_cliente=$client->cliente_email;
         }else
         {
             return "Não foi possivel localizar os dados do cliente";
