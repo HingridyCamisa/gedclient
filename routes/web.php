@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('contrato/index','ContratoController@index')->name('contratos.index');
 
+    Route::get('contrato/aviso','ContratoController@aviso')->name('contratos.aviso');
+
     Route::get('contrato','ContratoController@create')->name('contratos.create');
 
     Route::post('contrato','ContratoController@store')->name('contratos.store');
@@ -123,6 +125,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('email/{id}/{source}', 'EmailController@index');
     
     Route::post('enviaremail', 'EmailController@enviaremail');
+
+    
 
     //clientes 
     Route::resource('clientes','ClientesController');

@@ -33,6 +33,11 @@ class ContratoController extends Controller
     
     }
 
+    public function aviso()
+    {
+        return view('admin.contrato.aviso');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
