@@ -9,13 +9,15 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use App\Cliente;
+use App\AvisoCobranca;
+use Auth;
 
 
 class AvisoDeCobrancaController extends Controller
 {
     public function aviso ($tipo,$id)
     {
-       
+        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where()->get();
         $contrato=DB::table($tipo)->where('id',$id)->first();
         $cliente=Cliente::find($contrato->client_id);
        
@@ -57,11 +59,30 @@ class AvisoDeCobrancaController extends Controller
         $valor_a_pagar=$contrato->premio_total/$denominador;
         
 
-        return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos'));
+        return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos','tipo'));
     }
 
-    public function gerar_aviso_de_cobranca($contrato,$cliente,$numero,$valor_a_pagar,$data)
+    public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data)
     {
+        $token_id=$contrato.$numero;
+        $request['token_id']=$token_id;
+        $request->validate([
+            'token_id'=>'required|unique:avisocobranca,token_id',
+        ]);
+
+        $aviso=new AvisoCobranca;
+        $aviso->tipo=$tipo;
+        $aviso->contrato_token_id=$contrato;
+        $aviso->cliente_token_id=$cliente;
+        $aviso->aviso_numero=$numero;
+        $aviso->aviso_amount=$valor_a_pagar;
+        $aviso->aviso_data=$data;
+        $aviso->user_id=Auth::user()->id;
+        $aviso->token_id=$token_id;
+        $aviso->save();
+        
+
+        return back()->with('success','Cliente criado.');
         
     }
 

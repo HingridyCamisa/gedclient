@@ -49,6 +49,10 @@ class ContratoController extends Controller
         $tipo_seguro = TipoSeguro::all();
         $consultor = Consultor::all();
         $cliente=Cliente::where('status',1)->where('id',$id)->first();
+        if (!$cliente)
+        {
+        	return back()->with('error','Cliente desativado');
+        };
 
         return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor','cliente'));
     }
@@ -152,8 +156,9 @@ class ContratoController extends Controller
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
         'data_inicio'=>'required|date',
+        'data_proximo_pagamento'=>'required|date',
         'dias_cobertos'=>'required|numeric',
-        'dias_proximo_pagamento'=>'required|date',
+        'dias_proximo_pagamento'=>'required|numeric',
         'capital_seguro'=>'required|numeric',
         'premio_total'=>'required|numeric',
         'premio_simples'=>'required|numeric',

@@ -36,7 +36,7 @@
           <td>{{$prospecao->consultor }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>
-          <td>{{$prospecao->tipo_prospecao }}</td>
+          <td>{{$prospecao->tipo_ramo }}</td>
            @if(\Carbon\Carbon::parse($prospecao->data_prevista_fim)->isPast())
             <td><center><i class="fa fa-close text-red"></i> Expirado {{\Carbon\Carbon::parse($prospecao->data_inicio)->addDays(\Carbon\Carbon::parse($prospecao->data_prevista_fim)->diffInDays($prospecao->data_inicio))->diffForHumans()}} </center></td>
           @else
@@ -101,7 +101,7 @@
 
 
                     <p> 
-                        <label for="inputEmail3" class="col-md-2 control-label">Seguradora</label>
+                        <label for="" class="col-md-2 control-label">Seguradora</label>
                         <div class="col-md-10">
                           <select class="form-control" name="nome_seguradora" required autofocus >
                             @foreach($seguradora as $segu)
@@ -112,98 +112,98 @@
                     </p> <br><br>
                 
                      <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">Número</label>
+                        <label for="" class="col-md-2 control-label">Número</label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Nº de Apólice" type="text" name="numero_apolice" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Nº de Apólice" type="text" name="numero_apolice" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Nº de Recibo" type="text" name="numero_recibo" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Nº de Recibo" type="text" name="numero_recibo" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
     
-                      <p><div class="col-md-7"></div><label for="inputEmail3" class="col-md-2 control-label"> Expira </label></p><br />
+                      <p><div class="col-md-7"></div><label for="" class="col-md-2 control-label"> Expira </label></p><br />
                      <p> 
 
                         <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">Início </label>
+                        <label for="" class="col-md-2 control-label">Início </label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" type="date" name="data_inicio" required autofocus ></div>
+                          <input class="form-control" id="" type="date" name="data_inicio" required autofocus ></div>
                         </div>
 
                     
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3"  type="date" name="data_proximo_pagamento" required autofocus ></div>
+                          <input class="form-control" id=""  type="date" name="data_proximo_pagamento" required autofocus ></div>
                         </div>
                         </div>
 
                     </p> <br><br>
 
                      <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label"> Dias </label>
+                        <label for="" class="col-md-2 control-label"> Dias </label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Cobertos" type="text" name="dias_cobertos" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Cobertos" type="text" name="dias_cobertos" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
 
                      <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label"> Capital Seguro</label>
+                        <label for="" class="col-md-2 control-label"> Capital Seguro</label>
                         <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Capital Seguro" type="text" name="capital_seguro" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Capital Seguro" type="text" name="capital_seguro" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
 
                      <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">  Prémio </label>
+                        <label for="" class="col-md-2 control-label">  Prémio </label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Total" type="text" name="premio_total" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Total" type="text" name="premio_total" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
+                          <input class="form-control" id="" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
 
                      <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label"> Corretagem </label>
+                        <label for="" class="col-md-2 control-label"> Corretagem </label>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">%</span>
-                          <input class="form-control" id="inputEmail3" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
+                          <input class="form-control" id="" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">MTN</span>
-                          <input class="form-control" id="inputEmail3" placeholder="Comissão" type="text" name="comissao"  ></div>
+                          <input class="form-control" id="" placeholder="Comissão" type="text" name="comissao"  ></div>
                         </div>
                       </div>
                     </p> <br><br>
 
                       <p> 
-                        <label for="inputEmail3" class="col-md-2 control-label">Periodicidade Pagamento</label>
+                        <label for="" class="col-md-2 control-label">Periodicidade Pagamento</label>
                         <div class="col-md-10">
                         <select class="form-control" name="periodicidade_pagamento" required autofocus ">
                                         <option value="Mensal">Mensal</option>
@@ -216,7 +216,7 @@
                     </p> <br><br>
 
                      <p> 
-                        <label for="inputEmail3" class="col-md-2 control-label">Situação da Apólice</label>
+                        <label for="" class="col-md-2 control-label">Situação da Apólice</label>
                         <div class="col-md-10">
                         <select class="form-control" name="situacao" required autofocus >
                            <option value="Pago">Pago</option>
@@ -225,11 +225,11 @@
                       </div>
                     </p> <br><br>
                     <p> <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">Item Segurado</label>
+                        <label for="" class="col-md-2 control-label">Item Segurado</label>
                         <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
-                          <input class="form-control" id="inputEmail3" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>
+                          <input class="form-control" id="" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>
                         </div>
                       </div>
                     </p> <br><br>

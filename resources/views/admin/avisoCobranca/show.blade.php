@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+@include('notification')
 
 <page id="printableArea" name="printableArea">   
           <!-- general form elements -->
@@ -56,7 +57,7 @@
           <th><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
           <td width="17%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
              <td><center>
-                 <a href="{{url('admin/gerar-aviso-de-cobranca',[$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                 <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
                  <a href="" class="btn bg-orange  btn-xs"><i class="fa fa-file-pdf-o"></i> PDF</a>
              </center></td>
          </tr>

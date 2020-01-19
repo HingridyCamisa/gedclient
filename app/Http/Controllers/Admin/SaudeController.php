@@ -10,6 +10,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaudeRequest;
 use Carbon\Carbon;
+use App\Cliente;
+use App\Files;
+use Illuminate\Support\Str;
 
 class SaudeController extends Controller
 {
@@ -30,12 +33,17 @@ class SaudeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $saudes = Saude::all();
+        $saudes = Saude::where('tipo_membro','Policy Holder')->get();
         $consultor = Consultor::all();
         $seguradora = Seguradora::all();
-        return view('admin.saude.create',compact('saudes','seguradora','consultor'));
+        $cliente=Cliente::where('status',1)->where('id',$id)->first();
+        if (!$cliente)
+        {
+        	return back()->with('error','Cliente desativado');
+        };
+        return view('admin.saude.create',compact('saudes','seguradora','consultor','cliente'));
     }
 
     /**
@@ -46,32 +54,34 @@ class SaudeController extends Controller
      */
     public function store(SaudeRequest $request)
     {
-        $saudes = new Saude();
-        $saudes->nome_segurado = $request->input('nome_segurado');
-        $saudes->data_nascimento = $request->input('data_nascimento');
-        $saudes->idade = $request->input('idade');
-        $saudes->ano_nascimento = $request->input('ano_nascimento');
-        $saudes->contacto = $request->input('contacto');
-        $saudes->email = $request->input('email');
-        $saudes->tipo_segurado = $request->input('tipo_segurado');
-        $saudes->pessoa_contacto = $request->input('pessoa_contacto');
-        $saudes->email_pessoa_contacto = $request->input('email_pessoa_contacto');
-        $saudes->contacto_pessoa_contacto = $request->input('contacto_pessoa_contacto');
-        $saudes->seguradora = $request->input('seguradora');
-        $saudes->plano = $request->input('plano');
-        $saudes->nome_grupo = $request->input('nome_grupo');
-        $saudes->tipo_membro = $request->input('tipo_membro');
-        $saudes->numero_membro = $request->input('numero_membro');
-        $saudes->data_inicio_cobertura = $request->input('data_inicio_cobertura');
-        $saudes->data_fim_cobertura = $request->input('data_fim_cobertura');
-        $saudes->periodicidade_pagamento = $request->input('periodicidade_pagamento');
-        $saudes->premio_mensal = $request->input('premio_mensal');
-        $saudes->taxa_corretagem = $request->input('taxa_corretagem');
-        $saudes->comissao = $request->input('comissao');
-        $saudes->situacao = $request->input('situacao');
-        $saudes->save();
+        $saude=$request->all();
+        //file name
+        $namefile = Str::random(32).'saude'.time();
+        unset($saude['filetype']);//remove time from array before save
+        unset($saude['file']);//remove time from array before save
+        $saude["token_id"]=$namefile;
+
+         Saude::create($saude);
+        //storag file
+        if ($request->file('file'))
+        {
+        
+                foreach($request->file('file') as $key=>$file)
+                {
+                    $origname=$file->getClientOriginalName();
+                    $name=$origname . time() . '-'.$key.'.'. $file->getClientOriginalExtension();
+                    $file->storeAs('anexos', $name);
+                    $file= new Files();
+                    $file->filename=$name;
+                    $file->token_id=$namefile;
+                    $file->filetype=$request->filetype[$key];
+                    $file->save();
+
+                }
+        }
+      
  
-        return redirect('/admin/saude/index');
+        return redirect('/admin/saude/index')->with('success','Contrato criado ');
  
     }
 
@@ -81,9 +91,11 @@ class SaudeController extends Controller
      * @param  \App\Saude  $saude
      * @return \Illuminate\Http\Response
      */
-    public function show(Saude $saude, $id)
+    public function show($id)
     {
         $saude = Saude::findOrFail($id);
+        $dateOfBirth = $saude->cliente->cliente_data_nascimento;
+
 
         return view('admin.saude.show',compact('saude'));
     }
@@ -99,6 +111,7 @@ class SaudeController extends Controller
         $consultors = Consultor::all();
         $seguradora = Seguradora::all();
         $saude = Saude::findOrFail($id);
+
 
         return view('admin.saude.edit',compact('seguradora','consultors','saude'));
     }

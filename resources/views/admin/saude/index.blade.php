@@ -3,12 +3,14 @@
 @section('title','Consultor')
 
 @section('content_header')
-    <h1><a class="btn btn-danger"  href="{{ url('admin/saude')}}"><i class="fa fa-fw fa-plus"></i> </a>
+    <h1><a class="btn btn-danger"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-plus"></i> </a>
     </h1>
 
 @stop
 
 @section('content')
+@include('notification')
+
  <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-medkit"></i> Saúde </strong></h3></center>
@@ -36,9 +38,9 @@
       @foreach($saude as $saudes)
         <tr>
           <th><center>{{ ++$i}}</center></th>
-          <td><center>{{$saudes->nome_segurado }}</center></td>
+          <td><center>{{$saudes->cliente->cliente_nome }}</center></td>
           <td><center>{{$saudes->numero_membro }}</center></td>
-          <td><center>{{$saudes->seguradora }}</center></td>
+          <td><center>{{$saudes->seguradora->nome_seguradora }}</center></td>
           <td><center>{{$saudes->plano }}</center></td>
           <td><center>{{$saudes->tipo_membro }}</center></td>
           <td><center>{{ Carbon\Carbon::parse($saudes->data_inicio_cobertura)->format('d-m-Y ') }}</center></td>
@@ -55,7 +57,7 @@
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endif       
-          <a href="{{ url('/sms') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>    
+           <a href="{{ url('admin/email/'.$saudes->client_id.'/clientes') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>   
           </td>
 
 

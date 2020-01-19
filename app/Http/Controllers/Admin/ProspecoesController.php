@@ -48,6 +48,10 @@ class ProspecoesController extends Controller
     {
         $consultors = Consultor::all();
         $cliente=Cliente::where('status',1)->where('id',$id)->first();
+        if (!$cliente)
+        {
+        	return back()->with('error','Cliente desativado');
+        };
         return view('admin.prospecoes.create',compact('consultors','cliente'));
     }
 

@@ -4,8 +4,13 @@
 
 @section('content_header')
   
-  <h1><a class="btn btn-social-icon btn-github"  href="{{ url('admin/saude/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
-  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a></h1>
+
+
+  <a class="btn btn-social-icon btn-github"  href="{{ url('admin/saude/index')}}"><i class="fa  fa-arrow-left"></i></a>
+  <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x" aria-hidden="true"></i></a>
+  <a href="{{url('admin/aviso-de-cobranca/saudes',$saude->id)}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> Aviso Cobrança
+  </a>
     
 @stop
 
@@ -23,31 +28,35 @@
       <tbody>
         <tr>
           <th>ID</th>
-          <td><i class="fa fa-key"></i> &nbsp; {{ $saude->id}}</td> 
+          <td><i class="fa fa-key"></i> &nbsp; {{ $saude->token_id}}</td> 
         </tr>
         <tr>
           <th>Nome Cliente</th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$saude->nome_segurado }}</td>
+          <td><i class="fa fa-user"></i> &nbsp; {{$saude->cliente->cliente_nome}}</td>
         </tr>
         <tr>
           <th>Data Nascimento</th>
-          <td><i class="fa fa-birthday-cake"></i> &nbsp; {{ Carbon\Carbon::parse($saude->data_nascimento)->format('d-m-Y') }}</td>
+          <td><i class="fa fa-birthday-cake"></i> &nbsp; {{ $data=Carbon\Carbon::parse($saude->cliente->cliente_data_nascimento)->format('d-m-Y') }}</td>
         </tr>
         <tr>
           <th>Idade</th>
-          <td><i class="fa fa-male"></i> &nbsp; {{$saude->idade }}</td>
+          <td><i class="fa fa-male"></i> &nbsp; {{Carbon\Carbon::parse($data)->age}}</td>
         </tr>
         <tr>
           <th>Ano de Nascimento</th>
-          <td><i class="fa fa-birthday-cake"></i> &nbsp; {{ $saude->ano_nascimento }}</td>
+          <td><i class="fa fa-birthday-cake"></i> &nbsp; {{ Carbon\Carbon::parse($saude->cliente->cliente_data_nascimento)->format('Y')  }}</td>
         </tr>
         <tr>
-          <th>Contacto</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$saude->contacto }}</td>
+          <th>Telefone 1</th>
+          <td><i class="fa fa-phone"></i> &nbsp; {{$saude->cliente->cliente_telefone_1}}</td>
+        </tr>
+        <tr>
+          <th>Telefone 2</th>
+          <td><i class="fa fa-phone"></i> &nbsp; {{$saude->cliente->cliente_telefone_1}}</td>
         </tr>
         <tr>
           <th>Email</th>
-          <td><i class="fa fa-envelope"></i> &nbsp; {{$saude->email }}</td>
+          <td><i class="fa fa-envelope"></i> &nbsp; {{$saude->cliente->cliente_email }}</td>
         </tr>
         <tr>
           <th>Tipo Segurado</th>
