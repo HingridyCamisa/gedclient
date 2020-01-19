@@ -23,17 +23,23 @@
                         <form role="form" method="POST" action="{{ url('admin/clientes/atualizar', $cliente->id)}}" enctype="multipart/form-data">
                             @csrf
                         <div class="box-body">
-                             <div class="row">
-                                <div class="col-xs-4">
-                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Cliente Nome</label>
+
+                        <div class="box box-danger">
+                    <div class="box-header with-border">
+                    <h3 class="box-title"><strong><i class="fa fa-user"></i> DADOS DO CLIENTE</h3></strong>
+                    </div>
+                    <div class="row">
+                                <div class="col-xs-3">
+                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Nome</label>
                                     <input class="form-control" name="cliente_nome" placeholder="Nome" type="text" value="{{old('cliente_nome',$cliente->cliente_nome)}}">
                                 </div>
                                 
-                                 <div class="col-xs-4">
-                                    <label><i class="fa fa-institution"></i> Cliente Endereço</label>
+                                 <div class="col-xs-3">
+                                    <label><i class="fa fa-map-pin"></i> Endereço</label>
                                     <input class="form-control" name="cliente_endereco" placeholder="Av. Josina Machel" type="text"  value="{{old('cliente_endereco',$cliente->cliente_endereco)}}">
                                 </div>
-                                <div class="col-xs-4">
+
+                                <div class="col-xs-3">
                                     <label><i class="fa fa-user"></i> Tipo de Segurado</label>
                                         <select class="form-control" name="cliente_tipo" id="cliente_tipo" onchange="tipocliente(this.value)">
                                             <option value="" selected disabled>Select</option>
@@ -41,16 +47,16 @@
                                             <option value="Empresa">Empresa</option>
                                         </select>
                                 </div>
+
+                                <div class="col-xs-3">
+                                    <label for="cliente_data_nascimento"><i class="fa fa-birthday-cake"></i> Data de Nascimento</label>
+                                    <input  class="form-control desabilitar_empresa" name="cliente_data_nascimento"  type="date" value="{{old('cliente_data_nascimento',$cliente->cliente_data_nascimento)}}">
+                                </div>
                             </div><br>
 
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label for="cliente_data_nascimento"><i class="fa fa-birthday-cake"></i> Cliente Data de Nascimento</label>
-                                    <input  class="form-control desabilitar_empresa" name="cliente_data_nascimento"  type="date" value="{{old('cliente_data_nascimento',$cliente->cliente_data_nascimento)}}">
-                                </div>
-                                
-                                 <div  class="col-xs-2">
-                                    <label for="cliente_genero"><i class="fa fa-venus-mars"></i> Cliente Género</label>
+                                 <div  class="col-xs-3">
+                                    <label for="cliente_genero"><i class="fa fa-venus-mars"></i> Género</label>
                                     <div class="form-radio">
                                         <label class="radio-inline">
                                             <input class="desabilitar_empresa" type="radio" name="cliente_genero" value="Femenino">Femenino
@@ -60,25 +66,26 @@
                                     </label>
                                 </div>   
                              </div>
-                                <div class="col-xs-4">
-                                    <label for="cliente_email"><i class="fa fa-envelope"></i> Cliente email</label>
+
+                                <div class="col-xs-3">
+                                    <label for="cliente_email"><i class="fa fa-envelope"></i> Email</label>
                                     <input class="form-control" name="cliente_email"  type="email" placeholder="email@amana.co.mz" value="{{old('cliente_email',$cliente->cliente_email)}}">
                                 </div>
-                                <div class="col-xs-2">
-                                    <label for="cliente_telefone_1"><i class="fa fa-phone"></i> Cliente Telefone 1</label>
+
+                                <div class="col-xs-3">
+                                    <label for="cliente_telefone_1"><i class="fa fa-phone"></i> Contacto 1</label>
                                     <input class="form-control" name="cliente_telefone_1" placeholder="Numero de celular" type="text" value="{{old('cliente_telefone_1',$cliente->cliente_telefone_1)}}">
                                 </div>
-                                <div class="col-xs-2">
-                                    <label for="cliente_telefone_2"><i class="fa fa-phone"></i> Cliente Telefone 2</label>
+
+                                <div class="col-xs-3">
+                                    <label for="cliente_telefone_2"><i class="fa fa-phone"></i> Contacto 2</label>
                                     <input class="form-control" name="cliente_telefone_2" placeholder="Numero de celular" type="text" value="{{old('cliente_telefone_2',$cliente->cliente_telefone_2)}}">
                                 </div>
                             </div><br>
 
                             <div class="row">
-
-
-                                 <div class="col-xs-3">
-                                    <label> País</label>
+                              <div class="col-xs-4">
+                                    <label><i class="fa fa-map-marker"></i> País</label>
                                         <select class="form-control"  id="country">
                                             <option value="" selected disabled>Select</option>
                                             @foreach($countries as $key => $country)
@@ -88,13 +95,14 @@
                                         </select>
                                 </div>
                                 
-                                <div class="col-xs-3">
-                                    <label>Provincia</label>
+                                <div class="col-xs-4">
+                                    <label><i class="fa fa-map-marker"></i> Província</label>
                                         <select class="form-control" name="cliente_state_id" id="cliente_state_id" >
                                         </select>
                                 </div>
+
                                 <div class="col-xs-4 desabilitar_empresa">
-                                    <label>Cliente Documento de Identificação</label>
+                                    <label><i class="fa fa-list-alt"></i> Documento de Identificação</label>
                                      <div class="input-group">
                                         <div class="input-group-btn " >
                                             <select class="btn btn-default dropdown-toggle" name="cliente_id_tipo" id="cliente_id_tipo" >
@@ -111,23 +119,32 @@
                                 
  
                                 
-                                </div><hr>
-
-
-                     <!--pessoa de contacto-->
-                           <div id="div_pessoa_contacto">
+                                </div></br>
+                    </div>
+                             
+                    <div class="box box-danger">
+                    <div class="box-header with-border">
+                    <h3 class="box-title"><strong><i class="fa fa-user-secret"></i> DADOS PESSOA DE CONTACTO</h3></strong>
+                    </div>
+                    <div id="div_pessoa_contacto">
                              <div class="row">
-                                <div class="col-xs-4">
-                                    <label for="pessoa_contacto_nome"><i class="fa fa-user"></i> Pessoa de Contacto Nome</label>
+                                <div class="col-xs-3">
+                                    <label for="pessoa_contacto_nome"><i class="fa fa-user"></i> Nome</label>
                                     <input class="form-control" name="pessoa_contacto_nome" placeholder="Nome" type="text" value="{{old('pessoa_contacto_nome',$cliente->pessoa_contacto_nome)}}">
                                 </div>
                                 
-                                 <div class="col-xs-4">
-                                    <label><i class="fa fa-institution"></i> Pessoa de Contacto de  Endereço</label>
+                                 <div class="col-xs-3">
+                                    <label><i class="fa fa-map-pin"></i> Endereço</label>
                                     <input class="form-control" name="pessoa_contacto_endereco" placeholder="Av. Josina Machel" type="text" value="{{old('pessoa_contacto_nome',$cliente->pessoa_contacto_nome)}}">
                                 </div>
-                                <div class="col-xs-4">
-                                    <label for="pessoa_contacto_data_nascimento"><i class="fa fa-birthday-cake"></i> Pessoa de Contacto  Data de Nascimento</label>
+
+                                <div class="col-xs-3">
+                                    <label for="pessoa_contacto_email"><i class="fa fa-envelope"></i> Email</label>
+                                    <input class="form-control" name="pessoa_contacto_email"  type="email" placeholder="email@amana.co.mz" value="{{old('pessoa_contacto_email',$cliente->pessoa_contacto_email)}}" >
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <label for="pessoa_contacto_data_nascimento"><i class="fa fa-birthday-cake"></i> Data de Nascimento</label>
                                     <input class="form-control" name="pessoa_contacto_data_nascimento"  type="date" value="{{old('pessoa_contacto_data_nascimento',$cliente->pessoa_contacto_data_nascimento)}}">
                                 </div>
 
@@ -136,8 +153,8 @@
                             <div class="row">
 
                                 
-                                 <div class="col-xs-2">
-                                    <label for="pessoa_contacto_genero"><i class="fa fa-venus-mars"></i> Pessoa de Contacto Género</label>
+                                 <div class="col-xs-4">
+                                    <label for="pessoa_contacto_genero"><i class="fa fa-venus-mars"></i> Género</label>
                                     <div class="form-radio">
                                         <label class="radio-inline">
                                             <input type="radio" name="pessoa_contacto_genero" value="Femenino" >Femenino
@@ -147,25 +164,24 @@
                                     </label>
                                 </div>   
                              </div>
+                                
                                 <div class="col-xs-4">
-                                    <label for="pessoa_contacto_email"><i class="fa fa-envelope"></i> Pessoa de Contacto email</label>
-                                    <input class="form-control" name="pessoa_contacto_email"  type="email" placeholder="email@amana.co.mz" value="{{old('pessoa_contacto_email',$cliente->pessoa_contacto_email)}}" >
-                                </div>
-                                <div class="col-xs-2">
-                                    <label for="pessoa_contacto_telefone_1"><i class="fa fa-phone"></i> Pessoa de Contacto Telefone 1</label>
+                                    <label for="pessoa_contacto_telefone_1"><i class="fa fa-phone"></i> Contacto 1</label>
                                     <input class="form-control" name="pessoa_contacto_telefone_1" placeholder="Numero de celular" type="text" value="{{old('pessoa_contacto_telefone_1',$cliente->pessoa_contacto_telefone_1)}}">
                                 </div>
-                                <div class="col-xs-2">
-                                    <label for="pessoa_contacto_telefone_2"><i class="fa fa-phone"></i> Pessoa de Contacto Telefone 2</label>
+
+                                <div class="col-xs-4">
+                                    <label for="pessoa_contacto_telefone_2"><i class="fa fa-phone"></i> Contacto 2</label>
                                     <input class="form-control" name="pessoa_contacto_telefone_2" placeholder="Numero de celular" type="text" value="{{old('pessoa_contacto_telefone_2',$cliente->pessoa_contacto_telefone_2)}}">
                                 </div>
+
                             </div><br>
 
                             <div class="row">
 
 
-                                 <div class="col-xs-3">
-                                    <label> País</label>
+                                 <div class="col-xs-4">
+                                    <label><i class="fa fa-map-marker"></i> País</label>
                                         <select class="form-control"  id="country_2">
                                             <option value="" selected disabled>Select</option>
                                             @foreach($countries as $key => $country)
@@ -175,14 +191,15 @@
                                         </select>
                                 </div>
                                 
-                                <div class="col-xs-3">
-                                    <label>Provincia</label>
+                                <div class="col-xs-4">
+                                    <label><i class="fa fa-map-marker"></i> Provincia</label>
                                         <select class="form-control" name="pessoa_contacto_state_id" id="pessoa_contacto_state_id" >
 
                                         </select>
                                 </div>
+
                                 <div class="col-xs-4">
-                                    <label>Pessoa de Contacto Documento de Identificação</label>
+                                    <label><i class="fa fa-list-alt"></i> Documento de Identificação</label>
                                      <div class="input-group">
                                         <div class="input-group-btn " >
                                             <select class="btn btn-default dropdown-toggle" name="pessoa_contacto_id_tipo" id="pessoa_contacto_id_tipo" >
@@ -195,26 +212,25 @@
                                         <!-- /btn-group -->
                                         <input type="text" class="form-control" name="pessoa_contacto_id_numero" value="{{old('pessoa_contacto_id_numero',$cliente->pessoa_contacto_id_numero)}}">
                                       </div>
-                                </div>
-                                
- 
-                                
+                                </div>  
                                 </div>
                                 
                                  <br>
-                                
-                           </div>   
-                                <div class="form-group">
+                    </div>
+
+                    
+                 <br>   
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                    <h3 class="box-title"><strong><i class="fa fa-paperclip"></i> OUTROS</h3></strong>
+                    </div>
+                    <div class="form-group">
                                     <label for="DetalhesProspecao"><i class="fa fa-info"></i> Notas</label>
                                     <textarea class="form-control" name="notas" rows="2" placeholder="Notas ..." value="{{old('notas',$cliente->notas)}}"></textarea>
                                 </div>
                            
-
-                            <hr />
                            <div class="row col-md-12" style="margin-left:5px"> 
-                                  
-
-                            <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
+                           <label for="exampleInputFile"><i class="fa fa-upload"></i> Upload <a style="color: red">*</a></label>       
                               <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
                               <div class="">
                                 <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
@@ -338,8 +354,9 @@
                             </div>
                            </div>
                         </div>
-                            
-
+                </div>
+                                
+                           
                         <!-- /.box-body -->
                         <div class="box-footer">
                                 

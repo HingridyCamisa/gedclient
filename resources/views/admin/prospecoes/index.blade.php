@@ -21,7 +21,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Início</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Prevista Fim</center></th>
-          <th scope="col"><center> Ramo </center></th>
+          <th scope="col"><center> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar Contrato </center></th>
@@ -36,7 +36,7 @@
           <td>{{$prospecao->consultor }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>
-          <td>{{$prospecao->tipo_ramo }}</td>
+          <td>{{$prospecao->estado }}</td>
            @if(\Carbon\Carbon::parse($prospecao->data_prevista_fim)->isPast())
             <td><center><i class="fa fa-close text-red"></i> Expirado {{\Carbon\Carbon::parse($prospecao->data_inicio)->addDays(\Carbon\Carbon::parse($prospecao->data_prevista_fim)->diffInDays($prospecao->data_inicio))->diffForHumans()}} </center></td>
           @else
@@ -68,7 +68,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Início</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Prevista Fim</center></th>
-          <th scope="col"><center></i>Ramo </center></th>
+          <th scope="col"><center> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-info-circle"></i> Detalhes </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar Contrato </center></th>

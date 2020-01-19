@@ -98,6 +98,7 @@ class AvisoDeCobrancaController extends Controller
         public function avisoview($tipo,$contrato_token_id,$token_id)
     {   
         $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('token_id',$token_id)->get();
+        //dd($token_id);
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
