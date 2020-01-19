@@ -21,7 +21,7 @@ class AvisoCobranca extends Model
     }     
     public function Contrato()
     {
-        return $this->belongsTo('App\Contra','contrato_token_id','token_id');
+        return $this->belongsTo('App\Contrato','contrato_token_id','token_id');
     }  
 
         public function saude()

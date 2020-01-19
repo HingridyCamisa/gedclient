@@ -45,21 +45,60 @@
           <th>Tipo de renovação</th>
           <td><i class="fa fa-calendar"></i> &nbsp; {{$contrato->periodicidade_pagamento }}</td> 
         </tr>
-         <tr>
-          <th>
-          </th>
-          <th>
-          </th>
-         </tr>
+    </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-hover">
+    <tbody>
         @for ($i = 1; $i <= $denominador; $i++) 
          <tr>
-          <th> {{$i}}º </th>
-          <th><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
-          <td width="17%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
-             <td><center>
-                 <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn btn-danger btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
-                 <a href="" class="btn bg-orange  btn-xs"><i class="fa fa-file-pdf-o"></i> PDF</a>
-             </center></td>
+          <th  width="3%"> {{$i}}º </th>
+          <th width="7%"><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
+          <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
+          <th  width="13%"><i class="fa fa-calendar"></i>
+             @if($contrato->periodicidade_pagamento!='Mensal')
+                 @if($data->addDays($dia_periodo)->isPast())
+                    <i class="fa fa-close text-red"></i> Expirado  {{$data->addDays($dia_periodo)->diffForHumans() }}
+                 @else
+                    <i class="fa fa-check text-green"></i> Em dia  {{$data->addDays($dia_periodo)->diffForHumans() }}
+                 @endif
+            
+             @else
+                 @if($data->addMonthNoOverflow()->isPast())
+                    <i class="fa fa-close text-red"></i> Expirado    {{$data->addMonthNoOverflow()->diffForHumans() }}
+                 @else
+                    <i class="fa fa-check text-green"></i> Em dia    {{$data->addMonthNoOverflow()->diffForHumans() }}
+                 @endif
+             @endif
+         </th>
+          <td width="13%"><center>
+            @php
+            $verification = false 
+            @endphp
+                 @foreach($avisosDB as $avisosDBX)
+                    @if($avisosDBX['token_id']==$contrato->token_id.$i)
+                        @if($avisosDBX['status']==2)
+                        <a href="" class="btn bg-olive   btn-xs"><i class="fa fa-file-pdf-o"></i> PDF do Recibo</a>
+                        @else
+                        <a href="{{url('admin/avisode-cobranca-view',[$avisosDBX['tipo'],$avisosDBX['contrato_token_id'],$avisosDBX['token_id']])}}" class="btn bg-purple   btn-xs"><i class="fa fa-file-pdf-o"></i> PDF do Aviso</a>
+                        @endif
+                         @php
+                            $verification = true 
+                         @endphp
+                         @break
+                    @else
+                        @php
+                            $verification = false 
+                        @endphp
+                 @endif
+                 @endforeach
+
+                 @if($verification == false)
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn bg-navy btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                 @endif
+                 
+                 
+             </center>
+          </td>
          </tr>
          @endfor
 

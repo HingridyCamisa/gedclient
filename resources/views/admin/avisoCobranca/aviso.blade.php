@@ -3,25 +3,29 @@
 @section('title','Aviso')
 
 @section('content_header')
-    <h1><a class="btn btn-danger"  href="{{ url('admin/contrato/index') }}"><i class="fa fa-fw fa-arrow-left"></i> </a>
+    <h1><a class="btn btn-danger"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i> </a>
+      <a href="{{url('admin/avisode-cobranca-view-all',[$avisosDB[0]->tipo,$avisosDB[0]->contrato_token_id,$avisosDB[0]->token_id])}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
+            <i class="fa fa-globe"></i> Todos não cobrados
+  </a>
     </h1>
 
 @stop
 
 @section('content')
-<page id="printableArea" name="printableArea">  
+@include('notification')
+ 
 <div class="box box-solid box-danger">
             <div class="box-header">
                         <center><h3 class="box-title"><strong><i class="fa fa-fw fa- fa-fax"></i> Aviso de Cobrança </strong></h3></center>
             </div>
-
-            <section class="invoice">
+<page id="printableArea" name="printableArea"> 
+     <section class="invoice">
       <!-- title row -->
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
              AMANA SEGUROS
-            <small class="pull-right">Data: 11/01/2020</small>
+            <small class="pull-right">Data: {{\Carbon\Carbon::now()->format('d-m-Y')}}</small>
           </h2>
         </div>
         <!-- /.col -->
@@ -47,7 +51,7 @@
         <div class="col-sm-4 invoice-col">
           <b><img src="{{asset('/img/amana2.png')}}"   alt="logo" width="300" height="100"></b><br>  
           <br>
-          <b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Aviso Nᵒ  #007612</b>
+          <b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Aviso Nᵒ  #{{str_pad($avisosDB[0]->id, 6, "0", STR_PAD_LEFT)}}</b>
           
         </div>
         <!-- /.col -->
@@ -63,34 +67,33 @@
         <div class="col-sm-4 invoice-col">
         <address>
             <br>
-            <b> Segurado/ Insured:</b> M0000<br>
-            <b> Endereço:</b> Ahmed Zeinul<br>
-            <b> Cidade:</b> Av. 25 de Setembro<br><br>
-            <b>Localidade / City:</b> Maputo<br>
-            <b>NUIT/ Tax payer Nᵒ</b> <br><br>
-            <b>Seguradora:</b> ARKO <br>
-            <b>Nᵒ Apólice:</b> MABO09903129<br>
-            <b>Periodicidade de Pagamento:</b> Anual<br>
-            <b>Periodo de Seguro de:</b> 00/01/100<br>
-            <b>Periodo Efectivo de Débito:</b> 00/01/1900<br>
-            <b>Data Limite Pagamento:</b> 30 Dias<br>
+            <b> Segurado/ Insured:</b> {{$avisosDB[0]->cliente->cliente_nome}}<br>
+            <b> Endereço:</b> {{$avisosDB[0]->cliente->cliente_endereco}}<br>
+            <b> País:</b> {{$avisosDB[0]->cliente->client_country_city->country_name}} <br>
+            <b> Localidade / City:</b> {{$avisosDB[0]->cliente->client_country_city->state_name}}<br><br>
+            <b> NUIT/ Tax payer Nᵒ</b> <br><br>
           </address>
         </div>
         <div class="col-sm-4 invoice-col">
         <address>
             <br>
-            <br>  
-            <b>Nᵒ de Conta:</b> 1111111<br>
-            <b>Data / Date:</b> Beira<br><br>
-            <b>Nᵒ Ref. Seguradora :</b> 1111111<br>
-            <b>Insure Ref.ᵒ :</b> 243<br><br><br>
-            <b>Renovação :</b> 1111111<br><br>
-            <b>Até :</b> 00/01/1900<br>
-            <b>Até :</b> 30/01/1900<br>
-            <b>Referência AMANA :</b> 243<br>
-          </address>
+            <b> Seguradora:</b> {{$avisosDB[0]->Contrato->seguradora->nome_seguradora}}<br>
+            <b> Nᵒ Apólice:</b> {{$avisosDB[0]->Contrato->numero_apolice}}<br>
+            <b> Periodicidade de Pagamento:</b> {{$avisosDB[0]->Contrato->periodicidade_pagamento }}<br>
+            <b> Periodo de Seguro de:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_inicio))}}<br>
+            <b> Periodo de Seguro até:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
+            <b> Dias Cobertos:</b> {{\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_inicio)->diffInDays(\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
+            <b> Data Limite Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data))}}<br><br /> 
+        </address>
         </div>
         <div class="col-sm-4 invoice-col">
+            <address>
+                <br>
+                <b>Nᵒ de Conta:</b> <br>
+                <b>Data / Date:</b> <br><br>
+                <b>Nᵒ Ref. Seguradora :</b> <br>
+                <b>Insure Ref.ᵒ :</b> <br><br><br>
+            </address>
         </div>
       
       </div>
@@ -103,6 +106,8 @@
           <table class="table table-striped">
             <thead>
             <tr>
+              <th>Nº</th>
+              <th>Limite</th>
               <th>Descrição</th>
               <th>Pagamento</th>
               <th>Seguradora</th>
@@ -111,38 +116,30 @@
             </tr>
             </thead>
             <tbody>
+             @php($t=0)
+            @foreach($avisosDB as $key => $aviso)
             <tr>
-              <td>Referente ao pagamento de</td>
-              <td>Mensal</td>
-              <td>Arko</td>
-              <td>3,500.00</td>
+              <td>{{$key+1}}</td>
+              <td>{{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
+              <td>Referente ao pagamento</td>
+              <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
+              <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
+              <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}}</td>
+              @php($t=$aviso->aviso_amount+$t)
             </tr>
-            <tr>
-              <td>Referente ao pagamento de</td>
-              <td>Mensal</td>
-              <td>Arko</td>
-              <td>3,500.00</td>
-            </tr>
-            <tr>
-              <td>Referente ao pagamento de</td>
-              <td>Mensal</td>
-              <td>Arko</td>
-              <td>3,500.00</td>
-            </tr>
-            <tr>
-              <td>Referente ao pagamento de</td>
-              <td>Mensal</td>
-              <td>Arko</td>
-              <td>3,500.00</td>
-            </tr>
-            <tr>
-              <td>Referente ao pagamento de</td>
-              <td>Mensal</td>
-              <td>Arko</td>
-              <td>3,500.00</td>
-            </tr>
-           
+
+            @endforeach
             </tbody>
+          <tfoot>
+            <tr class="table-danger">
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>Total</th>
+              <th>{{number_format(round($t,2), 2, ',', ' ')}}</th>
+              </tr>
+          </tfoot>
           </table>
         </div>
         <!-- /.col -->
@@ -168,7 +165,8 @@
 
           </p>
         </div>
-        <!-- /.col -->
+        <!-- /.col detalhes por encargos -->
+        <!--
         <div class="col-xs-6">
           
 
@@ -201,10 +199,16 @@
             </tbody></table>
           </div>
         </div>
+            -->
         <!-- /.col -->
       </div>
       <!-- /.row -->
+     </section>
 </page>
+
+
+    
+    <section class="invoice">
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">

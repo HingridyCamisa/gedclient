@@ -15,9 +15,9 @@ use Auth;
 
 class AvisoDeCobrancaController extends Controller
 {
-    public function aviso ($tipo,$id)
+    public function aviso ($tipo,$id,$token_id)
     {
-        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where()->get();
+        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$token_id)->get();
         $contrato=DB::table($tipo)->where('id',$id)->first();
         $cliente=Cliente::find($contrato->client_id);
        
@@ -59,7 +59,7 @@ class AvisoDeCobrancaController extends Controller
         $valor_a_pagar=$contrato->premio_total/$denominador;
         
 
-        return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos','tipo'));
+        return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos','tipo','avisosDB'));
     }
 
     public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data)
@@ -82,7 +82,7 @@ class AvisoDeCobrancaController extends Controller
         $aviso->save();
         
 
-        return back()->with('success','Cliente criado.');
+        return back()->with('success','Aviso criado com sucesso.');
         
     }
 
@@ -94,4 +94,18 @@ class AvisoDeCobrancaController extends Controller
      return $days;
     }
 
+
+        public function avisoview($tipo,$contrato_token_id,$token_id)
+    {   
+        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('token_id',$token_id)->get();
+
+        return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
+    }
+
+        public function avisoviewall($tipo,$contrato_token_id,$token_id)
+    {   
+        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->get();
+
+        return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
+    }
 }
