@@ -11,7 +11,7 @@ use Carbon\CarbonInterval;
 use App\Cliente;
 use App\AvisoCobranca;
 use Auth;
-
+use App\AvisoCobrancaSaude;
 
 class AvisoDeCobrancaController extends Controller
 {
@@ -97,15 +97,31 @@ class AvisoDeCobrancaController extends Controller
 
         public function avisoview($tipo,$contrato_token_id,$token_id)
     {   
-        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('token_id',$token_id)->get();
-        //dd($token_id);
-
+        if ($tipo=='contratos')
+        {
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('token_id',$token_id)->get();
+        }
+        else
+        {
+            $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('token_id',$token_id)->get();
+        }
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
 
         public function avisoviewall($tipo,$contrato_token_id,$token_id)
     {   
-        $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->get();
+
+        if ($tipo=='contratos')
+        {
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->orderby('created_at','asc')->get();
+        }
+        else
+        {
+             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->orderby('created_at','asc')->get();      
+        }
+
+
+       
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }

@@ -52,7 +52,13 @@
         @for ($i = 1; $i <= $denominador; $i++) 
          <tr>
           <th  width="3%"> {{$i}}º </th>
-          <th width="7%"><i class="fa fa-calendar"></i> @if($contrato->periodicidade_pagamento!='Mensal'){{$data->addDays($dia_periodo)->format('d-m-Y') }}@else{{$data->addMonthNoOverflow()->format('d-m-Y') }}@endif</th>
+          <th width="7%"><i class="fa fa-calendar"></i>
+             @if($contrato->periodicidade_pagamento!='Mensal')
+                {{$finalData=$data->addDays($dia_periodo)->format('d-m-Y') }}
+             @else
+                {{$finalData=$data->addMonthNoOverflow()->format('d-m-Y') }}
+             @endif
+         </th>
           <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
           <th  width="13%"><i class="fa fa-calendar"></i>
              @if($contrato->periodicidade_pagamento!='Mensal')
@@ -93,7 +99,7 @@
                  @endforeach
 
                  @if($verification == false)
-                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$data])}}" class="btn bg-navy btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,\Carbon\Carbon::parse($finalData)])}}" class="btn bg-navy btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
                  @endif
                  
                  
