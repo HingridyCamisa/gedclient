@@ -143,8 +143,8 @@ return [
                     'icon'        => 'medkit',
                 ],
                 [
-                    'text'  => 'Cobranças',
-                    'url'   => '#',
+                    'text'  => 'Avisos',
+                    'url'   => 'admin/avisode-cobranca-index',
                     'icon'  => 'fax',
 
                 ],

@@ -12,6 +12,7 @@ use App\Cliente;
 use App\AvisoCobranca;
 use Auth;
 use App\AvisoCobrancaSaude;
+use App\AvisoCobrancaView;
 
 class AvisoDeCobrancaController extends Controller
 {
@@ -124,5 +125,12 @@ class AvisoDeCobrancaController extends Controller
        
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
+    }
+
+    public function index()
+    {
+
+        $avisos=AvisoCobrancaView::latest()->paginate(12);
+        return view('admin.avisoCobranca.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 }
