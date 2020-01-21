@@ -9,9 +9,9 @@
     "\\resources\\views",
     "\\resources\\views\\admin",
     "\\resources\\views\\admin\\prospecoes",
-    "\\resources\\views\\vendor\\adminlte",
+    "\\resources\\views\\admin\\saude",
     "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\admin\\prospecoes\\index.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\AdminController.php",
   "PreviewInSolutionExplorer": false
 }
