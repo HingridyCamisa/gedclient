@@ -81,6 +81,7 @@
                                  <input class="form-control" name="premio_total" placeholder="Prémio Total" type="float">
                                     
                                 </div>
+
                                 <div class="col-xs-3">
                                  <label><i class="fa fa-money"></i> Prémio Simples</label>
                                  <input class="form-control" name="premio_simples" placeholder="Prémio Simples" type="float">
@@ -95,6 +96,7 @@
                                     <label><i class="fa fa-calendar"></i> Data Inicio Cobertura</label>
                                     <input class="form-control" name="data_inicio" type="date">
                                 </div>
+
                                  <div class="col-xs-3">
                                     <label><i class="fa fa-calendar"></i> Data Fim Cobertura</label>
                                     <input class="form-control" name="data_proximo_pagamento"  type="date">
@@ -111,6 +113,7 @@
                                             <option value="Não Renovável">Não Renovável</option>
                                      </select>
                                 </div>
+
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-calculator"></i> Taxa Corretagem</label>
                                     <input class="form-control" name="taxa_corretagem" placeholder="Taxa Corretagem " type="float">
@@ -123,6 +126,7 @@
                                     <label><i class="fa fa-money"></i> Comissão Corretagem </label>
                                     <input class="form-control" name="comissao"  placeholder="Comissao Corretagem " type="float">
                                 </div>
+                                
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-money"></i> Situação</label>
                                         <select class="form-control" name="situacao">

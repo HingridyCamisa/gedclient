@@ -9,115 +9,58 @@
 @stop
 
 @section('content')
+@include('notification')
 
 
           <!-- general form elements -->
           <div class="box box-solid box-danger">
               <div class="box-header with-border">
-              <center><h3 class="box-title"><strong><i class="fa fa-fw fa-medkit"></i> Editar Saúde</strong></h3></center>
+              <center><h3 class="box-title"><strong><i class="fa fa-fw fa-medkit"></i> Editar Saúde:  {{$saude->cliente->cliente_nome}}</strong></h3></center>
               </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="POST" action="{{ route('saude.update', $saude['id'])}}">
+            <form role="form" method="POST" action="{{ route('saude.update', $saude['id']) }}" enctype="multipart/form-data">
                 @csrf
               <div class="box-body">
-                     <div class="row">
-                                <div class="col-xs-3">
-                                    <label for="NomeSegurado"><i class="fa fa-user"></i> Nome Segurado</label>
-                                    <input class="form-control" name="nome_segurado" value="{{$saude->nome_segurado}}" placeholder="Nome segurado" type="text">
-                                </div>
-                                
-                                 <div class="col-xs-3">
-                                    <label><i class="fa fa-birthday-cake"></i> Data Nascimento</label>
-                                    <input class="form-control" name="data_nascimento" value="{{$saude->data_nascimento}}" type="date">
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <label for="AnoNascimento"><i class="fa fa-birthday-cake"></i> Ano de Nascimento</label>
-                                    <input class="form-control" name="ano_nascimento" value="{{$saude->ano_nascimento}}"  type="text">
-                                </div>
-                                
-                                 <div class="col-xs-3">
-                                    <label><i class="fa fa-male"></i> Idade</label>
-                                    <input class="form-control" name="idade" placeholder="Idade segurado" value="{{$saude->idade}}" type="text">
-                                </div>
-                                
-                    </div><br>
                     <div class="row">
-                                 <div class="col-xs-3">
-                                    <label for="Contacto"><i class="fa fa-phone"></i> Contacto</label>
-                                    <input class="form-control" name="contacto" placeholder="841111111" value="{{$saude->contacto}}" type="text">
-                                </div>
-                                
-                                 <div class="col-xs-3">
-                                    <label><i class="fa fa-envelope"></i> Email</label>
-                                    <input class="form-control" name="email" value="{{$saude->email}}"  type="email">
-                                </div>
-
-                                <div class="col-xs-3">
-                                         <label><i class="fa fa-user"></i> Tipo de Segurado</label>
-                                        <select class="form-control" name="tipo_segurado">
-                                            <option value="{{$saude->tipo_segurado}}" selected>{{$saude->tipo_segurado}}</option>
-                                            <option value="Individual">Individual</option>
-                                            <option value="Empresa">Empresa</option>
-                                        </select> 
-                                </div>
 
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-user"></i> Consultor</label>
-                                        <select class="form-control"  >
-                                            @foreach($consultors as $consultors)
-                                            <option>{{ $consultors->nome_consultor}}</option>
+                                        <select class="form-control" name="consultor">
+                                            <option  value="{{old('consultor')}}" selected disabled> Select</option>
+                                            @foreach($consultors as $consultor)
+                                            <option value="{{ $consultor->id}}"> {{ $consultor->nome_consultor}}</option>
                                             @endforeach
                                         </select>
-                                </div>
-                                
-                    </div><br>
-                    <div class="row">
-                                 <div class="col-xs-3">
-                                    <label for="PessoaContacto"><i class="fa fa-user"></i> Pessoa Contacto</label>
-                                    <input class="form-control" name="pessoa_contacto" placeholder="Nome pessoa contacto" value="{{$saude->pessoa_contacto}}" type="text">
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <label for="Contacto"><i class="fa fa-phone"></i> Contacto</label>
-                                    <input class="form-control" name="contacto_pessoa_contacto" value="{{$saude->contacto_pessoa_contacto}}" placeholder="Numero de celular" value="{{$saude->contacto_pessoa_contacto}}" type="text">
-                                </div>
-                                
-                                 <div class="col-xs-3">
-                                    <label><i class="fa fa-envelope"></i> Email</label>
-                                    <input class="form-control" name="email_pessoa_contacto" value="{{$saude->email_pessoa_contacto}}" placeholder="Email" type="email">
                                 </div>
 
                                 <div class="col-xs-3">
                                  <label><i class="fa fa-users"></i> Nome do Grupo</label>
-                                 <input class="form-control" name="nome_grupo" placeholder="Nome do Grupo" value="{{$saude->nome_grupo}}" type="text">
-                                    
+                                 <input class="form-control" name="nome_grupo" placeholder="Nome do Grupo" type="text" value="{{ $saude->nome_grupo}}">  
                                 </div>
 
-                                
-                    </div><br>
-                    <div class="row">
-                                 <div class="col-xs-3">
+                                <div class="col-xs-3">
                                  <label><i class="fa fa-institution"></i> Nome Seguradora</label>
-                                        <select class="form-control" name="seguradora" >
+                                        <select class="form-control" name="nome_seguradora">
+                                            <option  value="{{old('nome_seguradora')}}" selected disabled> Select</option>
                                             @foreach($seguradora as $seguradora)
-                                            <option value="{{ $saude->seguradora}}" selected>{{$saude->seguradora}}</option>
-                                            <option>{{ $seguradora->nome_seguradora}}</option>
+                                            <option value="{{ $saude->id}}">{{ $saude->nome_seguradora}}</option>
                                             @endforeach
                                         </select>
                                 </div>
 
                                 <div class="col-xs-3">
                                     <label for="Contacto"><i class="fa fa-list-alt"></i> Plano</label>
-                                    <input class="form-control" name="plano" placeholder="Plano de Saúde" value="{{$saude->plano}}" type="text">
+                                    <input class="form-control" name="plano" placeholder="Plano de Saúde" type="text" value="{{$saude->plano}}">
                                 </div>
-                                
+                        </div><br>
+                        
+                        <div class="row">      
                                  <div class="col-xs-3">
                                     <label><i class="fa fa-venus-mars"></i> Tipo de Membro</label>
-                                    <select class="form-control" name="tipo_membro">
-                                    <option value="{{$saude->tipo_membro}}" selected>{{$saude->tipo_membro}}</option>
-                                            <option value="Policy Holder">Policy Holder</option>
+                                    <select class="form-control" name="tipo_membro" id="tipo_membro" onchange="tipomembro(this.value)">
+                                            <option value="" selected disabled> Select</option>
+                                            <option value="Policy Holder" >Policy Holder</option>
                                             <option value="Spouse">Spouse</option>
                                             <option value="Child">Child</option>
                                         </select> 
@@ -125,89 +68,262 @@
 
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-key"></i> Número de Membro</label>
-                                    <input class="form-control" name="numero_membro" placeholder="Numero de membro" value="{{$saude->numero_membro}}" type="text">
-                                </div>
+                                    <input class="form-control" name="numero_membro" placeholder="Numero de membro" type="text" value="{{$saude->numero_membro}}">
+                                </div> 
 
-                                
-                    </div><br>
+                                <div class="col-xs-3">
+                                 <label><i class="fa fa-money"></i> Prémio Total</label>
+                                 <input class="form-control" name="premio_total" placeholder="Prémio Total" type="float" value="{{$saude->premio_total}}">    
+                                </div>    
+
+                                <div class="col-xs-3">
+                                 <label><i class="fa fa-money"></i> Prémio Simples</label>
+                                 <input class="form-control" name="premio_simples" placeholder="Prémio Simples" type="float" value="{{$saude->premio_simples}}">      
+                                </div>
+                        </div><br>
+
                     <div class="row">
+                                
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-calendar"></i> Data Inicio Cobertura</label>
-                                    <input class="form-control" name="data_inicio_cobertura" value="{{$saude->data_inicio_cobertura}}" type="date">
-                                </div>
-                                
+                                    <input class="form-control" name="data_inicio" type="date" value="{{$saude->data_inicio}}">
+                                </div>   
+
                                  <div class="col-xs-3">
                                     <label><i class="fa fa-calendar"></i> Data Fim Cobertura</label>
-                                    <input class="form-control" name="data_fim_cobertura" value="{{$saude->data_fim_cobertura}}" type="date">
+                                    <input class="form-control" name="data_proximo_pagamento"  type="date" value="{{$saude->data_proximo_pagamento}}">
                                 </div>
 
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-hourglass-2"></i> Periodicidade de Pagamento</label>
                                     <select class="form-control" name="periodicidade_pagamento">
-                                    <option value="{{$saude->periodicidade_pagamento}}" selected>{{$saude->periodicidade_pagamento}}</option>
+                                            <option  value="{{old('periodicidade_pagamento')}}" selected disabled> {{old('periodicidade_pagamento','Select')}}</option>
                                             <option value="Mensal">Mensal</option>
                                             <option value="Trimestral">Trimestral</option>
                                             <option value="Semestral">Semestral</option>
                                             <option value="Anual">Anual</option>
+                                            <option value="Não Renovável">Não Renovável</option>
+                                     </select>
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <label><i class="fa fa-calculator"></i> Taxa Corretagem</label>
+                                    <input class="form-control" name="taxa_corretagem" placeholder="Taxa Corretagem " type="float" value="{{$saude->taxa_corretagem}}">
+                                </div>
+                    </div><br>
+                    <div class="row">
+                                 <div class="col-xs-3">
+                                    <label><i class="fa fa-money"></i> Comissão Corretagem </label>
+                                    <input class="form-control" name="comissao"  placeholder="Comissao Corretagem " type="float" value="{{$saude->comissao}}">
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <label><i class="fa fa-money"></i> Situação</label>
+                                        <select class="form-control" name="situacao">
+                                            <option>Pago</option>
+                                            <option>Em Cobrança</option>
                                         </select>
                                 </div>
 
                                 <div class="col-xs-3">
-                                 <label><i class="fa fa-money"></i> Prémio Mensal</label>
-                                 <input class="form-control" name="premio_mensal" placeholder="Prémio Mensal" value="{{$saude->premio_mensal}}" type="float">
-                                    
-                                </div>
-                    </div><br>
-                    <div class="row">
+                                 <label><i class="fa fa-user"></i> Segurado/Membro principal</label>
+                                        <select class="form-control desabilitar_principal" name="menbro_principal" disabled>
+                                            <option  value="" selected disabled> Select</option>
+                                        </select>
+                             </div><br>          
 
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-calculator"></i> Taxa Corretagem</label>
-                            <input class="form-control" name="taxa_corretagem" placeholder="Taxa Corretagem " value="{{$saude->taxa_corretagem}}" type="float">
-     
-                        </div>
+                    </div><br>  
 
-                         <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Comissão Corretagem </label>
-                            <input class="form-control" name="comissao"  placeholder="Comissao Corretagem " value="{{$saude->comissao}}" type="float">
+                     <div class="form-group">
+                            <label for="DetalhesProspecao"><i class="fa fa-info"></i> Notas</label>
+                            <textarea class="form-control" name="notas" rows="2" placeholder="Notas ..." value="{{$saude->notas}}"></textarea>
                         </div>
+                  <hr />   
 
-                                   
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Situação</label>
-                                <select class="form-control" name="situacao">
-                                <option value="{{$saude->situacao}}" selected>{{$saude->situacao}}</option>
-                                    <option value="Pago">Pago</option>
-                                    <option value="Em cobrança">Em Cobrança</option>
-                                </select>
-     
-                        </div>
-                                   
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-upload"></i> Upload Apólice</label>
-                                <input id="exampleInputFile" type="file">
-                        </div>
-                                    
-                        </div><br>
+                  <div class="row col-md-12" style="margin-left:5px"> 
+                                  
+
+                                  <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
+                                    <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
+                                    <div class="">
+                                      <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                         <option disabled selected>Seleciona tipo de ficheiro...</option>
+                                                  <option value="BI">
+                                                      BI
+                                                  </option>                                       
+                                                  <option value="Apolice de Seguro">
+                                                      Apolice de Seguro
+                                                  </option>                                    
+                                                  <option value="Carta de Condução">
+                                                      Carta de Condução
+                                                  </option>                                    
+                                                  <option value="Carta de Nomeação">
+                                                      Carta de Nomeação
+                                                  </option>                                    
+                                                  <option value="Livrete/Verbete">
+                                                      Livrete/Verbete
+                                                  </option>                                    
+                                                  <option value="Imagem">
+                                                      Imagem
+                                                  </option>                                    
+                                                  <option value="Formulario de Peritagem">
+                                                      Formulario de Peritagem
+                                                  </option>                                    
+                                                  <option value="Passaporte">
+                                                      Passaporte
+                                                  </option>                                    
+                                                  <option value="Comprovativo de pagamento">
+                                                      Comprovativpo de pagamento
+                                                  </option>                                   
+                                                  <option value="Factura">
+                                                      Factura
+                                                  </option>                                   
+                                                  <option value="Recibos">
+                                                      Recibos
+                                                  </option>                                    
+                                                  <option value="Alvará">
+                                                      Alvará
+                                                  </option>                                    
+                                                  <option value="Recibo de Água">
+                                                      Recibo de Água
+                                                  </option>                                    
+                                                  <option value="Certidão">
+                                                      Certidão
+                                                  </option>                                    
+                                                  <option value="Outros">
+                                                      Outros
+                                                  </option>
+                                      </select>
+                                    </div>
+                                  <div class="input-group control-group increment" >
+                                    <input type="file" name="file[]" class="form-control" >
+                                    <div class="input-group-btn" > 
+                                      <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
+                                    </div>
+                
+                                  </div>
+      
+      
+                                  <div class="clone hide" >
+                                  <div class="control-group">
+                                    <div class="" style="margin-top:10px">
+                                      <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
+                                         <option disabled selected>Seleciona...</option>
+                                          
+                                                  <option value="BI">
+                                                      BI
+                                                  </option>                                       
+                                                  <option value="Apolice de Seguro">
+                                                      Apolice de Seguro
+                                                  </option>                                    
+                                                  <option value="Carta de Condução">
+                                                      Carta de Condução
+                                                  </option>                                    
+                                                  <option value="Carta de Nomeação">
+                                                      Carta de Nomeação
+                                                  </option>                                    
+                                                  <option value="Livrete/Verbete">
+                                                      Livrete/Verbete
+                                                  </option>                                    
+                                                  <option value="Imagem">
+                                                      Imagem
+                                                  </option>                                    
+                                                  <option value="Formulario de Peritagem">
+                                                      Formulario de Peritagem
+                                                  </option>                                    
+                                                  <option value="Passaporte">
+                                                      Passaporte
+                                                  </option>                                    
+                                                  <option value="Comprovativo de pagamento">
+                                                      Comprovativo de pagamento
+                                                  </option>                                   
+                                                  <option value="Factura">
+                                                      Factura
+                                                  </option>                                   
+                                                  <option value="Recibos">
+                                                      Recibos
+                                                  </option>                                    
+                                                  <option value="Alvará">
+                                                      Alvará
+                                                  </option>                                    
+                                                  <option value="Recibo de Água">
+                                                      Recibo de Água
+                                                  </option>                                    
+                                                  <option value="Certidão">
+                                                      Certidão
+                                                  </option>                                    
+                                                  <option value="Outros">
+                                                      Outros
+                                                  </option>
+                                      </select>
+                                    </div>
+                                    <div class=" input-group" >
+                                      <input type="file" name="file[]" class="form-control" >          
+                                      <div class="input-group-btn"> 
+                                        <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                 </div>
+                               
+                    </div>
+                    <!-- /.box-body -->
+      
+                        <div class="box-footer">
                          
-              </div>
-              <!-- /.box-body -->
+                          <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
+                          
+                        </div>
 
-                  <div class="box-footer">
-                   
-                    <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
-                    
-                  </div>
             </form>
-            @if($errors->any())
-              <ul class="alert alert-warning">
-                @foreach($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-           @endif
+
           </div>
           <!-- /.box -->
 
-  
+ <script type="text/javascript">
+
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script> 
+
+
+<script>
+    $(document).ready(function () {
+        $data = $("#tipo_membro").val();
+        if ($data=='Policy Holder') {
+            $(".desabilitar_principal *").removeAttr('disabled');
+            $(".desabilitar_principal").removeAttr('disabled');
+        } else if($data=='Empresa') {
+            $(".desabilitar_principal").prop('disabled', true);
+            $(".desabilitar_principal *").prop('disabled', true);
+        }
+    });
+
+    function tipomembro(val) {
+        if (val!='Policy Holder') {
+            $(".desabilitar_principal *").removeAttr('disabled');
+            $(".desabilitar_principal").removeAttr('disabled');
+        } else {
+            $(".desabilitar_principal").prop('disabled', true);
+            $(".desabilitar_principal *").prop('disabled', true);
+            $(".desabilitar_principal").val('');
+
+        }
+        
+    }
+</script>
 
 @stop

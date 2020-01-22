@@ -27,6 +27,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>   Gerado em </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar</center></th>
 
         </tr>
       </thead>
@@ -51,9 +52,6 @@
              <td><center>
                  <a href="{{ route('clientes.edit', $cliente->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
                  <a href="{{ route ('clientes.show', $cliente->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-                 <a href="{{url('admin/contrato',$cliente->id)}}" class="btn btn-danger btn-xs">Contrato</a>
-                 <a href="{{url('admin/prospecoes',$cliente->id)}}" class="btn bg-orange  btn-xs">Prospeção</a>
-                 <a href="{{url('admin/saude',$cliente->id)}}" class="btn bg-orange  btn-xs">Saúde</a>
                   @if($cliente->status =='1')
                   {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
                   {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
@@ -65,6 +63,9 @@
                   {!! Form::close() !!}
                   @endif
              </center></td>
+             <td><center> <a href="{{url('admin/contrato',$cliente->id)}}" class="btn btn-danger btn-xs">Contrato</a>
+                 <a href="{{url('admin/prospecoes',$cliente->id)}}" class="btn btn-success  btn-xs">Prospeção</a>
+                 <a href="{{url('admin/saude',$cliente->id)}}" class="btn btn-primary  btn-xs">Saúde</a></center></td>
         </tr>  
       @endforeach
      
@@ -81,6 +82,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>   Gerado em </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar</center></th>
           </tr>
       </tfoot>
     </table>

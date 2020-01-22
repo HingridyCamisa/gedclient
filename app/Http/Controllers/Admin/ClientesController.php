@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Cliente;
+use App\Consultor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
@@ -172,9 +173,10 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
+        $consultors = Consultor::all();
         $cliente = Cliente::find($id);
         $countries = DB::table("uvw_country_states")->groupby("country_name")->pluck("country_name");
-        return view('admin.clientes.edit', compact('cliente','countries'));
+        return view('admin.clientes.edit', compact('cliente','countries','consultors'));
         
     }
 
