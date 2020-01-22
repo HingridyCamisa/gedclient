@@ -16,7 +16,6 @@
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr class="table-danger">
-          <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 1</center></th>
@@ -33,7 +32,6 @@
       <tbody>
       @foreach($avisos as $i => $aviso)
         <tr>
-          <th><center>{{ ++$i }}</center></th>
           <th><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></th>
           <th><center>{{ $aviso->cliente_email }}</center></th>
           <th><center>{{ $aviso->cliente_telefone_1 }}</center></th>
@@ -74,7 +72,6 @@
       </tbody>
       <tfoot>
         <tr class="table-danger">
-          <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 1</center></th>

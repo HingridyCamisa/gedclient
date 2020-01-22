@@ -142,6 +142,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     //index
     Route::get('avisode-cobranca-index', 'AvisoDeCobrancaController@index');
     
+    Route::get('financas','FinancasController@index');
+    Route::DELETE('financas/destroy/{id}','FinancasController@destroy');
 
 });
 

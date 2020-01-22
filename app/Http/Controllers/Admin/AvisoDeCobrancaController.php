@@ -133,4 +133,5 @@ class AvisoDeCobrancaController extends Controller
         $avisos=AvisoCobrancaView::latest()->paginate(12);
         return view('admin.avisoCobranca.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
+
 }

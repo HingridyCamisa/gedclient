@@ -5,13 +5,13 @@
     "\\app\\Http",
     "\\app\\Http\\Controllers",
     "\\app\\Http\\Controllers\\Admin",
+    "\\app\\Http\\Requests",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\prospecoes",
-    "\\resources\\views\\admin\\saude",
-    "\\routes"
+    "\\resources\\views\\admin\\calendario",
+    "\\resources\\views\\admin\\clientes"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\AdminController.php",
+  "SelectedNode": "\\resources\\views\\admin\\calendario\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }

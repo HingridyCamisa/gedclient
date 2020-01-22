@@ -176,7 +176,7 @@ return [
             'submenu'     => [
                 [
                     'text'  => 'Aviso de Cobranças',
-                    'url'   => '#',
+                    'url'   => 'admin/financas',
                     'icon'  => 'warning',
 
                 ],
