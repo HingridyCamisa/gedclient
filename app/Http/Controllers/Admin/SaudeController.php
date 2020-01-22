@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use App\Cliente;
 use App\Files;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 class SaudeController extends Controller
 {
@@ -125,32 +127,36 @@ class SaudeController extends Controller
      */
     public function update(Request $request, Saude $saude, $id)
     {
-        $saudes = Saude::findOrFail($id);
-        $saudes->nome_segurado = $request->input('nome_segurado');
-        $saudes->data_nascimento = $request->input('data_nascimento');
-        $saudes->idade = $request->input('idade');
-        $saudes->ano_nascimento = $request->input('ano_nascimento');
-        $saudes->contacto = $request->input('contacto');
-        $saudes->email = $request->input('email');
-        $saudes->tipo_segurado = $request->input('tipo_segurado');
-        $saudes->pessoa_contacto = $request->input('pessoa_contacto');
-        $saudes->email_pessoa_contacto = $request->input('email_pessoa_contacto');
-        $saudes->contacto_pessoa_contacto = $request->input('contacto_pessoa_contacto');
-        $saudes->seguradora = $request->input('seguradora');
-        $saudes->plano = $request->input('plano');
-        $saudes->nome_grupo = $request->input('nome_grupo');
-        $saudes->tipo_membro = $request->input('tipo_membro');
-        $saudes->numero_membro = $request->input('numero_membro');
-        $saudes->data_inicio_cobertura = $request->input('data_inicio_cobertura');
-        $saudes->data_fim_cobertura = $request->input('data_fim_cobertura');
-        $saudes->periodicidade_pagamento = $request->input('periodicidade_pagamento');
-        $saudes->premio_mensal = $request->input('premio_mensal');
-        $saudes->taxa_corretagem = $request->input('taxa_corretagem');
-        $saudes->comissao = $request->input('comissao');
-        $saudes->situacao = $request->input('situacao');
-        $saudes->save();
+
+        //dd($request->data['numero_membro']);
+        //dd($request->numero_membro);
+        $data=$this->validate($request, array(
+            'nome_seguradora'=>'nullable',
+            'plano'=>'nullable|string|min:3|max:100',
+            'numero_membro' => ['nullable','string','min:3','max:192',Rule::unique('saudes','numero_membro')->ignore($request->numero_membro,'numero_membro')],
+            'tipo_membro'=>'nullable|string|min:3|max:100',
+            'periodicidade_pagamento'=>'nullable|string',
+            'data_inicio'=>'nullable|date',
+            'data_proximo_pagamento'=>'nullable|date',
+            'premio_total'=>'nullable|numeric|min:1',
+            'premio_simples'=>'nullable|numeric|min:1',
+            'taxa_corretagem'=>'nullable|regex:/^\d*\.?\d*$/',
+            'comissao'=>'nullable|regex:/^\d*\.?\d*$/|min:1',
+            'consultor'=>'nullable|string',
+            'nome_grupo'=>'nullable|string',
+            'menbro_principal'=>'required_if:tipo_membro,Spouse|required_if:tipo_membro,Child|string',
+            'detalhes_item_segurado'=>'nullable|string',
+            'user_id'=>'nullable',
+            'client_id' =>'nullable',
+            'client_token' => 'nullable',
+            'notas' => 'nullable',
+        ));
+
+        Saude::where('id',$id)->update($data);  
+
+
  
-        return redirect('/admin/saude/index');
+        return redirect('/admin/saude/index')->with('success','Contrato alterado com sucesso');;
     }
 
     /**
