@@ -121,7 +121,7 @@
             <tr>
               <td>{{$key+1}}</td>
               <td>{{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
-              <td>Referente ao pagamento</td>
+              <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
               <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
               <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
               <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}}</td>

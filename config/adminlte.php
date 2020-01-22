@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'admin',
+    'dashboard_url' => 'admin/home',
 
     'logout_url' => 'logout',
 
@@ -111,7 +111,7 @@ return [
         'MENU',
         [
             'text'        => 'Home',
-            'url'         => 'admin',
+            'url'         => 'admin/home',
             'icon'        => 'home',
         ],
        
@@ -143,8 +143,8 @@ return [
                     'icon'        => 'medkit',
                 ],
                 [
-                    'text'  => 'Cobranças',
-                    'url'   => '#',
+                    'text'  => 'Avisos',
+                    'url'   => 'admin/avisode-cobranca-index',
                     'icon'  => 'fax',
 
                 ],

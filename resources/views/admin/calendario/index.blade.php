@@ -15,11 +15,13 @@
 @stop
 
 @section('content')
+@include('notification')
     <div class="container">
         <div class="box box-solid box-danger">
             <div class="box-header with-border"><b><center><i class="fa fa-calendar-plus-o"></i> Adicionar Evento ao Calendário </center></b></div>
             <div class="box-body">
                 {!! Form::open(array('route'=>'calendario.add','method'=>'POST','files'=>'true'))!!}
+                <input type="hidden" name="cor" id="cor" />
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                     <strong><h5>Cor do Evento</h5></strong>
@@ -112,12 +114,16 @@
       //Save color
       currColor = $(this).css('color')
       //Add color effect to button
+      $('#cor').val(currColor);  
       $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
     })
+
+/*
     $('#add-new-event').click(function (e) {
       e.preventDefault()
       //Get value and make sure it is not null
-      var val = $('#new-event').val()
+        var val = $('#add-new-event').val();
+        console.log(val);
       if (val.length == 0) {
         return
       }
@@ -137,8 +143,8 @@
       init_events(event)
 
       //Remove event from text input
-      $('#new-event').val('')
-    })
+      $('#add-new-event').val('')
+    })  */
   })
 </script>
 

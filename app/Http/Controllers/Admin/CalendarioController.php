@@ -21,21 +21,23 @@ class CalendarioController extends Controller
     {
         $calendarios = Calendario::all();
             $calendario_list = [];
+            $calendario_detalhes = [];
             foreach ($calendarios as $key => $calendario) {
-                $calendario_list[] = Calendar::event(
+                $calendario_list[]= Calendar::event(
                  $calendario->titulo,
                  true,
                  new \DateTime($calendario->data_inicio),
                  new \DateTime($calendario->data_final. '+1 day'),
-
-                    [
-                        'color' => '#ae5b38',
+                );
+            $calendario_detalhes=Calendar::addEvents($calendario_list,[
+                        'color' => $calendario->cor,
                         'url' => 'http://full-calendar.io',
 
-                    ]
-                );
+                    ]);
+                     $calendario_list=[];
+
             }
-            $calendario_detalhes = Calendar::addEvents($calendario_list);
+
 
         return view('admin.calendario.index', compact('calendario_detalhes'));
     }
@@ -47,15 +49,8 @@ class CalendarioController extends Controller
      */
     public function addEvent(CalendarioRequest $request)
     {
-        
-        $calendario = new Calendario();
-        $calendario->titulo = $request->input('titulo');
-        $calendario->data_inicio = $request->input('data_inicio');
-        $calendario->data_final = $request->input('data_final');
-        $calendario->save();
-
-       
-        return view('admin.calendario.index');
+        Calendario::create($request->all());
+        return $this->index()->with('success','Evento criado com sucesso.');
 
     }
 
