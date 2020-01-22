@@ -27,7 +27,7 @@
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-user"></i> Consultor</label>
                                         <select class="form-control" name="consultor">
-                                            <option  value="{{old('consultor')}}" selected disabled> Select</option>
+                                            <option  value="{{old('consultor',$saude->consultor)}}" selected disabled> {{old('consultor',$saude->consultorx->nome_consultor)}}</option>
                                             @foreach($consultors as $consultor)
                                             <option value="{{ $consultor->id}}"> {{ $consultor->nome_consultor}}</option>
                                             @endforeach
@@ -42,9 +42,9 @@
                                 <div class="col-xs-3">
                                  <label><i class="fa fa-institution"></i> Nome Seguradora</label>
                                         <select class="form-control" name="nome_seguradora">
-                                            <option  value="{{old('nome_seguradora')}}" selected disabled> Select</option>
+                                            <option  value="{{old('nome_seguradora',$saude->nome_seguradora)}}" selected disabled> {{old('nome_seguradora',$saude->seguradora->nome_seguradora)}}</option>
                                             @foreach($seguradora as $seguradora)
-                                            <option value="{{ $saude->id}}">{{ $saude->nome_seguradora}}</option>
+                                            <option value="{{ $seguradora->id}}">{{ $seguradora->nome_seguradora}}</option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -59,7 +59,7 @@
                                  <div class="col-xs-3">
                                     <label><i class="fa fa-venus-mars"></i> Tipo de Membro</label>
                                     <select class="form-control" name="tipo_membro" id="tipo_membro" onchange="tipomembro(this.value)">
-                                            <option value="" selected disabled> Select</option>
+                                            <option value="{{$saude->tipo_membro}}" selected disabled> {{$saude->tipo_membro}}</option>
                                             <option value="Policy Holder" >Policy Holder</option>
                                             <option value="Spouse">Spouse</option>
                                             <option value="Child">Child</option>
@@ -132,150 +132,18 @@
                                         </select>
                              </div><br>          
 
-                    </div><br>  
+                    </div><br><br>     <hr />  
 
                      <div class="form-group">
                             <label for="DetalhesProspecao"><i class="fa fa-info"></i> Notas</label>
-                            <textarea class="form-control" name="notas" rows="2" placeholder="Notas ..." value="{{$saude->notas}}"></textarea>
+                            <textarea class="form-control" name="notas" rows="2" placeholder="Notas" >{{$saude->notas}}</textarea>
                         </div>
-                  <hr />   
-
-                  <div class="row col-md-12" style="margin-left:5px"> 
-                                  
-
-                                  <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
-                                    <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
-                                    <div class="">
-                                      <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
-                                         <option disabled selected>Seleciona tipo de ficheiro...</option>
-                                                  <option value="BI">
-                                                      BI
-                                                  </option>                                       
-                                                  <option value="Apolice de Seguro">
-                                                      Apolice de Seguro
-                                                  </option>                                    
-                                                  <option value="Carta de Condução">
-                                                      Carta de Condução
-                                                  </option>                                    
-                                                  <option value="Carta de Nomeação">
-                                                      Carta de Nomeação
-                                                  </option>                                    
-                                                  <option value="Livrete/Verbete">
-                                                      Livrete/Verbete
-                                                  </option>                                    
-                                                  <option value="Imagem">
-                                                      Imagem
-                                                  </option>                                    
-                                                  <option value="Formulario de Peritagem">
-                                                      Formulario de Peritagem
-                                                  </option>                                    
-                                                  <option value="Passaporte">
-                                                      Passaporte
-                                                  </option>                                    
-                                                  <option value="Comprovativo de pagamento">
-                                                      Comprovativpo de pagamento
-                                                  </option>                                   
-                                                  <option value="Factura">
-                                                      Factura
-                                                  </option>                                   
-                                                  <option value="Recibos">
-                                                      Recibos
-                                                  </option>                                    
-                                                  <option value="Alvará">
-                                                      Alvará
-                                                  </option>                                    
-                                                  <option value="Recibo de Água">
-                                                      Recibo de Água
-                                                  </option>                                    
-                                                  <option value="Certidão">
-                                                      Certidão
-                                                  </option>                                    
-                                                  <option value="Outros">
-                                                      Outros
-                                                  </option>
-                                      </select>
-                                    </div>
-                                  <div class="input-group control-group increment" >
-                                    <input type="file" name="file[]" class="form-control" >
-                                    <div class="input-group-btn" > 
-                                      <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
-                                    </div>
                 
-                                  </div>
-      
-      
-                                  <div class="clone hide" >
-                                  <div class="control-group">
-                                    <div class="" style="margin-top:10px">
-                                      <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
-                                         <option disabled selected>Seleciona...</option>
-                                          
-                                                  <option value="BI">
-                                                      BI
-                                                  </option>                                       
-                                                  <option value="Apolice de Seguro">
-                                                      Apolice de Seguro
-                                                  </option>                                    
-                                                  <option value="Carta de Condução">
-                                                      Carta de Condução
-                                                  </option>                                    
-                                                  <option value="Carta de Nomeação">
-                                                      Carta de Nomeação
-                                                  </option>                                    
-                                                  <option value="Livrete/Verbete">
-                                                      Livrete/Verbete
-                                                  </option>                                    
-                                                  <option value="Imagem">
-                                                      Imagem
-                                                  </option>                                    
-                                                  <option value="Formulario de Peritagem">
-                                                      Formulario de Peritagem
-                                                  </option>                                    
-                                                  <option value="Passaporte">
-                                                      Passaporte
-                                                  </option>                                    
-                                                  <option value="Comprovativo de pagamento">
-                                                      Comprovativo de pagamento
-                                                  </option>                                   
-                                                  <option value="Factura">
-                                                      Factura
-                                                  </option>                                   
-                                                  <option value="Recibos">
-                                                      Recibos
-                                                  </option>                                    
-                                                  <option value="Alvará">
-                                                      Alvará
-                                                  </option>                                    
-                                                  <option value="Recibo de Água">
-                                                      Recibo de Água
-                                                  </option>                                    
-                                                  <option value="Certidão">
-                                                      Certidão
-                                                  </option>                                    
-                                                  <option value="Outros">
-                                                      Outros
-                                                  </option>
-                                      </select>
-                                    </div>
-                                    <div class=" input-group" >
-                                      <input type="file" name="file[]" class="form-control" >          
-                                      <div class="input-group-btn"> 
-                                        <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                                 </div>
-                               
-                    </div>
-                    <!-- /.box-body -->
-      
                         <div class="box-footer">
-                         
-                          <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
-                          
+                            
+                            <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
+                            
                         </div>
-
             </form>
 
           </div>

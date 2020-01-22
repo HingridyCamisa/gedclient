@@ -76,7 +76,7 @@
         </tr>
         <tr>
           <th>Seguradora</th>
-          <td><i class="fa fa-institution"></i> &nbsp; {{$saude->seguradora }}</td>
+          <td><i class="fa fa-institution"></i> &nbsp; {{$saude->seguradora->nome_seguradora }}</td>
         </tr>
         <tr>
           <th>Plano</th>
@@ -108,7 +108,7 @@
         </tr>
         <tr>
           <th>Prémio Mensal</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{$saude->premio_mensal }}</td>
+          <td><i class="fa fa-money"></i> &nbsp; {{$saude->premio_total }}</td>
         </tr>
         <tr>
           <th>Taxa Corretagem </th>
