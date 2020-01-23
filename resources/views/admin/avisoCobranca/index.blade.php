@@ -21,7 +21,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 1</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 2</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Espirado? </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Expirado </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>
@@ -77,7 +77,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 1</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 2</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Espirado? </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Expirado </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>

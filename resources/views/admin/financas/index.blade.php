@@ -16,60 +16,60 @@
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr class="table-danger">
+          <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Email</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Espirado? </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de atualização</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de criação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-envelope"></i>  Email</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data Fim </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-warning"></i>  Estado </center> </th>
+          <th scope="col"><center> Cobrança</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Situação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Atualização</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Criação</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
         </tr>
       </thead>
       <tbody>
       @foreach($avisos as $i => $aviso)
         <tr>
-          <th><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></th>
-          <th><center>{{ $aviso->cliente_email }}</center></th>
-          <th><center>{{ $aviso->aviso_data}}</center></th>
-          <th><center>
-                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data))->isPast())
-                    <i class="fa fa-close text-red"></i> Expirado  {{$data->diffForHumans()}}
-                 @else
-                    <i class="fa fa-check text-green"></i> Em dia  {{$data->diffForHumans()}}
-                 @endif
-           </center></th>
-          <th><center>
+        <td><center>
               @if($aviso->tipo=='contratos')
               <a href="{{url('admin/contrato/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
               @else
                <a href="{{url('admin/saude/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
              @endif
-          </center></th>
-          <th><center>
-                 @if($aviso->tipo=='saudes')
-                    <span class="label bg-green">Saude</span>
+          </center></td>
+          <td><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></td>
+          <td><center>{{ $aviso->cliente_email }}</center></td>
+          <td><center>{{ $aviso->aviso_data}}</center></td>
+          <td><center>
+                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data))->isPast())
+                    <i class="fa fa-close text-red"></i> Expirado  {{$data->diffForHumans()}}
                  @else
-                    <span class="label  bg-blue">Contrato</span> 
+                    <i class="fa fa-check text-green"></i> Em dia  {{$data->diffForHumans()}}
                  @endif
-          </center></th>
-          <th><center>
+           </center></td>
+          <td><center>
+                 @if($aviso->tipo=='saudes')
+                   Saúde
+                 @else
+                    Contrato
+                 @endif
+          </center></td>
+          <td><center>
               @if($aviso->status==1)
-              <span class="label label-danger">Não pago</span> 
+              <i class="fa fa-close text-red"></i> Não Pago
               @elseif($aviso->status==2)
-              <span class="label label-warning">Pago</span> 
+              <i class="fa fa-check text-green"></i> Pago
               @endif
-              </center></th>
-          <th><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></th>
-          <th><center>{{ $aviso->updated_at }}</center></th>
-          <th><center>{{ $aviso->created_at }}</center></th>
+              </center></td>
+          <td><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></td>
+          <td><center>{{ $aviso->updated_at }}</center></td>
+          <td><center>{{ $aviso->created_at }}</center></td>
 
            <td><center>
 
-             <a href="{{ route ('prospecoes.show', $aviso->id)}}" id="tornarcontrato"  value ="{{ $aviso->id }}" class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-money"></i></a>
+             <a href="{{ route ('prospecoes.show', $aviso->id)}}" id="tornarcontrato"  value ="{{ $aviso->id }}" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-money"></i></a>
              @if(Auth::user()->cargo =='1')
               {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/destroy', $aviso->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
@@ -84,16 +84,16 @@
       </tbody>
       <tfoot>
         <tr class="table-danger">
+        <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Email</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Espirado? </center> </th>
-          <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de atualização</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de criação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-envelope"></i>  Email</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data Fim </center> </th>
+          <th scope="col"><center><i class="fa fa-fw fa-warning"></i>  Estado </center> </th>
+          <th scope="col"><center> Cobrança</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Situação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Atualização</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Criação</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
           </tr>
       </tfoot>
