@@ -30,7 +30,7 @@
 
 
                                 <div class="row">
-                                 <div class="col-xs-4">
+                                 <div class="col-xs-3">
                                     <label><i class="fa fa-institution"></i> Nome Seguradora</label>
                                         <select class="form-control" name="nome_seguradora">
                                             <option  value="{{old('nome_seguradora')}}" selected disabled> {{old('nome_seguradora','Select')}}</option>
@@ -39,8 +39,17 @@
                                             @endforeach
                                         </select>
                                 </div>
+                                <div class="col-xs-3">
+                                    <label for="Numero Apolice"><i class="fa fa-fw fa-file-text-o"></i> Nº Apólice </label>
+                                    <input class="form-control" name="numero_apolice" placeholder="Numero Apólice " type="text" value="{{old('tipo_prospecao')}}">
+                                            
+                                    </div>
                                     <div class="col-xs-3">
-                                    <label><i class="fa fa-user"></i> Ramo </label>
+                                    <label for="Numero Recibo"><i class="fa fa-file-text-o"></i> Nº Recibo</label>
+                                    <input class="form-control" name="numero_recibo" placeholder="Numero Recibo " type="text" value="{{old('tipo_prospecao')}}">      
+                                    </div>
+                                    <div class="col-xs-3">
+                                    <label> Ramo </label>
                                         <select class="form-control" name="tipo_ramo">
                                             <option  value="{{old('tipo_prospecao')}}" selected disabled> {{old('tipo_prospecao','Select')}}</option>
                                             <option value="Acidentes Pessoais">Acidentes Pessoais</option>
@@ -55,31 +64,14 @@
                                             
                                         </select>
                                     </div>
-                                <div class="col-xs-3">
-                                        <label><i class="fa fa-user"></i> Consultor </label>
-                                        <select class="form-control" name="consultor">
-                                             <option  value="{{old('consultor')}}" selected disabled> {{old('consultor','Select')}}</option>
-                                            @foreach($consultor as $consultor)
-                                            <option value="{{ $consultor->id}}"> {{ $consultor->nome_consultor}}</option>
-                                            @endforeach
-                                        </select>
-                                 </div>
                                 
                                 </div><br>
 
                                  <div class="row">
-                                    <div class="col-xs-4">
-                                    <label for="Numero Apolice"><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice </label>
-                                    <input class="form-control" name="numero_apolice" placeholder="Numero Apólice " type="text" value="{{old('tipo_prospecao')}}">
-                                            
-                                    </div>
-                                    <div class="col-xs-4">
-                                    <label for="Numero Recibo"><i class="fa fa-phone"></i> Nº Recibo</label>
-                                    <input class="form-control" name="numero_recibo" placeholder="Numero Recibo " type="text" value="{{old('tipo_prospecao')}}">      
-                                    </div>
+                                    
 
-                                    <div class="col-xs-4">
-                                    <label for="Periodicidade Pagamento"><i class="fa fa-hourglass-2 "></i>Periodicidade de Pagamento</label>
+                                    <div class="col-xs-3">
+                                    <label for="Periodicidade Pagamento"><i class="fa fa-hourglass-2 "></i> Periodicidade de Pagamento</label>
                                     <select class="form-control" name="periodicidade_pagamento">
                                             <option  value="{{old('periodicidade_pagamento')}}" selected disabled> {{old('periodicidade_pagamento','Select')}}</option>
                                             <option value="Mensal">Mensal</option>
@@ -89,11 +81,17 @@
                                             <option value="Não Renovável">Não Renovável</option>
                                         </select>
                                     </div>
-                                   
-                                </div><br>
-
-                                 <div class="row">
                                     <div class="col-xs-3">
+                                        <label><i class="fa fa-user"></i> Consultor </label>
+                                        <select class="form-control" name="consultor">
+                                             <option  value="{{old('consultor')}}" selected disabled> {{old('consultor','Select')}}</option>
+                                            @foreach($consultor as $consultor)
+                                            <option value="{{ $consultor->id}}"> {{ $consultor->nome_consultor}}</option>
+                                            @endforeach
+                                        </select>
+                                 </div>
+
+                                 <div class="col-xs-3">
                                     <label for="Data_Inicio"><i class="fa fa-calendar"></i> Data Início do Seguro</label>
                                     <input class="form-control" name="data_inicio" placeholder="Data Inicio  " type="date" value="{{old('data_inicio')}}">
                                     </div>
@@ -103,19 +101,21 @@
                                         <input class="form-control " name="data_proximo_pagamento"  type="date" value="{{old('data_proximo_pagamento')}}">
                                     
                                     </div>
+                                
+                                   
+                                </div><br>
+
+                                 <div class="row">
+                                  
                                     <div class="col-xs-3">
-                                    <label for="Dias_Cobertos"><i class="fa fa-money"></i> Dias Cobertos </label>
+                                    <label for="Dias_Cobertos"><i class="fa fa-calendar"></i> Dias Cobertos </label>
                                         <input class="form-control " name="dias_cobertos"  type="text" value="{{old('dias_cobertos')}}">
                                     </div>
                                     <div class="col-xs-3">
-                                    <label for="Dias_Proximo_Pagamento"><i class="fa fa-money"></i> Dias Próximo  Pagamento </label>
+                                    <label for="Dias_Proximo_Pagamento"><i class="fa fa-calendar"></i> Dias Próximo  Pagamento </label>
                                         <input class="form-control" name="dias_proximo_pagamento"  type="text" value="{{old('dias_proximo_pagamento')}}">
                                     </div>
-                                </div>
-                                 <br>
-                                
 
-                                <div class="row">
                                     <div class="col-xs-3">
                                         <label><i class="fa fa-money"></i> Capital Seguro </label>
                                         <input class="form-control" name="capital_seguro"  placeholder="Capital Seguro "type="float" value="{{old('capital_seguro')}}">
@@ -126,6 +126,12 @@
                                         <input class="form-control" name="premio_total" placeholder="Premio Total " type="float" value="{{old('premio_total')}}">
                                     </div>
 
+                                </div>
+                                 <br>
+                                
+
+                                <div class="row">
+                                    
                                     <div class="col-xs-3">
                                         <label><i class="fa fa-money"></i> Prémio Simples</label>
                                         <input class="form-control" name="premio_simples" placeholder="Premio Simples " type="float" value="{{old('premio_simples')}}">
@@ -137,12 +143,17 @@
                                         <input class="form-control" name="comissao" placeholder="Comissão corretagem " type="float" value="{{old('comissao')}}">
      
                                     </div>
+                                    <div class="col-xs-3">
+                                        <label><i class="fa fa-money"></i> Taxa Corretagem</label>
+                                        <input class="form-control" name="taxa_corretagem"  type="float" value="{{old('taxa_corretagem')}}">
+     
+                                    </div>
                                 </div>
                                 
                                  <br>
                                  <div class="row">
                                     <div class="col-xs-3">
-                                        <label><i class="fa fa-users"></i> Item Segurado </label>
+                                        <label><i class="fa fa-info"></i> Item Segurado </label>
                                         <input class="form-control" name="item_segurado"  placeholder="Item Segurado "type="text" value="{{old('item_segurado')}}">
                                     </div>
 
@@ -156,11 +167,7 @@
                                         </select>
      
                                     </div>
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-money"></i> Taxa Corretagem</label>
-                                        <input class="form-control" name="taxa_corretagem"  type="float" value="{{old('taxa_corretagem')}}">
-     
-                                    </div>
+                                
 
                                     
                                 </div>

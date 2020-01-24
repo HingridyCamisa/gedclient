@@ -24,18 +24,20 @@
                             @csrf
                          <div class="box-body">
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
-                                <div class="row">
-                                    <div class="col-xs-2">
-                                    <label for="DataInicio"><i class="fa fa-calendar"></i> Data Início </label>
-                                        <input class="form-control " name="data_inicio"  type="date" value="{{old('data_inicio',$prospecao->data_inicio)}}">
-                                    
-                                    </div>
-                                    <div class="col-xs-2">
-                                    <label for="DataPrevistaFim"><i class="fa fa-calendar"></i> Data Prevista Fim </label>
-                                        <input class="form-control" name="data_prevista_fim"  type="date" value="{{old('data_prevista_fim',$prospecao->data_prevista_fim)}}" >
-                                    </div>
-                                    <div class="col-xs-2">
-                                    <label><i class="fa fa-user"></i> Ramo </label>
+                                
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label><i class="fa fa-user"></i> Consultor</label>
+                                        <select class="form-control" name="nome_consultor" >
+                                            <option  value="" selected disabled>Select</option>
+                                             @foreach($consultors as $consultor)
+                                            <option value="{{$consultor->id}}">{{ $consultor->nome_consultor}}</option>
+                                            @endforeach
+
+                                        </select>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Ramo </label>
                                         <select class="form-control" name="tipo_ramo">
                                             <option value="{{old('tipo_prospecao',$prospecao->tipo_prospecao)}}" selected disabled> {{old('tipo_prospecao',$prospecao->tipo_prospecao)}}</option>
                                             <option value="Acidentes Pessoais">Acidentes Pessoais</option>
@@ -51,7 +53,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-xs-2">
+                                    <div class="col-xs-3">
                                         <label><i class="fa fa-map-pin"></i> Origem Prospecção </label>
                                         <select class="form-control" name="origem_prospecao">
                                             <option  value="{{old('origem_prospecao',$prospecao->origem_prospecao)}}" selected disabled> {{old('origem_prospecao',$prospecao->origem_prospecao)}}</option>
@@ -63,7 +65,7 @@
                                             <option value="Outros">Outros</option>
                                         </select>
                                     </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
                                 <label><i class="fa fa-briefcase"></i> Estado Prospecção </label>
                                 <select class="form-control" name="estado">
                                     <option  value="{{old('estado',$prospecao->estado)}}" selected disabled> {{old('estado',$prospecao->estado)}}</option>
@@ -76,33 +78,28 @@
                                             
                                 </select>
                                 </div>
+
+                            </div>
+                                
+                                 <br>
+                                
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                    <label for="DataInicio"><i class="fa fa-calendar"></i> Data Início </label>
+                                        <input class="form-control " name="data_inicio"  type="date" value="{{old('data_inicio',$prospecao->data_inicio)}}">
+                                    
+                                    </div>
+                                    <div class="col-xs-3">
+                                    <label for="DataPrevistaFim"><i class="fa fa-calendar"></i> Data Prevista Fim </label>
+                                        <input class="form-control" name="data_prevista_fim"  type="date" value="{{old('data_prevista_fim',$prospecao->data_prevista_fim)}}" >
+                                    </div>
+                                    
                                         
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
                                     <label><i class="fa fa-money"></i> Valor Estipulado da Carteira </label>
                                     <input class="form-control" name="valor_estipulado_carteira" placeholder="Valor estipulado " type="number" pattern="([0-9]{1,3}).([0-9]{1,3})" {{old('valor_estipulado_carteira',$prospecao->valor_estipulado_carteira)}}>
                                 </div>
                                 </div> <br>
-                                
-
-
-                                <div class="row">
-                                <div class="col-xs-4">
-                                    <label><i class="fa fa-user"></i> Consultor</label>
-                                        <select class="form-control" name="nome_consultor" >
-                                            <option  value="" selected disabled>Select</option>
-                                             @foreach($consultors as $consultor)
-                                            <option value="{{$consultor->id}}">{{ $consultor->nome_consultor}}</option>
-                                            @endforeach
-
-                                        </select>
-                                </div>
-
-
-
-                                </div>
-                                
-                                 <br>
-                                
                                
                                 <div class="form-group">
                                     <label for="DetalhesProspecao"><i class="fa fa-info"></i> Detalhes Prospecção</label>
