@@ -27,6 +27,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('contratos', function ($user) {
          return $user->hasPermission('contratos');
-        });
+        });       
+        Gate::define('apagar-contratos', function ($user) {
+         return $user->hasPermission('apagar-contratos');
+        });       
+         Gate::define('apagar-recibos', function ($user) {
+         return $user->hasPermission('apagar-recibos');
+        }); 
     }
 }

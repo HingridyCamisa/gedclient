@@ -150,6 +150,11 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     //pagamentos
     Route::post('savepaymat','FinancasController@savepaymat');
 
+    //recibos 
+     Route::get('recibostable','FinancasController@recibostable');
+     Route::DELETE('financas/recibos/destroy/{id}','FinancasController@destroyrecibos');
+     Route::get('financas/recibos/recibo/{token_id}','FinancasController@extratrecibo');
+
 });
 
 Route::get('/', function(){

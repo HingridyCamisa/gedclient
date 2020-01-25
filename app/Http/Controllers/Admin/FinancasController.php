@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\AvisoCobranca;
 use App\Files;
 use App\Recibos;
+use App\AvisoCobrancaRecibosView;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,9 +19,21 @@ class FinancasController extends Controller
 
    public function index()
     {
-
         $avisos=AvisoCobrancaView::latest()->paginate(12);
         return view('admin.financas.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
+    } 
+
+    public function extratrecibo($token_id)
+    {
+       $recibo=AvisoCobrancaRecibosView::where('token_id',$token_id)->first();
+
+       return view('admin.financas.extratrecibo', compact('recibo'));
+    }
+    
+   public function recibostable()
+    {
+        $avisos=AvisoCobrancaRecibosView::latest()->paginate(12);
+        return view('admin.financas.recibos', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 
     public function destroy($id)
@@ -29,7 +42,15 @@ class FinancasController extends Controller
         $destroy->status=0;
         $destroy->save();
 
-        return redirect('/admin/contrato/index')->with('success','Contrato eliminado.');
+        return redirect()->back()->with('success','Aviso eliminado.');
+    }
+    public function destroyrecibos($id)
+    {
+        $destroy= \App\Recibos::find($id);
+        $destroy->status=0;
+        $destroy->save();
+
+        return redirect()->back()->with('success','Recibo eliminado.');
     }
 
     public function savepaymat(Request $request)

@@ -181,8 +181,8 @@ return [
 
                 ],
                 [
-                    'text'  => 'Recibo',
-                    'url'   => '#',
+                    'text'  => 'Recibos',
+                    'url'   => 'admin/recibostable',
                     'icon'  => 'file-text-o',
 
                 ],

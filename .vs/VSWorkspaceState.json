@@ -3,16 +3,15 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Requests",
-    "\\config",
+    "\\app\\Http\\Controllers",
+    "\\app\\Http\\Controllers\\Admin",
+    "\\app\\Providers",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\avisoCobranca",
     "\\resources\\views\\admin\\financas",
-    "\\resources\\views\\admin\\prospecoes",
-    "\\routes"
+    "\\resources\\views\\vendor\\adminlte"
   ],
-  "SelectedNode": "\\resources\\views\\admin\\financas\\index.blade.php",
+  "SelectedNode": "\\config\\adminlte.php",
   "PreviewInSolutionExplorer": false
 }

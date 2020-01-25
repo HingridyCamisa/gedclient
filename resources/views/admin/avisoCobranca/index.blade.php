@@ -63,7 +63,10 @@
               <span class="label label-danger">Não pago</span> 
               @elseif($aviso->status==2)
               <span class="label label-warning">Pago</span> 
+              @elseif($aviso->status==0)
+              <span class="fa fa-trash"> Eliminado</span> 
               @endif
+
               </center></th>
           <th><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></th>
           <th><center>{{ $aviso->updated_at }}</center></th>
