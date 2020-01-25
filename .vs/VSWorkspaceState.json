@@ -3,15 +3,16 @@
     "",
     "\\app",
     "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Http\\Controllers\\Admin",
     "\\app\\Http\\Requests",
+    "\\config",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\calendario",
-    "\\resources\\views\\admin\\clientes"
+    "\\resources\\views\\admin\\avisoCobranca",
+    "\\resources\\views\\admin\\financas",
+    "\\resources\\views\\admin\\prospecoes",
+    "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\admin\\calendario\\index.blade.php",
+  "SelectedNode": "\\resources\\views\\admin\\financas\\index.blade.php",
   "PreviewInSolutionExplorer": false
 }

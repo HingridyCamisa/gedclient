@@ -16,6 +16,11 @@ use App\Cliente;
 
 class ContratoController extends Controller
 {
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +28,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
+    $this->authorize('contratos');
         $contratos = Contrato::where("contratos.status",1)
                                        ->latest()
                                        ->paginate(12);
@@ -75,7 +81,7 @@ class ContratoController extends Controller
         'premio_simples'=>'required|numeric|min:1',
         'taxa_corretagem'=>'required|numeric',
         'comissao'=>'required|numeric|min:1',
-        'item_segurado'=>'required|numeric|min:1',
+        'item_segurado'=>'required|string|min:1',
         'situacao'=>'required|string',
         'consultor'=>'required|string',
         'detalhes_item_segurado'=>'required|string',
@@ -99,6 +105,9 @@ class ContratoController extends Controller
         Contrato::create($data);
 
         //storag file
+        if ($request->file('file'))
+        {
+        
         foreach($request->file('file') as $key=>$file)
         {
             $origname=$file->getClientOriginalName();
@@ -109,7 +118,7 @@ class ContratoController extends Controller
             $file->token_id=$namefile;
             $file->filetype=$request->filetype[$key];
             $file->save();
-
+        }
         }
 
         return redirect('/admin/contrato/index')->with('success','Contrato criado.');
@@ -194,6 +203,9 @@ class ContratoController extends Controller
         Contrato::create($data);
 
         //storag file
+        if ($request->file('file'))
+        {
+        
         foreach($request->file('file') as $key=>$file)
         {
             $origname=$file->getClientOriginalName();
@@ -206,8 +218,9 @@ class ContratoController extends Controller
             $file->save();
 
         }
+        }
         
-        return back()->with('success','Contrato criado com sucesso.');
+        return back()->with('success','Contrato criado.');
     }
 
     /**

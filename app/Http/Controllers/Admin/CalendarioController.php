@@ -27,13 +27,14 @@ class CalendarioController extends Controller
                  $calendario->titulo,
                  true,
                  new \DateTime($calendario->data_inicio),
-                 new \DateTime($calendario->data_final. '+1 day'),
+                 new \DateTime($calendario->data_final. '+1 day')
                 );
             $calendario_detalhes=Calendar::addEvents($calendario_list,[
                         'color' => $calendario->cor,
                         'url' => 'http://full-calendar.io',
 
                     ]);
+
                      $calendario_list=[];
 
             }

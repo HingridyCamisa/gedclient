@@ -34,7 +34,7 @@
 
       #toast {
         visibility: hidden;
-        max-width: 50px;
+        max-width: 100px;
         height: 50px;
         /*margin-left: -125px;*/
         margin: auto;

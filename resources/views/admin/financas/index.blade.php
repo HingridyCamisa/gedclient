@@ -61,20 +61,24 @@
               <i class="fa fa-close text-red"></i> Não Pago
               @elseif($aviso->status==2)
               <i class="fa fa-check text-green"></i> Pago
+              @elseif($aviso->status==0)
+              <i class="fa fa-trash"></i> Eliminado
               @endif
+
               </center></td>
           <td><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></td>
           <td><center>{{ $aviso->updated_at }}</center></td>
           <td><center>{{ $aviso->created_at }}</center></td>
 
            <td><center>
-
-             <a href="{{ route ('prospecoes.show', $aviso->id)}}" id="tornarcontrato"  value ="{{ $aviso->id }}" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-money"></i></a>
-             @if(Auth::user()->cargo =='1')
+               <button type="button" id="pagamento"  value ="{{$aviso->id}}" class="btn btn-success btn-xs" data_value="{{ $aviso->name }}" data-toggle="modal" data-target="#modal-default">
+                <i class="fa fa-fw fa-money"></i>
+              </button>
+              @can('apagar-avisos')
               {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/destroy', $aviso->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
-              @endif
+              @endcan
             </center>
              </td>
 
@@ -108,140 +112,89 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
-                <!-- <h4 class="modal-title"><i class="fa fa-fw fa-folder"></i>Tornar Contrato</h4> -->
-               <center> <h4 class="modal-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Contrato </h4> </center>
+               <center> <h4 class="modal-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Pagamento <span class="aviso_id"></span></h4> </center>
               </div>
-              <form method="post" action="{{route('tornarcontrato')}}" enctype="multipart/form-data" >
+              <form id="pagamentos" method="post" enctype="multipart/form-data" action="javascript:void(0)" >
               <div class="modal-body row">
               
 
                 
                     @csrf
-                    <input id="id" name="id_prospecaos" hidden>
                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
+                   <input type="hidden" name="aviso_id" id="aviso_id"  />
                 
                      <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Número</label>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="" placeholder="Nº de Apólice" type="text" name="numero_apolice" required autofocus ></div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="" placeholder="Nº de Recibo" type="text" name="numero_recibo" required autofocus ></div>
+                          <input class="form-control"  placeholder="Nº de Comprovativo de Pagamento" type="text" name="comprovativo" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
     
-                      <p><div class="col-md-7"></div><label for="" class="col-md-2 control-label"> Expira </label></p><br />
                      <p> 
 
                         <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Início </label>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="" type="date" name="data_inicio" required autofocus ></div>
+                            <select class="form-control" id="forma_pagamento" name="forma_pagamento" required autofocus  onchange="formaPagamento(this.value)">
+                                <option value="" disabled selected>Seleciona a forma de pagamento</option>
+                                <option value="Deposito">Deposito</option>
+                                <option value="Cash">Cash</option>
+                                <option value="TRF">TFR</option>
+                                <option value="Cheque">Cheque</option>
+                            </select>
                         </div>
 
                     
+                        </div>
+                        </div>
+
+                    </p> <br><br>
+
+                     <p> <div class="form-group">
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id=""  type="date" name="data_proximo_pagamento" required autofocus ></div>
+                          <input class="form-control dataValor"  placeholder="Data do pagamento" type="date" name="data_pagamento"  required autofocus disabled ></div>
                         </div>
-                        </div>
-
-                    </p> <br><br>
-
-                     <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label"> Dias </label>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="" placeholder="Cobertos" type="text" name="dias_cobertos" required autofocus ></div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento" required autofocus ></div>
-                        </div>
-                      </div>
-                    </p> <br><br>
-
-                     <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label"> Capital Seguro</label>
-                        <div class="col-md-10">
+                        <div class="col-md-7">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Capital Seguro" type="text" name="capital_seguro" required autofocus ></div>
+                          <input class="form-control dataValor" placeholder="Valor do recibo" type="text" name="amount" required autofocus disabled></div>
                         </div>
                       </div>
-                    </p> <br><br>
+                    </p> <br><br/>
 
                      <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label">  Prémio </label>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                           <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Total" type="text" name="premio_total" required autofocus ></div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
+                          <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                          <input class="form-control benificiario"   placeholder="Benificiario" type="text" name="benificiario" required autofocus disabled></div>
                         </div>
                       </div>
-                    </p> <br><br>
+                    </p> <br><br />
 
                      <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label"> Corretagem </label>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                           <div class="input-group">
-                          <span class="input-group-addon">%</span>
-                          <input class="form-control" id="" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon">MTN</span>
-                          <input class="form-control" id="" placeholder="Comissão" type="text" name="comissao"  ></div>
+                          <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                          <input class="form-control testemunha"  placeholder="Testemunha" type="text" name="testemunha" required autofocus disabled></div>
                         </div>
                       </div>
-                    </p> <br><br>
+                    </p> <br><br />
 
-                      <p> 
-                        <label for="" class="col-md-2 control-label">Periodicidade Pagamento</label>
-                        <div class="col-md-10">
-                        <select class="form-control" name="periodicidade_pagamento" required autofocus ">
-                                        <option value="Mensal">Mensal</option>
-                                        <option value="Trimestral">Trimestral</option>
-                                        <option value="Semestral">Semestral</option>
-                                        <option value="Anual">Anual</option>
-                                        <option value="Não~Renovável">Não Renovável </option>
-                                    </select>
-                      </div>
-                    </p> <br><br>
-
-                     <p> 
-                        <label for="" class="col-md-2 control-label">Situação da Apólice</label>
-                        <div class="col-md-10">
-                        <select class="form-control" name="situacao" required autofocus >
-                           <option value="Pago">Pago</option>
-                           <option value="Em Cobrança">Em Cobrança</option>
-                        </select>
-                      </div>
-                    </p> <br><br>
-                    <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Item Segurado</label>
-                        <div class="col-md-10">
+                     <p> <div class="form-group">
+                        <div class="col-md-12">
                           <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
-                          <input class="form-control" id="" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>
+                          <span class="input-group-addon"><i class="fa fa-fw fa-university"></i></span>
+                          <input class="form-control banco"  placeholder="Banco" type="text" name="banco" required autofocus  disabled></div>
                         </div>
                       </div>
-                    </p> <br><br>
+                    </p> <br>
+
+                     
                     <!--files-->
                   <hr />
                     
@@ -252,51 +205,10 @@
                       <div class="">
                         <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
                            <option disabled selected>Seleciona tipo de ficheiro...</option>
-                                    <option value="BI">
-                                        BI
-                                    </option>                                       
-                                    <option value="Apolice de Seguro">
-                                        Apolice de Seguro
-                                    </option>                                    
-                                    <option value="Carta de Condução">
-                                        Carta de Condução
-                                    </option>                                    
-                                    <option value="Carta de Nomeação">
-                                        Carta de Nomeação
-                                    </option>                                    
-                                    <option value="Livrete/Verbete">
-                                        Livrete/Verbete
-                                    </option>                                    
-                                    <option value="Imagem">
-                                        Imagem
-                                    </option>                                    
-                                    <option value="Formulario de Peritagem">
-                                        Formulario de Peritagem
-                                    </option>                                    
-                                    <option value="Passaporte">
-                                        Passaporte
-                                    </option>                                    
-                                    <option value="Comprovativo de pagamento">
-                                        Comprovativpo de pagamento
-                                    </option>                                   
-                                    <option value="Factura">
-                                        Factura
-                                    </option>                                   
-                                    <option value="Recibos">
-                                        Recibos
-                                    </option>                                    
-                                    <option value="Alvará">
-                                        Alvará
-                                    </option>                                    
-                                    <option value="Recibo de Água">
-                                        Recibo de Água
-                                    </option>                                    
-                                    <option value="Certidão">
-                                        Certidão
-                                    </option>                                    
-                                    <option value="Outros">
-                                        Outros
-                                    </option>
+                                <option value="Deposito">Deposito</option>
+                                <option value="Cash">Cash</option>
+                                <option value="TRF">TFR</option>
+                                <option value="Cheque">Cheque</option>
                         </select>
                       </div>
                     <div class="input-group control-group increment" >
@@ -313,52 +225,10 @@
                       <div class="" style="margin-top:10px">
                         <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
                            <option disabled selected>Seleciona...</option>
-                                    
-                                    <option value="BI">
-                                        BI
-                                    </option>                                       
-                                    <option value="Apolice de Seguro">
-                                        Apolice de Seguro
-                                    </option>                                    
-                                    <option value="Carta de Condução">
-                                        Carta de Condução
-                                    </option>                                    
-                                    <option value="Carta de Nomeação">
-                                        Carta de Nomeação
-                                    </option>                                    
-                                    <option value="Livrete/Verbete">
-                                        Livrete/Verbete
-                                    </option>                                    
-                                    <option value="Imagem">
-                                        Imagem
-                                    </option>                                    
-                                    <option value="Formulario de Peritagem">
-                                        Formulario de Peritagem
-                                    </option>                                    
-                                    <option value="Passaporte">
-                                        Passaporte
-                                    </option>                                    
-                                    <option value="Comprovativo de pagamento">
-                                        Comprovativo de pagamento
-                                    </option>                                   
-                                    <option value="Factura">
-                                        Factura
-                                    </option>                                   
-                                    <option value="Recibos">
-                                        Recibos
-                                    </option>                                    
-                                    <option value="Alvará">
-                                        Alvará
-                                    </option>                                    
-                                    <option value="Recibo de Água">
-                                        Recibo de Água
-                                    </option>                                    
-                                    <option value="Certidão">
-                                        Certidão
-                                    </option>                                    
-                                    <option value="Outros">
-                                        Outros
-                                    </option>
+                                <option value="Deposito">Deposito</option>
+                                <option value="Cash">Cash</option>
+                                <option value="TRF">TFR</option>
+                                <option value="Cheque">Cheque</option>
                         </select>
                       </div>
                       <div class=" input-group" >
@@ -375,16 +245,151 @@
                 </div>
                    <!--and files-->
                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button>
+                        <button id="save" type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button>
                       </div>
                 </form>
                  <!-- /.modal-content -->   
-
+                <div id="toast"><div id="img"></div><div id="desc"><span id="res_message"></div></div>
           </div>
           <!-- /.modal-dialog -->
    </div>
 </div>
 
+
+<script>
+    if ($("#pagamentos").length > 0) {
+
+        
+       $("#pagamentos").validate({
+      
+      
+            rules: {
+                "message": {
+                    required: true,
+                    maxlength: 255,
+                },    
+            },
+            messages: {
+        
+                  "message": {
+                    required: "Please type your message",
+                  },
+         
+            },
+    submitHandler: function(form) {
+     $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $('#save').html('Sending..');
+      $.ajax({
+        url: '{{url('admin/savepaymat')}}',
+        type: "POST",
+        data: $('#pagamentos').serialize(),
+          success: function (response) {
+              if (response.msg) {
+                  $('#res_message').html(response.msg);//toast msg
+                  $('#img').html('<i class="fa fa-floppy-o" aria-hidden="true"></i>');//toast icon
+                  launch_toast();//toast show
+              } else {
+                  response.errors.forEach(myFunction);
+
+                  function myFunction(item, index) {
+                        $('#res_message').html(item);//toast msg
+                        $('#img').html('<i class="fa fa-close text-red" ></i>');//toast icon
+
+                        launch_toast();//toast show
+                    }
+
+                   
+              }
+
+           
+
+            $('#message').val('');
+
+            $('#save').html('Submeter');
+
+
+
+ 
+
+        }
+      });
+    }
+  })
+}
+
+function launch_toast() {//toast function
+    var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+    }
+
+
+</script>
+
+
+<script>
+  $(document).on('click', 'button[id="pagamento"]', function(){
+      $valu = $(this).val();
+      $('#aviso_id').val($valu);
+  } );
+
+ 
+</script>
+
+
+<script>
+
+
+    function formaPagamento(data) {
+        if (data == 'Deposito') {
+            $(".dataValor").removeAttr('disabled');
+            $(".benificiario").removeAttr('disabled');
+            $(".banco").removeAttr('disabled');
+            $(".testemunha").prop('disabled', true);
+
+            $(".testemunha").val('');
+
+        } else if (data == 'Cash') {
+            $(".dataValor").removeAttr('disabled');
+            $(".testemunha").removeAttr('disabled');
+            $(".benificiario").removeAttr('disabled');
+            $(".banco").prop('disabled', true);
+
+            $(".banco").val('');
+
+        } else if (data == 'TRF') {
+            $(".dataValor").removeAttr('disabled');
+            $(".benificiario").prop('disabled', true);
+            $(".testemunha").prop('disabled', true);
+            $(".banco").prop('disabled', true);
+
+
+            $(".benificiario").val('');
+            $(".testemunha").val('');
+            $(".banco").val('');
+
+        } else if (data == 'Cheque') {
+            $(".dataValor").removeAttr('disabled');
+            $(".benificiario").removeAttr('disabled');
+            $(".banco").removeAttr('disabled');
+            $(".testemunha").prop('disabled', true);
+
+
+
+            $(".testemunha").val('');
+
+        } else {
+            $(".dataValor").prop('disabled', true);
+            $(".dataValor").val('');
+        };
+
+    }
+
+</script>
 
 <script type="text/javascript">
 

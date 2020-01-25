@@ -145,6 +145,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('financas','FinancasController@index');
     Route::DELETE('financas/destroy/{id}','FinancasController@destroy');
 
+    //pagamentos
+    Route::post('savepaymat','FinancasController@savepaymat');
+
 });
 
 Route::get('/', function(){
