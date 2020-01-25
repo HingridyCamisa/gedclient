@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('contratos', function ($user) {
+        /*Gate::define('contratos', function ($user) {
          return $user->hasPermission('contratos');
         });       
         Gate::define('apagar-contratos', function ($user) {
@@ -33,6 +33,9 @@ class AuthServiceProvider extends ServiceProvider
         });       
          Gate::define('apagar-recibos', function ($user) {
          return $user->hasPermission('apagar-recibos');
-        }); 
+        });      
+         Gate::define('apagar-avisos', function ($user) {
+         return $user->hasPermission('apagar-avisos');
+        }); */
     }
 }
