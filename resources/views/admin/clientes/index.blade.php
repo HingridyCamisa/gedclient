@@ -44,9 +44,9 @@
             <td>{{($cliente->created_at)->diffForHumans() }}</td>
             <td>
                 @if($cliente->status==1)
-                <span class="sucess">Ativo</span>
+                <span class="sucess"><center>Ativo</center></span>
                 @else
-                <span class="error">Desativado</span>
+                <span class="error"><center>Desativado</center></span>
                 @endif
             </td>
              <td><center>

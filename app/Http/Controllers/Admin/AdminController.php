@@ -6,11 +6,13 @@ use App\Admin;
 use App\Prospecao;
 use App\Segurado;
 use App\Contrato;
+use App\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\User;
 use App\Charts\Charts as grafico;
+use Carbon\Carbon;
 
 
 
@@ -23,11 +25,28 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = Prospecao::get()->groupBy('tipo_prospecao')->map(function ($item) {
+
+        $cliente = Cliente::all();
+        
+        $data = Prospecao::get()->groupBy('tipo_ramo')->map(function ($item) {
             return count($item);
         });
         
+
+        $clientes = Cliente::where('cliente_tipo','individual')->get();
+
+        $nu_aniversarios=0;
+
+        foreach($clientes as $key => $cliente){ 
+            if(Carbon::parse($cliente->cliente_data_nascimento)->isBirthday(carbon::today()))
+            {   
+                $nu_aniversarios = $nu_aniversarios+1;   
+            }
+
+        }
+
         
+
         $chart = new grafico;
         $chart->labels($data->keys());
         $chart->title('Tipo de Prospeção');
@@ -37,7 +56,7 @@ class AdminController extends Controller
         ],
         ]);
 
-        $emidiodata=Prospecao::get()->groupby('nome_consultor')->map(function ($item) {
+        $emidiodata = Contrato::get()->groupby('tipo_ramo ')->map(function ($item) {
             // Return the number of persons
             return count($item);
         });
@@ -46,19 +65,19 @@ class AdminController extends Controller
 
         $emidio = new grafico;
         $emidio->labels($emidiodata->keys());
-        $emidio->title('Nº de Prospeção por Consultores');
+        $emidio->title('Nº de Contratos por Consultores');
         $emidio->dataset('Consultores', 'bar', $emidiodata->values());
         
-
+        
         
         
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
         $contrato = Contrato::all();
-        
+       
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios'));
     }
 
     /**

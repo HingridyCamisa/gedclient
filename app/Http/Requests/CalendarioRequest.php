@@ -26,7 +26,7 @@ class CalendarioRequest extends FormRequest
         return [
             
             'titulo'=>'required|min:5',
-            'cor'=>'required',
+            'cor'=>'nullable',
             'data_inicio'=>'required|date|after_or_equal:today',
             'data_final'=>'required|date|after_or_equal:data_inicio'
         ];
