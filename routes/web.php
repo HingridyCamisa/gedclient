@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('aniversarios/index','AniversarioController@index')->name('aniversarios.index');
 
+    Route::get('metas/index','MetaController@index')->name('metas.index');
     //comentarios 
     Route::get('allcomments','ComentariosController@allcomments')->name('allcomments');
 

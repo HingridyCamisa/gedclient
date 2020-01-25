@@ -19,7 +19,7 @@ class MetaController extends Controller
          //dd(auth()->user()->meta);
         //$meta = $valor ? $valor->meta : 0;
        
-        return view('admin.metas.index', compact('valor'));
+        return view('admin/metas/index');
     }
 
     /**
