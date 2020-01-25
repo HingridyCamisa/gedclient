@@ -28,7 +28,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-    $this->authorize('contratos');
+    //$this->authorize('contratos');
         $contratos = Contrato::where("contratos.status",1)
                                        ->latest()
                                        ->paginate(12);
