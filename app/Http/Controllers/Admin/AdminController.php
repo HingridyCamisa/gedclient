@@ -61,14 +61,14 @@ class AdminController extends Controller
             return count($item);
         });
 
-        //dd($emidiodata);
 
+        
         $emidio = new grafico;
         $emidio->labels($emidiodata->keys());
         $emidio->title('Nº de Contratos por Consultores');
         $emidio->dataset('Consultores', 'bar', $emidiodata->values());
         
-        
+       
         
         
         $prospecao = Prospecao::all();

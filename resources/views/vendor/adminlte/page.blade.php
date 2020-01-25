@@ -67,9 +67,9 @@
                         <!-- Messages: style can be found in dropdown.less-->
 
                         <li class="dropdown birthday-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="{{ url('admin/aniversarios/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-birthday-cake"></i>
-                            <span class="label label-primary">6</span>
+                            <span class="label label-primary"> 6</span>
                             </a>
                         </li>
                         <li class="dropdown contratos-menu">
@@ -81,7 +81,7 @@
                         <li class="dropdown prospecoes-menu">
                             <a href="{{ url('admin/prospecoes/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-briefcase"></i>
-                            <span class="label label-warning">10</span>
+                            <span class="label label-warning">2</span>
                             </a>
                             
 
@@ -125,7 +125,7 @@
              <div class="user-panel">
                     <div class="pull-left image">
                         <img src="{{asset(('storage/'.Auth()->user()->avatar))}}" class="img-circle" alt="User Image">
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        
                     
 
                     </div>
