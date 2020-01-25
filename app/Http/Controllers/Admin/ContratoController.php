@@ -180,7 +180,7 @@ class ContratoController extends Controller
         $prospecao=Prospecao::where('status',1)->where('id',$request->id_prospecaos)->first();
         if (!$prospecao)
         {
-        	return back()->with('error','Prospenção desativada');
+        	return back()->with('error','Prospenï¿½ï¿½o desativada');
         };
         
        

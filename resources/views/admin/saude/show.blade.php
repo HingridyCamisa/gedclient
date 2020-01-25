@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <th>Idade</th>
-          <td><i class="fa fa-male"></i> &nbsp; {{Carbon\Carbon::parse($data)->age}}</td>
+          <td><i class="fa fa-male"></i> &nbsp; {{Carbon\Carbon::parse($saude->cliente->cliente_data_nascimento)->age}}</td>
         </tr>
         <tr>
           <th>Ano de Nascimento</th>

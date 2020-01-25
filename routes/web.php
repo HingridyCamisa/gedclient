@@ -117,6 +117,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::post('saude/update/{id}', 'SaudeController@update')->name('saude.update');
 
+    Route::get('aniversarios/index','AniversarioController@index')->name('aniversarios.index');
+
     //comentarios 
     Route::get('allcomments','ComentariosController@allcomments')->name('allcomments');
 

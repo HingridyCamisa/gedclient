@@ -31,7 +31,7 @@ class CalendarioController extends Controller
                 );
             $calendario_detalhes=Calendar::addEvents($calendario_list,[
                         'color' => $calendario->cor,
-                        'url' => 'http://full-calendar.io',
+                        'url' => 'http://fullcalendar.io', 
 
                     ]);
 

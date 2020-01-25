@@ -15,7 +15,7 @@
     <div class="small-box bg-green">
               <div class="inner">
                 <!-- <h3>{{ $prospecao->sum('valor_estipulado_carteira')}}</h3>  -->
-                <h4><strong>{{ number_format($prospecao->sum('valor_estipulado_carteira'), 2, ',', '.') . 'MTN'}}</strong></h4>
+                <h4><strong>{{ number_format($contrato->sum('premio_total'), 2, ',', '.') . 'MTN'}}</strong></h4>
                 <p>Valor em Carteira </p>
               </div>
               <div class="icon">
@@ -54,14 +54,13 @@
     <div class="col-md-3">
     <div class="small-box bg-aqua">
               <div class="inner">
-                <h4><strong>{{ $prospecao->count('prospecaos')}}</strong></h4>
-
+                <h4><strong>{{  $nu_aniversarios }}</strong></h4>
                 <p>Aniversários</p>
               </div>
               <div class="icon">
                 <i class="ion ion-birthday-cake"></i>
               </div>
-              <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="{{ url('admin/aniversarios/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
     </div>
 </div>
@@ -90,7 +89,8 @@
                           </div>
                 </div>
         </div>
-
+        <div class=>
+        </div>
 
 
     </div>

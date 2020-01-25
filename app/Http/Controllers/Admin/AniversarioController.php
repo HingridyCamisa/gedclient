@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Cliente;
+use carbon;
 
 class AniversarioController extends Controller
 {
@@ -13,7 +16,9 @@ class AniversarioController extends Controller
      */
     public function index()
     {
-        //
+        $cliente = Cliente::all(); 
+        
+        return view('admin.aniversarios.index', compact('cliente'));
     }
 
     /**
