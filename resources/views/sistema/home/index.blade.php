@@ -56,7 +56,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><strong><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></strong></li>
-                            <li><strong><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></strong></li> 
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
