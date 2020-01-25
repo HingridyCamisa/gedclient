@@ -45,7 +45,7 @@
           <td><center>{{$saudes->tipo_membro }}</center></td>
           <td><center>{{ Carbon\Carbon::parse($saudes->data_inicio_cobertura)->format('d-m-Y ') }}</center></td>
           <td><center>{{ Carbon\Carbon::parse($saudes->data_fim_cobertura)->format('d-m-Y ') }}</center></td>
-          @if(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->isPast())
+          @if(\Carbon\Carbon::parse($saudes->data_proximo_pagamento)->isPast())
             <td><center><i class="fa fa-close text-red"></i> Expirado {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}} </center></td>
           @else
             <td><center><i class="fa fa-check text-green"></i> Em dia Expirado {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}}</center></td>
