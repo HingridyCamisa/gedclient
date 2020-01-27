@@ -53,16 +53,16 @@
           </center></th>
           <th><center>
                  @if($aviso->tipo=='saudes')
-                    <span class="label bg-green">Saude</span>
+                   Saúde
                  @else
-                    <span class="label  bg-blue">Contrato</span> 
+                    Contrato
                  @endif
           </center></th>
           <th><center>
               @if($aviso->status==1)
-              <span class="label label-danger">Não pago</span> 
+              <i class="fa fa-close text-red"></i> Não pago
               @elseif($aviso->status==2)
-              <span class="label label-warning">Pago</span> 
+              <i class="fa fa-close text-green"></i> Pago 
               @elseif($aviso->status==0)
               <span class="fa fa-trash"> Eliminado</span> 
               @endif

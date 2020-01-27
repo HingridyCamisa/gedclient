@@ -160,6 +160,21 @@ return [
             'text'        => 'Gestão Seguradoras',
             'url'         => 'admin/seguradoras/index',
             'icon'        => 'institution',
+            'submenu'     => [
+                [
+                    'text'  => 'Gestão Seguradoras',
+                    'url'   => 'admin/seguradoras/index',
+                    'icon'  => 'institution',
+
+                ],
+                [
+                    'text'  => 'Ramo',
+                    'url'   => '#',
+                    'icon'  => 'institution',
+
+                ],
+            ]
+               
             
         ],
         [

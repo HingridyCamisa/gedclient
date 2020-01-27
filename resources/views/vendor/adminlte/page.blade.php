@@ -177,7 +177,7 @@
             reserved.
         </footer></center> -->
         <center> <footer class="main-footer">
-            <strong>Copyright © {{\Carbon\Carbon::now()->format('Y')}} <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
+            <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
             reserved.</footer>
         </center>
 

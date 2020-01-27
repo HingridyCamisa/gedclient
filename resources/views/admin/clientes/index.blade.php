@@ -19,8 +19,8 @@
         <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i> País </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Cidade</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> País </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> Cidade</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
           <th scope="col"><center><i class="fa fa-envelope"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-user"></i> Tipo </center></th>
@@ -74,8 +74,8 @@
         <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-users"></i> País </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Cidade</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> País </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> Cidade</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
           <th scope="col"><center><i class="fa fa-envelope"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-user"></i> Tipo </center></th>
