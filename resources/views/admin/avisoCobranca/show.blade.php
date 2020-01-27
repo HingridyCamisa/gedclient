@@ -53,28 +53,24 @@
          <tr>
           <th  width="3%"> {{$i}}º </th>
           <th width="7%"><i class="fa fa-calendar"></i>
+            @php
+            $finalData = $data->addDays($dia_periodo) 
+            @endphp
              @if($contrato->periodicidade_pagamento!='Mensal')
-                {{$finalData=$data->addDays($dia_periodo)->format('d-m-Y') }}
+                {{$finalData->format('d-m-Y') }}
              @else
-                {{$finalData=$data->addMonthNoOverflow()->format('d-m-Y') }}
+                {{$finalData->format('d-m-Y') }}
              @endif
          </th>
           <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
           <th  width="13%"><i class="fa fa-calendar"></i>
-             @if($contrato->periodicidade_pagamento!='Mensal')
-                 @if($data->addDays($dia_periodo)->isPast())
-                    <i class="fa fa-close text-red"></i> Expirado  {{$data->addDays($dia_periodo)->diffForHumans() }}
+
+                 @if($finalData->addMonthNoOverflow()->isPast())
+                    <i class="fa fa-close text-red"></i> Expirado    {{$finalData->diffForHumans() }}
                  @else
-                    <i class="fa fa-check text-green"></i> Em dia  {{$data->addDays($dia_periodo)->diffForHumans() }}
+                    <i class="fa fa-check text-green"></i> Em dia    {{$finalData->diffForHumans() }}
                  @endif
-            
-             @else
-                 @if($data->addMonthNoOverflow()->isPast())
-                    <i class="fa fa-close text-red"></i> Expirado    {{$data->addMonthNoOverflow()->diffForHumans() }}
-                 @else
-                    <i class="fa fa-check text-green"></i> Em dia    {{$data->addMonthNoOverflow()->diffForHumans() }}
-                 @endif
-             @endif
+
          </th>
           <td width="13%"><center>
             @php

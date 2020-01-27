@@ -111,7 +111,7 @@ class ProspecoesController extends Controller
     {
 
        $validatedata=$request->validate([
-            'data_inicio'=>'nullable|date|after_or_equal:today',
+            'data_inicio'=>'nullable|date',
             'data_prevista_fim'=>'nullable|date|after:data_inicio',
             'tipo_ramo'=>'nullable',
             'origem_prospecao'=>'nullable',

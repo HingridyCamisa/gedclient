@@ -118,15 +118,12 @@
                           <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
                           <input class="form-control" id="" placeholder="Nº de Apólice" type="text" name="numero_apolice" required autofocus ></div>
                         </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></span>
-                          <input class="form-control" id="" placeholder="Nº de Recibo" type="text" name="numero_recibo" required autofocus ></div>
-                        </div>
                       </div>
                     </p> <br><br>
     
-                      <p><div class="col-md-7"></div><label for="" class="col-md-2 control-label"> Expira </label></p><br />
+                      <p>
+                        
+                        <div class="col-md-7"><div class="col-md-3"></div><label for="" class="col-md-2 control-label">Início </label></div><label for="" class="col-md-2 control-label"> Expira </label></p><br />
                      <p> 
 
                         <div class="form-group">
@@ -145,29 +142,31 @@
                         </div>
                         </div>
 
-                    </p> <br><br>
-
-                     <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label"> Dias </label>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="" placeholder="Cobertos" type="text" name="dias_cobertos" required autofocus ></div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-                          <input class="form-control" id="" placeholder="Próximo Pagamento" type="text" name="dias_proximo_pagamento" required autofocus ></div>
-                        </div>
+                    </p> <br><br>  
+                  
+                  <label for="" class="col-md-2 control-label">Ramo</label>
+                        <div class="col-md-10">
+                            <select class="form-control" name="tipo_ramo" onchange="ramo(this.value)">
+                                <option  value="{{old('tipo_prospecao')}}" selected disabled> {{old('tipo_prospecao','Select')}}</option>
+                                <option value="Acidentes Pessoais">Acidentes Pessoais</option>
+                                <option value="Acidente de Trabalho">Acidente de Trabalho</option>
+                                <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
+                                <option value="Automóvel - Danos Próprios">Automóvel - Danos Próprios</option>
+                                <option value="Garantia">Garantia</option>
+                                <option value="Recheio">Recheio</option>
+                                <option value="Mercadoria">Mercadoria</option>
+                                <option value="Multirriscos">Multirriscos</option>
+                                            
+                            </select>
                       </div>
                     </p> <br><br>
 
                      <p> <div class="form-group">
-                        <label for="" class="col-md-2 control-label"> Capital Seguro</label>
+                        <label for="" class="col-md-2 control-label"> Capital </label>
                         <div class="col-md-10">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Capital Seguro" type="text" name="capital_seguro" required autofocus ></div>
+                          <input class="form-control capital_seguro" id="capital_seguro" placeholder="Capital Seguro" type="text" name="capital_seguro" disabled ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -177,12 +176,12 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Total" type="text" name="premio_total" required autofocus ></div>
+                          <input class="form-control"  placeholder="Total" type="text" name="premio_total" required autofocus ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control" id="" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
+                          <input class="form-control" id="premio_simples" placeholder="Simples" type="text" name="premio_simples" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -192,12 +191,12 @@
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">%</span>
-                          <input class="form-control" id="" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
+                          <input class="form-control" id="taxa_corretagem" placeholder="Taxa" type="text" name="taxa_corretagem"  ></div>
                         </div>
                         <div class="col-md-5">
                           <div class="input-group">
                           <span class="input-group-addon">MTN</span>
-                          <input class="form-control" id="" placeholder="Comissão" type="text" name="comissao"  ></div>
+                          <input class="form-control" id="comissao" placeholder="Comissão" type="text" name="comissao"  ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -230,6 +229,30 @@
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-info-circle"></i></span>
                           <input class="form-control" id="" placeholder="Item Segurado" type="text" name="item_segurado"  ></div>
+                        </div>
+                      </div>
+                    </p> <br><br>
+
+                    <p> <div class="form-group">
+                        <label for="" class="col-md-2 control-label">  Encargos </label>
+                        <div class="col-md-5">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
+                          <input class="form-control"  placeholder="Custo administrativo " type="text" name="custo_admin" required autofocus ></div>
+                        </div>
+                        <div class="col-md-5">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
+                          <input class="form-control" id="premio_simples" placeholder="Imposto sebre selo" type="text" name="imposto_selo" required autofocus ></div>
+                        </div>
+                      </div>
+                    </p> <br><br>
+                    <p> <div class="form-group">
+                        <label for="" class="col-md-2 control-label">  Encargos </label>
+                        <div class="col-md-5">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
+                          <input class="form-control"  placeholder="Imposto sobre taxa " type="text" name="sobre_taxa" required autofocus ></div>
                         </div>
                       </div>
                     </p> <br><br>
@@ -472,5 +495,40 @@ $(document).ready(function() {
     });
 
 </script>
+
+    <script type="text/javascript">
+        function ramo(val) {
+        if (val=='Automóvel - Responsabilidade Civil') {
+            $(".capital_seguro").removeAttr('disabled');
+        } else {
+            $(".capital_seguro").prop('disabled', true);
+            $(".capital_seguro").val('');
+        }
+        
+        }
+
+
+                
+    $(document).ready(function(){
+
+        $('#taxa_corretagem').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+
+        $('#premio_simples').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+    });
+    </script>
 
 @stop

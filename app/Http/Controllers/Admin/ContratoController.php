@@ -28,7 +28,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-    $this->authorize('contratos');
+    //$this->authorize('contratos');
         $contratos = Contrato::where("contratos.status",1)
                                        ->latest()
                                        ->paginate(12);
@@ -72,11 +72,10 @@ class ContratoController extends Controller
         'filetype.*' => 'required',
         'nome_seguradora'=>'required',
         'numero_apolice'=>'required|string|min:3|max:100',
-        'numero_recibo'=>'required|string|min:3|max:100',
         'periodicidade_pagamento'=>'required|string',
         'data_inicio'=>'required|date',
         'data_proximo_pagamento'=>'required|date',
-        'capital_seguro'=>'required|numeric|min:1',
+        'capital_seguro'=>'nullable|numeric|min:1',
         'premio_total'=>'required|numeric|min:1',
         'premio_simples'=>'required|numeric|min:1',
         'taxa_corretagem'=>'required|numeric',
@@ -89,8 +88,9 @@ class ContratoController extends Controller
         'user_id'=>'required',
         'client_id' =>'required',
         'client_token' => 'required',
-
-
+        'custo_admin'=>'required|numeric|min:1',
+        'imposto_selo'=>'required|numeric|min:1',
+        'sobre_taxa'=>'required|numeric|min:1',
        ]);
        
        //file name
@@ -146,25 +146,29 @@ class ContratoController extends Controller
     public function edit(Contrato $contrato, $id)
     {
         $seguradora = Seguradora::all();
-        $consultor = Consultor::all();
+        $consultores = Consultor::all();
         $tipo_seguro = TipoSeguro::all();
         $contrato = Contrato::findOrFail($id);
 
-        return view('admin.contrato.edit',compact('contrato','seguradora','consultor','tipo_seguro'))->with('success','Contrato editado.');
+        return view('admin.contrato.edit',compact('contrato','seguradora','consultores','tipo_seguro'))->with('success','Contrato editado.');
     }
 
     public function tornarcontrato(Request $request)
     { 
 
+         $prospecao=Prospecao::where('status',1)->where('id',$request->id_prospecaos)->first();
+        if (!$prospecao)
+        {
+        	return back()->with('error','Prospecção desativada');
+        };
+        
        $validatedata=$request->validate([
         'id_prospecaos'=>'required',
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
         'data_inicio'=>'required|date',
         'data_proximo_pagamento'=>'required|date',
-        'dias_cobertos'=>'required|numeric',
-        'dias_proximo_pagamento'=>'required|numeric',
-        'capital_seguro'=>'required|numeric',
+        'capital_seguro'=>'nullable|numeric',
         'premio_total'=>'required|numeric',
         'premio_simples'=>'required|numeric',
         'taxa_corretagem'=>'required|numeric',
@@ -172,18 +176,13 @@ class ContratoController extends Controller
         'periodicidade_pagamento'=>'required',
         'situacao'=>'required',
         'item_segurado'=>'required',
+        'custo_admin'=>'required|numeric|min:1',
+        'imposto_selo'=>'required|numeric|min:1',
+        'sobre_taxa'=>'required|numeric|min:1',
        ]);
        
        //file name
         $namefile = Str::random(32).'anexo'.time();
-
-        $prospecao=Prospecao::where('status',1)->where('id',$request->id_prospecaos)->first();
-        if (!$prospecao)
-        {
-        	return back()->with('error','Prospen��o desativada');
-        };
-        
-       
       
         $prospecao->status=0;
         $prospecao->save();
@@ -234,19 +233,22 @@ class ContratoController extends Controller
     {
     
        $validatedata=$request->validate([
-        'data_inicio'=>'required|date',
-        'dias_cobertos'=>'required|numeric',
-        'dias_proximo_pagamento'=>'required|numeric',
-        'capital_seguro'=>'required|numeric',
-        'premio_total'=>'required|numeric',
-        'premio_simples'=>'required|numeric',
-        'taxa_corretagem'=>'required|numeric',
-        'comissao'=>'required|numeric',
-        'periodicidade_pagamento'=>'required',
-        'situacao'=>'required',
-        'item_segurado'=>'required',
-        'nome_seguradora'=>'required',
-        'data_proximo_pagamento'=>'required|date',
+        'data_inicio'=>'nullable|date',
+        'dias_cobertos'=>'nullable|numeric',
+        'dias_proximo_pagamento'=>'nullable|numeric',
+        'capital_seguro'=>'nullable|numeric',
+        'premio_total'=>'nullable|numeric',
+        'premio_simples'=>'nullable|numeric',
+        'taxa_corretagem'=>'nullable|numeric',
+        'comissao'=>'nullable|numeric',
+        'periodicidade_pagamento'=>'nullable',
+        'situacao'=>'nullable',
+        'item_segurado'=>'nullable',
+        'nome_seguradora'=>'nullable',
+        'data_proximo_pagamento'=>'nullable|date',
+        'custo_admin'=>'nullable|numeric|min:1',
+        'imposto_selo'=>'nullable|numeric|min:1',
+        'sobre_taxa'=>'nullable|numeric|min:1',
        ]);
         $request=$request->except('_token');
         Contrato::where('id',$id)->update($request); 
