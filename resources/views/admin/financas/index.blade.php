@@ -112,7 +112,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
-               <center> <h4 class="modal-title"><i class="glyphicon glyphicon-folder-open"></i> &nbsp; Pagamento <span class="aviso_id"></span></h4> </center>
+               <center> <h4 class="modal-title"><i class="glyphicon glyphicon-credit-card"></i> &nbsp; Pagamento <span class="aviso_id"></span></h4> </center>
               </div>
               <form id="pagamentos" method="post" enctype="multipart/form-data" action="javascript:void(0)" >
               <div class="modal-body row">

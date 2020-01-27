@@ -26,7 +26,7 @@
      
       <tbody>
         <tr>
-          <th>Scret key</th>
+          <th>Secret Key</th>
           <td><i class="fa fa-key"></i> &nbsp; {{ $contrato->token_id}}</td> 
         </tr>
         <tr>
@@ -38,27 +38,24 @@
           <td><i class="fa fa-institution"></i> &nbsp; {{$contrato->seguradora->nome_seguradora }}</td>
         </tr>
         <tr>
-        <tr>
           <th>Nome Segurado</th>
           <td><i class="fa fa-user"></i> &nbsp; {{$contrato->cliente->cliente_nome }}</td>
         </tr>
         <tr>
           <th>Nº Apólice</th>
-          <td><i class="fa  fa-user"></i> &nbsp; {{$contrato->numero_apolice }}</td>
+          <td><i class="fa  fa-file-text-o"></i> &nbsp; {{$contrato->numero_apolice }}</td>
         </tr>
-        <tr>
         <tr>
           <th>Nº Recibo</th>
-          <td><i class="fa  fa-user"></i> &nbsp; {{$contrato->numero_recibo }}</td>
+          <td><i class="fa  fa-file-text-o"></i> &nbsp; {{$contrato->numero_recibo }}</td>
         </tr>
         <tr>
-        <tr>
           <th>Ramo</th>
-          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$contrato->tipo_ramo }}</td>
+          <td> &nbsp; {{$contrato->tipo_ramo }}</td>
         </tr>
         <tr>
           <th>Periodicidade Pagamento</th>
-          <td><i class="fa fa-phone"></i> &nbsp; {{$contrato->periodicidade_pagamento }}</td>
+          <td><i class="fa fa-hourglass-2"></i> &nbsp; {{$contrato->periodicidade_pagamento }}</td>
         </tr>
         <tr>
           <th>Data Início</th>
@@ -94,11 +91,23 @@
         </tr>
         <tr>
           <th>Taxa Corretagem</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{ $contrato->taxa_corretagem}}  </td>
+          <td>  %  &nbsp;{{ $contrato->taxa_corretagem}}  </td>
+        </tr> 
+        <tr>
+          <th>Custos Administrativos</th>
+          <td><i class="fa fa-money"></i> &nbsp; {{ 'MTN '.number_format($contrato->custo_admin, 2, ',', '.')}}  </td>
+        </tr>
+        <tr>
+          <th>Imposto Selo</th>
+          <td><i class="fa fa-money"></i> &nbsp; {{ 'MTN '.number_format($contrato->imposto_selo, 2, ',', '.')}}  </td>
+        </tr>
+        <tr>
+          <th>Sobre Taxa</th>
+          <td><i class="fa fa-money"></i> &nbsp; {{ 'MTN '.number_format($contrato->sobre_taxa, 2, ',', '.')}}  </td>
         </tr>
         <tr>
           <th>Item Segurado</th>
-          <td><i class="fa fa-money"></i> &nbsp; {{ $contrato->item_segurado}}  </td>
+          <td><i class="fa fa-info"></i> &nbsp; {{ $contrato->item_segurado}}  </td>
         </tr>
         <tr>
           <th>Situação</th>

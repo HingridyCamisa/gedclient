@@ -118,26 +118,48 @@
      
                                     </div>
 
+                                                                         
+                                    <div class="col-xs-3">
+                                        <label> % Taxa Corretagem</label>
+                                        <input class="form-control" id="taxa_corretagem" name="taxa_corretagem"  type="float" value="{{old('taxa_corretagem')}}">
+     
+                                    </div>
+
                                      <div class="col-xs-3">
                                         <label><i class="fa fa-money"></i> Comissão Corretagem</label>
                                         <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  disabled>
      
                                     </div>
-                                     
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-money"></i> Taxa Corretagem</label>
-                                        <input class="form-control" id="taxa_corretagem" name="taxa_corretagem"  type="float" value="{{old('taxa_corretagem')}}">
-     
-                                    </div>
+
 
                                 </div>
                                  <br>
                                 
 
                                 <div class="row">
-                                    
 
                                     <div class="col-xs-3">
+                                        <label><i class="fa fa-money"></i> Custo Administrativo</label>
+                                        <input class="form-control" name="custo_admin"  placeholder="Custo administrativo "type="text" value="{{old('custo_admin')}}">
+     
+                                    </div>                                     
+                                    <div class="col-xs-3">
+                                        <label><i class="fa fa-money"></i> Imposto de Selo</label>
+                                        <input class="form-control" name="imposto_selo"  placeholder="Imposto sebre selo"type="text" value="{{old('imposto_selo')}}">
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <label><i class="fa fa-money"></i> Sobre Taxa</label>
+                                        <input class="form-control" name="sobre_taxa"  placeholder="Imposto sobre taxa "type="text" value="{{old('sobre_taxa')}}">
+                                    </div>
+                                
+
+                                </div>
+                                
+                                 <br>
+                                 <div class="row">
+
+                                 <div class="col-xs-3">
                                         <label><i class="fa fa-info"></i> Item Segurado </label>
                                         <input class="form-control" name="item_segurado"  placeholder="Item Segurado "type="text" value="{{old('item_segurado')}}">
                                     </div>
@@ -152,27 +174,7 @@
                                         </select>
      
                                     </div>
-
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-money"></i> custo administrativo</label>
-                                        <input class="form-control" name="custo_admin"  placeholder="Custo administrativo "type="text" value="{{old('custo_admin')}}">
-     
-                                    </div>                                     
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-money"></i> Imposto de Selo</label>
-                                        <input class="form-control" name="imposto_selo"  placeholder="Imposto sebre selo"type="text" value="{{old('imposto_selo')}}">
-                                    </div>
-                                
-
-                                </div>
-                                
-                                 <br>
-                                 <div class="row">
-
-                                    <div class="col-xs-3">
-                                        <label><i class="fa fa-money"></i> Sobre taxa</label>
-                                        <input class="form-control" name="sobre_taxa"  placeholder="Imposto sobre taxa "type="text" value="{{old('sobre_taxa')}}">
-                                    </div>
+                                   
                                     
                                 </div>
                                 

@@ -20,6 +20,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-clock-o"></i> Tempo de Finalização</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
           <td><center>{{ $sinistro->seguradora }}</center></td>
           <td><center>{{ $sinistro->consultor }}</center></td>
           <td><center>{{ $sinistro->situacao }}</center></td>
+          <td><center></center></td>
           <td><center><a href="{{ route ('sinistros.edit', $sinistro->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
               <a href="{{route ('sinistros.show', $sinistro->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
               @if(Auth::user()->cargo =='1')
@@ -53,6 +55,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-users"></i> Consultor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Situação</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-clock-o"></i> Tempo de Finalização</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
         </tr>
       </tfoot>

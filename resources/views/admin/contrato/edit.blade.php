@@ -112,16 +112,16 @@
                             <input class="form-control" id="premio_simples" name="premio_simples" placeholder="Premio Simples " type="float" value="{{$contrato->premio_simples}}">
      
                         </div>
-
-                            <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Comissão Corretagem</label>
-                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  disabled>
-     
-                        </div>
                                      
                         <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Taxa Corretagem</label>
+                            <label> % Taxa Corretagem</label>
                             <input class="form-control" id="taxa_corretagem" name="taxa_corretagem"  type="float" value="{{$contrato->taxa_corretagem}}">
+     
+                        </div>
+
+                        <div class="col-xs-3">
+                            <label><i class="fa fa-money"></i> Comissão Corretagem</label>
+                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  disabled>
      
                         </div>
 
@@ -129,9 +129,29 @@
                                 
 
                     <div class="row">
-                                    
 
                         <div class="col-xs-3">
+                            <label><i class="fa fa-money"></i> Custo Administrativo</label>
+                            <input class="form-control" name="custo_admin"  placeholder="Custo administrativo "type="double" value="{{$contrato->custo_admin}}">
+     
+                        </div>   
+
+                        <div class="col-xs-3">
+                            <label><i class="fa fa-money"></i> Imposto de Selo</label>
+                            <input class="form-control" name="imposto_selo"  placeholder="Imposto sebre selo"type="double" value="{{$contrato->imposto_selo}}">
+                        </div>
+                        
+                        <div class="col-xs-3">
+                            <label><i class="fa fa-money"></i> Sobre Taxa</label>
+                            <input class="form-control" name="sobre_taxa"  placeholder="Imposto sobre taxa "type="double" value="{{$contrato->sobre_taxa}}">
+                        </div>
+                                
+
+                    </div> <br>
+
+                    <div class="row">
+
+                    <div class="col-xs-3">
                             <label><i class="fa fa-info"></i> Item Segurado </label>
                             <input class="form-control" name="item_segurado"  placeholder="Item Segurado "type="text" value="{{$contrato->item_segurado}}">
                         </div>
@@ -145,26 +165,6 @@
                                 <option value="Em Cobrança">Em Cobrança</option>
                             </select>
      
-                        </div>
-
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> custo administrativo</label>
-                            <input class="form-control" name="custo_admin"  placeholder="Custo administrativo "type="text" value="{{$contrato->custo_admin}}">
-     
-                        </div>                                     
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Imposto de Selo</label>
-                            <input class="form-control" name="imposto_selo"  placeholder="Imposto sebre selo"type="text" value="{{$contrato->imposto_selo}}">
-                        </div>
-                                
-
-                    </div> <br>
-
-                    <div class="row">
-
-                        <div class="col-xs-3">
-                            <label><i class="fa fa-money"></i> Sobre taxa</label>
-                            <input class="form-control" name="sobre_taxa"  placeholder="Imposto sobre taxa "type="text" value="{{$contrato->sobre_taxa}}">
                         </div>
                                     
                     </div>

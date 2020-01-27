@@ -34,12 +34,12 @@
          @if($cliente->cliente_tipo=='Individual')
         <tr>
           <th>Tipo de ID </th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$cliente->cliente_id_tipo }}</td>
+          <td><i class="fa fa-list-alt"></i> &nbsp; {{$cliente->cliente_id_tipo }}</td>
         </tr>
         
         <tr>
           <th>Nº ID </th>
-          <td><i class="fa fa-user"></i> &nbsp; {{$cliente->cliente_id_numero }}</td>
+          <td><i class="fa fa-key"></i> &nbsp; {{$cliente->cliente_id_numero }}</td>
         </tr>
         <tr>
         <tr>
@@ -49,15 +49,15 @@
          @endif
         <tr>
           <th>Endereço</th>
-          <td><i class="fa fa-institution"></i> &nbsp; {{$cliente->cliente_endereco }}</td>
+          <td><i class="fa fa-map-marker"></i> &nbsp; {{$cliente->cliente_endereco }}</td>
         </tr>
         <tr>
           <th>País</th>
-          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->country_name }}</td>
+          <td><i class="fa  fa-map-marker"></i> &nbsp; {{$cliente->client_country_city->country_name }}</td>
         </tr>
         <tr>
           <th>Província</th>
-          <td><i class="fa  fa-map-pin"></i> &nbsp; {{$cliente->client_country_city->state_name }}</td>
+          <td><i class="fa  fa-map-marker"></i> &nbsp; {{$cliente->client_country_city->state_name }}</td>
         </tr>
         <tr>
         <tr>
