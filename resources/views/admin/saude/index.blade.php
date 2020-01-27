@@ -48,7 +48,7 @@
           @if(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->isPast())
             <td><center><i class="fa fa-close text-red"></i> Expirado {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}} </center></td>
           @else
-            <td><center><i class="fa fa-check text-green"></i> Em dia Expirado {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}}</center></td>
+            <td><center><i class="fa fa-check text-green"></i> Em dia {{\Carbon\Carbon::parse($saudes->data_inicio_cobertura)->addDays(\Carbon\Carbon::parse($saudes->data_fim_cobertura)->diffInDays($saudes->data_inicio_cobertura))->diffForHumans()}}</center></td>
            @endif
           <td><center><a href="{{ route ('saude.edit', $saudes->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
           <a href="{{ route ('saude.show', $saudes->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
