@@ -28,7 +28,7 @@
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-user"></i> Consultor</label>
                                         <select class="form-control" name="nome_consultor" >
-                                            <option  value="{{old('nome_consultor')}}" selected disabled> {{old('nome_consultor','Select')}}</option>
+                                            <option  value="{{old('nome_consultor')}}" selected disabled> Select ..</option>
                                              @foreach($consultors as $consultor)
                                             <option value="{{$consultor->id}}">{{ $consultor->nome_consultor}}</option>
                                             @endforeach
@@ -38,7 +38,7 @@
                                 <div class="col-xs-3">
                                     <label> Ramo </label>
                                         <select class="form-control" name="tipo_ramo">
-                                            <option  value="{{old('tipo_prospecao')}}" selected disabled> {{old('tipo_prospecao','Select')}}</option>
+                                            <option  value="{{old('tipo_ramo')}}" selected disabled> {{old('tipo_ramo','Select')}}</option>
                                             <option value="Acidentes Pessoais">Acidentes Pessoais</option>
                                             <option value="Acidente de Trabalho">Acidente de Trabalho</option>
                                             <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
@@ -87,12 +87,12 @@
                                 <div class="row">
                                     <div class="col-xs-3">
                                     <label for="DataInicio"><i class="fa fa-calendar"></i> Data Início </label>
-                                        <input class="form-control " name="data_inicio"  type="date" {{old('data_inicio')}}>
+                                        <input class="form-control " name="data_inicio"  type="date" value="{{old('data_inicio')}}">
                                     
                                     </div>
                                     <div class="col-xs-3">
                                     <label for="DataPrevistaFim"><i class="fa fa-calendar"></i> Data Prevista Fim </label>
-                                        <input class="form-control" name="data_prevista_fim"  type="date" {{old('data_prevista_fim')}}>
+                                        <input class="form-control" name="data_prevista_fim"  type="date"value="{{old('data_prevista_fim')}}">
                                     </div>
                                   
 
@@ -100,7 +100,7 @@
                                         
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-money"></i> Valor Estipulado da Carteira </label>
-                                    <input class="form-control" name="valor_estipulado_carteira" placeholder="Valor estipulado " type="number" pattern="([0-9]{1,3}).([0-9]{1,3})" {{old('valor_estipulado_carteira')}}>
+                                    <input class="form-control" name="valor_estipulado_carteira" placeholder="Valor estipulado " type="number" pattern="([0-9]{1,3}).([0-9]{1,3})" value="{{old('valor_estipulado_carteira')}}">
                                 </div>
                                 </div> <br>
                                 
@@ -111,7 +111,7 @@
                                
                                 <div class="form-group">
                                     <label for="DetalhesProspecao"><i class="fa fa-info"></i> Detalhes Prospecção</label>
-                                    <textarea class="form-control" name="detalhes_prospecao" rows="3" placeholder="Detalhes ..." value="{{old('detalhes_prospecao')}}"></textarea>
+                                    <textarea class="form-control" name="detalhes_prospecao" rows="3" placeholder="Detalhes ..." >{{old('detalhes_prospecao')}}</textarea>
                                 
                                    <!-- <input class="form-control" name="detalhes_prospecao" placeholder="Detalhes da Prospecção " type="text"> -->
                                 </div>

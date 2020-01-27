@@ -28,7 +28,7 @@ class ProspecaoRequest extends FormRequest
             'nome_consultor'=>'required',
             'client_id' =>'required',
             'client_token' => 'required',
-            'data_inicio'=>'required|date|after_or_equal:today',
+            'data_inicio'=>'required|date',
             'data_prevista_fim'=>'required|date|after:data_inicio',
             'tipo_ramo'=>'required',
             'origem_prospecao'=>'required',
