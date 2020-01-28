@@ -159,6 +159,13 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
      //extrato do cliente
      Route::get('financas/extrato/{id}','FinancasController@extratoCliente');
 
+     //files 
+     Route::get('files/anexos/{token_id}','FileController@show');
+     //remover anexo form a
+    Route::get('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
+    Route::post('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
+    Route::post('/files/addfiles/{token_id}','FileController@addfiles');
+
 });
 
 Route::get('/', function(){
