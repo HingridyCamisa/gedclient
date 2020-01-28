@@ -121,7 +121,7 @@
 
                         <div class="col-xs-3">
                             <label><i class="fa fa-money"></i> Comissão Corretagem</label>
-                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  disabled>
+                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  >
      
                         </div>
 
