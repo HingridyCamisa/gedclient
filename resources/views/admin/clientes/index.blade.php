@@ -52,6 +52,7 @@
              <td><center>
                  <a href="{{ route('clientes.edit', $cliente->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
                  <a href="{{ route ('clientes.show', $cliente->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
+                 <a href="{{ url ('admin/financas/extrato', $cliente->token_id)}}" class="btn btn-success btn-xs"><i class="fa fa-pie-chart"></i></a>
                   @if($cliente->status =='1')
                   {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
                   {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}

@@ -11,6 +11,9 @@ use App\Recibos;
 use App\AvisoCobrancaRecibosView;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use DB;
+use App\ExtratoClient;
+use App\Cliente;
 
 
 class FinancasController extends Controller
@@ -111,5 +114,23 @@ class FinancasController extends Controller
         }
 
         return response()->json(['errors'=>$validator->errors()->all()]);
+    }
+
+
+    public function  extratoCliente($id)
+    {
+       $extrato = DB::select('select * from extrato_clientes where cliente_token_id=:cliente_token_id', ['cliente_token_id' =>$id]);
+       $cliente = Cliente::where('token_id',$id)->first();
+     
+       //dd($extrato);
+
+       
+               
+      if (!($extrato))
+        {
+        	return back()->with('error','Cliente sem contrato');
+      }
+
+        return view('admin.financas.extrato',compact('extrato', 'cliente'))->with('success','Extrato gerado com sucesso.');
     }
 }

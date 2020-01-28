@@ -156,6 +156,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
      Route::DELETE('financas/recibos/destroy/{id}','FinancasController@destroyrecibos');
      Route::get('financas/recibos/recibo/{token_id}','FinancasController@extratrecibo');
 
+     //extrato do cliente
+     Route::get('financas/extrato/{id}','FinancasController@extratoCliente');
+
 });
 
 Route::get('/', function(){
