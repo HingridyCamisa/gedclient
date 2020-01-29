@@ -204,7 +204,7 @@ Route::get('sendemail', function () {
         'name' => "Learning Laravel",
     );
 
-    Mail::send('erropirmition', $data, function ($message) {
+    Mail::send('notification', $data, function ($message) {
 
         $message->to('nhacudimaemidio@gmail.com')->subject('Learning Laravel test email');
 
