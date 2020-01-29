@@ -5,12 +5,15 @@
     "\\app\\Http",
     "\\app\\Http\\Controllers",
     "\\app\\Http\\Controllers\\Admin",
+    "\\public",
+    "\\public\\vendor",
+    "\\public\\vendor\\adminlte",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
     "\\resources\\views\\admin\\prospecoes",
     "\\routes"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\ContratoController.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\ClientesController.php",
   "PreviewInSolutionExplorer": false
 }
