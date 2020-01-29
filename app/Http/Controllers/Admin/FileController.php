@@ -31,8 +31,7 @@ class FileController extends Controller
                 'filetype.*' => 'required',
                 'file' => 'required',
                 'file.*' => 'mimes:jpeg,png,pdf,doc,docx,xlsx|max:10000',
-            ],
-        )   ;
+            ]);
 
           if ($request->file('file'))
         {
