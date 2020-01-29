@@ -29,6 +29,7 @@
         </tr>
       </thead>
       <tbody>
+      @if(isset($prospecao->cliente->cliente_nome ))
       @foreach($prospecaos as $prospecao)
         <tr>
           <th><center>{{ ++$i }}</center></th>
@@ -58,6 +59,7 @@
               </button> </center></td>
              <!-- <a href="{{ route ('prospecoes.show', $prospecao->id)}}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-folder"></i>Contrato</a> -->
       @endforeach
+            @endif
 
       </tr>
       </tbody>
