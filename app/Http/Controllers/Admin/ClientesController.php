@@ -164,7 +164,7 @@ class ClientesController extends Controller
          $anexos=Files::where('token_id',$cliente->token_id)->count();
          
 
-        return view('admin.clientes.show',compact('cliente','anexos'))->with($status,$messagem,);
+        return view('admin.clientes.show',compact('cliente','anexos'))->with($status,$messagem);
     }
 
     /**
