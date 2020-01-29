@@ -13,6 +13,12 @@ class FileController extends Controller
     {
 
         $files=Files::where('token_id',$token_id)->get();
+
+        if (!isset($files))
+        {
+        	 return back()->with('error','Não existe token');
+        }
+        
         return view('admin.files.show',compact('files','token_id'));
     }
 

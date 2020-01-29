@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-      @if(isset($saudes->cliente->cliente_nome))
+      @if(isset($saude))
       @foreach($saude as $saudes)
         <tr>
           <th><center>{{ ++$i}}</center></th>

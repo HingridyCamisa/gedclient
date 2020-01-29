@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-      @if(isset($prospecao->cliente->cliente_nome ))
+      @if(isset($prospecaos))
       @foreach($prospecaos as $prospecao)
         <tr>
           <th><center>{{ ++$i }}</center></th>

@@ -198,3 +198,17 @@ Route::get('chart','ChartController@index');
 //and sender
 
 
+//email sender
+Route::get('sendemail', function () {
+     $data = array(
+        'name' => "Learning Laravel",
+    );
+
+    Mail::send('erropirmition', $data, function ($message) {
+
+        $message->to('nhacudimaemidio@gmail.com')->subject('Learning Laravel test email');
+
+    });
+    return "Your email has been sent successfully";
+
+});

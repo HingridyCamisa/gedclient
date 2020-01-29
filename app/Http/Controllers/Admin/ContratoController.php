@@ -133,8 +133,9 @@ class ContratoController extends Controller
     public function show(Contrato $contrato, $id)
     {
         $contrato = Contrato::findOrFail($id);
+        $anexos=Files::where('token_id',$contrato->token_id)->count();
 
-        return view('admin.contrato.show',compact('contrato'));
+        return view('admin.contrato.show',compact('contrato','anexos'));
     }
 
     /**

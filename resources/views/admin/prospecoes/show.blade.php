@@ -7,7 +7,7 @@
   <h1>
       <a class="btn btn-social-icon btn-github"  href="{{ url('admin/prospecoes/index')}}"><i class="fa fa-fw fa-arrow-left"></i></a>
       <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-danger"><i class="fa fa-print fa-1x"></i></a>
-      <a href="{{url('admin/files/anexos',$prospecao->client_token)}}" class="btn btn-danger"> <i class="fa fa-files-o" ></i></a>
+      <a href="{{url('admin/files/anexos',$prospecao->token_id)}}" class="btn btn-danger"><span class="badge bg-teal">{{$anexos}}</span>  <i class="fa fa-file-pdf-o" ></i></a>
   </h1>
 
 @stop
