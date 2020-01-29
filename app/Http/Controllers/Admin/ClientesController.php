@@ -68,7 +68,7 @@ class ClientesController extends Controller
         if ($cliente['cliente_tipo']=='Individual')
         {
          $validatedata=$request->validate([
-        'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx,xlsx|max:5000',
         'filetype.*' => 'nullable|string',
         'cliente_nome'=>'required|string|min:3|max:100|unique:clientes,cliente_nome',
         'cliente_endereco'=>'required|string|min:3|max:100',
@@ -127,8 +127,8 @@ class ClientesController extends Controller
                 foreach($request->file('file') as $key=>$file)
                 {
                     $origname=$file->getClientOriginalName();
-                    $name=$origname . time() . '-'.$key.'.'. $file->getClientOriginalExtension();
-                    $file->storeAs('anexos', $name);
+                    $name=time() . '_'.$key.'.'. $origname;
+                    $file->storeAs('public/anexos', $name);
                     $file= new Files();
                     $file->filename=$name;
                     $file->token_id=$namefile;
@@ -160,9 +160,11 @@ class ClientesController extends Controller
          	$messagem='Cliente Ativo';
             $status='success';
          };
+
+         $anexos=Files::where('token_id',$cliente->token_id)->count();
          
 
-        return view('admin.clientes.show',compact('cliente'))->with($status,$messagem);
+        return view('admin.clientes.show',compact('cliente','anexos'))->with($status,$messagem);
     }
 
     /**

@@ -73,11 +73,11 @@ class ContratoController extends Controller
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
         'nome_seguradora'=>'required',
-        'numero_apolice'=>'required|string|min:3|max:100',
+        'numero_apolice'=>'required|string|min:3|max:100|unique:contratos,numero_apolice',
         'periodicidade_pagamento'=>'required|string',
         'data_inicio'=>'required|date',
         'data_proximo_pagamento'=>'required|date',
-        'capital_seguro'=>'nullable|numeric|min:1',
+        'capital_seguro'=>'numeric|min:1|required_if:tipo_ramo,Automóvel - Responsabilidade Civil',
         'premio_total'=>'required|numeric|min:1',
         'premio_simples'=>'required|numeric|min:1',
         'taxa_corretagem'=>'required|numeric',
@@ -135,8 +135,9 @@ class ContratoController extends Controller
     public function show(Contrato $contrato, $id)
     {
         $contrato = Contrato::findOrFail($id);
+        $anexos=Files::where('token_id',$contrato->token_id)->count();
 
-        return view('admin.contrato.show',compact('contrato'));
+        return view('admin.contrato.show',compact('contrato','anexos'));
     }
 
     /**
@@ -171,7 +172,7 @@ class ContratoController extends Controller
         'filetype.*' => 'required',
         'data_inicio'=>'required|date',
         'data_proximo_pagamento'=>'required|date',
-        'capital_seguro'=>'nullable|numeric',
+        'capital_seguro'=>'numeric|required_if:tipo_ramo,Automóvel - Responsabilidade Civil',
         'premio_total'=>'required|numeric',
         'premio_simples'=>'required|numeric',
         'taxa_corretagem'=>'required|numeric',
@@ -182,6 +183,7 @@ class ContratoController extends Controller
         'custo_admin'=>'required|numeric|min:1',
         'imposto_selo'=>'required|numeric|min:1',
         'sobre_taxa'=>'required|numeric|min:1',
+        'numero_apolice'=>'required|string|min:3|max:100|unique:contratos,numero_apolice',
        ]);
        
        //file name
@@ -236,19 +238,24 @@ class ContratoController extends Controller
     {
     
        $validatedata=$request->validate([
-        'data_inicio'=>'nullable|date',
-        'dias_cobertos'=>'nullable|numeric',
-        'dias_proximo_pagamento'=>'nullable|numeric',
-        'capital_seguro'=>'nullable|numeric',
-        'premio_total'=>'nullable|numeric',
-        'premio_simples'=>'nullable|numeric',
-        'taxa_corretagem'=>'nullable|numeric',
-        'comissao'=>'nullable|numeric',
-        'periodicidade_pagamento'=>'nullable',
-        'situacao'=>'nullable',
-        'item_segurado'=>'nullable',
         'nome_seguradora'=>'nullable',
+        'numero_apolice'=>['nullable','string','min:3','max:100',Rule::unique('contratos','numero_apolice')->ignore($id,'id')],
+        'periodicidade_pagamento'=>'nullable|string',
+        'data_inicio'=>'required|date',
         'data_proximo_pagamento'=>'nullable|date',
+        'capital_seguro'=>'numeric|min:1|required_if:tipo_ramo,Automóvel - Responsabilidade Civil',
+        'premio_total'=>'nullable|numeric|min:1',
+        'premio_simples'=>'nullable|numeric|min:1',
+        'taxa_corretagem'=>'nullable|numeric',
+        'comissao'=>'nullable|numeric|min:1',
+        'item_segurado'=>'nullable|string|min:1',
+        'situacao'=>'nullable|string',
+        'consultor'=>'nullable|string',
+        'detalhes_item_segurado'=>'nullable|string',
+        'tipo_ramo'=>'nullable|string',
+        'user_id'=>'nullable',
+        'client_id' =>'nullable',
+        'client_token' => 'nullable',
         'custo_admin'=>'nullable|numeric|min:1',
         'imposto_selo'=>'nullable|numeric|min:1',
         'sobre_taxa'=>'nullable|numeric|min:1',

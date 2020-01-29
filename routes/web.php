@@ -165,6 +165,16 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
      Route::DELETE('financas/recibos/destroy/{id}','FinancasController@destroyrecibos');
      Route::get('financas/recibos/recibo/{token_id}','FinancasController@extratrecibo');
 
+     //extrato do cliente
+     Route::get('financas/extrato/{id}','FinancasController@extratoCliente');
+
+     //files 
+     Route::get('files/anexos/{token_id}','FileController@show');
+     //remover anexo form a
+    Route::get('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
+    Route::post('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
+    Route::post('/files/addfiles/{token_id}','FileController@addfiles');
+
 });
 
 Route::get('/', function(){
@@ -197,3 +207,17 @@ Route::get('chart','ChartController@index');
 //and sender
 
 
+//email sender
+Route::get('sendemail', function () {
+     $data = array(
+        'name' => "Learning Laravel",
+    );
+
+    Mail::send('notification', $data, function ($message) {
+
+        $message->to('nhacudimaemidio@gmail.com')->subject('Learning Laravel test email');
+
+    });
+    return "Your email has been sent successfully";
+
+});

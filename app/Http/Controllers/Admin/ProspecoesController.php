@@ -12,7 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProspecaoRequest;
 use Carbon\Carbon;
 use App\Cliente;
-
+use App\Files;
+use Illuminate\Support\Str;
 
 class ProspecoesController extends Controller
 {
@@ -34,7 +35,6 @@ class ProspecoesController extends Controller
 
         $hoje = Carbon::today();
         
-
        return view('admin.prospecoes.index',compact('prospecaos','seguradora','hoje'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 
@@ -65,11 +65,11 @@ class ProspecoesController extends Controller
      */
     public function store(ProspecaoRequest $request)
     {
-
+       $request['token_id']=Str::random(32).'prospecao'.time();
        Prospecao::create($request->all());
 
 
-       return back()->with('success','Prospeção criado.');
+       return redirect('/admin/prospecoes/index')->with('success','Prospeção criada.');
 
 
     }
@@ -84,7 +84,10 @@ class ProspecoesController extends Controller
     {
         $prospecao = Prospecao::findOrFail($id);
 
-        return view('admin.prospecoes.show',compact('prospecao'));
+        $anexos=Files::where('token_id',$prospecao->token_id)->count();
+       
+
+        return view('admin.prospecoes.show',compact('prospecao','anexos'));
     }
 
     /**
