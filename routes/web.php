@@ -103,6 +103,14 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::delete('sinistro/destroy/{id}', 'SinistroController@destroy')->name('sinistros.destroy');
 
+    Route::get('ramo/index','RamoController@index')->name('ramo.index');
+
+    Route::get('ramo','RamoController@create')->name('ramo.create');
+
+    Route::post('ramo','RamoController@store')->name('ramo.store');
+
+    Route::delete('ramo/destroy/{id}','RamoController@destroy')->name('ramo.destroy');
+
     Route::get('saude/index','SaudeController@index')->name('saudes.index');
 
     Route::get('saude/{id}','SaudeController@create')->name('saude.create');
@@ -129,6 +137,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     
     Route::post('enviaremail', 'EmailController@enviaremail');
 
+    
     
 
     //clientes 

@@ -169,8 +169,7 @@ return [
                 ],
                 [
                     'text'  => 'Ramo',
-                    'url'   => '#',
-                    'icon'  => 'institution',
+                    'url'   => 'admin/ramo/index',
 
                 ],
             ]

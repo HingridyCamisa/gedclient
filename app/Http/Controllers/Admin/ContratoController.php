@@ -7,6 +7,7 @@ use App\TipoSeguro;
 use App\Consultor;
 use App\Contrato;
 use App\Prospecao;
+use App\Ramo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use carbon;
@@ -50,13 +51,14 @@ class ContratoController extends Controller
         $seguradora = Seguradora::all();
         $tipo_seguro = TipoSeguro::all();
         $consultor = Consultor::all();
+        $ramos = Ramo::all();
         $cliente=Cliente::where('status',1)->where('id',$id)->first();
         if (!$cliente)
         {
         	return back()->with('error','Cliente desativado');
         };
 
-        return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor','cliente'));
+        return view('admin.contrato.create',compact('contrato','tipo_seguro','seguradora','consultor','cliente','ramos'));
     }
 
     /**
@@ -148,9 +150,10 @@ class ContratoController extends Controller
         $seguradora = Seguradora::all();
         $consultores = Consultor::all();
         $tipo_seguro = TipoSeguro::all();
+        $ramos = Ramo::all();
         $contrato = Contrato::findOrFail($id);
 
-        return view('admin.contrato.edit',compact('contrato','seguradora','consultores','tipo_seguro'))->with('success','Contrato editado.');
+        return view('admin.contrato.edit',compact('contrato','seguradora','consultores','tipo_seguro','ramos'))->with('success','Contrato editado.');
     }
 
     public function tornarcontrato(Request $request)

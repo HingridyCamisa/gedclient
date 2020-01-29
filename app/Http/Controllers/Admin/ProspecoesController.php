@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Prospecao;
 use App\Consultor;
 use App\Seguradora;
+use App\Ramo;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -47,12 +48,13 @@ class ProspecoesController extends Controller
     public function create($id)
     {
         $consultors = Consultor::all();
+        $ramos = Ramo::all();
         $cliente=Cliente::where('status',1)->where('id',$id)->first();
         if (!$cliente)
         {
         	return back()->with('error','Cliente desativado');
         };
-        return view('admin.prospecoes.create',compact('consultors','cliente'));
+        return view('admin.prospecoes.create',compact('consultors','cliente','ramos'));
     }
 
     /**
@@ -94,9 +96,10 @@ class ProspecoesController extends Controller
     public function edit(Prospecao $prospecao, $id)
     {
         $consultors = Consultor::all();
+        $ramos = Ramo::all();
         $prospecao = Prospecao::findOrFail($id);
 
-        return view('admin.prospecoes.edit',compact('prospecao','consultors'));
+        return view('admin.prospecoes.edit',compact('prospecao','consultors','ramos'));
 
     }
 

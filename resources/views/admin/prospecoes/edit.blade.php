@@ -38,20 +38,16 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Ramo </label>
-                                        <select class="form-control" name="tipo_ramo">
-                                            <option value="{{old('tipo_prospecao',$prospecao->tipo_prospecao)}}" selected disabled> {{old('tipo_prospecao',$prospecao->tipo_prospecao)}}</option>
-                                            <option value="Acidentes Pessoais">Acidentes Pessoais</option>
-                                            <option value="Acidente de Trabalho">Acidente de Trabalho</option>
-                                            <option value="Automóvel - Responsabilidade Civil">Automóvel - Responsabilidade Civil</option>
-                                            <option value="Automóvel - Danos Próprios">Automóvel - Danos Próprios</option>
-                                            <option value="Garantia">Garantia</option>
-                                            <option value="Recheio">Recheio</option>
-                                            <option value="Saúde">Saúde</option>
-                                            <option value="Mercadoria">Mercadoria</option>
-                                            <option value="Multirriscos">Multirriscos</option>
+                                    <select class="form-control" name="ramo">
+                                  
+                                                @foreach($ramos as $ramo)
+                                                <option value="{{ $ramo->id}}"> {{ $ramo->ramo}}</option>
+                                                @endforeach
+                                            </select>
+                                            </div>
+
                                             
-                                        </select>
-                                    </div>
+                                      
 
                                     <div class="col-xs-3">
                                         <label><i class="fa fa-map-pin"></i> Origem Prospecção </label>
