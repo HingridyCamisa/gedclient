@@ -9,8 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
+
     public function show($token_id)
-    {
+    {$this->authorize('files');
 
         $files=Files::where('token_id',$token_id)->get();
 
@@ -25,6 +33,7 @@ class FileController extends Controller
     //remove anexo
         public function removeanexo(Request $request, $token_id)
     {
+        $this->authorize('files_remove');
 
         Storage::delete('/public/anexos/'.$token_id);
         Files::where('filename',$token_id)->delete();
@@ -33,6 +42,7 @@ class FileController extends Controller
 
        public function addfiles(Request $request, $token_id)
     {
+        $this->authorize('files_add');
            $validatedata=$request->validate([
                 'filetype.*' => 'required',
                 'file' => 'required',

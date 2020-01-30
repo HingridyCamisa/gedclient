@@ -10,13 +10,17 @@ use App\Http\Requests\RamoRequest;
 
 class RamoController extends Controller
 {
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { $this->authorize('ramos');
         
         $ramos = \App\Ramo::latest()->paginate(50);
 
@@ -30,7 +34,7 @@ class RamoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   $this->authorize('ramos_create');
         return view('admin.ramo.create');
     }
 
@@ -42,7 +46,7 @@ class RamoController extends Controller
      */
     public function store(RamoRequest $request)
     {
-      
+      $this->authorize('ramos_create');
        Ramo::create($request->all());
        
        
@@ -57,7 +61,7 @@ class RamoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Ramo $ramo)
-    {
+    {   $this->authorize('ramos_show');
         //
     }
 
@@ -68,7 +72,7 @@ class RamoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Ramo $ramo)
-    {
+    {   $this->authorize('ramos_edit');
         //
     }
 
@@ -80,7 +84,7 @@ class RamoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Ramo $ramo)
-    {
+    { $this->authorize('ramos_edit');
         //
     }
 
@@ -91,7 +95,7 @@ class RamoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Ramo $ramo, $id)
-    {
+    {   $this->authorize('ramos_destroy');
         $ramo= \App\Ramo::find($id);
         $ramo->delete();
 

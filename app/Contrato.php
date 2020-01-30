@@ -25,4 +25,9 @@ class Contrato extends Model
         return $this->belongsTo('App\Seguradora','nome_seguradora','id');
     }
     
+    public function ramo()
+    {
+        return $this->belongsTo('App\Ramo','tipo_ramo','id');
+    }
+    
 }

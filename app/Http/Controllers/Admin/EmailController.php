@@ -13,8 +13,17 @@ use App\Mail\Geral;
 
 class EmailController extends Controller
 {
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     public function index($id, $source)
     {
+
+    $this->authorize('emails');
+
         $client=DB::table($source)->where('id',$id)->first();
         if($source=="clientes")
         {
@@ -34,6 +43,7 @@ class EmailController extends Controller
 
     public function enviaremail(Request $request)
     {
+    $this->authorize('emails');
         $data=$request->all();
         $this->validate($request, array(
             'message' => 'required|min:3',

@@ -11,6 +11,13 @@ use App\Http\Controllers\Controller;
 
 class SinistroController extends Controller
 {
+
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +25,8 @@ class SinistroController extends Controller
      */
     public function index()
     {
+        $this->authorize('sinostros');
+
         $sinistros = \App\Sinistro::latest()->paginate(12);
 
         return view('admin.sinistro.index',compact('sinistros'))->with('i',(request()->input('page', 1) -1) *12);
@@ -29,7 +38,7 @@ class SinistroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   $this->authorize('sinostros_create');
         $seguradoras = Seguradora::all();
         $consultor = Consultor::all();
         return view ('admin.sinistro.create',compact('seguradoras','consultor'));
@@ -43,6 +52,7 @@ class SinistroController extends Controller
      */
     public function store(Request $request)
     {
+    $this->authorize('sinostros_create');
         $sinistro = new Sinistro();
         $sinistro->sinistro = $request->input('sinistro');
         $sinistro->seguradora = $request->input('seguradora');
@@ -74,6 +84,7 @@ class SinistroController extends Controller
      */
     public function show(Sinistro $sinistro, $id)
     {
+    $this->authorize('sinostros_show');
         $sinistros = Sinistro::findOrFail($id);
 
         return view('admin.sinistro.show',compact('sinistros'));
@@ -86,7 +97,7 @@ class SinistroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Sinistro $sinistro, $id)
-    {
+    {   $this->authorize('sinostros_edit');
         $sinistros = Sinistro::findOrFail($id);
         $consultor = Consultor::all();
         $seguradoras = Seguradora::all();
@@ -102,7 +113,8 @@ class SinistroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Sinistro $sinistro, $id)
-    {
+    {   $this->authorize('sinostros_edit');
+
         $sinistros = Sinistro::findOrFail($id);
         $sinistro->sinistro = $request->input('sinistro');
         $sinistro->seguradora = $request->input('seguradora');
@@ -134,7 +146,7 @@ class SinistroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Sinistro $sinistro, $id)
-    {
+    {   $this->authorize('sinostros_destroy');
         $sinistro = \App\Sinistro::find($id);
         $sinistro->delete();
 

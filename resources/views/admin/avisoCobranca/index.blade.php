@@ -157,6 +157,6 @@ $(document).ready(function() {
 } );
 
 </script>
-
+ {{ $avisos->links() }}
 
 @stop

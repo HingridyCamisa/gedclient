@@ -47,10 +47,10 @@
 
                                     <div class="col-xs-3">
                                     <label> Ramo </label>
-                                            <select class="form-control" name="ramo">
+                                            <select class="form-control" name="tipo_ramo">
                                                 <option   selected disabled> select</option>
                                                 @foreach($ramos as $ramo)
-                                                <option value="{{ $ramo->id}}"> {{ $ramo->ramo}}</option>
+                                                <option value="{{$ramo->id}}"> {{$ramo->ramo}}</option>
                                                 @endforeach
                                             </select>
                                     </div>

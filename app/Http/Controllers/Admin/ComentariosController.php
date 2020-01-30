@@ -15,10 +15,14 @@ class ComentariosController extends Controller
          $this->middleware('auth');
 
     }
-
+    protected function guard()
+    {
+        return Auth::guard(app('VoyagerGuard'));
+    }
 
     public function comentsave(Request $request)
     {
+     $this->authorize('comentarios');
          $task=Comentarios::create($request->all());
 
 

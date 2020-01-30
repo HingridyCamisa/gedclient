@@ -48,6 +48,7 @@
         </tr>
       </tfoot>
     </table>
+ </div>
 
 <script type="text/javascript">
 
@@ -111,7 +112,7 @@ $(document).ready(function() {
 
 
 
-   </div>
+  
 
-
+ {{ $ramos->links() }}
 @stop

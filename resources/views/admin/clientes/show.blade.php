@@ -25,8 +25,8 @@
       <tbody>
 
         <tr >
-          <th width="300px">Secret Key</th>
-          <td><i class="fa fa-key"></i> &nbsp; {{ $cliente->token_id}}</td> 
+          <th width="300px">Codigo</th>
+          <td><i class="fa fa-key"></i> &nbsp; M{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</td> 
         </tr>
         <tr>
           <th>Nome </th>

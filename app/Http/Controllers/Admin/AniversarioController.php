@@ -9,13 +9,19 @@ use carbon;
 
 class AniversarioController extends Controller
 {
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   $this->authorize('aniversarios');
         $cliente = Cliente::all(); 
         
         return view('admin.aniversarios.index', compact('cliente'));

@@ -16,8 +16,18 @@ use App\AvisoCobrancaView;
 
 class AvisoDeCobrancaController extends Controller
 {
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
+
     public function aviso ($tipo,$id,$token_id)
     {
+
+         $this->authorize('avisos_show');
+
         $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$token_id)->get();
         $contrato=DB::table($tipo)->where('id',$id)->first();
         $cliente=Cliente::find($contrato->client_id);
@@ -64,7 +74,8 @@ class AvisoDeCobrancaController extends Controller
     }
 
     public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data)
-    {
+    {    $this->authorize('avisos_make');
+
         $token_id=$contrato.$numero;
         $request['token_id']=$token_id;
         $request->validate([
@@ -129,6 +140,7 @@ class AvisoDeCobrancaController extends Controller
 
     public function index()
     {
+         $this->authorize('avisos');
 
         $avisos=AvisoCobrancaView::latest()->paginate(12);
         return view('admin.avisoCobranca.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);

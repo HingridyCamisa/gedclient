@@ -11,13 +11,17 @@ use App\Http\Requests\SeguradoraRequest;
 
 class SeguradorasController extends Controller
 {
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  $this->authorize('seguradoras');
       // $seguradoras = Seguradora::all();
 
          $seguradoras = \App\Seguradora::latest()->paginate(12);
@@ -32,7 +36,7 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {     $this->authorize('seguradoras_create');
         return view('admin.seguradoras.create');
     }
 
@@ -43,7 +47,7 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(SeguradoraRequest $request)
-    {
+    { $this->authorize('seguradoras_create');
         //dd($request->all());
 
  
@@ -71,7 +75,7 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Seguradora $seguradora, $id)
-    {
+    {    $this->authorize('seguradoras_show');
         $tipo_seguro = TipoSeguro::all();
         $seguradora = \App\Seguradora::findOrFail($id);
 
@@ -85,7 +89,7 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Seguradora $seguradora, $id)
-    {
+    {    $this->authorize('seguradoras_edit');
         $seguradora = \App\Seguradora::findOrFail($id);
 
         return view('admin.seguradoras.edit',compact('seguradora'));
@@ -99,7 +103,8 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Seguradora $seguradora, $id)
-    {
+    {    $this->authorize('seguradoras_edit');
+
         $seguradoras = Seguradora::find($id);
         $seguradoras->nome_seguradora = $request->input('nome_seguradora');
         $seguradoras->endereco_seguradora = $request->input('endereco_seguradora');
@@ -121,7 +126,7 @@ class SeguradorasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Seguradora $seguradora, $id)
-    {
+    {    $this->authorize('seguradoras_destroy');
         $seguradora= \App\Seguradora::find($id);
         $seguradora->delete();
 

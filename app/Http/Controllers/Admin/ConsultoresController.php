@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 class ConsultoresController extends Controller
 {
 
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,6 +29,8 @@ class ConsultoresController extends Controller
      */
     public function index()
     {
+        $this->authorize('consultores');
+
         $consultor = Consultor::latest()->paginate(12);
 
         return view('admin.consultor.index',compact ('consultor',$consultor))->with('i', (request()->input('page', 1) - 1) *10);
@@ -36,7 +43,7 @@ class ConsultoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {     $this->authorize('consultores_create');
         return view('admin.consultor.create');
     }
 
@@ -47,7 +54,7 @@ class ConsultoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ConsultorRequest $request)
-    {
+    {     $this->authorize('consultores_create');
         
        $consultor = new Consultor();
        $consultor->nome_consultor = $request->input('nome_consultor');
@@ -67,7 +74,8 @@ class ConsultoresController extends Controller
      */
     public function show(Consultor $consultor)
     {
-        //
+          $this->authorize('consultores_show');
+//
     }
 
     /**
@@ -78,6 +86,7 @@ class ConsultoresController extends Controller
      */
     public function edit(Consultor $consultor, $id)
     {
+          $this->authorize('consultores_edit');
         $consultor = Consultor::findorFail($id);
 
         return view('admin.consultor.edit', compact('consultor'));
@@ -91,7 +100,8 @@ class ConsultoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Consultor $consultor, $id)
-    {
+    {     $this->authorize('consultores_edit');
+
         $consultor = Consultor::find($id);
         $consultor->nome_consultor = $request->input('nome_consultor');
         $consultor->email_consultor = $request->input('email_consultor');
@@ -110,7 +120,8 @@ class ConsultoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Consultor $consultor, $id)
-    {
+    {     $this->authorize('consultores_destroy');
+
         $consultor= \App\Consultor::find($id);
         $consultor->delete();
 

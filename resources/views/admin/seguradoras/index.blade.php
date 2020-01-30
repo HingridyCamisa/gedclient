@@ -36,7 +36,7 @@
           <td><center>{{$seguradora->gestor }}</center></td>
           <td><center><a href="{{ route ('seguradora.edit', $seguradora->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
               <a href="{{ route ('seguradora.show', $seguradora->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-              @if(Auth::user()->cargo =='1')
+              @can('seguradoras_destroy')
               {!! Form::open(['method' => 'DELETE','route' => ['seguradora.destroy', $seguradora->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
@@ -121,6 +121,6 @@ $(document).ready(function() {
 
 </script>
 
-
+ {{ $seguradoras->links() }}
 
 @stop

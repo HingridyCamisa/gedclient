@@ -137,13 +137,37 @@
                         <div class="form-group">
                         <div class="col-md-12">
                           <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                          <span class="input-group-addon"><i class="fa fa-caret-square-o-down"></i></span>
                             <select class="form-control" id="forma_pagamento" name="forma_pagamento" required autofocus  onchange="formaPagamento(this.value)">
                                 <option value="" disabled selected>Seleciona a forma de pagamento</option>
                                 <option value="Deposito">Deposito</option>
                                 <option value="Cash">Cash</option>
                                 <option value="TRF">TFR</option>
                                 <option value="Cheque">Cheque</option>
+                            </select>
+                        </div>
+
+                    
+                        </div>
+                        </div>
+
+                    </p> <br><br>    
+                     <p> 
+
+                        <div class="form-group">
+                        <div class="col-md-12">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-caret-square-o-down"></i></span>
+                            <select class="form-control"  name="operacao" required autofocus  >
+                                <option value="" disabled selected>Seleciona o tipo de operação</option>
+                                <option value="Nova Apolice">Nova Apolice</option>
+                                <option value="Seguro Novo">Seguro Novo</option>
+                                <option value="Renovacao">Renovacao</option>
+                                <option value="Segunda  prestacao">Segunda  prestacao</option>
+                                <option value="Aviso Previo">Aviso Previo</option>
+                                <option value="Seguro Unico">Seguro Unico</option>
+                                <option value="Inclusao">Inclusao</option>
+                                <option value="Segundo aviso">Segundo aviso</option>
                             </select>
                         </div>
 
@@ -195,51 +219,6 @@
                     </p> <br>
 
                      
-                    <!--files-->
-                  <hr />
-                    
-                    
-                   <div class="row col-md-12" style="margin-left:5px">   
-                    <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4>  
-                      <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não  superior à 5MB</small>
-                      <div class="">
-                        <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
-                           <option disabled selected>Seleciona tipo de ficheiro...</option>
-                                <option value="Deposito">Deposito</option>
-                                <option value="Cash">Cash</option>
-                                <option value="TRF">TFR</option>
-                                <option value="Cheque">Cheque</option>
-                        </select>
-                      </div>
-                    <div class="input-group control-group increment" >
-                      <input type="file" name="file[]" class="form-control" >
-                      <div class="input-group-btn" > 
-                        <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus" ></i>Add</button>
-                      </div>
-          
-                    </div>
-
-
-                    <div class="clone hide" >
-                    <div class="control-group">
-                      <div class="" style="margin-top:10px">
-                        <select class="form-control"   id="filetype[]"  name="filetype[]" required autofocus  >
-                           <option disabled selected>Seleciona...</option>
-                                <option value="Deposito">Deposito</option>
-                                <option value="Cash">Cash</option>
-                                <option value="TRF">TFR</option>
-                                <option value="Cheque">Cheque</option>
-                        </select>
-                      </div>
-                      <div class=" input-group" >
-                        <input type="file" name="file[]" class="form-control" >          
-                        <div class="input-group-btn"> 
-                          <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                   </div>
 
 
                 </div>

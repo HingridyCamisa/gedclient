@@ -53,7 +53,7 @@
            @endif
           <td><center><a href="{{ route ('saude.edit', $saudes->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
           <a href="{{ route ('saude.show', $saudes->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-          @if(Auth::user()->cargo =='1')
+          @can('saudes_destroy')
               {!! Form::open(['method' => 'DELETE','route' => ['saude.destroy', $saudes->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
@@ -146,5 +146,5 @@ $(document).ready(function() {
 
    </div>
 
-
+ {{ $saude->links() }}
 @stop

@@ -18,13 +18,18 @@ use Illuminate\Validation\Rule;
 
 class SaudeController extends Controller
 {
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   $this->authorize('saudes');
 
         $saude = Saude::latest()->paginate(12);
         return view('admin.saude.index',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
@@ -36,7 +41,8 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($id)
-    {
+    {   $this->authorize('saudes_create');
+
         $saudes = Saude::where('tipo_membro','Policy Holder')->get();
         $consultor = Consultor::all();
         $seguradora = Seguradora::all();
@@ -55,7 +61,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(SaudeRequest $request)
-    {
+    {   $this->authorize('saudes_store');
         $saude=$request->all();
         //file name
         $namefile = Str::random(32).'saude'.time();
@@ -94,7 +100,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   $this->authorize('saudes_show');
         $saude = Saude::findOrFail($id);
         $dateOfBirth = $saude->cliente->cliente_data_nascimento;
 
@@ -109,7 +115,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Saude $saude, $id)
-    {
+    {  $this->authorize('edit');
         $consultors = Consultor::all();
         $seguradora = Seguradora::all();
         $saude = Saude::findOrFail($id);
@@ -127,7 +133,7 @@ class SaudeController extends Controller
      */
     public function update(Request $request, Saude $saude, $id)
     {
-
+         $this->authorize('edit');
         //dd($request->data['numero_membro']);
         //dd($request->numero_membro);
         $data=$this->validate($request, array(
@@ -166,7 +172,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Saude $saude, $id)
-    {
+    {    $this->authorize('saudes_destroy');
         $saude= \App\Saude::find($id);
         $saude->delete();
 

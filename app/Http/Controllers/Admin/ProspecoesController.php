@@ -17,6 +17,13 @@ use Illuminate\Support\Str;
 
 class ProspecoesController extends Controller
 {
+
+
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +31,7 @@ class ProspecoesController extends Controller
      */
     public function index()
     {
+      $this->authorize('prospecoes');
         $seguradora = Seguradora::all();
         $prospecaos = Prospecao::select('prospecaos.*','consultors.nome_consultor as consultor')
                                 ->join('consultors','prospecaos.nome_consultor','consultors.id')
@@ -46,7 +54,7 @@ class ProspecoesController extends Controller
      */
 
     public function create($id)
-    {
+    {   $this->authorize('prospecoes_create');
         $consultors = Consultor::all();
         $ramos = Ramo::all();
         $cliente=Cliente::where('status',1)->where('id',$id)->first();
@@ -64,7 +72,7 @@ class ProspecoesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProspecaoRequest $request)
-    {
+    {   $this->authorize('prospecoes_create');
        $request['token_id']=Str::random(32).'prospecao'.time();
        Prospecao::create($request->all());
 
@@ -81,7 +89,7 @@ class ProspecoesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Prospecao $prospecao, $id)
-    {
+    {   $this->authorize('prospecoes_show');
         $prospecao = Prospecao::findOrFail($id);
 
         $anexos=Files::where('token_id',$prospecao->token_id)->count();
@@ -97,7 +105,7 @@ class ProspecoesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Prospecao $prospecao, $id)
-    {
+    {   $this->authorize('prospecoes_edit');
         $consultors = Consultor::all();
         $ramos = Ramo::all();
         $prospecao = Prospecao::findOrFail($id);
@@ -115,6 +123,7 @@ class ProspecoesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('prospecoes_edit');
 
        $validatedata=$request->validate([
             'data_inicio'=>'nullable|date',
@@ -141,6 +150,8 @@ class ProspecoesController extends Controller
      */
     public function destroy(Prospecao $prospecao, $id)
     {
+        $this->authorize('prospecoes_destroy');
+
         $prospecao= \App\Prospecao::find($id);
         $prospecao->delete();
 

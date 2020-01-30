@@ -12,13 +12,17 @@ use Validator;
 
 class CalendarioController extends Controller
 {
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {     $this->authorize('calendario');
         $calendarios = Calendario::all();
             $calendario_list = [];
             $calendario_detalhes = [];
@@ -49,7 +53,7 @@ class CalendarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addEvent(CalendarioRequest $request)
-    {
+    {     $this->authorize('calendario_create');
         Calendario::create($request->all());
         return $this->index()->with('success','Evento criado com sucesso.');
 

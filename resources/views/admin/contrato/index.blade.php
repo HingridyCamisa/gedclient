@@ -38,7 +38,7 @@
           <td><center>{{$contrato->cliente->cliente_nome}}</center></td>
           <td><center>{{$contrato->seguradora->nome_seguradora }}</center></td>
           <td><center>{{$contrato->numero_apolice }}</center></td>
-          <td><center>{{$contrato->tipo_ramo }}</center></td>
+          <td><center>{{$contrato->ramo['ramo'] }}</center></td>
           <td><center>{{$contrato->data_proximo_pagamento}}</center></td>
           <td><center>{{$contrato->situacao }}</center></td>
           @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())
@@ -49,11 +49,11 @@
           <td><center><a href="{{ route ('contratos.edit', $contrato->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
 
               <a href="{{ route ('contratos.show', $contrato->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-              @if(Auth::user()->cargo =='1')
+              @can('contratos_destroy')
               {!! Form::open(['method' => 'DELETE','route' => ['contrato.destroy', $contrato->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
-              @endif
+              @endcan
               <a href="{{ url('admin/email/'.$contrato->client_id.'/clientes') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
               </center>
           </td>

@@ -13,6 +13,10 @@ use Illuminate\Validation\Rule;
 
 class ClientesController extends Controller
 {
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +24,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
+    $this->authorize('clientes');
         $clientes=Cliente::latest()
                            ->paginate(12);
         return view('admin.clientes.index',compact('clientes'))->with('i', (request()->input('page', 1) -1) * 12);
@@ -32,6 +37,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
+    $this->authorize('clientes_create');
         $countries = DB::table("uvw_country_states")->groupby("country_name")->pluck("country_name");
         return view('admin.clientes.create',compact('countries'));
     }
@@ -46,6 +52,7 @@ class ClientesController extends Controller
 
     public function getCityList(Request $request)
     {
+        
         $cities = DB::table("tbl_cities")
         ->where("state_id",$request->state_id)
         ->pluck("name","id");
@@ -59,7 +66,8 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $this->authorize('clientes_create');
         $cliente=$request->all();
         $request->validate([
             'cliente_tipo'=>'required|string|min:1',
@@ -124,18 +132,18 @@ class ClientesController extends Controller
         if ($request->file('file'))
         {
         
-                foreach($request->file('file') as $key=>$file)
-                {
-                    $origname=$file->getClientOriginalName();
-                    $name=time() . '_'.$key.'.'. $origname;
-                    $file->storeAs('public/anexos', $name);
-                    $file= new Files();
-                    $file->filename=$name;
-                    $file->token_id=$namefile;
-                    $file->filetype=$request->filetype[$key];
-                    $file->save();
+            foreach($request->file('file') as $key=>$file)
+            {
+                $origname=$file->getClientOriginalName();
+                $name=time() . '_'.$key.'.'. $origname;
+                $file->storeAs('public/anexos', $name);
+                $file= new Files();
+                $file->filename=$name;
+                $file->token_id=$namefile;
+                $file->filetype=$request->filetype[$key];
+                $file->save();
 
-                }
+            }
         }
         return redirect('/admin/clientes')->with('success','Cliente criado.');
         
@@ -150,6 +158,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('clientes_show');
         $cliente=Cliente::find($id);
         if ($cliente->status==0)
         {
@@ -175,6 +184,7 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('clientes_edit');
         $consultors = Consultor::all();
         $cliente = Cliente::find($id);
         $countries = DB::table("uvw_country_states")->groupby("country_name")->pluck("country_name");
@@ -191,6 +201,7 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('clientes_edit');
         $teste_cliente=Cliente::find($id);
         if ($teste_cliente->status==0)
         {
@@ -260,6 +271,7 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('clientes_destroy');
         $cliente= \App\Cliente::find($id);
         if ($cliente->status==1)
         {

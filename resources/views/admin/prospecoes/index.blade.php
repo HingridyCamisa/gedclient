@@ -46,11 +46,11 @@
             <td><center><a href="{{ route ('prospecoes.edit', $prospecao->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
 
              <a href="{{ route ('prospecoes.show', $prospecao->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-             @if(Auth::user()->cargo =='1')
+             @can('prospecoes_destroy')
               {!! Form::open(['method' => 'DELETE','route' => ['prospecoes.destroy', $prospecao->id],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
-              @endif
+              @endcan
               <a href="{{ url('admin/email/'.$prospecao->client_id.'/clientes') }}" class="btn btn-default btn-xs"><i class="fa fa-fw fa-envelope"></i></a>
             </center>
              </td>
@@ -532,5 +532,5 @@ $(document).ready(function() {
         });
     });
     </script>
-
+ {{ $prospecaos->links() }}
 @stop

@@ -14,6 +14,7 @@ use carbon;
 use Illuminate\Support\Str;
 use App\Files;
 use App\Cliente;
+use Illuminate\Validation\Rule;
 
 class ContratoController extends Controller
 {
@@ -46,7 +47,8 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($id)
-    {
+    {   
+        $this->authorize('contratos_create');
         $contrato = Contrato::all();
         $seguradora = Seguradora::all();
         $tipo_seguro = TipoSeguro::all();
@@ -69,6 +71,7 @@ class ContratoController extends Controller
      */
     public function store(Request $request)
     {
+         $this->authorize('contratos_create');
          $validatedata=$request->validate([
         'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
         'filetype.*' => 'required',
@@ -110,17 +113,18 @@ class ContratoController extends Controller
         if ($request->file('file'))
         {
         
-        foreach($request->file('file') as $key=>$file)
-        {
-            $origname=$file->getClientOriginalName();
-            $name=$origname . time() . '-'.$key.'.'. $file->getClientOriginalExtension();
-            $file->storeAs('anexos', $name);
-            $file= new Files();
-            $file->filename=$name;
-            $file->token_id=$namefile;
-            $file->filetype=$request->filetype[$key];
-            $file->save();
-        }
+                foreach($request->file('file') as $key=>$file)
+                {
+                    $origname=$file->getClientOriginalName();
+                    $name=time() . '_'.$key.'.'. $origname;
+                    $file->storeAs('public/anexos', $name);
+                    $file= new Files();
+                    $file->filename=$name;
+                    $file->token_id=$namefile;
+                    $file->filetype=$request->filetype[$key];
+                    $file->save();
+
+                }
         }
 
         return redirect('/admin/contrato/index')->with('success','Contrato criado.');
@@ -134,6 +138,7 @@ class ContratoController extends Controller
      */
     public function show(Contrato $contrato, $id)
     {
+        $this->authorize('contratos_show');
         $contrato = Contrato::findOrFail($id);
         $anexos=Files::where('token_id',$contrato->token_id)->count();
 
@@ -147,7 +152,8 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Contrato $contrato, $id)
-    {
+    {   
+        $this->authorize('contratos_edit');
         $seguradora = Seguradora::all();
         $consultores = Consultor::all();
         $tipo_seguro = TipoSeguro::all();
@@ -159,7 +165,7 @@ class ContratoController extends Controller
 
     public function tornarcontrato(Request $request)
     { 
-
+        $this->authorize('tornar_contrato');
          $prospecao=Prospecao::where('status',1)->where('id',$request->id_prospecaos)->first();
         if (!$prospecao)
         {
@@ -236,7 +242,7 @@ class ContratoController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+       $this->authorize('contratos_edit');
        $validatedata=$request->validate([
         'nome_seguradora'=>'nullable',
         'numero_apolice'=>['nullable','string','min:3','max:100',Rule::unique('contratos','numero_apolice')->ignore($id,'id')],
@@ -273,7 +279,7 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contrato $contrato, $id)
-    {
+    {   $this->authorize('contratos_destroy');
         $contrato= \App\Contrato::find($id);
         $contrato->status=0;
         $contrato->save();

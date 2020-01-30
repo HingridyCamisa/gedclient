@@ -19,28 +19,32 @@ use App\Cliente;
 class FinancasController extends Controller
 {
      
+      protected function guard()
+  {
+      return Auth::guard(app('VoyagerGuard'));
+  }
 
    public function index()
-    {
+    {   $this->authorize('financas_avisos');
         $avisos=AvisoCobrancaView::latest()->paginate(12);
         return view('admin.financas.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     } 
 
     public function extratrecibo($token_id)
-    {
+    {    $this->authorize('financas_extrair_recibo');
        $recibo=AvisoCobrancaRecibosView::where('token_id',$token_id)->first();
-
-       return view('admin.financas.extratrecibo', compact('recibo'));
+       $anexos=Files::where('token_id',$token_id)->count();
+       return view('admin.financas.extratrecibo', compact('recibo','anexos'));
     }
     
    public function recibostable()
-    {
+    {    $this->authorize('financas_recibos');
         $avisos=AvisoCobrancaRecibosView::latest()->paginate(12);
         return view('admin.financas.recibos', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 
     public function destroy($id)
-    {
+    {   $this->authorize('financas_aviso_destroy');
         $destroy= \App\AvisoCobranca::find($id);
         $destroy->status=0;
         $destroy->save();
@@ -48,7 +52,7 @@ class FinancasController extends Controller
         return redirect()->back()->with('success','Aviso eliminado.');
     }
     public function destroyrecibos($id)
-    {
+    {   $this->authorize('financas_recibo_destroy');
         $destroy= \App\Recibos::find($id);
         $destroy->status=0;
         $destroy->save();
@@ -57,7 +61,8 @@ class FinancasController extends Controller
     }
 
     public function savepaymat(Request $request)
-    {   
+    {   $this->authorize('financas_make_payment');
+
         $pay= AvisoCobranca::find($request->aviso_id);
         if ($pay->status==0)
         {
@@ -74,8 +79,7 @@ class FinancasController extends Controller
         'benificiario'=>'nullable',
         'testemunha'=>'nullable',
         'banco'=>'nullable',
-        'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
-        'filetype.*' => 'required',
+        'operacao'=>'required',
         ]);
         if ($validator->passes()) {
         //file name
@@ -118,7 +122,8 @@ class FinancasController extends Controller
 
 
     public function  extratoCliente($id)
-    {
+    {  $this->authorize('financas_extrato_cliente');
+
        $extrato = DB::select('select * from extrato_clientes where cliente_token_id=:cliente_token_id', ['cliente_token_id' =>$id]);
        $cliente = Cliente::where('token_id',$id)->first();
      

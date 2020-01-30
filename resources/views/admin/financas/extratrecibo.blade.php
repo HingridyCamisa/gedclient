@@ -1,10 +1,10 @@
-﻿@extends('adminlte::page')
+@extends('adminlte::page')
 
 @section('title','Aviso')
 
 @section('content_header')
     <h1><a class="btn btn-danger"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i> </a>
-
+      <a href="{{url('admin/files/anexos',$recibo->token_id)}}" class="btn btn-danger"><span class="badge bg-teal">{{$anexos}}</span>  <i class="fa fa-file-pdf-o" ></i></a>
     </h1>
 
 @stop
