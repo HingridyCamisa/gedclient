@@ -42,10 +42,9 @@ class RamoController extends Controller
      */
     public function store(RamoRequest $request)
     {
-       /*$ramos = new Ramo();
-       $ramos->ramo = $request->input('ramo');
-       $ramos->save();*/
+      
        Ramo::create($request->all());
+       
        
        return redirect('/admin/ramo/index')->with('success','Ramo criado.');
     }

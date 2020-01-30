@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+@include('notification')
  <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong> Ramo Seguradora </strong></h3></center>

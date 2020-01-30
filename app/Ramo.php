@@ -11,6 +11,7 @@ class Ramo extends Model
 
     protected $guarded =array();
 
+
     public $primaryKey = 'id';
 
     public $timestamps=true;

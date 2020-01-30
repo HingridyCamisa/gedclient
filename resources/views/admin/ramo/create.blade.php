@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+@include('notification')
 
 
           <!-- general form elements -->
@@ -25,7 +26,7 @@
                      
                           <div class="form-group">
                             <label for="NomeRamo"><i class="fa fa-user"></i> Ramo </label>
-                            <input class="form-control" name="ramo" placeholder="Ramo" type="text">
+                            <input class="form-control" name="ramo" placeholder="Ramo" type="text" value="{{old('ramo')}}">
                           </div>
               </div>
               <!-- /.box-body -->
@@ -36,13 +37,6 @@
                     
                   </div>
             </form>
-            @if($errors->any())
-              <ul class="alert alert-warning">
-                @foreach($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-           @endif
           </div>
           <!-- /.box -->
 

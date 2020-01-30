@@ -104,7 +104,7 @@
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
-        "order": [[ 6, "desc" ]],
+        "order": [[ 1, "desc" ]],
         "columnDefs": [
                         { "type": "date-eu", "targets": 6 }
                       ],

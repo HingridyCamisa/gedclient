@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use DB;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,13 +22,25 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    public $key;
     public function boot()
     {
         $this->registerPolicies();
 
-        /*Gate::define('contratos', function ($user) {
-         return $user->hasPermission('contratos');
-        });       
+        $permitions=DB::table('permissions')->get();
+        //dd($permitions[0]->key);
+
+        foreach($permitions as $key)
+        {
+        $this->key=$key->key;
+         Gate::define($this->key, function ($user) {
+             return $user->hasPermission($this->key);
+            }); 
+
+        };
+
+ 
+        /*     
         Gate::define('apagar-contratos', function ($user) {
          return $user->hasPermission('apagar-contratos');
         });       
