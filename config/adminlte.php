@@ -135,12 +135,40 @@ return [
                     'text'  => 'Contratos',
                     'url'   => 'admin/contrato/index',
                     'icon'  => 'folder-open',
+                     'submenu'     => [
+                                        [
+                                            'text'  => 'Contratos',
+                                            'url'   => 'admin/contrato/index',
+                                            'icon'  => 'folder-open',
+
+                                        ],
+                                        [
+                                            'text'  => 'A Expirar',
+                                            'url'   => 'admin/contrato/expira',
+                                            'icon'  => 'clock-o',
+
+                                        ],
+                                      ]
 
                 ],
                 [
                     'text'        => ' Saúde',
                     'url'         => 'admin/saude/index',
                     'icon'        => 'medkit',
+                     'submenu'     => [
+                                        [
+                                            'text'        => ' Saúde',
+                                            'url'         => 'admin/saude/index',
+                                            'icon'  => 'medkit',
+
+                                        ],
+                                        [
+                                            'text'  => 'A Expirar',
+                                            'url'   => 'admin/saude/expira',
+                                            'icon'  => 'clock-o',
+
+                                        ],
+                                      ]
                 ],
                 [
                     'text'  => 'Avisos',

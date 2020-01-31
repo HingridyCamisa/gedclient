@@ -10,7 +10,7 @@ use App\Prospecao;
 use App\Ramo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use carbon;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Files;
 use App\Cliente;
@@ -37,6 +37,20 @@ class ContratoController extends Controller
 
         
         return view('admin.contrato.index',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
+    
+    }
+    public function expira()
+    {
+        $this->authorize('contratos');
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
+        $contratos = Contrato::where("contratos.status",1)
+                                       ->whereBetween('data_proximo_pagamento',[$start,$end])
+                                       ->latest()
+                                       ->paginate(12);
+
+        
+        return view('admin.contrato.expira',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
     
     }
 

@@ -34,6 +34,16 @@ class SaudeController extends Controller
         $saude = Saude::latest()->paginate(12);
         return view('admin.saude.index',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
     }
+    public function expira()
+    {   $this->authorize('saudes');
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
+
+        $saude = Saude::latest()
+                    ->whereBetween('data_proximo_pagamento',[$start,$end])
+                    ->paginate(12);
+        return view('admin.saude.expira',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -25,12 +25,18 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $now=Carbon::now();
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
+        $contrato_expira=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
+        $saude_expira=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
+
+
+
 
         $cliente = Cliente::all();
         
-        $data = Prospecao::get()->groupBy('tipo_ramo')->map(function ($item) {
-            return count($item);
-        });
+
         
 
         $clientes = Cliente::where('cliente_tipo','individual')->get();
@@ -46,6 +52,9 @@ class AdminController extends Controller
         }
 
         
+        $data = Prospecao::get()->groupBy('tipo_ramo')->map(function ($item) {
+            return count($item);
+        });
 
         $chart = new grafico;
         $chart->labels($data->keys());
@@ -56,9 +65,10 @@ class AdminController extends Controller
         ],
         ]);
 
-        $emidiodata = Contrato::get()->groupby('tipo_ramo ')->map(function ($item) {
+        $emidiodata = Contrato::join('consultors','contratos.consultor','consultors.id')->get()->groupby('nome_consultor')->map(function ($item) {
             // Return the number of persons
             return count($item);
+
         });
 
 
@@ -73,11 +83,11 @@ class AdminController extends Controller
         
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
-        $contrato = Contrato::all();
+        $contrato = Contrato::all()->where('status',1);
        
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira'));
     }
 
     /**

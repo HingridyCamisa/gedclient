@@ -8,9 +8,8 @@
 
 @section('content')
 <div class="row">
-@if(Auth::user()->cargo =='1')
 
-  
+
   <div class="col-md-3">
     <div class="small-box bg-green">
               <div class="inner">
@@ -24,7 +23,7 @@
               <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
-  @endif
+
   <div class="col-md-3">
     <div class="small-box bg-yellow">
               <div class="inner">
@@ -58,15 +57,43 @@
                 <p>Aniversários</p>
               </div>
               <div class="icon">
-                <i class="ion ion-birthday-cake"></i>
+                <i class="ion ion-beer"></i>
               </div>
               <a href="{{ url('admin/aniversarios/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-3">
+    <div class="small-box bg-red">
+              <div class="inner">
+                <h4><strong>{{  $contrato_expira }}</strong></h4>
+                <p>Contratos a expirar no presente mês</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-clock"></i>
+              </div>
+              <a href="{{ url('admin/contrato/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+    <div class="col-md-3">
+    <div class="small-box bg-red">
+              <div class="inner">
+                <h4><strong>{{  $saude_expira }}</strong></h4>
+                <p>Contratos de saude a expirar no presente mês</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-clock"></i>
+              </div>
+              <a href="{{ url('admin/saude/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+</div>
+
 <hr>
 <div id="app">    
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
 
                 <div class="panel-body">
@@ -78,7 +105,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
                 <div class="card">
 
                           <div class="panel-body">
