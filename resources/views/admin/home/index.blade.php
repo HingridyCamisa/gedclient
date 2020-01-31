@@ -9,20 +9,50 @@
 @section('content')
 <div class="row">
 
+     <div class="col-md-3">
 
-  <div class="col-md-3">
-    <div class="small-box bg-green">
-              <div class="inner">
-                <!-- <h3>{{ $prospecao->sum('valor_estipulado_carteira')}}</h3>  -->
-                <h4><strong>{{ number_format($contrato->sum('premio_total'), 2, ',', '.') . 'MTN'}}</strong></h4>
-                <p>Valor em Carteira </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-cash"></i>
-              </div>
-              <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
-    </div>
-  </div>
+        <div class="info-box bg-green">
+          <span class="info-box-icon"><i class="ion ion-cash"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Valor em Carteira</span>
+            <span class="info-box-number">{{ number_format($contrato->sum('premio_total'), 2, ',', '.') . 'MTN'}}</span>
+            <!-- The progress section is optional -->
+            <div class="progress">
+              <div class="progress-bar" style="width: {{100}}%"></div>
+            </div>
+            <span class="progress-description">
+              Percentual {{ 100 }}% 
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+     </div>
+
+      <div class="col-md-3">
+
+        <div class="info-box bg-red">
+          <span class="info-box-icon"><i class="ion ion-cash"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Valor des Comições</span>
+            <span class="info-box-number">{{number_format($contrato->sum('comissao'), 2, ',', '.') . 'MTN'}}</span>
+            <!-- The progress section is optional -->
+            <div class="progress">
+              @if($contrato->sum('comissao')!=0)
+              <div class="progress-bar" style="width: {{($contrato->sum('comissao')/$contrato->sum('premio_total'))*100}}%"></div>
+              @endif
+            </div>
+            <span class="progress-description">
+              @if($contrato->sum('comissao')!=0)
+              Percentual {{ number_format(($contrato->sum('comissao')/$contrato->sum('premio_simples'))*100, 2) }}% 
+              @endif
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+
+      </div>
+
 
   <div class="col-md-3">
     <div class="small-box bg-yellow">
@@ -48,18 +78,6 @@
                 <i class="ion ion-folder"></i>
               </div>
               <a href="{{ url('admin/contrato/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-    </div>
-    <div class="col-md-3">
-    <div class="small-box bg-aqua">
-              <div class="inner">
-                <h4><strong>{{  $nu_aniversarios }}</strong></h4>
-                <p>Aniversários</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-beer"></i>
-              </div>
-              <a href="{{ url('admin/aniversarios/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
     </div>
 </div>
@@ -89,10 +107,50 @@
               <a href="{{ url('admin/saude/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
     </div>
+    <div class="col-md-3">
+    <div class="small-box bg-aqua">
+              <div class="inner">
+                <h4><strong>{{  $totalcontrato_expira_next }}</strong></h4>
+                <p>Contratos a expirar next month</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-clock"></i>
+              </div>
+              <a data-toggle="modal" data-target="#modal-warning" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+    <div class="col-md-3">
+    <div class="small-box bg-aqua">
+              <div class="inner">
+                <h4><strong>{{  $nu_aniversarios }}</strong></h4>
+                <p>Aniversários</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-beer"></i>
+              </div>
+              <a href="{{ url('admin/aniversarios/index')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
 </div>
 
 <hr>
-<div id="app">    
+
+<div id="app"> 
+        <div class="row">
+      
+        <div class="col-md-12">
+        <div class="card">
+
+                <div class="panel-body">
+                    <div>
+                    {!! $category_month->container()!!}
+                    </div>  
+                </div>
+            </div>
+        </div> 
+         </div>
+        <hr />
+    <div class="row">
         <div class="col-md-4">
             <div class="card">
 
@@ -129,8 +187,27 @@
         </div>
 
     </div>
+</div>
 
-
+<div class="modal modal-warning fade" id="modal-warning" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Aviso</h4>
+              </div>
+              <div class="modal-body">
+                <p>Devera navegar para <code> Contratos->A Expirar</code> ou <code> Saude->A Expirar</code></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
 
 
     <!--Graficos-->
@@ -158,6 +235,7 @@
 {!! $chart->script() !!}
 {!! $emidio->script() !!}
 {!! $graf_seguradora->script() !!}
+{!! $category_month->script() !!}
 
 
 <style>

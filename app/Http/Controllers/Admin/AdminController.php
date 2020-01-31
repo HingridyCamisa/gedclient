@@ -31,7 +31,12 @@ class AdminController extends Controller
         $contrato_expira=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
         $saude_expira=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
 
+        $start_next = new Carbon('first day of next month');
+        $end_next = new Carbon('last day of next month');
 
+        $contrato_expira_next=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->count();
+        $saude_expira_next=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->count();
+        $totalcontrato_expira_next=$contrato_expira_next+$saude_expira_next;
 
 
         $cliente = Cliente::all();
@@ -90,15 +95,69 @@ class AdminController extends Controller
         $graf_seguradora->title('Nº de Contratos por Seguradora');
         $graf_seguradora->dataset('Seguradoras', 'bar', $data_seguradora->values());
 
-        
-        
+        $lebels_category_month=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
+            ->orderby('created_at','asc')
+            ->get()
+            ->groupBy('date');
+
+        $data_premio=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'premio_simples')        
+            ->orderby('created_at','asc')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($item, $key) {
+                  return $this->sumItemPremio($item);
+            });      
+        $data_comissao=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'comissao')        
+            ->orderby('created_at','asc')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($item, $key) {
+                  return $this->sumItemComissao($item);
+            });
+        $category_month = new grafico;
+        $category_month->labels($lebels_category_month->keys());
+        $category_month->title('Performace Mensal');
+        $category_month->dataset('Premio Simples', 'line', $data_premio->values());
+        $category_month->dataset('Comissão', 'line', $data_comissao->values());
+
+
+
+
+
+
+
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
         $contrato = Contrato::all()->where('status',1);
        
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next'));
+    }
+
+    function sumItemPremio($items)
+    {
+        $total=0;
+
+        foreach ($items as $item)
+        {
+        	$total=$total+$item->premio_simples;
+        }
+        $result = $total;
+        
+        return $result;
+    }
+    function sumItemComissao($items)
+    {
+        $total=0;
+
+        foreach ($items as $item)
+        {
+        	$total=$total+$item->comissao;
+        }
+        $result = $total;
+        
+        return $result;
     }
 
     /**
