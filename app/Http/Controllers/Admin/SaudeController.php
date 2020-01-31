@@ -45,6 +45,27 @@ class SaudeController extends Controller
         return view('admin.saude.expira',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 
+        public function expiraFiltro(Request $request)
+    {
+        $this->authorize('contratos');
+
+        $request->validate([
+            'start'=>'required|date',
+            'end'=>'required|date|after:start'
+        ]);
+
+        $start = Carbon::parse($request->start);
+        $end = Carbon::parse($request->end)->addHours(23)->addMinutes(59)->addSecond(59);
+        $contratos = Saude::where("contratos.status",1)
+                                       ->whereBetween('data_proximo_pagamento',[$start,$end])
+                                       ->latest()
+                                       ->paginate(12);
+
+        
+        return view('admin.saude.expira',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
+    
+    }
+
     /**
      * Show the form for creating a new resource.
      *

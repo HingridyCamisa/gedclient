@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('contrato/index','ContratoController@index')->name('contratos.index');
     Route::get('contrato/expira','ContratoController@expira')->name('contratos.expira');
+    Route::post('contratos/expira/filtro','ContratoController@expiraFiltro');
 
     Route::get('contrato','ContratoController@create')->name('contratos.create');
 
@@ -114,6 +115,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::get('saude/index','SaudeController@index')->name('saudes.index');
     Route::get('saude/expira','SaudeController@expira')->name('saudes.expira');
+    Route::post('saude/expira/filtro','ContratoController@expiraFiltro');
 
     Route::get('saude/{id}','SaudeController@create')->name('saude.create');
 

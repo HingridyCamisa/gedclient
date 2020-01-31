@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1><a class="btn btn-danger"  href="{{ url('admin/clientes')}}"><i class="fa fa-fw fa-plus"></i> </a>
-    </h1>
+    <a class="btn btn-danger" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw fa-calendar"></i></a></h1>
 
 @stop
 
@@ -81,6 +81,46 @@
         </tr>
       </tfoot>
     </table>
+
+<div class="modal modal-primary fade" id="modal-default">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Filtro entre Datas</h4>
+        </div>
+        <form role="form" method="POST" action="{{ url('admin/saude/expira/filtro')}}" enctype="multipart/form-data">
+            @csrf
+        <div class="modal-body">
+            <div class="row">
+            <div class="form-group">
+            <div class="col-md-6">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                <input class="form-control"  type="date" name="start" required autofocus ></div>
+            </div>
+
+                    
+            <div class="col-md-6">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+                <input class="form-control"  type="date" name="end" required autofocus ></div>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-outline">Submeter</button>
+        </div>
+        </form>
+    </div>
+    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 
 <script type="text/javascript">
 
