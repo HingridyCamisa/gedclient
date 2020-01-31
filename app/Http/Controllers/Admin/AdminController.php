@@ -79,6 +79,17 @@ class AdminController extends Controller
         $emidio->dataset('Consultores', 'bar', $emidiodata->values());
         
        
+        $data_seguradora = Contrato::join('seguradoras','contratos.nome_seguradora','seguradoras.id')->get()->groupby('nome_seguradora')->map(function ($item) {
+            // Return the number of persons
+            return count($item);
+
+        });
+                
+        $graf_seguradora = new grafico;
+        $graf_seguradora->labels($data_seguradora->keys());
+        $graf_seguradora->title('Nº de Contratos por Seguradora');
+        $graf_seguradora->dataset('Seguradoras', 'bar', $data_seguradora->values());
+
         
         
         $prospecao = Prospecao::all();
@@ -87,7 +98,7 @@ class AdminController extends Controller
        
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora'));
     }
 
     /**
