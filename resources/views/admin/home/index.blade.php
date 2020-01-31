@@ -87,7 +87,7 @@
     <div class="small-box bg-red">
               <div class="inner">
                 <h4><strong>{{  $contrato_expira }}</strong></h4>
-                <p>Contratos a expirar no presente mês</p>
+                <p>Contratos a expirar</p>
               </div>
               <div class="icon">
                 <i class="ion ion-clock"></i>
@@ -99,7 +99,7 @@
     <div class="small-box bg-red">
               <div class="inner">
                 <h4><strong>{{  $saude_expira }}</strong></h4>
-                <p>Contratos de saude a expirar no presente mês</p>
+                <p>Saude a expirar</p>
               </div>
               <div class="icon">
                 <i class="ion ion-clock"></i>
