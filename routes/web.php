@@ -182,6 +182,15 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::post('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
     Route::post('/files/addfiles/{token_id}','FileController@addfiles');
 
+    Route::get('report/index','ReportController@index');
+    Route::get('report/new','ReportController@new');
+    Route::resource('meusficheiros','ReportController');
+    Route::get('meusficheiros/deletefile/{file}','ReportController@deletefile');
+    Route::get('meusficheiros/all/deletefile','ReportController@alldeletefile');
+    Route::get('file/download/{filename}', 'FileDownloadController@index')->name('file/download');
+    Route::post('report/filtro','ReportController@filtro');
+
+
 });
 
 Route::get('/', function(){

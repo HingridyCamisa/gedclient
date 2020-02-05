@@ -171,7 +171,7 @@ return [
 
         RezaAr\Highcharts\Provider::class,
 
-        
+         Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
         
@@ -232,7 +232,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Chart' => RezaAr\Highcharts\Facade::class,
-        
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
        
         
         

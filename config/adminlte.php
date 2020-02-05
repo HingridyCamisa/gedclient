@@ -236,8 +236,22 @@ return [
         [
             
             'text'        => 'Relatórios',
-            'url'         => '#',
+            'url'         => 'admin/report/index',
             'icon'        => 'bar-chart',
+            'submenu'     => [
+                [
+                    'text'  => 'My Reports',
+                    'url'   => 'admin/report/index',
+                    'icon'  => 'warning',
+
+                ],
+                [
+                    'text'  => 'New Report',
+                    'url'   => 'admin/report/new',
+                    'icon'  => 'file-text-o',
+
+                ],
+            ]
         ],
         [
             'text'        => 'Calendário',
