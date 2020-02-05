@@ -133,10 +133,10 @@ class SaudeController extends Controller
     public function show($id)
     {   $this->authorize('saudes_show');
         $saude = Saude::findOrFail($id);
-        $dateOfBirth = $saude->cliente->cliente_data_nascimento;
 
+        $anexos=Files::where('token_id',$saude->token_id)->count();
 
-        return view('admin.saude.show',compact('saude'));
+        return view('admin.saude.show',compact('saude','anexos'));
     }
 
     /**

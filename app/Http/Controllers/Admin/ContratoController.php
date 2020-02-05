@@ -179,6 +179,8 @@ class ContratoController extends Controller
         return view('admin.contrato.show',compact('contrato','anexos'));
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *

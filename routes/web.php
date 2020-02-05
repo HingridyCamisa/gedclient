@@ -157,6 +157,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('avisode-cobranca-view-all/{tipo}/{contrato_token_id}/{token_id}','AvisoDeCobrancaController@avisoviewall')->name('avisode-cobranca-view-all');
     //index
     Route::get('avisode-cobranca-index', 'AvisoDeCobrancaController@index');
+    //showContratoViaAviso
+    Route::get('showContratoViaAviso/{id}','AvisoDeCobrancaController@showContratoViaAviso');
+    Route::get('financas/avisoViaTableAvisos/{id}','AvisoDeCobrancaController@avisoViaTableAvisos');
     
     Route::get('financas','FinancasController@index');
     Route::DELETE('financas/destroy/{id}','FinancasController@destroy');

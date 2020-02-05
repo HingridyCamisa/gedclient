@@ -111,7 +111,7 @@
     <div class="small-box bg-aqua">
               <div class="inner">
                 <h4><strong>{{  $totalcontrato_expira_next }}</strong></h4>
-                <p>Contratos a expirar next month</p>
+                <p>A Expirar next month</p>
               </div>
               <div class="icon">
                 <i class="ion ion-clock"></i>

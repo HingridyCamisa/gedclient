@@ -13,6 +13,10 @@ use App\AvisoCobranca;
 use Auth;
 use App\AvisoCobrancaSaude;
 use App\AvisoCobrancaView;
+use App\Files;
+use App\Contrato;
+use App\Saude;
+
 
 class AvisoDeCobrancaController extends Controller
 {
@@ -21,7 +25,22 @@ class AvisoDeCobrancaController extends Controller
   {
       return Auth::guard(app('VoyagerGuard'));
   }
+    public function avisoViaTableAvisos($id)
+    {
+        $data=AvisoCobranca::find($id);
+        $tipo=$data->tipo;
+        $token_id=$data->contrato_token_id;
 
+        if ($tipo=='contratos')
+        {   $contrato=Contrato::where('token_id',$token_id)->first();	
+        }elseif($tipo=='saudes')
+        {   $contrato=Saude::where('token_id',$token_id)->first();
+        }
+
+        $id=$contrato->id;
+
+        return $this->aviso ($tipo,$id,$token_id);
+    }
 
     public function aviso ($tipo,$id,$token_id)
     {
@@ -145,5 +164,28 @@ class AvisoDeCobrancaController extends Controller
         $avisos=AvisoCobrancaView::latest()->paginate(12);
         return view('admin.avisoCobranca.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
+
+    public function showContratoViaAviso( $id)
+    {
+        $this->authorize('contratos_show');
+
+
+        $aviso = AvisoCobranca::findOrFail($id);
+        $table=$aviso->tipo;
+        $token_id=$aviso->contrato_token_id;
+
+        $anexos=Files::where('token_id',$token_id)->count();
+        if ($table=='contratos')
+        {   $contrato=Contrato::where('token_id',$token_id)->first();
+            return view('admin.contrato.show',compact('contrato','anexos'));	
+        }elseif($table=='saudes')
+        {   $saude=Saude::where('token_id',$token_id)->first();
+            return view('admin.saude.show',compact('saude','anexos'));
+        }
+        
+        return "Tipo de contrato não encotrado, Tente mas tarde";
+        
+    }
+
 
 }

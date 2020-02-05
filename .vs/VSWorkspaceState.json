@@ -8,10 +8,9 @@
     "\\resources\\views\\admin",
     "\\resources\\views\\admin\\avisoCobranca",
     "\\resources\\views\\admin\\clientes",
-    "\\resources\\views\\admin\\contrato",
-    "\\resources\\views\\admin\\prospecoes",
-    "\\routes"
+    "\\resources\\views\\admin\\home",
+    "\\resources\\views\\admin\\saude"
   ],
-  "SelectedNode": "\\resources\\views\\admin\\prospecoes\\index.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\SaudeController.php",
   "PreviewInSolutionExplorer": false
 }

@@ -33,11 +33,7 @@
       @foreach($avisos as $i => $aviso)
         <tr>
         <td><center>
-              @if($aviso->tipo=='contratos')
-              <a href="{{url('admin/contrato/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
-              @else
-               <a href="{{url('admin/saude/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
-             @endif
+              <a href="{{url('admin/financas/avisoViaTableAvisos',$aviso->id)}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
           </center></td>
           <td><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></td>
           <td><center>{{ $aviso->cliente_email }}</center></td>

@@ -45,17 +45,13 @@
                  @endif
            </center></th>
           <th><center>
-              @if($aviso->tipo=='contratos')
-              <a href="{{url('admin/contrato/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
-              @else
-               <a href="{{url('admin/saude/index')}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
-             @endif
+              <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
           </center></th>
           <th><center>
                  @if($aviso->tipo=='saudes')
-                   Saúde
+                   <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> Saúde</a>
                  @else
-                    Contrato
+                   <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> Contrato</a>
                  @endif
           </center></th>
           <th><center>
