@@ -9,6 +9,7 @@ use App\Contrato;
 use DB;
 use App\Email;
 use App\Mail\Geral;
+use App\Jobs\SendEmailGeral;
 
 
 class EmailController extends Controller
@@ -53,7 +54,10 @@ class EmailController extends Controller
         Email::create($data);
         
 
-        Mail::to($data['to'])->send(new Geral($data));
+        //Mail::to($data['to'])->send(new Geral($data));
+
+        $emailJob = (new SendEmailGeral($data));
+        dispatch($emailJob);
         
         return back()->with('success','Email enviado');
     }

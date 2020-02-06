@@ -47,7 +47,7 @@ class SaudeController extends Controller
 
         public function expiraFiltro(Request $request)
     {
-        $this->authorize('contratos');
+        $this->authorize('saudes');
 
         $request->validate([
             'start'=>'required|date',
@@ -92,7 +92,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(SaudeRequest $request)
-    {   $this->authorize('saudes_store');
+    {   $this->authorize('saudes_create');
         $saude=$request->all();
         //file name
         $namefile = Str::random(32).'saude'.time();

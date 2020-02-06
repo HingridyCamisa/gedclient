@@ -54,7 +54,7 @@ class ReportController extends Controller
 
             foreach ($files as $file)
             {
-            $out.=$file->filname.',';	
+            $out.=$file->filename.',';	
             }
 
                
@@ -93,7 +93,7 @@ class ReportController extends Controller
         $data['user_id']=Auth::user()->id;
         ProcessedFiles::create($data);
 
-        return Excel::download(new  RelatorioExport($start,$end,$type,$filtro), $filename);
+        //return Excel::download(new  RelatorioExport($start,$end,$type,$filtro), $filename);
 
         (new RelatorioExport($start,$end,$type,$filtro))->queue($filename)->chain([
             new NotifyUserOfCompletedExport(request()->user(),$filename),
