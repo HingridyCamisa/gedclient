@@ -92,8 +92,13 @@ class AvisoDeCobrancaController extends Controller
         return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos','tipo','avisosDB'));
     }
 
-    public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data)
+    public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data,$denominador)
     {    $this->authorize('avisos_make');
+
+        $contrato_data=Contrato::where('token_id',$contrato)->first();
+        if (!$contrato_data) {
+            return back()->with('error','Problemas com contrato.');
+        }
 
         $token_id=$contrato.$numero;
         $request['token_id']=$token_id;
@@ -110,6 +115,10 @@ class AvisoDeCobrancaController extends Controller
         $aviso->aviso_data=$data;
         $aviso->user_id=Auth::user()->id;
         $aviso->token_id=$token_id;
+        $aviso->premio_simples=($contrato_data->premio_simples/$denominador);
+        $aviso->custo_admin=($contrato_data->custo_admin/$denominador);
+        $aviso->imposto_selo=($contrato_data->imposto_selo/$denominador);
+        $aviso->sobre_taxa=($contrato_data->sobre_taxa/$denominador);
         $aviso->save();
         
 

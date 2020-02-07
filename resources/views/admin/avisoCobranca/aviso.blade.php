@@ -49,9 +49,9 @@
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b><img src="{{asset('/img/amana2.png')}}"   alt="logo" width="300" height="100"></b><br>  
+          <b><img src="{{asset('/img/amana2.png')}}"   alt="logo" width="200" height="100"></b><br>  
           <br>
-          <b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Aviso Nᵒ  #{{str_pad($avisosDB[0]->id, 6, "0", STR_PAD_LEFT)}}</b>
+          <b>&emsp;&emsp;&emsp;&emsp;Aviso Nᵒ  #{{str_pad($avisosDB[0]->id, 6, "0", STR_PAD_LEFT)}}</b>
           
         </div>
         <!-- /.col -->
@@ -70,8 +70,9 @@
             <b> Segurado/ Insured:</b> {{$avisosDB[0]->cliente->cliente_nome}}<br>
             <b> Endereço:</b> {{$avisosDB[0]->cliente->cliente_endereco}}<br>
             <b> País:</b> {{$avisosDB[0]->cliente->client_country_city->country_name}} <br>
-            <b> Localidade / City:</b> {{$avisosDB[0]->cliente->client_country_city->state_name}}<br><br>
-            <b> NUIT/ Tax payer Nᵒ</b> <br><br>
+            <b> Localidade / City:</b> {{$avisosDB[0]->cliente->client_country_city->state_name}}<br>
+            <b> NUIT/ Tax payer Nᵒ:</b> {{$avisosDB[0]->cliente->cliente_nuit}} <br>
+            <b> Nᵒ do Clinete:</b> M{{str_pad($avisosDB[0]->cliente->id, 6, "0", STR_PAD_LEFT)}}<br><br>
           </address>
         </div>
         <div class="col-sm-4 invoice-col">
@@ -83,16 +84,13 @@
             <b> Periodo de Seguro de:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_inicio))}}<br>
             <b> Periodo de Seguro até:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
             <b> Dias Cobertos:</b> {{\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_inicio)->diffInDays(\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
-            <b> Data Limite Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data))}}<br><br /> 
         </address>
         </div>
         <div class="col-sm-4 invoice-col">
             <address>
-                <br>
-                <b>Nᵒ de Conta:</b> <br>
-                <b>Data / Date:</b> <br><br>
-                <b>Nᵒ Ref. Seguradora :</b> <br>
-                <b>Insure Ref.ᵒ :</b> <br><br><br>
+            <br>
+            <b> Data Limite Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data))}}<br><br /> 
+              
             </address>
         </div>
       
@@ -116,7 +114,11 @@
             </tr>
             </thead>
             <tbody>
-             @php($t=0)
+            @php($t=0)
+            @php($t1=0)
+            @php($t2=0)
+            @php($t3=0)
+            @php($t4=0)
             @foreach($avisosDB as $key => $aviso)
             <tr>
               <td>{{$key+1}}</td>
@@ -126,6 +128,10 @@
               <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
               <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}}</td>
               @php($t=$aviso->aviso_amount+$t)
+              @php($t1=$aviso->premio_simples+$t1)
+              @php($t2=$aviso->custo_admin+$t2)
+              @php($t3=$aviso->imposto_selo+$t3)
+              @php($t4=$aviso->sobre_taxa+$t4)
             </tr>
 
             @endforeach
@@ -166,7 +172,7 @@
           </p>
         </div>
         <!-- /.col detalhes por encargos -->
-        <!--
+        
         <div class="col-xs-6">
           
 
@@ -174,32 +180,32 @@
             <table class="table">
               <tbody><tr>		
                 <th style="width:50%">Subtotal:</th>
-                <td>3,500.00</td>
+                <td></td>
               </tr>
               <tr>
                 <th>Prémio líquido / Net premium:</th>
-                <td>$10.34</td>
+                <td>{{number_format(round($t1,2), 2, ',', ' ')}} MTN</td>
               </tr>
               <tr>
                 <th>Encargos / Administration:</th>
-                <td>$5.80</td>
+                <td>{{number_format(round($t2,2), 2, ',', ' ')}} MTN</td>
               </tr>
               <tr>
                 <th>Selos / Stamps:</th>
-                <td>$5.80</td>
+                <td>{{number_format(round($t3,2), 2, ',', ' ')}} MTN</td>
               </tr>
               <tr>
                 <th>Sobretaxa / Subcharge:</th>
-                <td>$5.80</td>
+                <td>{{number_format(round($t4,2), 2, ',', ' ')}} MTN</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td>$265.24</td>
+                <td>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</td>
               </tr>
             </tbody></table>
           </div>
         </div>
-            -->
+          
         <!-- /.col -->
       </div>
       <!-- /.row -->

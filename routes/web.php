@@ -156,7 +156,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('get-city-list','ClientesController@getCityList');
     //aviso de cobranca
     Route::get('aviso-de-cobranca/{tipo}/{id}/{token_id}','AvisoDeCobrancaController@aviso');
-    Route::get('gerar-aviso-de-cobranca/{tipo}/{contrato}/{cliente}/{numero}/{valor_a_pagar}/{data}','AvisoDeCobrancaController@gerar_aviso_de_cobranca');
+    Route::get('gerar-aviso-de-cobranca/{tipo}/{contrato}/{cliente}/{numero}/{valor_a_pagar}/{data}/{denominador}','AvisoDeCobrancaController@gerar_aviso_de_cobranca');
     Route::get('avisode-cobranca-view/{tipo}/{contrato_token_id}/{token_id}','AvisoDeCobrancaController@avisoview')->name('avisode-cobranca-view');
     Route::get('avisode-cobranca-view-all/{tipo}/{contrato_token_id}/{token_id}','AvisoDeCobrancaController@avisoviewall')->name('avisode-cobranca-view-all');
     //index
