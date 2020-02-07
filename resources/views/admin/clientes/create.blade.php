@@ -115,6 +115,12 @@
                     <input type="text" class="form-control" name="cliente_id_numero" value="{{old('cliente_id_numero')}}">
                     </div>
                     </div>
+                    </div><br>
+                    <div class="row">
+                    <div class="col-xs-3">
+                    <label for="cliente_nuit"> Nuit</label>
+                    <input class="form-control" name="cliente_nuit" placeholder="Nuit" type="number" value="{{old('cliente_nuit')}}">
+                    </div>
                     </div>
                     <br>
                 </div> 

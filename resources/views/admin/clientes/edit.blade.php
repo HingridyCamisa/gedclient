@@ -83,43 +83,48 @@
                                 </div>
                             </div><br>
 
-                            <div class="row">
-                              <div class="col-xs-4">
-                                    <label><i class="fa fa-map-marker"></i> País</label>
-                                        <select class="form-control"  id="country">
-                                            <option value="" selected disabled>Select</option>
-                                            @foreach($countries as $key => $country)
-                                                <option value="{{$country}}"> {{$country}}</option>
-                                           @endforeach
-                                            
-                                        </select>
-                                </div>
+                <div class="row">
+                  <div class="col-xs-4">
+                        <label><i class="fa fa-map-marker"></i> País</label>
+                            <select class="form-control"  id="country">
+                                <option value="" selected disabled>Select</option>
+                                @foreach($countries as $key => $country)
+                                    <option value="{{$country}}"> {{$country}}</option>
+                               @endforeach
                                 
-                                <div class="col-xs-4">
-                                    <label><i class="fa fa-map-marker"></i> Província</label>
-                                        <select class="form-control" name="cliente_state_id" id="cliente_state_id" >
-                                        </select>
-                                </div>
+                            </select>
+                    </div>
+                    
+                    <div class="col-xs-4">
+                        <label><i class="fa fa-map-marker"></i> Província</label>
+                            <select class="form-control" name="cliente_state_id" id="cliente_state_id" >
+                            </select>
+                    </div>
 
-                                <div class="col-xs-4 desabilitar_empresa">
-                                    <label><i class="fa fa-list-alt"></i> Documento de Identificação</label>
-                                     <div class="input-group">
-                                        <div class="input-group-btn " >
-                                            <select class="btn btn-default dropdown-toggle" name="cliente_id_tipo" id="cliente_id_tipo" >
-                                                <option  value="{{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}" selected disabled> {{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}</option>
-                                                <option value="BI" >BI</option>
-                                                <option value="Passaporte" >Passaporte</option>
-                                                <option value="DIR" >DIR</option>
-                                            </select>
-                                        </div>
-                                        <!-- /btn-group -->
-                                        <input type="text" class="form-control" name="cliente_id_numero" value="{{old('cliente_id_numero',$cliente->cliente_id_numero)}}">
-                                      </div>
-                                </div>
+                    <div class="col-xs-4 desabilitar_empresa">
+                        <label><i class="fa fa-list-alt"></i> Documento de Identificação</label>
+                         <div class="input-group">
+                            <div class="input-group-btn " >
+                                <select class="btn btn-default dropdown-toggle" name="cliente_id_tipo" id="cliente_id_tipo" >
+                                    <option  value="{{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}" selected disabled> {{old('cliente_id_tipo',$cliente->cliente_id_tipo)}}</option>
+                                    <option value="BI" >BI</option>
+                                    <option value="Passaporte" >Passaporte</option>
+                                    <option value="DIR" >DIR</option>
+                                </select>
+                            </div>
+                            <!-- /btn-group -->
+                            <input type="text" class="form-control" name="cliente_id_numero" value="{{old('cliente_id_numero',$cliente->cliente_id_numero)}}">
+                          </div>
+                    </div>
+
+                    </div><br>
+                     <div class="row">
+                    <div class="col-xs-3">
+                        <label for="cliente_nuit"> Nuit</label>
+                        <input class="form-control" name="cliente_nuit" placeholder="Nuit" type="number" value="{{old('cliente_nuit',$cliente->cliente_nuit)}}">
+                    </div>
+                    </div><br>
                                 
- 
-                                
-                                </div></br>
                     </div>
                              
                     <div class="box box-danger">

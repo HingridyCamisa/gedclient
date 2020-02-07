@@ -51,7 +51,7 @@
         <div class="col-sm-4 invoice-col">
           <b><img src="{{asset('/img/amana2.png')}}"   alt="logo" width="180" height="100"></b><br>  
           <br>
-          <b>&emsp;&emsp;&emsp;Cliete Nᵒ  #{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</b>
+          <b>&emsp;&emsp;&emsp;Cliete Nᵒ  M{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</b>
           
         </div>
         <!-- /.col -->
@@ -166,13 +166,13 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-4">
-          <p class="lead"><strong><i class="fa fa-fw fa-cc-visa"></i> Dados Bancários:</strong></p>
+          <p class="lead"><strong><i class="fa fa-fw fa-cc-visa"></i>Dados Bancários:</strong></p>
 
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-          <b>Banco:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIM<br>  
-          <b>Titular:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amana Seguros, SA<br>  
-          <b>Nᵒ de Conta:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;415522102<br>
-          <b>NIB:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00010000041552210257<br>   
+          <b>Banco:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;BIM<br>  
+          <b>Titular:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Amana Seguros, SA<br>  
+          <b>Nᵒ de Conta:</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;415522102 (MZN)<br>
+          <b>NIB:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;00010000041552210257<br>   
           </p>
         </div>
         <!-- /.col -->
