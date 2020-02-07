@@ -103,7 +103,12 @@
                     "defaultContent": ""
                 },
                 { "data": "name" },
-                { "data": "assuntox" },
+                                {
+                  data: null,
+                  render: function ( data, type, row ) {
+                    return '<b>'+data.name_cliente+'</b> - '+data.assunto+'';
+                  }
+                },
                 { "data": "created_at" },
                 { "data": "time" },
                 {

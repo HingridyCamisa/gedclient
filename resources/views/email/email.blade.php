@@ -24,7 +24,8 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li class=""><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+                <li class=""><a href="#"><i class="fa fa-envelope-o"></i> ALL<span class="label label-danger pull-right">{{$sent+$drafts}}</span></a></li>
+                <li class="active"><a href="#"><i class="fa fa-inbox"></i> New</a></li>
                 <li class=""><a href="{{url('admin/email/all')}}"><i class="fa fa-envelope-o"></i> Sent<span class="label label-warning pull-right">{{$sent}}</span></a></li>
                 <li><a href="{{url('admin/email/all')}}"><i class="fa fa-file-text-o"></i> Drafts <span class="label label-primary pull-right">{{$drafts}}</span></a></li>
                 <li><a href="#"><i class="fa fa-filter"></i> Junk </a>
