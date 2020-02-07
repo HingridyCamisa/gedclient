@@ -259,6 +259,11 @@ return [
             'icon'        => 'calendar',
         ],
         [
+            'text'        => 'Email',
+            'url'         => 'admin/email/all',
+            'icon'        => 'telegram',
+        ],
+        [
             'text'        => 'Aniversários',
             'url'         => 'admin/aniversarios/index',
             'icon'        => 'birthday-cake',

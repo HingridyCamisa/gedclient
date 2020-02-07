@@ -171,8 +171,9 @@ return [
 
         RezaAr\Highcharts\Provider::class,
 
-         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         
 
@@ -233,10 +234,8 @@ return [
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Chart' => RezaAr\Highcharts\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-       
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         
-        
-
     ],
 
 ];

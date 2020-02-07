@@ -138,6 +138,10 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::post('comentsave','ComentariosController@comentsave')->name('comentsave');
 
     Route::get('email/{id}/{source}', 'EmailController@index');
+    Route::get('email/all', 'EmailController@all');
+    Route::get('email/allsource', 'EmailController@allsource');
+
+    Route::get('emailtry/{id}', 'EmailController@try');
     
     Route::post('enviaremail', 'EmailController@enviaremail');
 

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Mail;
 use App\Mail\Geral;
+use App\Email;
 
 class SendEmailGeral implements ShouldQueue
 {
@@ -20,9 +21,11 @@ class SendEmailGeral implements ShouldQueue
      * @return void
      */
     public $data;
-    public function __construct($data)
+    public $id;
+    public function __construct($data,$id)
     {
        $this->data=$data; 
+       $this->id=$id;
     }
 
     /**
@@ -33,5 +36,8 @@ class SendEmailGeral implements ShouldQueue
     public function handle()
     {
         Mail::to($this->data['to'])->send(new Geral($this->data));
+        $data=Email::find($this->id);
+        $data->status=0;
+        $data->save();
     }
 }

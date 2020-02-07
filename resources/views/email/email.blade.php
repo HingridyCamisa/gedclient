@@ -3,90 +3,89 @@
 @section('title', 'SMS')
 
 @section('content_header')
-<h1><a class="btn btn-social-icon btn-github"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i></h1></a>
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-
-input[type=number], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-
-input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.textcenter{
-    text-align: center;
-}
-
-</style>  
+<h1><a class="btn btn-social-icon btn-github"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i></a></h1>
  
 @stop
 
 @section('content')
 @include('notification')
 
-          <div class="box box-solid box-danger">
-          <div class="box-header with-border">
-                 <center><h3 class="box-title"><strong><i class="fa fa-edit"></i> Compor Novo Email </strong></h3></center>
-         </div>
- 
+<div class="row">
+        <div class="col-md-3">
 
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Folders</h3>
 
-<div class="box-body">
-            <form action="{{ url('admin/enviaremail') }}" method="post">
-                    {{ csrf_field() }}
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li class=""><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+                <li class=""><a href="{{url('admin/email/all')}}"><i class="fa fa-envelope-o"></i> Sent<span class="label label-warning pull-right">{{$sent}}</span></a></li>
+                <li><a href="{{url('admin/email/all')}}"><i class="fa fa-file-text-o"></i> Drafts <span class="label label-primary pull-right">{{$drafts}}</span></a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Junk </a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+         <form action="{{ url('admin/enviaremail') }}" method="post">
+              {{ csrf_field() }}
 
-            <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}" />
-
-            <input type="text" id="assunto" name="assunto" placeholder="Assunto do Email:">
-
-            <input type="text" id="name_cliente" name="name_cliente" placeholder="Nome" value="{{$nome_cliente }}">
-
-           
-            <input type="text" id="to" name="to" value="{{$email_cliente }}">
-            
-            <textarea id="message" class="textarea" name="message" placeholder="Escreva aqui o seu email..." value="{{ old('subject') }}" style="height:200px;height: 100px;"></textarea>
-
-            <center><button type="submit" class="btn btn-danger"><i class="fa fa-envelope"></i>  Enviar</button></center>
-        </form>
-</div>
-
+           <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}" />
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Compose New Message</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="form-group">
+                <input class="form-control" placeholder="To:"  id="to" name="to" value="{{$email_cliente }}" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="Subject:" id="assunto" name="assunto" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" id="name_cliente" name="name_cliente" placeholder="Name: " value="{{$nome_cliente }}" required>
+              </div>
+              <div class="form-group">
+               <textarea id="message" class="textarea" name="message" placeholder="Escreva aqui o seu email..." style="height:200px;height: 100px;">{!!old('subject')!!}</textarea>
+              </div>
+                <div class="form-group">
+                <!--
+                <div class="btn btn-default btn-file">
+                    <i class="fa fa-paperclip"></i> Attachment
+                    <input type="file" name="attachment">
+                </div>
+                <p class="help-block">Max. 32MB</p>
+                </div>
+                -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="pull-right">
+                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                </div>
+                <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+            </div>
+            <!-- /.box-footer -->
+            </div>
+            <!-- /. box -->
+          </form>
+        </div>
+        <!-- /.col -->
+      </div>
 <script>
         $('.textarea').ckeditor();
 </script>
