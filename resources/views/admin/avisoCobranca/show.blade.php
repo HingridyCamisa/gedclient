@@ -79,7 +79,9 @@
                  @foreach($avisosDB as $avisosDBX)
                     @if($avisosDBX['token_id']==$contrato->token_id.$i)
                         @if($avisosDBX['status']==2)
-                        <a href="" class="btn bg-olive   btn-xs"><i class="fa fa-file-pdf-o"></i> PDF do Recibo</a>
+                        <a href="{{url('admin/avisode-cobranca-view',[$avisosDBX['tipo'],$avisosDBX['contrato_token_id'],$avisosDBX['token_id']])}}" class="btn bg-lime   btn-xs"><i class="fa fa-file-pdf-o"></i> Pago</a>
+                        @elseif($avisosDBX['status']==3)
+                        <a href="{{url('admin/avisode-cobranca-view',[$avisosDBX['tipo'],$avisosDBX['contrato_token_id'],$avisosDBX['token_id']])}}" class="btn bg-teal   btn-xs"><i class="fa fa-file-pdf-o"></i> Aviso Pendente</a>
                         @else
                         <a href="{{url('admin/avisode-cobranca-view',[$avisosDBX['tipo'],$avisosDBX['contrato_token_id'],$avisosDBX['token_id']])}}" class="btn bg-purple   btn-xs"><i class="fa fa-file-pdf-o"></i> PDF do Aviso</a>
                         @endif
@@ -95,7 +97,7 @@
                  @endforeach
 
                  @if($verification == false)
-                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-navy btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
                  @endif
                  
                  

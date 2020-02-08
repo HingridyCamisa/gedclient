@@ -68,12 +68,20 @@
           <td><center>{{ $aviso->comprovativo}}</center></td>
 
            <td><center>
-               <a href="{{url('admin/financas/recibos/recibo',$aviso->token_id)}}" class="btn btn-success btn-xs">Recibo</a>
-              @can('apagar-recibos')
+              <a href="{{url('admin/financas/recibos/recibo',$aviso->token_id)}}" class="btn btn-success btn-xs">Recibo</a>
+              @if($aviso->status_recibos==1)
+              @can('financas_recibo_destroy')
               {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/recibos/destroy', $aviso->nu_recibo],'style'=>'display:inline']) !!}
               {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endcan
+              @else
+              @can('financas_recibo_destroy')
+              {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/recibos/destroy/db', $aviso->nu_recibo],'style'=>'display:inline']) !!}
+              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+              {!! Form::close() !!}
+              @endcan
+              @endif
             </center>
              </td>
 

@@ -23,7 +23,9 @@
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i>  Estado </center> </th>
           <th scope="col"><center> Cobrança</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Situação</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Aviso MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Recibo MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Saldo MTN</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Atualização</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Criação</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
@@ -63,6 +65,8 @@
 
               </center></td>
           <td><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></td>
+          <td><center> {{number_format($aviso->recibo_amount , 2, ',', ' ') }}</center></td>
+          <td><center> {{number_format($aviso->aviso_amount-$aviso->recibo_amount , 2, ',', ' ') }}</center></td>
           <td><center>{{ $aviso->updated_at }}</center></td>
           <td><center>{{ $aviso->created_at }}</center></td>
 
@@ -70,11 +74,6 @@
                <button type="button" id="pagamento"  value ="{{$aviso->id}}" class="btn btn-success btn-xs" data_value="{{ $aviso->name }}" data-toggle="modal" data-target="#modal-default">
                 <i class="fa fa-fw fa-money"></i>
               </button>
-              @can('apagar-avisos')
-              {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/destroy', $aviso->id],'style'=>'display:inline']) !!}
-              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
-              {!! Form::close() !!}
-              @endcan
             </center>
              </td>
 

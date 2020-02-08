@@ -23,8 +23,8 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Expirado </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de atualização</center></th>
         </tr>
@@ -61,6 +61,8 @@
               <i class="fa fa-close text-green"></i> Pago 
               @elseif($aviso->status==0)
               <span class="fa fa-trash"> Eliminado</span> 
+              @elseif($aviso->status==3)
+              <i class="fa fa-close text-red"></i> Não Aprovado 
               @endif
 
               </center></th>
@@ -78,11 +80,11 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Expirado </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Tipo de Contrato</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Estado</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de atualização</center></th>
-          </tr>
+        </tr>
       </tfoot>
     </table>
    </div>

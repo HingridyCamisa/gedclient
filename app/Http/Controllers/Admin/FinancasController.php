@@ -26,7 +26,8 @@ class FinancasController extends Controller
 
    public function index()
     {   $this->authorize('financas_avisos');
-        $avisos=AvisoCobrancaView::latest()->paginate(12);
+        $avisos=AvisoCobrancaView::latest()->orwhere('status',1)->orwhere('status',2)->paginate(12);
+
         return view('admin.financas.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     } 
 
@@ -59,14 +60,44 @@ class FinancasController extends Controller
 
         return redirect()->back()->with('success','Recibo eliminado.');
     }
+    public function destroyrecibosdifinito($id)
+    {   $this->authorize('financas_recibo_destroy');
+        $destroy= \App\Recibos::find($id);
+        $recibos=Recibos::where('aviso_id',$destroy->aviso_id)->count();
+        if ($recibos==1) {
+            $aviso= \App\AvisoCobranca::find($destroy->aviso_id);
+            $aviso->status=1;//to not paid
+            $aviso->save();
+        };
+        $destroy->delete();
+
+        return redirect()->back()->with('success','Recibo eliminado.');
+    }
 
     public function savepaymat(Request $request)
     {   $this->authorize('financas_make_payment');
 
         $pay= AvisoCobranca::find($request->aviso_id);
+        $aviso=$pay->aviso_amount;
+        $recibo=Recibos::where('aviso_id',$request->aviso_id)->sum('amount');
+
+        $saldo=($aviso-$recibo)-$request->amount;
+
+        if ($saldo < 0)
+        {
+           $arr = array('msg' => $saldo.' Valor superior!', 'status' => false);
+          return Response()->json($arr);
+        }
+
         if ($pay->status==0)
         {
            $arr = array('msg' => 'Aviso eliminado!', 'status' => true);
+          return Response()->json($arr);
+        }
+
+        if ($pay->status==3)
+        {
+           $arr = array('msg' => 'Aviso pendente!', 'status' => false);
           return Response()->json($arr);
         }
         
@@ -113,7 +144,7 @@ class FinancasController extends Controller
         }
 
         }
-         $arr = array('msg' => 'Successfully updated', 'status' => true);
+         $arr = array('msg' => 'Successfully Save', 'status' => true);
          return Response()->json($arr);
         }
 

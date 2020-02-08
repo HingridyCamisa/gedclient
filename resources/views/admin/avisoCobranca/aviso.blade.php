@@ -178,10 +178,7 @@
 
           <div class="table-responsive">
             <table class="table">
-              <tbody><tr>		
-                <th style="width:50%">Subtotal:</th>
-                <td></td>
-              </tr>
+              <tbody>
               <tr>
                 <th>Prémio líquido / Net premium:</th>
                 <td>{{number_format(round($t1,2), 2, ',', ' ')}} MTN</td>
@@ -198,9 +195,9 @@
                 <th>Sobretaxa / Subcharge:</th>
                 <td>{{number_format(round($t4,2), 2, ',', ' ')}} MTN</td>
               </tr>
-              <tr>
+              <tr class="table-danger">
                 <th>Total:</th>
-                <td>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</td>
+                <td><b>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</b></td>
               </tr>
             </tbody></table>
           </div>
@@ -218,9 +215,19 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-        <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submeter Aviso
-          </button>
+          <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
+          @if($aviso->status==3)
+
+          <a type="button" class="btn btn-success pull-right" href="{{url('admin/aviso/approver',$aviso->id)}}" style="margin-right: 5px;"><i class="fa fa-credit-card"></i> Aprovar
+          </a>
+
+          <a type="button" class="btn btn-danger pull-right" href="{{url('admin/aviso/destroy',[$aviso->tipo,$aviso->contrato_token_id,$aviso->token_id,$aviso->id])}}" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> Eliminar
+          </a>
+
+          @elseif($aviso->status==1)
+          <a type="button" class="btn btn-danger pull-right" href="{{url('admin/aviso/destroy',[$aviso->tipo,$aviso->contrato_token_id,$aviso->token_id,$aviso->id])}}" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> Eliminar
+          </a>
+          @endif
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
           </button>

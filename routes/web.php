@@ -159,8 +159,10 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('gerar-aviso-de-cobranca/{tipo}/{contrato}/{cliente}/{numero}/{valor_a_pagar}/{data}/{denominador}','AvisoDeCobrancaController@gerar_aviso_de_cobranca');
     Route::get('avisode-cobranca-view/{tipo}/{contrato_token_id}/{token_id}','AvisoDeCobrancaController@avisoview')->name('avisode-cobranca-view');
     Route::get('avisode-cobranca-view-all/{tipo}/{contrato_token_id}/{token_id}','AvisoDeCobrancaController@avisoviewall')->name('avisode-cobranca-view-all');
+    Route::get('aviso/destroy/{tipo}/{contrato_token_id}/{token_id}/{id}','AvisoDeCobrancaController@destroy');
+    Route::get('aviso/approver/{id}','AvisoDeCobrancaController@approver');
     //index
-    Route::get('avisode-cobranca-index', 'AvisoDeCobrancaController@index');
+    Route::get('avisode-cobranca-index', 'AvisoDeCobrancaController@index')->name('avisode-cobranca-index');
     //showContratoViaAviso
     Route::get('showContratoViaAviso/{id}','AvisoDeCobrancaController@showContratoViaAviso');
     Route::get('financas/avisoViaTableAvisos/{id}','AvisoDeCobrancaController@avisoViaTableAvisos');
@@ -174,6 +176,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     //recibos 
      Route::get('recibostable','FinancasController@recibostable');
      Route::DELETE('financas/recibos/destroy/{id}','FinancasController@destroyrecibos');
+     Route::DELETE('financas/recibos/destroy/db/{id}','FinancasController@destroyrecibosdifinito');
      Route::get('financas/recibos/recibo/{token_id}','FinancasController@extratrecibo');
 
      //extrato do cliente

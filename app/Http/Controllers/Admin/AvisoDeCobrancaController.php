@@ -48,6 +48,7 @@ class AvisoDeCobrancaController extends Controller
          $this->authorize('avisos_show');
 
         $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$token_id)->get();
+
         $contrato=DB::table($tipo)->where('id',$id)->first();
         $cliente=Cliente::find($contrato->client_id);
        
@@ -153,11 +154,11 @@ class AvisoDeCobrancaController extends Controller
 
         if ($tipo=='contratos')
         {
-        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->orderby('created_at','asc')->get();
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->orwhere('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
         }
         else
         {
-             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',1)->orderby('created_at','asc')->get();      
+             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->orwhere('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();      
         }
 
 
@@ -196,5 +197,34 @@ class AvisoDeCobrancaController extends Controller
         
     }
 
+public $tipo;
+public $contrato_token_id;
+public $token_id;
 
+
+        public function destroy($tipo,$contrato_token_id,$token_id,$id)
+    {   $this->authorize('aviso_destroy');
+        $this->tipo=$tipo;
+        $this->contrato_token_id=$contrato_token_id;
+        $this->token_id=$token_id;
+
+        $destroy= \App\AvisoCobranca::find($id);
+        if ($destroy->status==3 || $destroy->status==1) {
+               $destroy->delete();
+
+               return redirect()->route('avisode-cobranca-index')->with('sucesso','Aviso Eliminado');
+               //$this->avisoview($tipo,$contrato_token_id,$token_id);
+               //return redirect()->route('avisode-cobranca-view',[$this->tipo,$this->contrato_token_id,$this->token_id])->with('success','Aviso eliminado.');
+        }
+        return redirect()->back()->with('error','Aviso Pago.');
+    }
+
+        public function approver($id)
+    {   $this->authorize('aviso_approver');
+        $destroy= \App\AvisoCobranca::find($id);
+        $destroy->status=1;
+        $destroy->save();
+
+        return redirect()->back()->with('success','Aviso atualizado.');
+    }
 }
