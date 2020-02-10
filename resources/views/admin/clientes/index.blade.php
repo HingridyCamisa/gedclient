@@ -28,53 +28,13 @@
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar</center></th>
-
         </tr>
       </thead>
       <tbody>
-      @foreach($clientes as $cliente)
-        <tr>
-            <th><center>M{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</center></th>
-            <td>{{$cliente->cliente_nome }}</td>
-            <td>{{$cliente->client_country_city->country_name}}</td>
-            <td>{{$cliente->client_country_city->state_name}}</td>
-            <td>{{$cliente->cliente_telefone_1 }}</td>
-            <td>{{$cliente->cliente_email }}</td>
-            <td>{{$cliente->cliente_tipo }}</td>
-            <td>{{($cliente->created_at)->diffForHumans() }}</td>
-            <td>
-                @if($cliente->status==1)
-                <span class="sucess"><center>Ativo</center></span>
-                @else
-                <span class="error"><center>Desativado</center></span>
-                @endif
-            </td>
-             <td><center>
-                 <a href="{{ route('clientes.edit', $cliente->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a>
-                 <a href="{{ route ('clientes.show', $cliente->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a>
-                 <a href="{{ url ('admin/financas/extrato', $cliente->token_id)}}" class="btn btn-success btn-xs"><i class="fa fa-pie-chart"></i></a>
-                 @can('clientes_destroy')
-                  @if($cliente->status =='1')
-                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
-                  {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
-                  {!! Form::close() !!}
-                  @endif
-                  @if($cliente->status !='1')
-                  {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
-                  {!! Form::button('<i class="fa fa-recycle"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
-                  {!! Form::close() !!}
-                  @endif
-                 @endcan
-             </center></td>
-             <td><center> <a href="{{url('admin/contrato',$cliente->id)}}" class="btn btn-danger btn-xs">Contrato</a>
-                 <a href="{{url('admin/prospecoes',$cliente->id)}}" class="btn btn-success  btn-xs">Prospeção</a>
-                 <a href="{{url('admin/saude',$cliente->id)}}" class="btn btn-primary  btn-xs">Saúde</a></center></td>
-        </tr>  
-      @endforeach
-     
       </tbody>
       <tfoot>
         <tr class="table-danger">
+          
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> País </center></th>
@@ -85,7 +45,9 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>   Gerado em </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+         
           <th scope="col"><center><i class="fa fa-fw fa-check-square"></i> Tornar</center></th>
+       
           </tr>
       </tfoot>
     </table>
@@ -93,23 +55,15 @@
 
 
 
-
-
-
-
-
-
-
-
 <script type="text/javascript">
-
-$(document).ready(function() {
+  $(document).ready(function() {
     $('#example').DataTable( {
+        serverSide: true,
+        processing: true,
+        responsive: true,
+        "order": [[0, "desc"]],
         dom: 'Bfrtip',
-        "order": [[ 1, "desc" ]],
-        "columnDefs": [
-                        { "type": "date-eu", "targets": 6 }
-                      ],
+        "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
         buttons: [
             {
               extend: 'copy',
@@ -159,12 +113,72 @@ $(document).ready(function() {
 
               }
             },
-        ]
+        ],
+
+
+        "ajax": "{{ url('admin/getdataClientes') }}",
+
+
+            "columns": [
+                {"data":"idx"},
+                {"data":"cliente_nome"},
+                {"data":"country_name", "name":'uvw_country_states.country_name'},
+                {"data":"state_name", "name":'uvw_country_states.state_name'},
+                {"data":"cliente_telefone_1"},
+                {"data":"cliente_email"},
+                {"data":"cliente_tipo"},
+                {"data":"created_at"},
+
+               {
+                  data: null,
+                  render: function ( data, type, row ) {
+                    if (data.status==1) 
+                    {
+                      $result ='<span class="sucess"><center>Ativo</center></span>';
+                    }else{
+                      $result='<span class="error"><center>Desativado</center></span>';
+
+                    }
+                    return $result;
+                  },
+                  'name':'cliente_nome'
+                },
+
+                {
+                  data: null,
+                  render: function ( data, type, row ) {
+                    $urledit=window.location.href+'/'+data.id+'/edit';
+                    $urlshow=window.location.href+'/show/'+data.id;
+                    $urlextrato=window.location+'/financas/extrato/'+data.token_id;
+                    $urldelete=window.location.href+'/delete/'+data.id;
+                    if (data.status==1) {
+                      $delete='<a href="'+$urldelete+'" class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash-o"></i></a>';
+
+                    }else{
+                      $delete='<a href="'+$urldelete+'" class="btn btn-danger btn-xs"><i class="fa fa-fw fa-recycle"></i></a>';
+
+                    }
+
+                    $return='<center class="row"><a href="'+$urledit+'" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-pencil"></i></a><a href="'+$urlshow+'" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-info-circle"></i></a><a href="'+$urlextrato+'" class="btn btn-success btn-xs"><i class="fa fa-pie-chart"></i></a>'+$delete;
+
+                    return $return;
+                  },
+                  'name':'cliente_nome'
+                },
+                {
+                  data:null,
+                  render:function(data,type,row){
+
+                    return '<a href="{{url("admin/contrato")}}/'+data.id+'" class="btn btn-danger btn-xs">Contrato</a><a href="{{url("admin/prospecoes")}}/'+data.id+'" class="btn btn-success  btn-xs">Prospeção</a><a href="{{url("admin/saude")}}/'+data.id+'" class="btn btn-primary  btn-xs">Saúde</a></center>';
+                  },
+                  'name':'cliente_nome'
+                }
+
+                
+            ]
     } );
 } );
-
 </script>
-
 
  {{ $clientes->links() }}
 

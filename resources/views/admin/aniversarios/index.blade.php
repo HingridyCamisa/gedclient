@@ -4,6 +4,7 @@
 
 
 @section('content')
+@include('notification')
  <div class="box box-solid box-danger">
    <div class="box-header">
               <center><h3 class="box-title"><strong><i class="fa fa-fw fa-birthday-cake"></i>  {{\Carbon\Carbon::now()->format('F')}} </strong></h3></center>

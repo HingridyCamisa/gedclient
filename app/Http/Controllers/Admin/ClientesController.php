@@ -10,6 +10,8 @@ use DB;
 use Illuminate\Support\Str;
 use App\Files;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+use DataTables;
 
 class ClientesController extends Controller
 {
@@ -28,6 +30,21 @@ class ClientesController extends Controller
         $clientes=Cliente::latest()
                            ->paginate(1000);
         return view('admin.clientes.index',compact('clientes'))->with('i', (request()->input('page', 1) -1) * 12);
+    }
+    public function getdataClientes()
+    {
+      /*$clientes=Cliente::select('clientes.*','uvw_country_states.country_name','uvw_country_states.state_name')
+      ->leftjoin('uvw_country_states','clientes.cliente_state_id','=','uvw_country_states.id')
+       ;*/
+       $clientes=Cliente::select('clientes.*','uvw_country_states.country_name','uvw_country_states.state_name')
+      ->leftjoin('uvw_country_states','clientes.cliente_state_id','=','uvw_country_states.id')
+       ;;
+
+       return Datatables::eloquent($clientes)
+       ->addColumn('idx', 'M{{str_pad($id, 6, "0", STR_PAD_LEFT)}}')
+       ->make(true);
+
+
     }
 
     /**

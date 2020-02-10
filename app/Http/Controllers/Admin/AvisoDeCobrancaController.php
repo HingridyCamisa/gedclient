@@ -16,6 +16,7 @@ use App\AvisoCobrancaView;
 use App\Files;
 use App\Contrato;
 use App\Saude;
+use App\Recibos;
 
 
 class AvisoDeCobrancaController extends Controller
@@ -209,6 +210,12 @@ public $token_id;
         $this->token_id=$token_id;
 
         $destroy= \App\AvisoCobranca::find($id);
+
+        $recibos=Recibos::where('aviso_id',$id)->count();
+        if ($recibos>1) {
+            return redirect()->back()->with('error','Aviso Pago.');
+        };
+
         if ($destroy->status==3 || $destroy->status==1) {
                $destroy->delete();
 

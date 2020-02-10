@@ -34,7 +34,7 @@
         <div class="info-box bg-red">
           <span class="info-box-icon"><i class="ion ion-cash"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text">Valor des Comições</span>
+            <span class="info-box-text">Valor das Comições</span>
             <span class="info-box-number">{{number_format($contrato->sum('comissao'), 2, ',', '.') . 'MTN'}}</span>
             <!-- The progress section is optional -->
             <div class="progress">
