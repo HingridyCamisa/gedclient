@@ -107,7 +107,7 @@ class ClientesController extends Controller
         'cliente_id_numero'=>'required|string|min:1|unique:clientes,cliente_id_numero',
         'notas'=>'nullable|string',
         'cliente_tipo'=>'required|string|min:1',
-        'cliente_nuit'=>'required|string|min:9|max:9|unique:clientes,cliente_nuit',
+        'cliente_nuit'=>'required|digits:9|min:9|max:9|unique:clientes,cliente_nuit',
        ]);
         }elseif ($cliente['cliente_tipo']=='Empresa')
         {
@@ -122,7 +122,7 @@ class ClientesController extends Controller
         'cliente_state_id'=>'required|numeric',
         'notas'=>'nullable|string',
         'cliente_tipo'=>'required|string|min:1',
-        'cliente_nuit'=>'required|digits|min:9|max:9|unique:clientes,cliente_nuit',
+        'cliente_nuit'=>'required|digits:9|min:9|max:9|unique:clientes,cliente_nuit',
             
         //pessoa de contacto
         'pessoa_contacto_nome'=>'required|string|min:3|max:100',
