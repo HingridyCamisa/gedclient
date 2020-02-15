@@ -175,6 +175,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //pagamentos
     Route::post('savepaymat','FinancasController@savepaymat');
+    Route::post('savesituacao','FinancasController@savesituacao');
 
     //recibos 
      Route::get('recibostable','FinancasController@recibostable');
@@ -199,6 +200,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('meusficheiros/all/deletefile','ReportController@alldeletefile');
     Route::get('file/download/{filename}', 'FileDownloadController@index')->name('file/download');
     Route::post('report/filtro','ReportController@filtro');
+    Route::get('financas/seguradora/{token}/{name}/{id}','FinancasController@seguradora');
 
 
 });

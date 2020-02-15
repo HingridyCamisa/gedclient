@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use DB;
 use App\ExtratoClient;
 use App\Cliente;
+use App\SituacaoSeguradora;
 
 
 class FinancasController extends Controller
@@ -168,5 +169,44 @@ class FinancasController extends Controller
       }
 
         return view('admin.financas.extrato',compact('extrato', 'cliente'))->with('success','Extrato gerado com sucesso.');
+    }
+
+    public function seguradora($token,$name,$id)
+    {
+        $data=SituacaoSeguradora::where('recibo_id',$id)->first();
+
+        return view('admin.financas.seguradora', compact('token','name','id','data'));
+    }
+
+       public function savesituacao(Request $request)
+    {   $this->authorize('financas_make_payment');
+
+        $recido= Recibos::find($request->recibo_id);
+        if (!$recido)
+        {
+            $arr = array('msg' => 'Recibo nao encotrado', 'status' => false);
+            return Response()->json($arr);
+        }
+
+        $validator = Validator::make($request->all(), [
+        'ref_prestacao'=>'nullable|max:50',
+        'n_cheque'=>'nullable|max:50',
+        'data_p'=>'nullable|date',
+        'n_recibo'=>'nullable|max:50',
+        'data_r'=>'nullable|date',
+        'estado'=>'nullable|max:50',
+        'data_e'=>'nullable|date',
+        ]);
+        if ($validator->passes()) {
+            SituacaoSeguradora::updateOrCreate(
+                    ['recibo_id' => $request->recibo_id],
+                    ['ref_prestacao' => $request->ref_prestacao, 'data_p' => $request->data_p,'n_cheque'=>$request->n_cheque,'n_recibo'=>$request->n_recibo,'data_r'=>$request->data_r,'estado'=>$request->estado,'data_e'=>$request->data_e,'user_id'=>$request->user_id]
+            );
+
+         $arr = array('msg' => 'Successfully Save', 'status' => true);
+         return Response()->json($arr);
+        }
+
+        return response()->json(['errors'=>$validator->errors()->all()]);
     }
 }

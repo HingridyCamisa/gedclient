@@ -3,14 +3,14 @@
     "",
     "\\app",
     "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\app\\Http\\Controllers\\Admin",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\avisoCobranca",
-    "\\resources\\views\\admin\\clientes",
-    "\\resources\\views\\admin\\home",
+    "\\resources\\views\\admin\\financas",
     "\\resources\\views\\admin\\saude"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\SaudeController.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\ClientesController.php",
   "PreviewInSolutionExplorer": false
 }

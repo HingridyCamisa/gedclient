@@ -19,6 +19,7 @@
         <tr class="table-danger">
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nuit</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> País </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> Cidade</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
@@ -37,6 +38,7 @@
           
           <th scope="col"><center> Nº</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nome</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-user"></i> Nuit</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> País </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-map-marker"></i> Cidade</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i>Telefone</center></th>
@@ -62,8 +64,8 @@
         processing: true,
         responsive: true,
         "order": [[0, "desc"]],
-        dom: 'Bfrtip',
         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+
         buttons: [
             {
               extend: 'copy',
@@ -120,8 +122,9 @@
 
 
             "columns": [
-                {"data":"idx"},
+                {"data":"idx", "name":"id"},
                 {"data":"cliente_nome"},
+                {"data":"cliente_nuit"},
                 {"data":"country_name", "name":'uvw_country_states.country_name'},
                 {"data":"state_name", "name":'uvw_country_states.state_name'},
                 {"data":"cliente_telefone_1"},

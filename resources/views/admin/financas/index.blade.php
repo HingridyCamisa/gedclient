@@ -28,7 +28,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-money"></i> Saldo MTN</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Atualização</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Criação</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Pagamento</center></th>
         </tr>
       </thead>
       <tbody>
