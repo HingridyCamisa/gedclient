@@ -67,6 +67,8 @@ class FileController extends Controller
             
             foreach($request->file('file') as $key=>$file)
             {   
+                if(isset($request->filetype[$key]) and $file)
+                {
                 $origname=$file->getClientOriginalName();
                 $name=time() . '_'.$key.'.'. $origname;
                 $file->storeAs('public/anexos', $name);
@@ -75,6 +77,10 @@ class FileController extends Controller
                 $file->token_id=$token_id;
                 $file->filetype=$request->filetype[$key];
                 $file->save();
+                }else{
+                $arr = array('msg' => 'Verifica se todos ficheiros estao devidamente preenchidos', 'status' => false);
+                return Response()->json($arr);
+                }
 
             }
             
