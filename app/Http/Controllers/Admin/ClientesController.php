@@ -100,8 +100,10 @@ class ClientesController extends Controller
         'cliente_data_nascimento'=>'required|date',
         'cliente_genero'=>'required|string|min:3|max:100',
         'cliente_email'=>'nullable|email|unique:clientes,cliente_email',
-        'cliente_telefone_1'=>'required|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
-        'cliente_telefone_2'=>'nullable|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
+        'cliente_telefone_1'=>'required|numeric',
+        'cliente_telefone_2'=>'nullable|numeric',
+        /*'cliente_telefone_1'=>'required|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
+        'cliente_telefone_2'=>'nullable|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',*/
         'cliente_state_id'=>'required|numeric',
         'cliente_id_tipo'=>'required|string|min:1',
         'cliente_id_numero'=>'required|string|min:1|unique:clientes,cliente_id_numero',
@@ -240,8 +242,10 @@ class ClientesController extends Controller
         'cliente_data_nascimento'=>'nullable|date',
         'cliente_genero'=>'nullable|string|min:3|max:100',
         'cliente_email'=>['nullable','email',Rule::unique('clientes','cliente_email')->ignore($id,'id')],
-        'cliente_telefone_1'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
-        'cliente_telefone_2'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
+        'cliente_telefone_1'=>'nullable|numeric',
+        'cliente_telefone_2'=>'nullable|numeric',
+        /*'cliente_telefone_1'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
+        'cliente_telefone_2'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],*/
         'cliente_nuit'=>['nullable','digits:9',Rule::unique('clientes','cliente_nuit')->ignore($id,'id')],
 
         'cliente_state_id'=>'nullable|numeric',
