@@ -40,7 +40,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="box box-primary">
+          <div class="box box-danger">
             <div class="box-header with-border">
               <h3 class="box-title">Mails</h3>
               <!-- /.box-tools -->

@@ -90,7 +90,7 @@
                 <p>Contratos a expirar</p>
               </div>
               <div class="icon">
-                <i class="ion ion-clock"></i>
+                <i class="ion ion-archive"></i>
               </div>
               <a href="{{ url('admin/contrato/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -102,7 +102,7 @@
                 <p>Saude a expirar</p>
               </div>
               <div class="icon">
-                <i class="ion ion-clock"></i>
+                <i class="ion ion-medkit"></i>
               </div>
               <a href="{{ url('admin/saude/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -114,7 +114,7 @@
                 <p>A Expirar next month</p>
               </div>
               <div class="icon">
-                <i class="ion ion-clock"></i>
+                <i class="ion ion-archive"></i>
               </div>
               <a data-toggle="modal" data-target="#modal-warning" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
             </div>
