@@ -31,7 +31,7 @@
                             <tr>
                             <td>{{++$key}}</td>
                             <td>{{$cil->filetype}}</td>
-                            <td><strong><a class="fa fa-file " aria-hidden="true" href="{{asset('storage/anexos/'.$cil->filename)}}" target="_self"> {{$cil->filename}}</a></strong>
+                            <td><strong><a class="fa fa-file " aria-hidden="true" href="{{asset('storage/anexos/'.$cil->filename)}}" target="_blank"> {{$cil->filename}}</a></strong>
                             </td>
                             <th><strong><a class="fa fa-trash " aria-hidden="true" href="{{route('remove-anexo',$cil->filename)}}" target="_self"> Remover</a></strong>
                             </th>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <br>
-      <form method="post" action="{{ url('admin/files/addfiles',$token_id) }}" enctype="multipart/form-data">
+      <form method="post" action="javascript:void(0)" id="myform" enctype="multipart/form-data">
           {{csrf_field()}}
         <h4><i class="fa fa-upload"></i> Upload<a style="color: red">*</a></h4> 
           <small id="fileHelp" class="form-text text-muted">Por favor carregue o anexo (jpeg,png,pdf) com os todos documentos. E não pode ser superior à 10MB</small>
@@ -163,15 +163,15 @@
             </select>
           </div>
           <div class=" input-group" >
-            <input type="file" name="file[]" class="form-control" >          
+            <input type="file" name="file[]" id="file[]" class="form-control" >          
             <div class="input-group-btn"> 
-              <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
+              <button  class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remover</button>
             </div>
           </div>
         </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-top:10px">Submeter</button>
+        <button id="save" type="submit" class="btn btn-primary" style="margin-top:10px">Caregar</button>
 
         </form>
                 </div>
@@ -182,7 +182,50 @@
         
         
         
-    </div>
+</div>
+
+<script>
+$(document).on("submit", "#myform", function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      var formData = new FormData(this);
+      $('#save').html('Caregango <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
+      $.ajax({
+           url: "{{ url('admin/files/addfiles',$token_id) }}",
+           type: 'POST',
+           data: formData,
+           success: function (response) {
+              if (response.status==false) {
+                  toastr.error(response.msg);
+
+              } else if (response.status==true)
+                {
+                   toastr.success(response.msg);
+                }
+              else{
+                  response.errors.forEach(myFunction);
+
+                  function myFunction(item, index) {
+                       toastr.error(item);
+                      
+                    }
+              }
+       
+
+            $('#save').html('Caregar');
+           },
+           error: function (error) {
+               console.log(error)
+           },
+           cache: true,
+           contentType: false,
+           processData: false
+      });
+      return false;
+ });
+</script>
+
 <script type="text/javascript">
 
 

@@ -29,6 +29,8 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Metodo </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Comprovativo </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Seguradora</center></th>
         </tr>
       </thead>
       <tbody>
@@ -66,24 +68,28 @@
           <td><center>{{ $aviso->data_pagamento}}</center></td>
           <td><center>{{ $aviso->forma_pagamento}}</center></td>
           <td><center>{{ $aviso->comprovativo}}</center></td>
+          <td><center> <a href="{{url('admin/financas/recibos/recibo',$aviso->token_id)}}" class="btn btn-success margin btn-xs">Recibo</a></center></td>
 
            <td><center>
-              <a href="{{url('admin/financas/recibos/recibo',$aviso->token_id)}}" class="btn btn-success btn-xs">Recibo</a>
               @if($aviso->status_recibos==1)
               @can('financas_recibo_destroy')
               {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/recibos/destroy', $aviso->nu_recibo],'style'=>'display:inline']) !!}
-              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger margin btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endcan
               @else
               @can('financas_recibo_destroy')
               {!! Form::open(['method' => 'DELETE','url' => ['admin/financas/recibos/destroy/db', $aviso->nu_recibo],'style'=>'display:inline']) !!}
-              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger btn-xs', 'type'=>'submit']) !!}
+              {!! Form::button('<i class="fa fa-trash-o"></i>', ['class'=>'btn btn-danger margin btn-xs', 'type'=>'submit']) !!}
               {!! Form::close() !!}
               @endcan
               @endif
             </center>
-             </td>
+           </td>
+           <td>
+               
+              <a href="{{url('admin/financas/seguradora',[$aviso->token_id,$aviso->cliente_nome,$aviso->nu_recibo])}}" class="btn bg-purple margin btn-xs">Seguradora</a>
+           </td>
 
 
       @endforeach

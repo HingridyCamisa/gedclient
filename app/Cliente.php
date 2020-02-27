@@ -19,6 +19,12 @@ class Cliente extends Model
         return $this->belongsTo('App\CountryCity','cliente_state_id','id');
     }
 
+         public function clientCountryCity()
+    {
+        return $this->belongsTo('App\CountryCity','cliente_state_id','id');
+    }
+
+
     public function pessoa_country_city()
     {
         return $this->belongsTo('App\CountryCity','pessoa_contacto_state_id','id');

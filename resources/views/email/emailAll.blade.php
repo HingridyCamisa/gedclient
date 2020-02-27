@@ -100,14 +100,16 @@
                     "class":          "details-control",
                     "orderable":      false,
                     "data":           null,
-                    "defaultContent": ""
+                    "defaultContent": "",
+                    'name':'assunto'
                 },
-                { "data": "name" },
+                { "data": "name",'name':'users.name' },
                                 {
                   data: null,
                   render: function ( data, type, row ) {
                     return '<b>'+data.name_cliente+'</b> - '+data.assunto+'';
-                  }
+                  },
+                  'name':'name_cliente'
                 },
                 { "data": "created_at" },
                 { "data": "time" },
@@ -115,7 +117,8 @@
                   data: null,
                   render: function ( data, type, row ) {
                     return '<a  href="{{url(url("admin/emailtry/"))}}/'+data.id+'" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></a>';
-                  }
+                  },
+                  'name':'assunto'
                 }
             ],
             "rowCallback": function (row, data) {

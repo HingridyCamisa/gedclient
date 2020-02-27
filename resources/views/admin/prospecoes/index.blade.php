@@ -34,7 +34,7 @@
         <tr>
           <th><center>{{ ++$i }}</center></th>
           <td>{{$prospecao->cliente->cliente_nome }}</td>
-          <td>{{$prospecao->consultor }}</td>
+          <td>{{$prospecao->consultor->nome_consultor }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
           <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>
           <td>{{$prospecao->estado }}</td>

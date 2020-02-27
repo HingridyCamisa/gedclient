@@ -3,14 +3,17 @@
     "",
     "\\app",
     "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\app\\Http\\Controllers\\Admin",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\avisoCobranca",
-    "\\resources\\views\\admin\\clientes",
-    "\\resources\\views\\admin\\home",
-    "\\resources\\views\\admin\\saude"
+    "\\resources\\views\\admin\\files",
+    "\\resources\\views\\admin\\financas",
+    "\\resources\\views\\admin\\saude",
+    "\\resources\\views\\vendor\\adminlte",
+    "\\routes"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\SaudeController.php",
+  "SelectedNode": "\\resources\\views\\admin\\files\\show.blade.php",
   "PreviewInSolutionExplorer": false
 }

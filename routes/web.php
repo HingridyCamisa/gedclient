@@ -150,6 +150,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //clientes 
     Route::resource('clientes','ClientesController');
+    Route::get('clientes/delete/{id}','ClientesController@destroy')->name('clientes/delete');
+    Route::get('clientes/show/{id}','ClientesController@show')->name('clientes/show');
+    Route::get('getdataClientes','ClientesController@getdataClientes');
     Route::post('clientes/atualizar/{id}','ClientesController@update');
     //states
     Route::get('get-state-list','ClientesController@getStateList');
@@ -172,6 +175,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     //pagamentos
     Route::post('savepaymat','FinancasController@savepaymat');
+    Route::post('savesituacao','FinancasController@savesituacao');
 
     //recibos 
      Route::get('recibostable','FinancasController@recibostable');
@@ -180,13 +184,13 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
      Route::get('financas/recibos/recibo/{token_id}','FinancasController@extratrecibo');
 
      //extrato do cliente
-     Route::get('financas/extrato/{id}','FinancasController@extratoCliente');
+     Route::get('clientes/financas/extrato/{id}','FinancasController@extratoCliente');
 
      //files 
      Route::get('files/anexos/{token_id}','FileController@show');
      //remover anexo form a
     Route::get('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
-    Route::post('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
+    //Route::post('/remove-anexo/{anexo}', 'FileController@removeanexo')->name('remove-anexo');
     Route::post('/files/addfiles/{token_id}','FileController@addfiles');
 
     Route::get('report/index','ReportController@index');
@@ -196,6 +200,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('meusficheiros/all/deletefile','ReportController@alldeletefile');
     Route::get('file/download/{filename}', 'FileDownloadController@index')->name('file/download');
     Route::post('report/filtro','ReportController@filtro');
+    Route::get('financas/seguradora/{token}/{name}/{id}','FinancasController@seguradora');
 
 
 });

@@ -10,6 +10,8 @@ use DB;
 use Illuminate\Support\Str;
 use App\Files;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+use DataTables;
 
 class ClientesController extends Controller
 {
@@ -28,6 +30,21 @@ class ClientesController extends Controller
         $clientes=Cliente::latest()
                            ->paginate(1000);
         return view('admin.clientes.index',compact('clientes'))->with('i', (request()->input('page', 1) -1) * 12);
+    }
+    public function getdataClientes()
+    {
+      /*$clientes=Cliente::select('clientes.*','uvw_country_states.country_name','uvw_country_states.state_name')
+      ->leftjoin('uvw_country_states','clientes.cliente_state_id','=','uvw_country_states.id')
+       ;*/
+       $clientes=Cliente::select('clientes.*','uvw_country_states.country_name','uvw_country_states.state_name')
+      ->leftjoin('uvw_country_states','clientes.cliente_state_id','=','uvw_country_states.id')
+       ;;
+
+       return Datatables::eloquent($clientes)
+       ->addColumn('idx', 'M{{str_pad($id, 6, "0", STR_PAD_LEFT)}}')
+       ->make(true);
+
+
     }
 
     /**
@@ -83,14 +100,17 @@ class ClientesController extends Controller
         'cliente_data_nascimento'=>'required|date',
         'cliente_genero'=>'required|string|min:3|max:100',
         'cliente_email'=>'nullable|email|unique:clientes,cliente_email',
-        'cliente_telefone_1'=>'required|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
-        'cliente_telefone_2'=>'nullable|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
+        'cliente_telefone_1'=>'required|numeric',
+        'cliente_telefone_2'=>'nullable|numeric',
+        /*'cliente_telefone_1'=>'required|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',
+        'cliente_telefone_2'=>'nullable|numeric|unique:clientes,cliente_telefone_1|unique:clientes,cliente_telefone_2',*/
         'cliente_state_id'=>'required|numeric',
         'cliente_id_tipo'=>'required|string|min:1',
         'cliente_id_numero'=>'required|string|min:1|unique:clientes,cliente_id_numero',
         'notas'=>'nullable|string',
         'cliente_tipo'=>'required|string|min:1',
-        'cliente_nuit'=>'required|string|min:9|max:9|unique:clientes,cliente_nuit',
+        //'cliente_nuit'=>'required|digits:9|min:9|max:9|unique:clientes,cliente_nuit',
+        'cliente_nuit'=>'required|digits:9|min:9|max:9',
        ]);
         }elseif ($cliente['cliente_tipo']=='Empresa')
         {
@@ -105,7 +125,8 @@ class ClientesController extends Controller
         'cliente_state_id'=>'required|numeric',
         'notas'=>'nullable|string',
         'cliente_tipo'=>'required|string|min:1',
-        'cliente_nuit'=>'required|digits|min:9|max:9|unique:clientes,cliente_nuit',
+        //'cliente_nuit'=>'required|digits:9|min:9|max:9|unique:clientes,cliente_nuit',
+        'cliente_nuit'=>'required|digits:9|min:9|max:9',
             
         //pessoa de contacto
         'pessoa_contacto_nome'=>'required|string|min:3|max:100',
@@ -223,10 +244,12 @@ class ClientesController extends Controller
         'cliente_data_nascimento'=>'nullable|date',
         'cliente_genero'=>'nullable|string|min:3|max:100',
         'cliente_email'=>['nullable','email',Rule::unique('clientes','cliente_email')->ignore($id,'id')],
-        'cliente_telefone_1'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
-        'cliente_telefone_2'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
-        'cliente_nuit'=>['nullable','digits:9',Rule::unique('clientes','cliente_nuit')->ignore($id,'id')],
-
+        'cliente_telefone_1'=>'nullable|numeric',
+        'cliente_telefone_2'=>'nullable|numeric',
+        /*'cliente_telefone_1'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],
+        'cliente_telefone_2'=>['nullable','digits:9',Rule::unique('clientes','cliente_telefone_1')->ignore($id,'id'),Rule::unique('clientes','cliente_telefone_2')->ignore($id,'id')],*/
+        //'cliente_nuit'=>['nullable','digits:9',Rule::unique('clientes','cliente_nuit')->ignore($id,'id')],
+        'cliente_nuit'=>'nullable|digits:9|min:9|max:9',
         'cliente_state_id'=>'nullable|numeric',
         'cliente_id_tipo'=>'nullable|string|min:1',
         'cliente_id_numero'=>['nullable','string','min:1',Rule::unique('clientes','cliente_id_numero')->ignore($id,'id')],
