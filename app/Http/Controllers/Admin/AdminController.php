@@ -121,7 +121,19 @@ class AdminController extends Controller
         $category_month->dataset('Comissão', 'line', $data_comissao->values());
 
 
+        $perf_contratos=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
+            ->orderby('data_inicio','asc')
+            ->get()
+            ->groupBy('date')
+            ->map(function ($item) {
+            // Return the number of persons
+            return count($item);
+        });
 
+        $category_month_perf = new grafico;
+        $category_month_perf->labels($lebels_category_month->keys());
+        $category_month_perf->title('Performace Mensal Contratos');
+        $category_month_perf->dataset('Nº contratos', 'line', $perf_contratos->values());
 
 
 
@@ -132,7 +144,7 @@ class AdminController extends Controller
        
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next'));
+         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next','category_month_perf'));
     }
 
     function sumItemPremio($items)

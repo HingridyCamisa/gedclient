@@ -150,6 +150,20 @@
         </div> 
          </div>
         <hr />
+        <div class="row">
+      
+        <div class="col-md-12">
+        <div class="card">
+
+                <div class="panel-body">
+                    <div>
+                    {!! $category_month_perf->container()!!}
+                    </div>  
+                </div>
+            </div>
+        </div> 
+         </div>
+        <hr />
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -236,6 +250,7 @@
 {!! $emidio->script() !!}
 {!! $graf_seguradora->script() !!}
 {!! $category_month->script() !!}
+{!! $category_month_perf->script() !!}
 
 
 <style>
