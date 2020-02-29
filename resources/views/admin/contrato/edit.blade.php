@@ -40,7 +40,7 @@
 
                                     <div class="col-xs-3">
                                     <label> Ramo </label>
-                                            <select class="form-control" name="tipo_ramo">
+                                            <select class="form-control" name="tipo_ramo" onchange="ramo(this.value)">
                                                 <option   selected disabled> select</option>
                                                 @foreach($ramos as $ramo)
                                                 <option value="{{ $ramo->id}}"> {{ $ramo->ramo}}</option>
@@ -189,7 +189,7 @@
 
     <script type="text/javascript">
         function ramo(val) {
-        if (val=='Automóvel - Responsabilidade Civil') {
+        if (val=='4') {
             $(".capital_seguro").removeAttr('disabled');
         } else {
             $(".capital_seguro").prop('disabled', true);

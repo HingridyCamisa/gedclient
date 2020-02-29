@@ -122,8 +122,11 @@ class CalendarioController extends Controller
      * @param  \App\Calendario  $calendario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Calendario $calendario)
+    public function destroy($calendario)
     {
-        //
+        $this->authorize('calendario_create');
+        $event = Calendario::find($calendario)->delete();
+        return redirect('admin/calendario')->with('success','Evento Elimidado com sucesso.');
+
     }
 }

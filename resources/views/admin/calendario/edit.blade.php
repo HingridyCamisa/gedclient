@@ -42,7 +42,7 @@
                     </ul>
                     </div>
 
-                    <div class="col-xs-4 col-sm-4 col-ms-4">
+                    <div class="col-xs-5 col-sm-5 col-ms-5">
                         <div class="form-group">
                             {!!Form::label('titulo','Título do Evento:')!!}
                             <div class="">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-3 col-sm-3 col-ms-3">
+                    <div class="col-xs-2 col-sm-2 col-ms-2">
                         <div class="form-group">
                             {!!Form::label('data_inicio','Data Início:')!!}
                             <div class="">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-3 col-sm-3 col-ms-3">
+                    <div class="col-xs-2 col-sm-2 col-ms-2">
                         <div class="form-group">
                             {!!Form::label('data_final','Data Final:')!!}
                             <div class="">
@@ -74,6 +74,10 @@
 
                     <div class="col-xs-1 col-sm-1 col-md-1 text-center"> &nbsp;</br/>
                      {!! Form::button('<i class="fa fa-save"></i> Update', ['id'=>'add-new-event','class'=>'btn btn-danger', 'type'=>'submit']) !!} 
+                    </div>
+
+                    <div class="col-xs-1 col-sm-1 col-md-1 text-center">&nbsp;</br/>
+                      <a href="{{url('admin/calendario/delete/'.$event->id)}}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar</a>
                     </div>
 <!--'id'=>'add-new-event'-->
                 </div>

@@ -90,8 +90,9 @@
         <div class="box box-solid box-danger">
             <div class="box-header with-border"> <center><i class="fa fa-calendar"></i> Calendário</center></div>
                 <div class="box-body">
+                  
                      {!! $calendario_detalhes->calendar()!!}
-                        
+                  
                 </div>
         </div>
         
@@ -100,7 +101,8 @@
 @stop
 
 
-{!!  $calendario_detalhes->script() !!}
+  {!!  $calendario_detalhes->script() !!}
+
 
 <script>
   $(function () {
