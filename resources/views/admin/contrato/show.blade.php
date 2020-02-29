@@ -48,12 +48,8 @@
           <td><i class="fa  fa-file-text-o"></i> &nbsp; {{$contrato->numero_apolice }}</td>
         </tr>
         <tr>
-          <th>Nº Recibo</th>
-          <td><i class="fa  fa-file-text-o"></i> &nbsp; {{$contrato->numero_recibo }}</td>
-        </tr>
-        <tr>
           <th>Ramo</th>
-          <td> &nbsp; {{$contrato->ramo['ramo']  }}</td>
+          <td><i class="fa  fa-file-text-o"></i> &nbsp; {{$contrato->ramo['ramo']  }}</td>
         </tr>
         <tr>
           <th>Periodicidade Pagamento</th>
@@ -67,13 +63,6 @@
           <th>Data Próximo  Pagamento</th>
           <td><i class="fa fa-calendar"></i> &nbsp; {{ Carbon\Carbon::parse($contrato->data_proximo_pagamento)->format('d-m-Y') }}</td>
         </tr>
-        <tr>
-          <th>Dias Cobertos</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ $contrato->dias_cobertos }}</td>
-        </tr>
-        <tr>
-          <th>Data Próximo  Pagamento</th>
-          <td><i class="fa fa-calendar"></i> &nbsp; {{ $contrato->dias_proximo_pagamento }}</td>
         </tr>
         <tr>
           <th>Capital Seguro</th>
