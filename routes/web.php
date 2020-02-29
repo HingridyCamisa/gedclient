@@ -3,6 +3,7 @@
 use App\Calendario;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Voyager::routes();
@@ -215,7 +216,8 @@ Route::get('/', function(){
     return view('auth.login');
 });
 
-Auth::routes();
+
+
 
 
  

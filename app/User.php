@@ -34,4 +34,8 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasOne(Meta::class);
     }
+    public function aniversarios()
+    {
+        return 6;
+    }
 }

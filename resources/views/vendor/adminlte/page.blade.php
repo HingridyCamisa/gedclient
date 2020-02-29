@@ -69,7 +69,7 @@
                         <li class="dropdown birthday-menu">
                             <a href="{{ url('admin/aniversarios/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-birthday-cake"></i>
-                            <span class="label label-primary"> 6</span>
+                            <span class="label label-primary"> </span>
                             </a>
                         </li>
                         <li class="dropdown contratos-menu">
