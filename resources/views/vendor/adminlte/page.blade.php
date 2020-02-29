@@ -133,6 +133,7 @@
 
             <div class="pull-left info">
                 <p>&nbsp{{ Auth::user()->name }}</p>
+                <p>&nbsp<a href="{{URL::asset('manual/Manual_de_Utilizador.pdf')}}" target="_blank"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Ajuda</a></p>
                     <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
             </div>
 
@@ -146,6 +147,8 @@
             </section>
             <!-- /.sidebar -->
         </aside>
+
+
         @endif
 
         <!-- Content Wrapper. Contains page content -->

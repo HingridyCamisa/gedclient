@@ -83,7 +83,6 @@
       </tbody>
       <tfoot>
         <tr class="table-danger">
-        <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-envelope"></i>  Email</center></th>

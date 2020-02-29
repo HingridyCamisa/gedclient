@@ -110,6 +110,8 @@
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Metodo </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Comprovativo </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Seguradora</center></th>
           </tr>
       </tfoot>
     </table>
