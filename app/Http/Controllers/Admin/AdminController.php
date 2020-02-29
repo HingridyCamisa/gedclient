@@ -96,19 +96,19 @@ class AdminController extends Controller
         $graf_seguradora->dataset('Contratos', 'bar', $data_seguradora->values());
 
         $lebels_category_month=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
-            ->orderby('created_at','asc')
+            ->orderby('data_inicio','asc')
             ->get()
             ->groupBy('date');
 
         $data_premio=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'premio_simples')        
-            ->orderby('created_at','asc')
+            ->orderby('data_inicio','asc')
             ->get()
             ->groupBy('date')
             ->map(function ($item, $key) {
                   return $this->sumItemPremio($item);
             });      
         $data_comissao=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'comissao')        
-            ->orderby('created_at','asc')
+            ->orderby('data_inicio','asc')
             ->get()
             ->groupBy('date')
             ->map(function ($item, $key) {
