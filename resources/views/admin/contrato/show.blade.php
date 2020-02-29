@@ -109,6 +109,11 @@
           <th>Detalhes Item Segurado</th>
           <td><i class="fa fa-info"></i> &nbsp; {{$contrato->detalhes_item_segurado}}</td>
         </tr>
+
+        <tr>
+          <th>Criado Por</th>
+          <td><i class="fa fa-info"></i> &nbsp; {{$contrato->user->name}}</td>
+        </tr>
         <tr>
           <th>Estado Contrato</th>
           @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())         

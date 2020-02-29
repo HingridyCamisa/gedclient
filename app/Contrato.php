@@ -29,5 +29,10 @@ class Contrato extends Model
     {
         return $this->belongsTo('App\Ramo','tipo_ramo','id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id','id');
+    }
     
 }
