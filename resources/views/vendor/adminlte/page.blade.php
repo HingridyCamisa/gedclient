@@ -69,19 +69,19 @@
                         <li class="dropdown birthday-menu">
                             <a href="{{ url('admin/aniversarios/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-birthday-cake"></i>
-                            <span class="label label-primary"> </span>
+                            <span class="label label-primary"> {{ Auth::user()->aniversarios() }}</span>
                             </a>
                         </li>
                         <li class="dropdown contratos-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-folder-open"></i>
-                            <span class="label label-success">120</span>
+                            <span class="label label-success">{{ Auth::user()->contratos() }}</span>
                             </a>
                         </li>
                         <li class="dropdown prospecoes-menu">
                             <a href="{{ url('admin/prospecoes/index')}}" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-fw fa-briefcase"></i>
-                            <span class="label label-warning">2</span>
+                            <span class="label label-warning"> {{ Auth::user()->prospecoes() }}</span>
                             </a>
                             
 
