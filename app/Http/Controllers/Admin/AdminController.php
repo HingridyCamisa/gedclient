@@ -93,7 +93,7 @@ class AdminController extends Controller
         $graf_seguradora = new grafico;
         $graf_seguradora->labels($data_seguradora->keys());
         $graf_seguradora->title('Nº de Contratos por Seguradora');
-        $graf_seguradora->dataset('Seguradoras', 'bar', $data_seguradora->values());
+        $graf_seguradora->dataset('Contratos', 'bar', $data_seguradora->values());
 
         $lebels_category_month=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
             ->orderby('created_at','asc')
