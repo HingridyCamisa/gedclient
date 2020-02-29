@@ -95,7 +95,7 @@ $(document).ready(function() {
         dom: 'Bfrtip',
         "order": [[ 6, "desc" ]],
         "columnDefs": [
-                        { "type": "date-eu", "targets": 6 }
+                        { "type": "date-eu", "targets": 5 }
                       ],
         buttons: [
             {
