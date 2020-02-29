@@ -14,6 +14,7 @@
 
     
      </div>
+     <div class="box-body table-responsive no-padding">
      <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr class="table-danger">
@@ -23,7 +24,8 @@
           <th scope="col"><center><i class="fa fa-fw fa-institution"></i> Seguradora</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-file-text-o"></i>Nº Apólice</center></th>
           <th scope="col"><center> Ramo</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Próximo Pagamento </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Inicio </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Fim </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-money"></i>  Situação </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Estado </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
@@ -39,6 +41,7 @@
           <td><center>{{$contrato->seguradora->nome_seguradora }}</center></td>
           <td><center>{{$contrato->numero_apolice }}</center></td>
           <td><center>{{$contrato->ramo['ramo'] }}</center></td>
+          <td><center>{{$contrato->data_inicio}}</center></td>
           <td><center>{{$contrato->data_proximo_pagamento}}</center></td>
           <td><center>{{$contrato->situacao }}</center></td>
           @if(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->isPast())
@@ -79,6 +82,7 @@
           </tr>
       </tfoot>
     </table>
+  </div>
    </div>
 
 
