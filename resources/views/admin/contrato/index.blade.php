@@ -35,7 +35,7 @@
       <tbody>
       @foreach($contratos as $contrato)
         <tr>
-          <th><center>{{ ++$i }}</center></th>
+          <th><center>{{$contrato->id}}</center></th>
           <td><center>{{$contrato->consultorx->nome_consultor}}</center></td>
           <td><center>{{$contrato->cliente->cliente_nome}}</center></td>
           <td><center>{{$contrato->seguradora->nome_seguradora }}</center></td>
