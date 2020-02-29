@@ -44,7 +44,7 @@
               {{ csrf_field() }}
 
            <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}" />
-          <div class="box box-primary">
+          <div class="box box-danger">
             <div class="box-header with-border">
               <h3 class="box-title">Compose New Message</h3>
             </div>

@@ -28,7 +28,7 @@
                           </div>
                         <div class="form-group">
                           <label for="EmailConsultor"><i class="fa fa-envelope"></i> Email</label>
-                          <input class="form-control" name="email_consultor" placeholder="consultor.apelido@almond.co.mz" type="email">
+                          <input class="form-control" name="email_consultor" placeholder="consultor.apelido@amanaseguros.co.mz" type="email">
                         </div>
                      
             

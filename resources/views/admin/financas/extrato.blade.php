@@ -51,7 +51,7 @@
         <div class="col-sm-4 invoice-col">
           <b><img src="{{asset('/img/amana2.png')}}"   alt="logo" width="180" height="100"></b><br>  
           <br>
-          <b>&emsp;&emsp;&emsp;Cliete Nᵒ  M{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</b>
+          <b>&emsp;&emsp;&emsp;Cliente Nᵒ  M{{str_pad($cliente->id, 6, "0", STR_PAD_LEFT)}}</b>
           
         </div>
         <!-- /.col -->
@@ -65,7 +65,7 @@
         <address>
             <br>
         <div class="col-xs-12">
-          <p class="lead"><strong><i class="fa fa-address-card-o"></i> Dados Do Clinete:</strong></p>
+          <p class="lead"><strong><i class="fa fa-address-card-o"></i> Dados Do Cliente:</strong></p>
 
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
             <b>Nome:</b> {{$cliente->cliente_nome}}<br>  
