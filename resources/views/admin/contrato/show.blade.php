@@ -53,7 +53,7 @@
         </tr>
         <tr>
           <th>Ramo</th>
-          <td> &nbsp; {{$contrato->tipo_ramo }}</td>
+          <td> &nbsp; {{$contrato->ramo['ramo']  }}</td>
         </tr>
         <tr>
           <th>Periodicidade Pagamento</th>
