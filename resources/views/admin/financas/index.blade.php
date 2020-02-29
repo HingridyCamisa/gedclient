@@ -84,16 +84,19 @@
       <tfoot>
         <tr class="table-danger">
         <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-key"></i> Código </center></th>
           <th scope="col"><center><i class="fa fa-fw fa-user"></i> Cliente</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-envelope"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data Fim </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i>  Estado </center> </th>
           <th scope="col"><center> Cobrança</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Situação</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Valor MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Aviso MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Recibo MTN</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-money"></i> Saldo MTN</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Atualização</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data de Criação</center></th>
-          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Acções</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-gears"></i> Pagamento</center></th>
           </tr>
       </tfoot>
     </table>

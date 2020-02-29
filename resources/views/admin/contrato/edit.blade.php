@@ -115,7 +115,7 @@
 
                         <div class="col-xs-3">
                             <label><i class="fa fa-money"></i> Comissão Corretagem</label>
-                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  >
+                            <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  value="{{$contrato->comissao}}">
      
                         </div>
 
@@ -200,6 +200,27 @@
 
 
                 
+    $(document).ready(function(){
+
+        $('#taxa_corretagem').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+
+        $('#premio_simples').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+    });
+
     $(document).ready(function(){
 
         $('#taxa_corretagem').keyup(function(){

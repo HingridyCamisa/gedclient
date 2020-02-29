@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Str;
 use App\Files;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use DataTables;
@@ -86,15 +87,19 @@ class ClientesController extends Controller
     {   
         $this->authorize('clientes_create');
         $cliente=$request->all();
-        $request->validate([
+        $validatedata = Validator::make($request->all(), [
             'cliente_tipo'=>'required|string|min:1',
         ]);
+        
+        if ($validatedata->passes()) {
 
         if ($cliente['cliente_tipo']=='Individual')
         {
-         $validatedata=$request->validate([
-        'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx,xlsx|max:5000',
-        'filetype.*' => 'nullable|string',
+
+
+        $validatedata = Validator::make($request->all(),[
+        //'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx,xlsx|max:5000',
+        //'filetype.*' => 'nullable|string',
         'cliente_nome'=>'required|string|min:3|max:100|unique:clientes,cliente_nome',
         'cliente_endereco'=>'required|string|min:3|max:100',
         'cliente_data_nascimento'=>'required|date',
@@ -112,11 +117,36 @@ class ClientesController extends Controller
         //'cliente_nuit'=>'required|digits:9|min:9|max:9|unique:clientes,cliente_nuit',
         'cliente_nuit'=>'required|digits:9|min:9|max:9',
        ]);
+
+
+        $valdata=[
+        'cliente_nome'=>$request->cliente_nome,
+        'cliente_endereco'=>$request->cliente_endereco,
+        'cliente_data_nascimento'=>$request->cliente_data_nascimento,
+        'cliente_genero'=>$request->cliente_genero,
+        'cliente_email'=>$request->cliente_email,
+        'cliente_telefone_1'=>$request->cliente_telefone_1,
+        'cliente_telefone_2'=>$request->cliente_telefone_2,
+        'cliente_state_id'=>$request->cliente_state_id,
+        'cliente_id_tipo'=>$request->cliente_id_tipo,
+        'cliente_id_numero'=>$request->cliente_id_numero,
+        'notas'=>$request->notas,
+        'cliente_tipo'=>$request->cliente_tipo,
+        'cliente_nuit'=>$request->cliente_nuit,
+        ];
+        if ($validatedata->passes()) {
+            $this->storeSave($request, $valdata);
+            $arr = array('msg' => 'Cliente criado.', 'status' => true);
+            return Response()->json($arr); 
+        }
+
+
+
         }elseif ($cliente['cliente_tipo']=='Empresa')
         {
-         $validatedata=$request->validate([
-        'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5000',
-        'filetype.*' => 'nullable|string|',
+        $validatedata = Validator::make($request->all(),[
+        //'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        //'filetype.*' => 'nullable|string|',
         'cliente_nome'=>'required|string|min:3|max:100',
         'cliente_endereco'=>'required|string|min:3|max:100',
         'cliente_email'=>'nullable|email',
@@ -141,12 +171,50 @@ class ClientesController extends Controller
         'pessoa_contacto_id_numero'=>'nullable|string|min:1',
 
         ]);
+
+        $valdata=[
+        'cliente_nome'=>$request->cliente_nome,
+        'cliente_endereco'=>$request->cliente_endereco,
+        'cliente_email'=>$request->cliente_email,
+        'cliente_telefone_1'=>$request->cliente_telefone_1,
+        'cliente_telefone_2'=>$request->cliente_telefone_2,
+        'cliente_state_id'=>$request->cliente_state_id,
+        'notas'=>$request->notas,
+        'cliente_tipo'=>$request->cliente_tipo,
+        'cliente_nuit'=>$request->cliente_nuit,
+            
+        //pessoa de contacto
+        'pessoa_contacto_nome'=>$request->pessoa_contacto_nome,
+        'pessoa_contacto_endereco'=>$request->pessoa_contacto_endereco,
+        'pessoa_contacto_data_nascimento'=>$request->pessoa_contacto_data_nascimento,
+        'pessoa_contacto_genero'=>$request->pessoa_contacto_genero,
+        'pessoa_contacto_email'=>$request->pessoa_contacto_email,
+        'pessoa_contacto_telefone_1'=>$request->pessoa_contacto_telefone_1,
+        'pessoa_contacto_telefone_2'=>$request->pessoa_contacto_telefone_2,
+        'pessoa_contacto_state_id'=>$request->pessoa_contacto_state_id,
+        'pessoa_contacto_id_tipo'=>$request->pessoa_contacto_id_tipo,
+        'pessoa_contacto_id_numero'=>$request->pessoa_contacto_id_numero,
+        ];
+        if ($validatedata->passes()) {
+            $this->storeSave($request, $valdata);
+            $arr = array('msg' => 'Cliente criado.', 'status' => true);
+            return Response()->json($arr); 
         }
-         
-        //file name
+
+        }
+
+    }
+    return response()->json(['errors'=>$validatedata->errors()->all()]);
+        
+
+    }
+
+    function storeSave($request, $validatedata)
+    {
+             //file name
         $namefile = Str::random(32).'cliente'.time();
-        unset($validatedata['filetype']);//remove time from array before save
-        unset($validatedata['file']);//remove time from array before save
+       // unset($validatedata['filetype']);//remove time from array before save
+       // unset($validatedata['file']);//remove time from array before save
         $validatedata["token_id"]=$namefile;
 
         Cliente::create($validatedata);
@@ -168,9 +236,8 @@ class ClientesController extends Controller
 
             }
         }
-        return redirect('/admin/clientes')->with('success','Cliente criado.');
-        
 
+  
     }
 
     /**

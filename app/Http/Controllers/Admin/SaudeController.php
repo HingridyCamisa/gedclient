@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Cliente;
 use App\Files;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 
@@ -91,13 +92,42 @@ class SaudeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaudeRequest $request)
+    public function store(Request $request)
     {   $this->authorize('saudes_create');
         $saude=$request->all();
+
+         $validatedata = Validator::make($request->all(),[
+        'nome_seguradora'=>'required',
+        'plano'=>'required|string|min:3|max:100',
+        'numero_membro'=>'required|string|min:3|max:100|unique:saudes,numero_membro',
+        'tipo_membro'=>'required|string|min:3|max:100',
+        'periodicidade_pagamento'=>'required|string',
+        'data_inicio'=>'required|date',
+        'data_proximo_pagamento'=>'required|date',
+        'premio_total'=>'required|numeric|min:1',
+        'premio_simples'=>'required|numeric|min:1',
+        'taxa_corretagem'=>'required|regex:/^\d*\.?\d*$/',
+        'comissao'=>'required|regex:/^\d*\.?\d*$/|min:1',
+        'consultor'=>'required|string',
+        'nome_grupo'=>'nullable|string',
+        'menbro_principal'=>'required_if:tipo_membro,Spouse|required_if:tipo_membro,Child|string',
+        'detalhes_item_segurado'=>'nullable|string',
+        'user_id'=>'required',
+        'client_id' =>'required',
+        'client_token' => 'required',
+        //'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        //'filetype.*' => 'required',
+        'custo_admin'=>'required|numeric|min:1',
+        'imposto_selo'=>'required|numeric|min:1',
+        'sobre_taxa'=>'required|numeric|min:1',
+         ]);
+
+
+    if ($validatedata->passes()) {
         //file name
         $namefile = Str::random(32).'saude'.time();
-        unset($saude['filetype']);//remove time from array before save
-        unset($saude['file']);//remove time from array before save
+        //unset($saude['filetype']);//remove time from array before save
+        //unset($saude['file']);//remove time from array before save
         $saude["token_id"]=$namefile;
 
          Saude::create($saude);
@@ -118,10 +148,11 @@ class SaudeController extends Controller
 
                 }
         }
-      
+            $arr = array('msg' => 'Saude criado.', 'status' => true);
+            return Response()->json($arr);
+    } 
  
-        return redirect('/admin/saude/index')->with('success','Contrato criado ');
- 
+            return response()->json(['errors'=>$validatedata->errors()->all()]);
     }
 
     /**
@@ -146,7 +177,7 @@ class SaudeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Saude $saude, $id)
-    {  $this->authorize('edit');
+    {  $this->authorize('saudes_edit');
         $consultors = Consultor::all();
         $seguradora = Seguradora::all();
         $saude = Saude::findOrFail($id);
@@ -164,7 +195,7 @@ class SaudeController extends Controller
      */
     public function update(Request $request, Saude $saude, $id)
     {
-         $this->authorize('edit');
+         $this->authorize('saudes_edit');
         //dd($request->data['numero_membro']);
         //dd($request->numero_membro);
         $data=$this->validate($request, array(
@@ -187,6 +218,9 @@ class SaudeController extends Controller
             'client_id' =>'nullable',
             'client_token' => 'nullable',
             'notas' => 'nullable',
+            'custo_admin'=>'required|numeric|min:1',
+            'imposto_selo'=>'required|numeric|min:1',
+            'sobre_taxa'=>'required|numeric|min:1',
         ));
 
         Saude::where('id',$id)->update($data);  

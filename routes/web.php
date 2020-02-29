@@ -11,6 +11,10 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     Route::post('calendario','CalendarioController@addEvent')->name('calendario.add');
 
+    Route::get('calendario/detalhes/{id}','CalendarioController@show');
+
+    Route::post('calendario/detalhes/update/{id}','CalendarioController@edit');
+
     Route::get('metas','MetaController@index')->name('admin.metas');
 
     Route::get('seguradoras','SeguradorasController@index')->name('seguradora.index');

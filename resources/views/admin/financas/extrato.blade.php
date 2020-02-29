@@ -218,8 +218,7 @@
       <div class="row no-print">
         <div class="col-xs-12">
         <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submeter Aviso
-          </button>
+ 
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
           </button>

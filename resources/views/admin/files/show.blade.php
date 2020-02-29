@@ -174,15 +174,8 @@
         <button id="save" type="submit" class="btn btn-primary" style="margin-top:10px">Caregar</button>
 
         </form>
-                </div>
-        </div> 
+      </div>
 
-
-
-        
-        
-        
-</div>
 
 <script>
 $(document).on("submit", "#myform", function (event) {

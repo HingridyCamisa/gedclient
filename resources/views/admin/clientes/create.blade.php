@@ -20,7 +20,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data">
+        <form role="form" method="POST" id="clientes" action="javascript:void(0)"  enctype="multipart/form-data">
                             @csrf
                         <div class="box-body">
                         <div class="box box-danger">
@@ -225,7 +225,7 @@
                     <label for="DetalhesProspecao"><i class="fa fa-file-text-o"></i> Notas</label>
                     <textarea class="form-control" name="notas" rows="2" placeholder="Notas ..." value="{{old('notas')}}"></textarea>
                 </div>
-                   
+                <!--   
                 <div class="row col-md-12" style="margin-left:5px"> 
                 <label for="exampleInputFile"><i class="fa fa-upload"></i> Upload <a style="color: red">*</a></label>
 
@@ -354,13 +354,14 @@
                         </div>
                             
                 </div>
+            -->
 
                 
 
                         <!-- /.box-body -->
                         <div class="box-footer">
                                 
-                                <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
+                                <center><button id="save" type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
                             </div>
                            
                         </form>
@@ -369,6 +370,50 @@
                       
           </div>
           <!-- /.box --> 
+
+ <script>
+$(document).on("submit", "#clientes", function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      var formData = new FormData(this);
+      $('#save').html(' Caregando <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
+      $.ajax({
+           url: "{{ route('clientes.store') }}",
+           type: 'post',
+           data: formData,
+           success: function (response) {
+              if (response.status==false) {
+                  toastr.error(response.msg);
+
+              } else if (response.status==true)
+                {
+                   toastr.success(response.msg);
+                }
+              else{
+                  response.errors.forEach(myFunction);
+
+                  function myFunction(item, index) {
+                       toastr.error(item);
+                      
+                    }
+              }
+       
+
+            $('#save').html(' Caregar');
+           },
+           error: function (error) {
+            toastr.success('Algo correu mal na sua requisição');
+               console.log(error)
+           },
+           cache: false,
+           contentType: false,
+           processData: false
+      });
+      return false;
+ });
+</script>
+         
 
 <script>
     $(document).ready(function () {

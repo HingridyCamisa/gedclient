@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Files;
 use App\Cliente;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class ContratoController extends Controller
@@ -106,9 +107,9 @@ class ContratoController extends Controller
     public function store(Request $request)
     {
          $this->authorize('contratos_create');
-         $validatedata=$request->validate([
-        'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
-        'filetype.*' => 'required',
+        $validatedata = Validator::make($request->all(),[
+        //'file.*' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5000',
+        //'filetype.*' => 'required',
         'nome_seguradora'=>'required',
         'numero_apolice'=>'required|string|min:3|max:100|unique:contratos,numero_apolice',
         'periodicidade_pagamento'=>'required|string',
@@ -132,12 +133,14 @@ class ContratoController extends Controller
         'sobre_taxa'=>'required|numeric|min:1',
        ]);
        
+
+    if ($validatedata->passes()) {
        //file name
         $namefile = Str::random(32).'anexo'.time();
 
         $data=$request->all();
-        unset($data['filetype']);//remove time from array before save
-        unset($data['file']);//remove time from array before save
+        //unset($data['filetype']);//remove time from array before save
+        //unset($data['file']);//remove time from array before save
         $data["token_id"]=$namefile;
 
         
@@ -160,8 +163,11 @@ class ContratoController extends Controller
 
                 }
         }
+            $arr = array('msg' => 'Contrato criado.', 'status' => true);
+            return Response()->json($arr);
+    }
 
-        return redirect('/admin/contrato/index')->with('success','Contrato criado.');
+          return response()->json(['errors'=>$validatedata->errors()->all()]);
     }
 
     /**

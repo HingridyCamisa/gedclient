@@ -35,7 +35,7 @@ class CalendarioController extends Controller
                 );
             $calendario_detalhes=Calendar::addEvents($calendario_list,[
                         'color' => $calendario->cor,
-                        'url' => 'http://fullcalendar.io', 
+                        'url' => 'calendario/detalhes/'.$calendario->id, 
 
                     ]);
 
@@ -67,7 +67,7 @@ class CalendarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -76,9 +76,11 @@ class CalendarioController extends Controller
      * @param  \App\Calendario  $calendario
      * @return \Illuminate\Http\Response
      */
-    public function show(Calendario $calendario)
+    public function show($calendario)
     {
-        //
+        $this->authorize('calendario_create');
+        $event = Calendario::find($calendario);  
+        return view('admin.calendario.edit', compact('event'));
     }
 
     /**
@@ -87,9 +89,19 @@ class CalendarioController extends Controller
      * @param  \App\Calendario  $calendario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Calendario $calendario)
+    public function edit(Request $request,$calendario)
     {
-        //
+        $this->authorize('calendario_create');
+        $event = Calendario::find($calendario);
+        $data=$request->except('_token');
+        $event->titulo=$request->titulo;
+        $event->cor=$request->cor;
+        $event->data_inicio=$request->data_inicio;
+        $event->data_final=$request->data_final;
+        $event->save();
+
+
+        return back()->with('success','Evento alterado com sucesso.');
     }
 
     /**

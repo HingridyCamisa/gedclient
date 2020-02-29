@@ -78,7 +78,7 @@
 
                                 <div class="col-xs-3">
                                  <label><i class="fa fa-money"></i> Prémio Simples</label>
-                                 <input class="form-control" name="premio_simples" placeholder="Prémio Simples" type="float" value="{{$saude->premio_simples}}">      
+                                 <input class="form-control" name="premio_simples" id="premio_simples" placeholder="Prémio Simples" type="float" value="{{$saude->premio_simples}}">      
                                 </div>
                         </div><br>
 
@@ -108,13 +108,13 @@
 
                                 <div class="col-xs-3">
                                     <label><i class="fa fa-calculator"></i> Taxa Corretagem</label>
-                                    <input class="form-control" name="taxa_corretagem" placeholder="Taxa Corretagem " type="float" value="{{$saude->taxa_corretagem}}">
+                                    <input class="form-control" name="taxa_corretagem" id="taxa_corretagem" placeholder="Taxa Corretagem " type="float" value="{{$saude->taxa_corretagem}}">
                                 </div>
                     </div><br>
                     <div class="row">
                                  <div class="col-xs-3">
                                     <label><i class="fa fa-money"></i> Comissão Corretagem </label>
-                                    <input class="form-control" name="comissao"  placeholder="Comissao Corretagem " type="float" value="{{$saude->comissao}}">
+                                    <input class="form-control" name="comissao" id="comissao"  placeholder="Comissao Corretagem " type="float" value="{{$saude->comissao}}">
                                 </div>
 
                                 <div class="col-xs-3">
@@ -132,7 +132,28 @@
                                         </select>
                              </div><br>          
 
-                    </div><br><br>     <hr />  
+                    </div><br>
+
+                        <div class="row">
+
+                            <div class="col-xs-3">
+                                <label><i class="fa fa-money"></i> Custo Administrativo</label>
+                                <input class="form-control" name="custo_admin"  placeholder="Custo administrativo "type="text" value="{{$saude->custo_admin}}">
+
+                            </div>                                     
+                            <div class="col-xs-3">
+                                <label><i class="fa fa-money"></i> Imposto de Selo</label>
+                                <input class="form-control" name="imposto_selo"  placeholder="Imposto sebre selo"type="text" value="{{$saude->imposto_selo}}">
+                            </div>
+
+                            <div class="col-xs-3">
+                                <label><i class="fa fa-money"></i> Sobre Taxa</label>
+                                <input class="form-control" name="sobre_taxa"  placeholder="Imposto sobre taxa "type="text" value="{{$saude->sobre_taxa}}">
+                            </div>
+                        
+
+                        </div><br>
+                        <hr />  
 
                      <div class="form-group">
                             <label for="DetalhesProspecao"><i class="fa fa-info"></i> Notas</label>
@@ -191,7 +212,30 @@
 
         }
         
-    }
+    };
+
+    $(document).ready(function(){
+
+        $('#taxa_corretagem').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+
+        $('#premio_simples').keyup(function(){
+
+            var taxa_corretagem = $('#taxa_corretagem').val();
+            var premio_simples = $('#premio_simples').val();
+            var total=(parseFloat(taxa_corretagem)/100)*parseFloat(premio_simples);
+            $('#comissao').val(total);
+
+        });
+    });
+
+
 </script>
 
 @stop

@@ -20,7 +20,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="{{ route('contratos.store') }}" enctype="multipart/form-data">
+                        <form role="form" method="POST" id="contratos" action="javascript:void(0)"  enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
                             <input type="hidden" name="client_id" value="{{$cliente->id}}" />
@@ -122,7 +122,6 @@
                                      <div class="col-xs-3">
                                         <label><i class="fa fa-money"></i> Comissão Corretagem</label>
                                         <input class="form-control" id="comissao" name="comissao" placeholder="Comissão corretagem "  >
-     
                                     </div>
 
 
@@ -181,6 +180,7 @@
                                 </div>
 
                             <hr />
+                            <!--
                            <div class="row col-md-12" style="margin-left:5px"> 
                                   
 
@@ -308,12 +308,12 @@
                             </div>
                            </div>
                         </div>
-                            
+                            -->
 
                         <!-- /.box-body -->
                         <div class="box-footer">
                                 
-                                <center><button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
+                                <center><button type="submit" id="save" class="btn btn-danger"><i class="fa fa-save"></i> Submeter</button></center>
                             </div>
                            
                         </form>
@@ -324,7 +324,50 @@
           <!-- /.box --> 
 
 
-   
+<script>
+$(document).on("submit", "#contratos", function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      var formData = new FormData(this);
+      $('#save').html(' Caregando <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
+      $.ajax({
+           url: "{{ route('contratos.store') }}",
+           type: 'post',
+           data: formData,
+           success: function (response) {
+              if (response.status==false) {
+                  toastr.error(response.msg);
+
+              } else if (response.status==true)
+                {
+                   toastr.success(response.msg);
+                }
+              else{
+                  response.errors.forEach(myFunction);
+
+                  function myFunction(item, index) {
+                       toastr.error(item);
+                      
+                    }
+              }
+       
+
+            $('#save').html(' Caregar');
+           },
+           error: function (error) {
+            toastr.success('Algo correu mal na sua requisição');
+               console.log(error)
+           },
+           cache: false,
+           contentType: false,
+           processData: false
+      });
+      return false;
+ });
+</script>
+
+
 <script type="text/javascript">
 
 

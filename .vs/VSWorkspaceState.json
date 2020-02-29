@@ -2,18 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Http",
-    "\\app\\Http\\Controllers",
-    "\\app\\Http\\Controllers\\Admin",
+    "\\app\\Exports",
+    "\\app\\Mail",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
     "\\resources\\views\\admin\\files",
-    "\\resources\\views\\admin\\financas",
-    "\\resources\\views\\admin\\saude",
-    "\\resources\\views\\vendor\\adminlte",
-    "\\routes"
+    "\\resources\\views\\admin\\prospecoes",
+    "\\resources\\views\\emails"
   ],
-  "SelectedNode": "\\resources\\views\\admin\\files\\show.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\FileController.php",
   "PreviewInSolutionExplorer": false
 }
