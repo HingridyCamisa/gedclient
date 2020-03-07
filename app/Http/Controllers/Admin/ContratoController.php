@@ -34,7 +34,7 @@ class ContratoController extends Controller
         $this->authorize('contratos');
         $contratos = Contrato::where("contratos.status",1)
                                        ->latest()
-                                       ->paginate(12);
+                                       ->paginate(5000);
 
         
         return view('admin.contrato.index',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
@@ -48,7 +48,7 @@ class ContratoController extends Controller
         $contratos = Contrato::where("contratos.status",1)
                                        ->whereBetween('data_proximo_pagamento',[$start,$end])
                                        ->latest()
-                                       ->paginate(12);
+                                       ->paginate(5000);
 
         
         return view('admin.contrato.expira',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);
@@ -68,7 +68,7 @@ class ContratoController extends Controller
         $contratos = Contrato::where("contratos.status",1)
                                        ->whereBetween('data_proximo_pagamento',[$start,$end])
                                        ->latest()
-                                       ->paginate(12);
+                                       ->paginate(5000);
 
         
         return view('admin.contrato.expira',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);

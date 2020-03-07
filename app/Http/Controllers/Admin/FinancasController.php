@@ -27,7 +27,7 @@ class FinancasController extends Controller
 
    public function index()
     {   $this->authorize('financas_avisos');
-        $avisos=AvisoCobrancaView::latest()->orwhere('status',1)->orwhere('status',2)->paginate(12);
+        $avisos=AvisoCobrancaView::latest()->orwhere('status',1)->orwhere('status',2)->paginate(5000);
 
         return view('admin.financas.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     } 
@@ -41,7 +41,7 @@ class FinancasController extends Controller
     
    public function recibostable()
     {    $this->authorize('financas_recibos');
-        $avisos=AvisoCobrancaRecibosView::latest()->paginate(12);
+        $avisos=AvisoCobrancaRecibosView::latest()->paginate(5000);
         return view('admin.financas.recibos', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 

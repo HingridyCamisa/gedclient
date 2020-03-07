@@ -29,7 +29,7 @@ class ClientesController extends Controller
     {
     $this->authorize('clientes');
         $clientes=Cliente::latest()
-                           ->paginate(1000);
+                           ->paginate(5000);
         return view('admin.clientes.index',compact('clientes'))->with('i', (request()->input('page', 1) -1) * 12);
     }
     public function getdataClientes()

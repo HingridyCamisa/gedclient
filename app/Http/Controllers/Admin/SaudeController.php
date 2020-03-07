@@ -32,7 +32,7 @@ class SaudeController extends Controller
     public function index()
     {   $this->authorize('saudes');
 
-        $saude = Saude::latest()->paginate(12);
+        $saude = Saude::latest()->paginate(5000);
         return view('admin.saude.index',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
     }
     public function expira()
@@ -42,7 +42,7 @@ class SaudeController extends Controller
 
         $saude = Saude::latest()
                     ->whereBetween('data_proximo_pagamento',[$start,$end])
-                    ->paginate(12);
+                    ->paginate(5000);
         return view('admin.saude.expira',compact('saude'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 
@@ -60,7 +60,7 @@ class SaudeController extends Controller
         $contratos = Saude::where("contratos.status",1)
                                        ->whereBetween('data_proximo_pagamento',[$start,$end])
                                        ->latest()
-                                       ->paginate(12);
+                                       ->paginate(5000);
 
         
         return view('admin.saude.expira',compact('contratos'))->with('i', (request()->input('page', 1) -1) * 12);

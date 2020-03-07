@@ -31,7 +31,7 @@ class ConsultoresController extends Controller
     {
         $this->authorize('consultores');
 
-        $consultor = Consultor::latest()->paginate(12);
+        $consultor = Consultor::latest()->paginate(5000);
 
         return view('admin.consultor.index',compact ('consultor',$consultor))->with('i', (request()->input('page', 1) - 1) *10);
 

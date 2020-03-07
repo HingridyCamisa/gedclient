@@ -22,7 +22,7 @@ class RamoController extends Controller
     public function index()
     { $this->authorize('ramos');
         
-        $ramos = \App\Ramo::latest()->paginate(50);
+        $ramos = \App\Ramo::latest()->paginate(5000);
 
         return view('admin.ramo.index',compact('ramos'))->with('i',(request()->input('page', 1) -1) *50);
         

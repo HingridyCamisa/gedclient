@@ -14,7 +14,7 @@ class TipoSegurosController extends Controller
      */
     public function index()
     {
-        $tipo_seguros = \App\TipoSeguro::latest()->paginate(10);
+        $tipo_seguros = \App\TipoSeguro::latest()->paginate(5000);
 
         return view('admin.seguradoras.index',compact('seguradoras'))->with('i',(request()->input('page', 1) -1) *10);
 

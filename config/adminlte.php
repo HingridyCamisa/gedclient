@@ -268,6 +268,11 @@ return [
             'url'         => 'admin/aniversarios/index',
             'icon'        => 'birthday-cake',
         ],
+        [
+            'text'        => 'Configurações',
+            'url'         => 'admin',
+            'icon'        => 'cog',
+        ],
     ],
 
     /*

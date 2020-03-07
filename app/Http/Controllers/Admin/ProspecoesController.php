@@ -37,7 +37,7 @@ class ProspecoesController extends Controller
                                 ->join('consultors','prospecaos.nome_consultor','consultors.id')
                                 ->latest()
                                 ->where('status','1')
-                                ->paginate(12)
+                                ->paginate(5000)
                                 ;
                       
 

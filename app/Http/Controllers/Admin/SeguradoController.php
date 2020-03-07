@@ -20,7 +20,7 @@ class SeguradoController extends Controller
     public function index()
     {
         $user = auth()->user()->name;
-        $segurados = \App\Segurado::latest()->paginate(12);
+        $segurados = \App\Segurado::latest()->paginate(5000);
 
         return view('admin.segurados.index',compact('segurados','user'))->with('i',(request()->input('page', 1) -1) *12);
     }

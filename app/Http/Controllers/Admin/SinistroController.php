@@ -27,7 +27,7 @@ class SinistroController extends Controller
     {
         $this->authorize('sinostros');
 
-        $sinistros = \App\Sinistro::latest()->paginate(12);
+        $sinistros = \App\Sinistro::latest()->paginate(5000);
 
         return view('admin.sinistro.index',compact('sinistros'))->with('i',(request()->input('page', 1) -1) *12);
     }
