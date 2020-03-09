@@ -27,7 +27,7 @@
       <tbody>
       @foreach($cliente as $key => $cliente)
       <tr>
-          @if($cliente->cliente_tipo == 'Individual')  
+          @if($cliente->cliente_tipo == 'Individual' && $cliente->cliente_data_nascimento!=null)  
             @if(\Carbon\Carbon::parse($cliente->cliente_data_nascimento)->isBirthday(\Carbon\Carbon::today()))
 
             <td><center>{{$cliente->cliente_nome }}</center></td>

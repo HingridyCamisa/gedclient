@@ -42,7 +42,12 @@
           <th>Nº ID </th>
           <td><i class="fa fa-key"></i> &nbsp; {{$cliente->cliente_id_numero }}</td>
         </tr>
+
         <tr>
+          <th>NUIT </th>
+          <td><i class="fa fa-key"></i> &nbsp; {{$cliente->cliente_nuit }}</td>
+        </tr>
+        
         <tr>
           <th>Genero </th>
           <td><i class="fa fa-transgender"></i> &nbsp; {{$cliente->cliente_genero }}</td>
