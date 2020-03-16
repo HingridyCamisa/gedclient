@@ -333,15 +333,15 @@ function launch_toast() {//toast function
             $(".dataValor").removeAttr('disabled');
             $(".testemunha").removeAttr('disabled');
             $(".benificiario").removeAttr('disabled');
-            $(".banco").prop('disabled', true);
+            $(".banco").removeAttr('disabled');
 
             $(".banco").val('');
 
         } else if (data == 'TRF') {
             $(".dataValor").removeAttr('disabled');
-            $(".benificiario").prop('disabled', true);
+            $(".benificiario").removeAttr('disabled');
             $(".testemunha").prop('disabled', true);
-            $(".banco").prop('disabled', true);
+            $(".banco").removeAttr('disabled');
 
 
             $(".benificiario").val('');
@@ -352,7 +352,7 @@ function launch_toast() {//toast function
             $(".dataValor").removeAttr('disabled');
             $(".benificiario").removeAttr('disabled');
             $(".banco").removeAttr('disabled');
-            $(".testemunha").prop('disabled', true);
+            $(".testemunha").removeAttr('disabled');
 
 
 
