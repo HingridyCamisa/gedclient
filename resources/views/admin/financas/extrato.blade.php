@@ -36,7 +36,7 @@
           <address>
             <strong>Amana Correctores e Consultores de Seguros, SA</strong><br>
             Av. Fernão Magalhães, nᵒ 932 – R/C<br>
-            Cell: (+258) 84 822 6218<br>
+            Cell: (+258) 87 100 009 8<br>
             Fixo: (+258) 21 087 442<br>
             Email: info@amanaseguros.co.mz<br>
             Maputo, Moçambique

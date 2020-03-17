@@ -174,6 +174,18 @@
 
                     </p> <br><br>
 
+                    <p> <div class="form-group">
+                        <div class="col-md-12">
+                          <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
+                          <textarea class="form-control" name="extenso">
+                          
+                          </textarea>
+                          
+                        </div>
+                      </div>
+                    </p> <br><br /> <br>
+
                      <p> <div class="form-group">
                         <div class="col-md-5">
                           <div class="input-group">
