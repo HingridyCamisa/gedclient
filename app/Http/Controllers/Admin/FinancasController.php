@@ -82,6 +82,21 @@ class FinancasController extends Controller
         $aviso=$pay->aviso_amount;
         $recibo=Recibos::where('aviso_id',$request->aviso_id)->sum('amount');
 
+        $validator = Validator::make($request->all(), [
+        'comprovativo'=>'required|unique:recibos,comprovativo',
+        'forma_pagamento'=>'required',
+        'data_pagamento'=>'required|date',
+        'amount'=>'required|numeric',
+        'benificiario'=>'nullable',
+        'testemunha'=>'nullable',
+        'banco'=>'nullable',
+        'operacao'=>'required',
+        ]);
+        if (!is_numeric($request->amount))
+        {
+          $arr = array('msg' => $request->amount.' Formato incorrecto!', 'status' => false);
+          return Response()->json($arr);
+        }
         $saldo=($aviso-$recibo)-$request->amount;
 
         if ($saldo < 0)
@@ -103,16 +118,7 @@ class FinancasController extends Controller
         }
         
 
-        $validator = Validator::make($request->all(), [
-        'comprovativo'=>'required|unique:recibos,comprovativo',
-        'forma_pagamento'=>'required',
-        'data_pagamento'=>'required|date',
-        'amount'=>'required|numeric',
-        'benificiario'=>'nullable',
-        'testemunha'=>'nullable',
-        'banco'=>'nullable',
-        'operacao'=>'required',
-        ]);
+
         if ($validator->passes()) {
         //file name
         $namefile = Str::random(32).'anexo'.time();

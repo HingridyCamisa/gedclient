@@ -178,7 +178,7 @@
                         <div class="col-md-12">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <textarea class="form-control" name="extenso">
+                          <textarea class="form-control" name="extenso" required="" autofocus="">
                           
                           </textarea>
                           
@@ -195,7 +195,7 @@
                         <div class="col-md-7">
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
-                          <input class="form-control dataValor" placeholder="Valor do recibo" type="text" name="amount" required autofocus disabled></div>
+                          <input class="form-control dataValor" placeholder="Valor do recibo" type="number" step="any" name="amount" required autofocus disabled></div>
                         </div>
                       </div>
                     </p> <br><br/>

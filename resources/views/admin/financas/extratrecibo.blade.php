@@ -116,7 +116,7 @@
           <b>
           Valor por extenso: 
           </b>
-          {{$recibo->extenso}}.
+          {{$recibo->extenso}}. Recebidos por {{$recibo->forma_pagamento}}
         </p>
       </div>
 
