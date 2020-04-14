@@ -28,14 +28,14 @@ class AdminController extends Controller
         $now=Carbon::now();
         $start = new Carbon('first day of this month');
         $end = new Carbon('last day of this month');
-        $contrato_expira=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
+        $contrato_expira=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start,$end])->where('status',1)->count();
         $saude_expira=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start,$end])->count();
 
         $start_next = new Carbon('first day of next month');
         $end_next = new Carbon('last day of next month');
 
-        $contrato_expira_next=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->count();
-        $saude_expira_next=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->count();
+        $contrato_expira_next=DB::table('contratos')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->where('status',1)->count();
+        $saude_expira_next=DB::table('saudes')->whereBetween('data_proximo_pagamento',[$start_next,$end_next])->where('status',1)->count();
         $totalcontrato_expira_next=$contrato_expira_next+$saude_expira_next;
 
 
@@ -44,7 +44,7 @@ class AdminController extends Controller
 
         
 
-        $clientes = Cliente::where('cliente_tipo','individual')->get();
+        $clientes = Cliente::where('cliente_tipo','individual')->where('status',1)->get();
 
         $nu_aniversarios=0;
 
@@ -57,7 +57,7 @@ class AdminController extends Controller
         }
 
         
-        $data = Prospecao::get()->groupBy('tipo_ramo')->map(function ($item) {
+        $data = Prospecao::get()->groupBy('tipo_ramo')->where('status',1)->map(function ($item) {
             return count($item);
         });
 
@@ -70,7 +70,7 @@ class AdminController extends Controller
         ],
         ]);
 
-        $emidiodata = Contrato::join('consultors','contratos.consultor','consultors.id')->get()->groupby('nome_consultor')->map(function ($item) {
+        $emidiodata = Contrato::join('consultors','contratos.consultor','consultors.id')->where('status',1)->get()->groupby('nome_consultor')->map(function ($item) {
             // Return the number of persons
             return count($item);
 
@@ -84,7 +84,7 @@ class AdminController extends Controller
         $emidio->dataset('Consultores', 'bar', $emidiodata->values());
         
        
-        $data_seguradora = Contrato::join('seguradoras','contratos.nome_seguradora','seguradoras.id')->get()->groupby('nome_seguradora')->map(function ($item) {
+        $data_seguradora = Contrato::join('seguradoras','contratos.nome_seguradora','seguradoras.id')->where('status',1)->get()->groupby('nome_seguradora')->map(function ($item) {
             // Return the number of persons
             return count($item);
 
@@ -97,11 +97,13 @@ class AdminController extends Controller
 
         $lebels_category_month=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
             ->orderby('data_inicio','asc')
+            ->where('status',1)
             ->get()
             ->groupBy('date');
 
         $data_premio=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'premio_simples')        
             ->orderby('data_inicio','asc')
+            ->where('status',1)
             ->get()
             ->groupBy('date')
             ->map(function ($item, $key) {
@@ -109,6 +111,7 @@ class AdminController extends Controller
             });      
         $data_comissao=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'),'comissao')        
             ->orderby('data_inicio','asc')
+            ->where('status',1)
             ->get()
             ->groupBy('date')
             ->map(function ($item, $key) {
@@ -123,6 +126,7 @@ class AdminController extends Controller
 
         $perf_contratos=Contrato::select(DB::raw('date_format(data_inicio, "%Y-%m") as "date"'))        
             ->orderby('data_inicio','asc')
+            ->where('status',1)
             ->get()
             ->groupBy('date')
             ->map(function ($item) {

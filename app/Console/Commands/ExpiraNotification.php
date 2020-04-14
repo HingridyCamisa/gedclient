@@ -46,8 +46,8 @@ class ExpiraNotification extends Command
     {   
         $user=User::get()->toArray();
         $today=Carbon::today();
-        $contrartos=Contrato::where('data_proximo_pagamento',$today)->get();
-        $prospecao=Prospecao::where('data_prevista_fim',$today)->get();
+        $contrartos=Contrato::where('data_proximo_pagamento',$today)->where('status',1)->get();
+        $prospecao=Prospecao::where('data_prevista_fim',$today)->where('status',1)->get();
 
         if ($contrartos->count()>0)
         {

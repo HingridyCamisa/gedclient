@@ -172,7 +172,7 @@ class AvisoDeCobrancaController extends Controller
     {
          $this->authorize('avisos');
 
-        $avisos=AvisoCobrancaView::latest()->paginate(12);
+        $avisos=AvisoCobrancaView::latest()->paginate(5000);
         return view('admin.avisoCobranca.index', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
     }
 

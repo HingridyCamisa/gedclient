@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Exports",
-    "\\app\\Mail",
+    "\\app\\Http",
+    "\\app\\Providers",
+    "\\config",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\admin",
-    "\\resources\\views\\admin\\files",
-    "\\resources\\views\\admin\\prospecoes",
-    "\\resources\\views\\emails"
+    "\\resources\\views\\admin\\calendario",
+    "\\routes"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\Admin\\FileController.php",
+  "SelectedNode": "\\routes\\web.php",
   "PreviewInSolutionExplorer": false
 }

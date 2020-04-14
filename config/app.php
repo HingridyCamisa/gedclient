@@ -175,7 +175,7 @@ return [
         
         Yajra\Datatables\DatatablesServiceProvider::class,
 
-        
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         
 
@@ -235,7 +235,7 @@ return [
         'Chart' => RezaAr\Highcharts\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
