@@ -49,23 +49,26 @@
     </table>
     <table class="table table-striped table-bordered table-hover">
     <tbody>
+        @php
+        $startDate=\Carbon\Carbon::parse($contrato->data_inicio)
+        @endphp
         @for ($i = 1; $i <= $denominador; $i++) 
          <tr>
-          <th  width="3%"> {{$i}}º </th>
+          <th width="3%"> {{$i}}º </th>
           <th width="7%"><i class="fa fa-calendar"></i>
             @php
-            $finalData = $data->addDays($dia_periodo) 
+            $finalData = $startDate->addDays($dia_periodo) 
             @endphp
-             @if($contrato->periodicidade_pagamento!='Mensal')
-                {{$finalData->format('d-m-Y') }}
-             @else
-                {{$finalData->format('d-m-Y') }}
-             @endif
+
+            {{$finalData->format('d-m-Y') }}
+             
          </th>
           <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
           <th  width="13%"><i class="fa fa-calendar"></i>
-
-                 @if($finalData->addMonthNoOverflow()->isPast())
+                @php
+                $lastFinalDataCompar=\Carbon\Carbon::parse($contrato->data_inicio)->addDays($dia_periodo)->addMonthNoOverflow()
+                @endphp
+                 @if($lastFinalDataCompar->isPast())
                     <i class="fa fa-close text-red"></i> Expirado    {{$finalData->diffForHumans() }}
                  @else
                     <i class="fa fa-check text-green"></i> Em dia    {{$finalData->diffForHumans() }}

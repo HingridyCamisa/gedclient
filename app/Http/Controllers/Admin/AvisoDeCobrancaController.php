@@ -75,6 +75,7 @@ class AvisoDeCobrancaController extends Controller
                 {
                     $denominador=4;
                     $dia_periodo=($this->cal_days_in_year($year)/4);
+                    
                 }elseif($contrato->periodicidade_pagamento=='Semestral')
                     {
                         $denominador=2;
@@ -147,8 +148,11 @@ class AvisoDeCobrancaController extends Controller
         {
             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('token_id',$token_id)->get();
         }
+        
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
+
+
 
         public function avisoviewall($tipo,$contrato_token_id,$token_id)
     {   
