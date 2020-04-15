@@ -79,7 +79,7 @@ class AvisoDeCobrancaController extends Controller
                 }elseif($contrato->periodicidade_pagamento=='Semestral')
                     {
                         $denominador=2;
-                        $dia_periodo=($this->cal_days_in_year($year))/6;
+                        $dia_periodo=($this->cal_days_in_year($year))/2;
                     }elseif($contrato->periodicidade_pagamento=='Nao Renovavel')
                         {
                             $dia_periodo=1;
