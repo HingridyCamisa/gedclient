@@ -55,7 +55,7 @@
                                             <option value="Trimestral">Trimestral</option>
                                             <option value="Semestral">Semestral</option>
                                             <option value="Anual">Anual</option>
-                                            <option value="Não Renovável">Não Renovável</option>
+                                            <option value="Nao Renovavel">Não Renovável</option>
                                         </select>
                                     </div>
 
