@@ -137,6 +137,39 @@ class AvisoDeCobrancaController extends Controller
      return $days;
     }
 
+    public function avisoPDF($tipo,$contrato_token_id,$token_id)
+    {
+
+        if ($tipo=='contratos')
+        {
+             $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('token_id',$token_id)->get();
+        }
+        else
+        {
+            $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('token_id',$token_id)->get();
+        }
+
+          $pdf = app('dompdf.wrapper')->loadView('admin.avisoCobranca.avisoPDF', compact('avisosDB'));
+          return $pdf->stream('aviso.pdf');
+
+    }
+
+    public function avisoPDFAll($tipo,$contrato_token_id,$token_id)
+    {
+
+        if ($tipo=='contratos')
+        {
+             $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
+        }
+        else
+        {
+            $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();  
+        }
+
+          $pdf = app('dompdf.wrapper')->loadView('admin.avisoCobranca.avisoPDF', compact('avisosDB'));
+          return $pdf->stream('aviso.pdf');
+
+    }
 
         public function avisoview($tipo,$contrato_token_id,$token_id)
     {   
@@ -159,11 +192,11 @@ class AvisoDeCobrancaController extends Controller
 
         if ($tipo=='contratos')
         {
-        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->orwhere('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
         }
         else
         {
-             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->orwhere('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();      
+             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();      
         }
 
 

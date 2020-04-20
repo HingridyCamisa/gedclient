@@ -208,6 +208,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('file/download/{filename}', 'FileDownloadController@index')->name('file/download');
     Route::post('report/filtro','ReportController@filtro');
     Route::get('financas/seguradora/{token}/{name}/{id}','FinancasController@seguradora');
+    Route::get('aviso/pdf/{tipo}/{contrato_token_id}/{token_id}/{id}','AvisoDeCobrancaController@avisoPDF');
+    Route::get('aviso/pdf/all/{tipo}/{contrato_token_id}/{token_id}/{id}','AvisoDeCobrancaController@avisoPDFAll');
 
 
 });

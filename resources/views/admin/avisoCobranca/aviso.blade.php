@@ -199,7 +199,8 @@
                 <th>Total:</th>
                 <td><b>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</b></td>
               </tr>
-            </tbody></table>
+            </tbody>
+          </table>
           </div>
         </div>
           
@@ -228,9 +229,12 @@
           <a type="button" class="btn btn-danger pull-right" href="{{url('admin/aviso/destroy',[$aviso->tipo,$aviso->contrato_token_id,$aviso->token_id,$aviso->id])}}" style="margin-right: 5px;"><i class="fa fa-trash-o"></i> Eliminar
           </a>
           @endif
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Gerar PDF
-          </button>
+          <a type="button" class="btn btn-primary pull-right" style="margin-right: 5px;" href="{{url('admin/aviso/pdf',[$aviso->tipo,$aviso->contrato_token_id,$aviso->token_id,$aviso->id])}}">
+            <i class="fa fa-download"></i> PDF
+          </a>
+          <a type="button" class="btn btn-primary pull-right" style="margin-right: 5px;" href="{{url('admin/aviso/pdf/all',[$aviso->tipo,$aviso->contrato_token_id,$aviso->token_id,$aviso->id])}}">
+            <i class="fa fa-download"></i> PDF não cobrados
+          </a>
         </div>
       </div>
     </section>
