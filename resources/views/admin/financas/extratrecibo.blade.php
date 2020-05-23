@@ -98,8 +98,8 @@
             </thead>
             <tbody>
             <tr>
-              <td>Referente ao pagamento do aviso Nᵒ #{{str_pad($recibo->id, 6, "0", STR_PAD_LEFT)}}, {{$recibo->operacao}}</td>
-              <td>Mensal</td>
+              <td>Referente ao pagamento do aviso Nᵒ #{{str_pad($recibo->id, 6, "0", STR_PAD_LEFT)}}</td>
+              <td>{{$recibo->operacao}}</td>
               <td>{{number_format(round($recibo->amount,2), 2, ',', ' ')}}</td>
            
             </tr>

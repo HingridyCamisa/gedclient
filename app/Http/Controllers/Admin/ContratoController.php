@@ -128,9 +128,9 @@ class ContratoController extends Controller
         'user_id'=>'required',
         'client_id' =>'required',
         'client_token' => 'required',
-        'custo_admin'=>'required|numeric|min:1',
-        'imposto_selo'=>'required|numeric|min:1',
-        'sobre_taxa'=>'required|numeric|min:1',
+        'custo_admin'=>'required|numeric|min:0',
+        'imposto_selo'=>'required|numeric|min:0',
+        'sobre_taxa'=>'required|numeric|min:0',
        ]);
        
 
@@ -228,9 +228,9 @@ class ContratoController extends Controller
         'periodicidade_pagamento'=>'required',
         'situacao'=>'required',
         'item_segurado'=>'required',
-        'custo_admin'=>'required|numeric|min:1',
-        'imposto_selo'=>'required|numeric|min:1',
-        'sobre_taxa'=>'required|numeric|min:1',
+        'custo_admin'=>'required|numeric|min:0',
+        'imposto_selo'=>'required|numeric|min:0',
+        'sobre_taxa'=>'required|numeric|min:0',
         'numero_apolice'=>'required|string|min:3|max:100|unique:contratos,numero_apolice',
        ]);
        
@@ -304,9 +304,9 @@ class ContratoController extends Controller
         'user_id'=>'nullable',
         'client_id' =>'nullable',
         'client_token' => 'nullable',
-        'custo_admin'=>'nullable|numeric|min:1',
-        'imposto_selo'=>'nullable|numeric|min:1',
-        'sobre_taxa'=>'nullable|numeric|min:1',
+        'custo_admin'=>'nullable|numeric|min:0',
+        'imposto_selo'=>'nullable|numeric|min:0',
+        'sobre_taxa'=>'nullable|numeric|min:0',
        ]);
         $request=$request->except('_token');
         Contrato::where('id',$id)->update($request); 

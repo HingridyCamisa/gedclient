@@ -164,7 +164,17 @@
                                 <option value="Aviso Previo">Aviso Previo</option>
                                 <option value="Seguro Unico">Seguro Unico</option>
                                 <option value="Inclusao">Inclusao</option>
-                                <option value="Segundo aviso">Segundo aviso</option>
+                                <option value="1 prestação">1 prestação</option>
+                                <option value="2 prestação">2 prestação</option>
+                                <option value="3 prestação">3 prestação</option>
+                                <option value="4 prestação">4 prestação</option>
+                                <option value="5 prestação">5 prestação</option>
+                                <option value="6 prestação">6 prestação</option>
+                                <option value="7 prestação">7 prestação</option>
+                                <option value="8 prestação">8 prestação</option>
+                                <option value="9 prestação">9 prestação</option>
+                                <option value="10 prestação">10 prestação</option>
+
                             </select>
                         </div>
 
