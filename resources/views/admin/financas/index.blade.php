@@ -141,6 +141,7 @@
                                 <option value="Cash">Cash</option>
                                 <option value="TRF">TFR</option>
                                 <option value="Cheque">Cheque</option>
+                                <option value="Pagamento directo a seguradora">Pagamento directo a seguradora</option>
                             </select>
                         </div>
 
@@ -377,6 +378,14 @@ function launch_toast() {//toast function
             $(".testemunha").removeAttr('disabled');
 
 
+
+            $(".testemunha").val('');
+
+        }else if (data == 'Pagamento directo a seguradora') {
+            $(".dataValor").removeAttr('disabled');
+            $(".benificiario").removeAttr('disabled');
+            $(".banco").removeAttr('disabled');
+            $(".testemunha").prop('disabled', true);
 
             $(".testemunha").val('');
 
