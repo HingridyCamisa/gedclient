@@ -150,12 +150,12 @@ Estado: Aviso de Cobrança
           <table   class="" width="100%" align="left" >
                 <thead>
                 <tr>
-                  <th>Nº</th>
-                  <th>Limite</th>
-                  <th>Descrição</th>
-                  <th>Pagamento</th>
-                  <th>Seguradora</th>
-                  <th>Valor</th>
+                  <th width="5%">Nº</th>
+                  <th width="10%">Limite</th>
+                  <th width="30%">Descrição</th>
+                  <th width="10%">Pagamento</th>
+                  <th width="25%">Seguradora</th>
+                  <th width="20%">Valor</th>
                 
                 </tr>
                 </thead>
