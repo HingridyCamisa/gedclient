@@ -72,7 +72,7 @@
             <b> País:</b> {{$avisosDB[0]->cliente->client_country_city->country_name}} <br>
             <b> Localidade / City:</b> {{$avisosDB[0]->cliente->client_country_city->state_name}}<br>
             <b> NUIT/ Tax payer Nᵒ:</b> {{$avisosDB[0]->cliente->cliente_nuit}} <br>
-            <b> Nᵒ do Clinete:</b> M{{str_pad($avisosDB[0]->cliente->id, 6, "0", STR_PAD_LEFT)}}<br><br>
+            <b> Nᵒ do Cliente:</b> M{{str_pad($avisosDB[0]->cliente->id, 6, "0", STR_PAD_LEFT)}}<br><br>
           </address>
         </div>
         <div class="col-sm-4 invoice-col">
@@ -105,8 +105,8 @@
             <thead>
             <tr>
               <th>Nº</th>
-              <th>Limite</th>
-              <th>Descrição</th>
+              <th>Data Limite</th>
+              <th>Matricula</th>
               <th>Pagamento</th>
               <th>Seguradora</th>
               <th>Valor</th>
@@ -114,6 +114,7 @@
             </tr>
             </thead>
             <tbody>
+            @php($aviso_amount=0)
             @php($t=0)
             @php($t1=0)
             @php($t2=0)
@@ -126,8 +127,8 @@
               <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
               <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
               <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
-              <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}}</td>
-              @php($t=$aviso->aviso_amount+$t)
+              <td>{{number_format(round($aviso_amount=$aviso->aviso_amount,2), 2, ',', ' ')}} MTN</td>
+              @php($t=$aviso_amount+$t)
               @php($t1=$aviso->premio_simples+$t1)
               @php($t2=$aviso->custo_admin+$t2)
               @php($t3=$aviso->imposto_selo+$t3)
@@ -143,7 +144,7 @@
               <th></th>
               <th></th>
               <th>Total</th>
-              <th>{{number_format(round($t,2), 2, ',', ' ')}}</th>
+              <th>{{number_format(round($t,2), 2, ',', ' ')}} MTN</th>
               </tr>
           </tfoot>
           </table>

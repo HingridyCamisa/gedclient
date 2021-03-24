@@ -91,7 +91,7 @@
             <thead>
             <tr>
               <th>Descrição</th>
-              <th>Pagamento</th>
+              <th>Tipo de Operaçõa</th>
               <th>Valor</th>
             
             </tr>
@@ -116,10 +116,30 @@
           <b>
           Valor por extenso: 
           </b>
-          {{$recibo->extenso}}. Recebidos por {{$recibo->forma_pagamento}}
+          {{$recibo->extenso}}.
         </p>
       </div>
 
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-4">
+          <p class="lead"><strong><i class="fa fa-fw fa-cc-visa"></i>Dados Bancários:</strong></p>
+
+          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+          <b>Banco:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;BIM<br>  
+          <b>Titular:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Amana Seguros, SA<br>  
+          <b>Nᵒ de Conta:</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;415522102 (MZN)<br>
+          <b>NIB:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;00010000041552210257<br>   
+          </p>
+        </div>
+      </div>
+      <div class="row">
+      
+        <div class="col-xs-12" align="right">
+        <p>__________________________</p>
+         <p style="margin-right: 50px">(Assinatura)</p> 
+        </div>
+      </div>
 
 
     </section>
@@ -136,9 +156,9 @@
 
           <a href="{{ url ('admin/clientes/financas/extrato', $recibo->cliente_token_id)}}" class="btn btn-success pull-right"><i class="fa fa-pie-chart"></i> Extrato</a>
 
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+         <!-- <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
-          </button>
+          </button>-->
         </div>
       </div>
     </section>

@@ -206,6 +206,13 @@
       </div>
       <!-- /.row -->
 
+      <div class="row">
+      
+        <div class="col-xs-12" align="right">
+        <p>__________________________</p>
+         <p style="margin-right: 50px">(Assinatura)</p> 
+        </div>
+      </div>
 
     </section>
 
@@ -219,9 +226,9 @@
         <div class="col-xs-12">
         <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
  
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+          <!--<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
-          </button>
+          </button>-->
         </div>
       </div>
     </section>

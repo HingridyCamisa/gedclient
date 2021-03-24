@@ -172,7 +172,7 @@ Estado: Aviso de Cobrança
                   <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
                   <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
                   <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
-                  <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}}</td>
+                  <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}} MTN</td>
                   @php($t=$aviso->aviso_amount+$t)
                   @php($t1=$aviso->premio_simples+$t1)
                   @php($t2=$aviso->custo_admin+$t2)
@@ -189,7 +189,7 @@ Estado: Aviso de Cobrança
                   <th></th>
                   <th></th>
                   <th>Total</th>
-                  <th>{{number_format(round($t,2), 2, ',', ' ')}}</th>
+                  <th>{{number_format(round($t,2), 2, ',', ' ')}} MTN</th>
                   </tr>
               </tfoot>
           </table>
@@ -240,8 +240,9 @@ Estado: Aviso de Cobrança
               </tr>
           </tbody>
       </table>
-      <hr style="margin: 5px">
-      <table>
+      <br>
+      <div class="box" width="50%">
+      <table class="table" width="50%">
           <tbody>
               <tr>
                   <th>Banco:</th>
@@ -250,13 +251,18 @@ Estado: Aviso de Cobrança
               <tr>
                   <th>Titular:</th>
                   <td>Amana Seguros, SA </td>
+             </tr>
+             <tr>
                   <th>Conta:</th>
                   <td>415522102 (MZN)</td>
+             </tr>
+             <tr>
                   <th>NIB:</th>
                   <td>00010000041552210257</td>
               </tr>
           </tbody>
       </table>
+      </div>
 
 
 
@@ -264,7 +270,7 @@ Estado: Aviso de Cobrança
     <table width="100%">
         <tr>
             <td align="left" style="width: 50%;">
-                &copy; {{ date('Y') }} {{ config('app.url') }} - All rights reserved.
+                &copy; {{ date('Y') }} - All rights reserved.
             </td>
             <td align="right" style="width: 50%;">
                  AMANA SEGUROS
