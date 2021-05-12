@@ -172,7 +172,6 @@
         <button onclick="printDiv('printableArea')" class="btn btn-default">
           <i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir
         </button>
-        <a  type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
 
           <a href="{{ url ('admin/clientes/financas/extrato', $recibo->cliente_token_id)}}" class="btn btn-success pull-right"><i class="fa fa-pie-chart"></i> Extrato</a>
 
