@@ -241,6 +241,9 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
+        <button onclick="printDiv('printableArea')" class="btn btn-default">
+          <i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir
+        </button>
         <a  type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
  
           <!--<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
