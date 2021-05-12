@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            Amana Correctores e Consultores de Seguros, SA
+            Amana Corretores e Consultores de Seguros, SA
             <small class="pull-right">Data: {{\Carbon\Carbon::now()->format('d-m-Y')}}</small>
           </h2>
         </div>
