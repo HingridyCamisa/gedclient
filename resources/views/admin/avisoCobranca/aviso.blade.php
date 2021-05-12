@@ -158,11 +158,27 @@
         <div class="col-xs-6">
           <p class="lead"><strong><i class="fa fa-fw fa-cc-visa"></i>Dados Bancários:</strong></p>
 
-          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-          <b>Banco:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;BIM<br>  
-          <b>Titular:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Amana Seguros, SA<br>  
-          <b>Nᵒ de Conta:</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;415522102 (MZN)<br>
-          <b>NIB:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;00010000041552210257<br>   
+          <div class="box" width="">
+            <table class="table" width="">
+                <tbody>
+                    <tr>
+                        <th>Banco:</th>
+                        <td> BIM</td>
+                    </tr>
+                    <tr>
+                        <th>Titular:</th>
+                        <td>Amana Seguros, SA </td>
+                  </tr>
+                  <tr>
+                        <th>Conta:</th>
+                        <td>415522102 (MZN)</td>
+                  </tr>
+                  <tr>
+                        <th>NIB:</th>
+                        <td>00010000041552210257</td>
+                    </tr>
+                </tbody>
+            </table> 
           </p>
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
           Nos termos dos Artigos 124ᵒ 128ᵒ  do Decreto-
