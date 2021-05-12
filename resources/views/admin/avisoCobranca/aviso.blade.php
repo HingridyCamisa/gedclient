@@ -181,7 +181,7 @@
             </table> 
           </p>
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-          Nos termos dos Artigos 124ᵒ 128ᵒ  do Decreto-
+          Nos termos dos Artigos 124º 128º  do Decreto-
           Lei Nº 1 de 2010 de 31 de Dezembro o prémio de duração do contrato de seguro é devido por inteiro, sem prejuizo de poder ser fraccionado para efeitos de pagamento
           primeira fracção deste, é devido na data da celebração do contrato. As fracções seguintes do prémio inicial, o prémio de anuidades subsequentes e as sucessivas fracções
 
