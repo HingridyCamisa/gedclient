@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-             AMANA SEGUROS
+             Amana Correctores e Consultores de Seguros, SA
             <small class="pull-right">Data: {{\Carbon\Carbon::now()->format('d-m-Y')}}</small>
           </h2>
         </div>
@@ -34,7 +34,6 @@
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
           <address>
-            <strong>Amana Correctores e Consultores de Seguros, SA</strong><br>
             Aeroporto de Maputo - Terminal de Carga,<br> Escritório Nr. 55<br>
             Nuit: 400875367<br>
             Cell: (+258) 87 100 009 8<br>
