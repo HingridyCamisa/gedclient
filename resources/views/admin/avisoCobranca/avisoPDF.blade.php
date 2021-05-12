@@ -65,13 +65,14 @@
             <td align="left" style="width: 60%;">
                 <h2>Amana Correctores e Consultores de Seguros, SA</h2>
                 <pre>
-Av. Fernão Magalhães, n 932 – R/C<br>
+Aeroporto de Maputo - Terminal de Carga, Escritório Nr. 55<br>
+<br>
+Maputo, Moçambique
+<br />
+Nuit: 400875367
 Cell: (+258) 87 100 009 8<br>
 Fixo: (+258) 21 087 442<br>
 Email: info@amanaseguros.co.mz<br>
-Nuit:<br>
-Maputo, Moçambique
-<br />
 Data: {{ date('d-M-Y') }}
 Estado: Aviso de Cobrança
 </pre>
@@ -108,7 +109,7 @@ Estado: Aviso de Cobrança
                     <th align="right">Endereço:</th>
                     <td align="left">{{$avisosDB[0]->cliente->cliente_endereco}}</td>
                     
-                    <th align="">N Apólice:</th>
+                    <th align="">Nr. Apólice:</th>
                     <td align="left">{{$avisosDB[0]->Contrato->numero_apolice}}</td>
                 </tr>
                 <tr>
@@ -126,14 +127,14 @@ Estado: Aviso de Cobrança
                     <td align="left">{{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_inicio))}}</td>
                 </tr>
                 <tr>
-                    <th align="right">NUIT/ Tax payer N:</th>
+                    <th align="right">NUIT/ Tax payer Nr:</th>
                     <td align="left">{{$avisosDB[0]->cliente->cliente_nuit}}</td>
                    
                     <th align="">Periodo de Seguro até:</th>
                     <td align="left">{{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_proximo_pagamento))}}</td>
                 </tr>
                 <tr>
-                    <th align="right">N do Clinete:</th>
+                    <th align="right">Nr. Cliente:</th>
                     <td align="left">M{{str_pad($avisosDB[0]->cliente->id, 6, "0", STR_PAD_LEFT)}}</td>
                 
                     <th align="">Dias Cobertos:</th>
@@ -151,7 +152,7 @@ Estado: Aviso de Cobrança
                 <thead>
                 <tr>
                   <th width="5%">Nº</th>
-                  <th width="10%">Limite</th>
+                  <th width="10%">Data Fim de Seguro</th>
                   <th width="30%">Descrição</th>
                   <th width="10%">Pagamento</th>
                   <th width="25%">Seguradora</th>
@@ -203,7 +204,7 @@ Estado: Aviso de Cobrança
                      
                     <div class="box">
                       <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;  margin: 5px">
-                      Nos termos dos Artigos 124ᵒ 128ᵒ  do Decreto-
+                      Nos termos dos Artigos 124º 128º  do Decreto-
                       Lei Nº 1 de 2010 de 31 de Dezembro o prémio de duração do contrato de seguro é devido por inteiro, sem prejuizo de poder ser fraccionado para efeitos de pagamento
                       primeira fracção deste, é devido na data da celebração do contrato. As fracções seguintes do prémio inicial, o prémio de anuidades subsequentes e as sucessivas fracções
 
@@ -216,23 +217,23 @@ Estado: Aviso de Cobrança
                           <tbody>
                           <tr>
                             <th align="right" style="width: 50%;">Prémio líquido / Net premium:</th>
-                            <td style="width: 50%;">{{number_format(round($t1,2), 2, ',', ' ')}} MTN</td>
+                            <td align="right" style="width: 50%;">{{number_format(round($t1,2), 2, ',', ' ')}} MTN</td>
                           </tr>
                           <tr>
                             <th align="right"  style="width: 50%;">Encargos / Administration:</th>
-                            <td style="width: 50%;">{{number_format(round($t2,2), 2, ',', ' ')}} MTN</td>
+                            <td align="right" style="width: 50%;">{{number_format(round($t2,2), 2, ',', ' ')}} MTN</td>
                           </tr>
                           <tr>
                             <th align="right"  style="width: 50%;">Selos / Stamps:</th>
-                            <td style="width: 50%;">{{number_format(round($t3,2), 2, ',', ' ')}} MTN</td>
+                            <td align="right" style="width: 50%;">{{number_format(round($t3,2), 2, ',', ' ')}} MTN</td>
                           </tr>
                           <tr>
                             <th align="right"  style="width: 50%;">Sobretaxa / Subcharge:</th>
-                            <td style="width: 50%;">{{number_format(round($t4,2), 2, ',', ' ')}} MTN</td>
+                            <td align="right" style="width: 50%;">{{number_format(round($t4,2), 2, ',', ' ')}} MTN</td>
                           </tr>
                           <tr class="table-danger">
                             <th align="right" style="width: 50%;">Total:</th>
-                            <td style="width: 50%;"><b>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</b></td>
+                            <td align="right" style="width: 50%;"><b>{{number_format(round(($t1+$t2+$t3+$t4),2), 2, ',', ' ')}} MTN</b></td>
                           </tr>
                         </tbody>
                       </table> 
@@ -270,10 +271,10 @@ Estado: Aviso de Cobrança
     <table width="100%">
         <tr>
             <td align="left" style="width: 50%;">
-                &copy; {{ date('Y') }} - All rights reserved.
+                &copy; {{ date('Y') }} - All rights reserved. 
             </td>
             <td align="right" style="width: 50%;">
-                 AMANA SEGUROS
+                Processado por AMANA Software
             </td>
         </tr>
 
