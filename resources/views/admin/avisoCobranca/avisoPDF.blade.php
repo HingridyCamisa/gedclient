@@ -65,7 +65,8 @@
             <td align="left" style="width: 60%;">
                 <h2>Amana Corretores e Consultores de Seguros, SA</h2>
                 <pre>
-                Aeroporto de Maputo - Terminal de Carga,<br> Escritório Nr. 55<br>
+                Aeroporto de Maputo - Terminal de Carga,
+                Escritório Nr. 55<br>
                 Nuit: 400875367<br>
                 Cell: (+258) 87 100 009 8<br>
                 Fixo: (+258) 21 087 442<br>
