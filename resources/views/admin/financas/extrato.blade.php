@@ -169,26 +169,28 @@
           <p class="lead"><strong><i class="fa fa-fw fa-cc-visa"></i>Dados Bancários:</strong></p>
 
 
-          <table class="table">
-              <tbody>
-                  <tr>
-                      <th>Banco:</th>
-                      <td> BIM</td>
+          <div class="box" width="">
+            <table class="table" width="">
+                <tbody>
+                    <tr>
+                        <th>Banco:</th>
+                        <td> BIM</td>
+                    </tr>
+                    <tr>
+                        <th>Titular:</th>
+                        <td>Amana Seguros, SA </td>
                   </tr>
                   <tr>
-                      <th>Titular:</th>
-                      <td>Amana Seguros, SA </td>
-                </tr>
-                <tr>
-                      <th>Conta:</th>
-                      <td>415522102 (MZN)</td>
-                </tr>
-                <tr>
-                      <th>NIB:</th>
-                      <td>00010000041552210257</td>
+                        <th>Conta:</th>
+                        <td>415522102 (MZN)</td>
                   </tr>
-              </tbody>
-          </table>
+                  <tr>
+                        <th>NIB:</th>
+                        <td>00010000041552210257</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
         </div>
         <!-- /.col -->
           <!--
@@ -239,7 +241,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-        <a href="#" type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
+        <a  type="button" onclick="printDiv('printableArea')" class="btn btn-default"><i class="fa fa-print fa-1x" aria-hidden="true"></i> Imprimir</a>
  
           <!--<button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
