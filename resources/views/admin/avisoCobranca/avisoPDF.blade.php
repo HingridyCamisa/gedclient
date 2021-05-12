@@ -65,17 +65,17 @@
             <td align="left" style="width: 60%;">
                 <h2>Amana Correctores e Consultores de Seguros, SA</h2>
                 <pre>
-Aeroporto de Maputo - Terminal de Carga, Escritório Nr. 55<br>
-<br>
-Maputo, Moçambique
-<br />
-Nuit: 400875367
-Cell: (+258) 87 100 009 8<br>
-Fixo: (+258) 21 087 442<br>
-Email: info@amanaseguros.co.mz<br>
-Data: {{ date('d-M-Y') }}
-Estado: Aviso de Cobrança
-</pre>
+                Aeroporto de Maputo - Terminal de Carga, Escritório Nr. 55<br>
+                Nuit: 400875367
+                Cell: (+258) 87 100 009 8<br>
+                Fixo: (+258) 21 087 442<br>
+                Email: info@amanaseguros.co.mz<br>
+                Data: {{ date('d-M-Y') }}
+                Estado: Aviso de Cobrança
+                <br>
+                Maputo, Moçambique
+                <br />
+                </pre>
 
 
             </td>
@@ -204,11 +204,9 @@ Estado: Aviso de Cobrança
                      
                     <div class="box">
                       <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;  margin: 5px">
-                      Nos termos dos Artigos 124º 128º  do Decreto-
-                      Lei Nº 1 de 2010 de 31 de Dezembro o prémio de duração do contrato de seguro é devido por inteiro, sem prejuizo de poder ser fraccionado para efeitos de pagamento
-                      primeira fracção deste, é devido na data da celebração do contrato. As fracções seguintes do prémio inicial, o prémio de anuidades subsequentes e as sucessivas fracções
-
-
+                        Nos termos dos Artigos 124ᵒ 128ᵒ  do Decreto-
+                        Lei Nº 1 de 2010 de 31 de Dezembro o prémio de duração do contrato de seguro é devido por inteiro, sem prejuizo de poder ser fraccionado para efeitos de pagamento
+                        primeira fracção deste, é devido na data da celebração do contrato. As fracções seguintes do prémio inicial, o prémio de anuidades subsequentes e as sucessivas fracções
                       </p>
                     </div> 
                   </td>
