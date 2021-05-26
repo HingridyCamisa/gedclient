@@ -231,6 +231,8 @@
                 </table>
             </div>
         </div>    
+        <br>
+        <br>
       <div class="row" >
         <table class="table" width="100%" align="right">
             <tr>
