@@ -39,6 +39,14 @@ class FinancasController extends Controller
        return view('admin.financas.extratrecibo', compact('recibo','anexos'));
     }
     
+    public function extratrecibopdf($token_id)
+    {    $this->authorize('financas_extrair_recibo');
+       $recibo=AvisoCobrancaRecibosView::where('token_id',$token_id)->first();
+       $anexos=Files::where('token_id',$token_id)->count();
+        $pdf = app('dompdf.wrapper')->loadView('admin.financas.extratreciboPDF', compact('recibo','anexos'));
+        return $pdf->stream('recibo.pdf');
+    }
+    
    public function recibostable()
     {    $this->authorize('financas_recibos');
         $avisos=AvisoCobrancaRecibosView::latest()->paginate(5000);

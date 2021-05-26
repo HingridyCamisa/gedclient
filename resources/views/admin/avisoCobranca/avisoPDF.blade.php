@@ -55,6 +55,26 @@
 
 
     </style>
+        
+    <style>
+        #customers {
+        border-collapse: collapse;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #ddd;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+        text-align: left;
+        background-color: #0066CC;
+        color: white;
+        }
+    </style>
 
 </head>
 <body>
@@ -102,8 +122,8 @@
                     <th align="right" style="width: 20%;">Segurado/ Insured:</th>
                     <td align="left" style="width: 40%;">{{$avisosDB[0]->cliente->cliente_nome}}</td>
 
-                    <th align="" style="width: 30%;">Seguradora:</th>
-                    <td align="left" style="width: 20%;">{{$avisosDB[0]->Contrato->seguradora->nome_seguradora}}</td>
+                    <th align="" style="width: 20%;">Seguradora:</th>
+                    <td align="left" style="width: 30%;">{{$avisosDB[0]->Contrato->seguradora->nome_seguradora}}</td>
                 </tr>
                 <tr>
                     <th align="right">Endereço:</th>
@@ -137,8 +157,8 @@
                     <th align="right">Nr. Cliente:</th>
                     <td align="left">M{{str_pad($avisosDB[0]->cliente->id, 6, "0", STR_PAD_LEFT)}}</td>
                 
-                    <th align="">Dias Cobertos:</th>
-                    <td align="left">{{\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_inicio)->diffInDays(\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_proximo_pagamento))}}</td>
+                    <th align="">Tipo de Seguro:</th>
+                    <td align="left">{{$avisosDB[0]->Contrato->ramo->ramo}}</td>
                 </tr>
             </tbody>
         </table>
@@ -147,16 +167,17 @@
 
 
       <!-- Table row -->
-      <div class="box">
-          <table   class="" width="100%" align="left" >
+  
+          <table  style=" width:100%; " id="customers" >
                 <thead>
                 <tr>
-                  <th width="5%">Nº</th>
-                  <th width="10%">Data Fim de Seguro</th>
-                  <th width="30%">Descrição</th>
+                  <th width="8%">Nº Aviso</th>
+                  <th width="13%">Data Limite de Pagamento</th>
+                  <th width="22%">Periodo de cobertura</th>
+                  <th width="20%">Descrição</th>
                   <th width="10%">Pagamento</th>
                   <th width="25%">Seguradora</th>
-                  <th width="20%">Valor</th>
+                  <!--<th width="20%">Valor</th>-->
                 
                 </tr>
                 </thead>
@@ -168,12 +189,13 @@
                 @php($t4=0)
                 @foreach($avisosDB as $key => $aviso)
                 <tr>
-                  <td>{{$key+1}}</td>
-                  <td>{{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
+                  <td>{{$aviso->aviso_numero}}</td>  
+                  <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} </td>
+                  <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} - {{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
                   <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
                   <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
                   <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
-                  <td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}} MTN</td>
+                  <!--<td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}} MTN</td>-->
                   @php($t=$aviso->aviso_amount+$t)
                   @php($t1=$aviso->premio_simples+$t1)
                   @php($t2=$aviso->custo_admin+$t2)
@@ -183,18 +205,8 @@
 
                 @endforeach
                 </tbody>
-              <tfoot>
-                <tr class="table-danger">
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th>Total</th>
-                  <th>{{number_format(round($t,2), 2, ',', ' ')}} MTN</th>
-                  </tr>
-              </tfoot>
           </table>
-    </div>
+   
       <!-- /.row -->
       <br>
       <table width="100%" style="margin: 5px">

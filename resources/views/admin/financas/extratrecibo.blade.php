@@ -175,9 +175,9 @@
 
           <a href="{{ url ('admin/clientes/financas/extrato', $recibo->cliente_token_id)}}" class="btn btn-success pull-right"><i class="fa fa-pie-chart"></i> Extrato</a>
 
-         <!-- <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+          <a href="{{url('admin/financas/recibos/recibo/pdf',$recibo->token_id)}}" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Gerar PDF
-          </button>-->
+          </a>
         </div>
       </div>
     </section>

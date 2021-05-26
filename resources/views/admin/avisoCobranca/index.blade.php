@@ -36,9 +36,9 @@
           <th><center>{{ $aviso->cliente_email }}</center></th>
           <th><center>{{ $aviso->cliente_telefone_1 }}</center></th>
           <th><center>{{ $aviso->cliente_telefone_2 }}</center></th>
-          <th><center>{{ $aviso->aviso_data}}</center></th>
+          <th><center>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}}</center></th>
           <th><center>
-                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data))->isPast())
+                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data_inicial))->isPast())
                     <i class="fa fa-close text-red"></i> Expirado  {{$data->diffForHumans()}}
                  @else
                     <i class="fa fa-check text-green"></i> Em dia  {{$data->diffForHumans()}}

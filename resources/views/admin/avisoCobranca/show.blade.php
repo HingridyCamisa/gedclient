@@ -52,26 +52,28 @@
         @php
         $startDate=\Carbon\Carbon::parse($contrato->data_inicio)
         @endphp
-        @for ($i = 1; $i <= $denominador; $i++) 
+        @php
+          $inicialData = \Carbon\Carbon::parse($contrato->data_inicio)
+        @endphp
+        @for ($i = 1; $i <= $denominador; $i++)  
          <tr>
           <th width="3%"> {{$i}}º </th>
           <th width="7%"><i class="fa fa-calendar"></i>
             @php
-            $finalData = $startDate->addDays($dia_periodo) 
+            $finalData = $startDate->addDays($dia_periodo)
             @endphp
 
+            {{$inicialData->format('d-m-Y') }}
+            -
             {{$finalData->format('d-m-Y') }}
              
          </th>
           <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
           <th  width="13%"><i class="fa fa-calendar"></i>
-                @php
-                $lastFinalDataCompar=\Carbon\Carbon::parse($contrato->data_inicio)->addDays($dia_periodo)->addMonthNoOverflow()
-                @endphp
-                 @if($lastFinalDataCompar->isPast())
-                    <i class="fa fa-close text-red"></i> Expirado    {{$finalData->diffForHumans() }}
+                 @if($finalData->isPast())
+                    <i class="fa fa-close text-red"></i> Expirado   {{$finalData->diffForHumans() }}
                  @else
-                    <i class="fa fa-check text-green"></i> Em dia    {{$finalData->diffForHumans() }}
+                    <i class="fa fa-check text-green"></i> Em dia     {{$finalData->diffForHumans() }}
                  @endif
 
          </th>
@@ -100,13 +102,17 @@
                  @endforeach
 
                  @if($verification == false)
-                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> Aviso de Cobrança</a>
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$inicialData,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> {{$inicialData->format('d-m-Y') }} - Aviso de Cobrança</a>
                  @endif
                  
                  
              </center>
           </td>
          </tr>
+         
+          @php
+            $inicialData = $finalData
+          @endphp
          @endfor
 
       </tbody>

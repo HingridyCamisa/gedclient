@@ -85,8 +85,8 @@ class AvisoDeCobrancaController extends Controller
                             $dia_periodo=1;
                             $denominador=1;
                         }else{
-                                return back()->with('error','Forma de pagamento');
-                             };
+                                return back()->with('error','Verifica forma de pagamento');
+                            };
         $denominador=round($denominador,0);
         $dia_periodo=round($dia_periodo,0);
         $valor_a_pagar=$contrato->premio_total/$denominador;
@@ -95,7 +95,7 @@ class AvisoDeCobrancaController extends Controller
         return view('admin.avisoCobranca.show',compact('cliente','contrato','denominador','valor_a_pagar','dia_periodo','dias_cobertos','tipo','avisosDB'));
     }
 
-    public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data,$denominador)
+    public function gerar_aviso_de_cobranca(Request $request,$tipo,$contrato,$cliente,$numero,$valor_a_pagar,$data_inicial,$data,$denominador)
     {    $this->authorize('avisos_make');
 
         $contrato_data=Contrato::where('token_id',$contrato)->first();
@@ -115,6 +115,7 @@ class AvisoDeCobrancaController extends Controller
         $aviso->cliente_token_id=$cliente;
         $aviso->aviso_numero=$numero;
         $aviso->aviso_amount=$valor_a_pagar;
+        $aviso->aviso_data_inicial=$data_inicial;
         $aviso->aviso_data=$data;
         $aviso->user_id=Auth::user()->id;
         $aviso->token_id=$token_id;
@@ -181,6 +182,7 @@ class AvisoDeCobrancaController extends Controller
         {
             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('token_id',$token_id)->get();
         }
+  
         
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
@@ -231,7 +233,7 @@ class AvisoDeCobrancaController extends Controller
             return view('admin.saude.show',compact('saude','anexos'));
         }
         
-        return "Tipo de contrato não encotrado, Tente mas tarde";
+        return "Tipo de contrato nï¿½o encotrado, Tente mas tarde";
         
     }
 

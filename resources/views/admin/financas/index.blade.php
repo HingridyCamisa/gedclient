@@ -39,9 +39,9 @@
           </center></td>
           <td><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></td>
           <td><center>{{ $aviso->cliente_email }}</center></td>
-          <td><center>{{ $aviso->aviso_data}}</center></td>
+          <td><center>{{ $aviso->aviso_data_inicial}}</center></td>
           <td><center>
-                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data))->isPast())
+                 @if(($data=\Carbon\Carbon::parse($aviso->aviso_data_inicial))->isPast())
                     <i class="fa fa-close text-red"></i> Expirado  {{$data->diffForHumans()}}
                  @else
                     <i class="fa fa-check text-green"></i> Em dia  {{$data->diffForHumans()}}

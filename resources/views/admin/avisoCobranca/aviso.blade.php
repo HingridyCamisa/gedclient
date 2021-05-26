@@ -64,7 +64,7 @@
       <div class="box box-solid box-danger">
       <div class="row invoice-info">
 
-        <div class="col-sm-4 invoice-col">
+        <div class="col-sm-4 invoice-col" >
         <address>
             <br>
             <b> Segurado/ Insured:</b> {{$avisosDB[0]->cliente->cliente_nome}}<br>
@@ -83,13 +83,14 @@
             <b> Periodicidade de Pagamento:</b> {{$avisosDB[0]->Contrato->periodicidade_pagamento }}<br>
             <b> Periodo de Seguro de:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_inicio))}}<br>
             <b> Periodo de Seguro até:</b> {{date('d-m-Y',strtotime($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
-            <b> Dias Cobertos:</b> {{\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_inicio)->diffInDays(\Carbon\Carbon::parse($avisosDB[0]->Contrato->data_proximo_pagamento))}}<br>
+            <b> Tipo de Seguro:</b> {{$avisosDB[0]->Contrato->ramo->ramo}}<br>
         </address>
         </div>
         <div class="col-sm-4 invoice-col">
             <address>
             <br>
-            <b> Data Limite Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data))}}<br><br /> 
+            <b> Data Limite de Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data_inicial))}}<br>
+            
               
             </address>
         </div>
@@ -104,9 +105,9 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>Nº</th>
-              <th>Data Limite</th>
-              <th>Matricula</th>
+              <th>Nᵒ Aviso</th>
+              <th>Periodo</th>
+              <th>Descrição</th>
               <th>Pagamento</th>
               <th>Seguradora</th>
               <th>Valor</th>
@@ -122,8 +123,8 @@
             @php($t4=0)
             @foreach($avisosDB as $key => $aviso)
             <tr>
-              <td>{{$key+1}}</td>
-              <td>{{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
+              <td>{{$avisosDB[0]->aviso_numero}}</td>
+              <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} - {{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
               <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
               <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
               <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
@@ -137,16 +138,6 @@
 
             @endforeach
             </tbody>
-          <tfoot>
-            <tr class="table-danger">
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th>Total</th>
-              <th>{{number_format(round($t,2), 2, ',', ' ')}} MTN</th>
-              </tr>
-          </tfoot>
           </table>
         </div>
         <!-- /.col -->
