@@ -86,14 +86,14 @@
             <b> Tipo de Seguro:</b> {{$avisosDB[0]->Contrato->ramo->ramo}}<br>
         </address>
         </div>
-        <div class="col-sm-4 invoice-col">
+        <!--<div class="col-sm-4 invoice-col">
             <address>
             <br>
             <b> Data Limite de Pagamento:</b> {{date('d-m-Y',strtotime($avisosDB[0]->aviso_data_inicial))}}<br>
             
               
             </address>
-        </div>
+        </div>-->
       
       </div>
 
@@ -106,7 +106,7 @@
             <thead>
             <tr>
               <th>Nᵒ Aviso</th>
-              <th>Periodo</th>
+              <th>Periodo de Cobrança</th>
               <th>Descrição</th>
               <th>Pagamento</th>
               <th>Seguradora</th>
