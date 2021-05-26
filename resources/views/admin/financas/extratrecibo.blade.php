@@ -74,7 +74,9 @@
         <address>
             <br>
             <b>Nᵒ Apólice:</b> {{$recibo->numero_apolice}}<br>  
-            <b>Seguradora:</b> {{$recibo->seguradora}}<br>
+            <b>Seguradora:</b> {{$recibo->seguradora}}<br> 
+            <b>Tipo de Pagamento:</b> {{$recibo->forma_pagamento}}<br> 
+            <b>Nr. Comprovativo:</b> {{$recibo->comprovativo}}<br>
           </address>
         </div>
         <div class="col-sm-4 invoice-col">

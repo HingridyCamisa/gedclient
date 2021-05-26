@@ -146,6 +146,13 @@
                     <th align="right">Seguradora:</th>
                     <td align="left">{{$recibo->seguradora}}</td>
                 </tr>
+                <tr>
+                    <th align="right">Tipo de Pagamento:</th>
+                    <td align="left">{{$recibo->forma_pagamento}}</td>
+
+                    <th align="right">Nr. Comprovativo:</th>
+                    <td align="left">{{$recibo->comprovativo}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -185,7 +192,6 @@
          
         </table>
       </div>
-      </div>
     
         <div class="row">
 
@@ -216,7 +222,29 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>    
+      <div class="row" >
+        <table class="table" width="100%" align="right">
+            <tr>
+                <td width="40%"></td>
+                <th width="40%">
+                _______________________________
+                </th>
+                <td width="40%"></td>
+            </tr>
+         
+        </table>  
+        <table class="table" width="100%" align="right">      
+            <tr>
+                <td width="43%"></td>
+                <th width="">
+                Assinatura
+                </th>
+                <td width="35%"></td>
+            </tr>
+         
+        </table>
+      </div>
  
 
 
