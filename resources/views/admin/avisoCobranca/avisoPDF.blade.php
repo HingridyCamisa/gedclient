@@ -267,8 +267,8 @@
               </tr>
           </tbody>
       </table>
-      </div>
-            <div class="row" >
+       <br>
+        <br>
         <table class="table" width="100%" align="right">
             <tr>
                 <td width="40%"></td>
