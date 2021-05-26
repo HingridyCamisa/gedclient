@@ -154,8 +154,6 @@
                 <tr>
                     <th align="right">Endereço:</th>
                     <td align="left">{{$recibo->cliente_detale->cliente_endereco}}</td>
-                </tr>
-                <tr>
                     <th align="right">País:</th>
                     <td align="left"> {{$recibo->cliente_detale->client_country_city->country_name}}</td>
                 </tr>
