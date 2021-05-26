@@ -120,32 +120,33 @@
 <div class="invoice">
     <h5>Recibo #{{str_pad($recibo->nu_recibo, 6, "0", STR_PAD_LEFT)}}</h5>
     <div class="box">
-        <table >
+        <table   style="width: 70%;">
             <tbody>
                 <tr>
                     <th align="right" style="width: 20%;">ID Cliente:</th>
                     <td align="left" style="width: 40%;">M{{str_pad($recibo->cliente, 6, "0", STR_PAD_LEFT)}}</td>
 
-                    <th align="right" style="width: 30%;">Nome:</th>
-                    <td align="left" style="width: 20%;">{{$recibo->cliente_nome}}</td>
+                    <th align="right" style="width: 30%;">Seguradora:</th>
+                    <td align="left" style="width: 20%;">{{$recibo->seguradora}}</td>
+                </tr>
+                <tr>
+                    <th align="right">Nome:</th>
+                    <td align="left" >{{$recibo->cliente_nome}}</td>
+                    
+                    <th align="right">Nr. Apólice:</th>
+                    <td align="left">{{$recibo->numero_apolice}}</td>
+                </tr>
+                <tr>
+                    <th align="right">NUIT:</th>
+                    <td align="left">{{$recibo->cliente_nuit}}</td>
+
+                    <th align="right">Tipo de Pagamento:</th>
+                    <td align="left">{{$recibo->forma_pagamento}}</td>
+
                 </tr>
                 <tr>
                     <th align="right">Telefone:</th>
                     <td align="left">{{$recibo->cliente_telefone_1}}</td>
-                    
-                    <th align="right">NUIT:</th>
-                    <td align="left">{{$recibo->cliente_nuit}}</td>
-                </tr>
-                <tr>
-                    <th align="right">Nr. Apólice:</th>
-                    <td align="left">{{$recibo->numero_apolice}}</td>
-
-                    <th align="right">Seguradora:</th>
-                    <td align="left">{{$recibo->seguradora}}</td>
-                </tr>
-                <tr>
-                    <th align="right">Tipo de Pagamento:</th>
-                    <td align="left">{{$recibo->forma_pagamento}}</td>
 
                     <th align="right">Nr. Comprovativo:</th>
                     <td align="left">{{$recibo->comprovativo}}</td>

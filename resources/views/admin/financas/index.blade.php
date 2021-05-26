@@ -190,7 +190,7 @@
                           <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-fw fa-money"></i></span>
                           <textarea class="form-control" name="extenso" required="" autofocus="">
-                          
+                          Valor por Extenso..
                           </textarea>
                           
                         </div>
