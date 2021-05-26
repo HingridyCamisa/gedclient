@@ -173,8 +173,8 @@
                 <tr>
                   <th width="8%">Nº Aviso</th>
                   <th width="22%">Periodo de cobertura</th>
-                  <th width="20%">Descrição</th>
-                  <th width="10%">Pagamento</th>
+                  <th width="20%">Item Segurado</th>
+                  <th width="10%">Periodo de Cobrança</th>
                   <th width="25%">Seguradora</th>
                   <!--<th width="20%">Valor</th>-->
                 
@@ -190,7 +190,7 @@
                 <tr>
                   <td>{{$aviso->aviso_numero}}</td>  
                   <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} - {{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
-                  <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
+                  <td>{{$aviso->Contrato->item_segurado}}</td>
                   <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
                   <td>{{$aviso->Contrato->seguradora->nome_seguradora}}</td>
                   <!--<td>{{number_format(round($aviso->aviso_amount,2), 2, ',', ' ')}} MTN</td>-->
