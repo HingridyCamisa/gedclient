@@ -201,6 +201,11 @@ class AvisoDeCobrancaController extends Controller
              $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->where('status',1)->orderby('created_at','asc')->get();      
         }
 
+        if(!isset($avisosDB[0])){
+             return back()->with('info','Sem dados para mostrar.');
+        }
+
+
 
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
