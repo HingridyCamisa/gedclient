@@ -15,5 +15,9 @@ class AvisoCobrancaView extends Model
 
     public $timestamps=true;
 
+     public function cliente_detale()
+    {
+        return $this->belongsTo('App\Cliente','cliente_token_id','token_id');
+    } 
 
 }

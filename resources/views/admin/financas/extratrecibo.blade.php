@@ -68,6 +68,10 @@
             <b>Nome:</b> {{$recibo->cliente_nome}}<br>
             <b>Telefone:</b> {{$recibo->cliente_telefone_1}}<br>
             <b>NUIT:</b> {{$recibo->cliente_nuit}}<br>
+            <b>Endereço:</b> {{$recibo->cliente_detale->cliente_endereco}}<br>
+            
+            <b>País:</b> {{$recibo->cliente_detale->client_country_city->country_name}}<br>
+            <b>City:</b> {{$recibo->cliente_detale->client_country_city->state_name}}<br>
           </address>
         </div>
         <div class="col-sm-4 invoice-col">

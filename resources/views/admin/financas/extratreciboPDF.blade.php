@@ -127,7 +127,7 @@
                     <td align="left" style="width: 40%;">M{{str_pad($recibo->cliente, 6, "0", STR_PAD_LEFT)}}</td>
 
                     <th align="right" style="width: 30%;">Seguradora:</th>
-                    <td align="left" style="width: 20%;">{{$recibo->seguradora}}</td>
+                    <td align="left" style="width: 40%;">{{$recibo->seguradora}}</td>
                 </tr>
                 <tr>
                     <th align="right">Nome:</th>
@@ -150,6 +150,18 @@
 
                     <th align="right">Nr. Comprovativo:</th>
                     <td align="left">{{$recibo->comprovativo}}</td>
+                </tr>
+                <tr>
+                    <th align="right">Endereço:</th>
+                    <td align="left">{{$recibo->cliente_detale->cliente_endereco}}</td>
+                </tr>
+                <tr>
+                    <th align="right">País:</th>
+                    <td align="left"> {{$recibo->cliente_detale->client_country_city->country_name}}</td>
+                </tr>
+                <tr>
+                    <th align="right">City:</th>
+                    <td align="left"> {{$recibo->cliente_detale->client_country_city->state_name}}</td>
                 </tr>
             </tbody>
         </table>
