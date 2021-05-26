@@ -65,14 +65,9 @@
         border: 1px solid #ddd;
         }
 
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-        #customers tr:hover {background-color: #ddd;}
-
         #customers th {
         text-align: left;
-        background-color: #0066CC;
-        color: white;
+        color: black;
         }
     </style>
 
