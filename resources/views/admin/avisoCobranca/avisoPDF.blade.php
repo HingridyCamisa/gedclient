@@ -172,7 +172,6 @@
                 <thead>
                 <tr>
                   <th width="8%">Nº Aviso</th>
-                  <th width="13%">Data Limite de Pagamento</th>
                   <th width="22%">Periodo de cobertura</th>
                   <th width="20%">Descrição</th>
                   <th width="10%">Pagamento</th>
@@ -190,7 +189,6 @@
                 @foreach($avisosDB as $key => $aviso)
                 <tr>
                   <td>{{$aviso->aviso_numero}}</td>  
-                  <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} </td>
                   <td>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}} - {{date('d-m-Y',strtotime($aviso->aviso_data))}}</td>
                   <td>{{$aviso->Contrato->detalhes_item_segurado}}</td>
                   <td>{{$aviso->Contrato->periodicidade_pagamento}}</td>
@@ -274,6 +272,28 @@
               </tr>
           </tbody>
       </table>
+      </div>
+            <div class="row" >
+        <table class="table" width="100%" align="right">
+            <tr>
+                <td width="40%"></td>
+                <th width="40%">
+                _______________________________
+                </th>
+                <td width="40%"></td>
+            </tr>
+         
+        </table>  
+        <table class="table" width="100%" align="right">      
+            <tr>
+                <td width="43%"></td>
+                <th width="">
+                Assinatura
+                </th>
+                <td width="35%"></td>
+            </tr>
+         
+        </table>
       </div>
 
 

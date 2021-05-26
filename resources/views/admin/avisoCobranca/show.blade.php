@@ -60,7 +60,7 @@
           <th width="3%"> {{$i}}º </th>
           <th width="7%"><i class="fa fa-calendar"></i>
             @php
-            $finalData = $startDate->addDays($dia_periodo)
+            $finalData = $startDate->addDays(30)
             @endphp
 
             {{$inicialData->format('d-m-Y') }}
@@ -111,7 +111,7 @@
          </tr>
          
           @php
-            $inicialData = $finalData
+            $inicialData = $inicialData->addDays($dia_periodo)
           @endphp
          @endfor
 
