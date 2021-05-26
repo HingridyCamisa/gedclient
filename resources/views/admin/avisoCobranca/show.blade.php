@@ -102,9 +102,9 @@
                  @endforeach
 
                  @if($verification == false)
-                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$inicialData,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> {{$inicialData->format('d-m-Y') }} - Aviso de Cobrança</a>
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$inicialData,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> {{$finalData->format('d-m-Y') }} - Aviso de Cobrança</a>
                  @endif
-                 
+            
                  
              </center>
           </td>
