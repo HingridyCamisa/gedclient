@@ -194,15 +194,14 @@ class AvisoDeCobrancaController extends Controller
 
         if ($tipo=='contratos')
         {
-        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('cliente_token_id',$cliente_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('cliente_token_id',$cliente_token_id)->where('status',3)->where('status',1)->orderby('created_at','asc')->get();
         }
         else
         {
-             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();      
+             $avisosDB=AvisoCobrancaSaude::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->where('status',1)->orderby('created_at','asc')->get();      
         }
 
 
-       dd($avisosDB);
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
