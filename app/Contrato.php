@@ -14,7 +14,7 @@ class Contrato extends Model
 
     public function cliente()
     {
-        return $this->belongsTo('App\Cliente','id','client_id');
+        return $this->belongsTo('App\Cliente','client_id','id');
     }    
     public function consultorx()
     {

@@ -202,7 +202,7 @@ class AvisoDeCobrancaController extends Controller
         }
 
 
-       
+       dd($avisosDB);
 
         return view('admin.avisoCobranca.aviso',compact('avisosDB'))->with('success','Gerado com sucesso.');
     }
