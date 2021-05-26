@@ -189,12 +189,12 @@ class AvisoDeCobrancaController extends Controller
 
 
 
-        public function avisoviewall($tipo,$contrato_token_id,$token_id)
+        public function avisoviewall($tipo,$contrato_token_id,$cliente_token_id)  
     {   
 
         if ($tipo=='contratos')
         {
-        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
+        	 $avisosDB=AvisoCobranca::where('tipo',$tipo)->where('contrato_token_id',$contrato_token_id)->where('cliente_token_id',$cliente_token_id)->where('status',3)->orwhere('status',1)->orderby('created_at','asc')->get();
         }
         else
         {

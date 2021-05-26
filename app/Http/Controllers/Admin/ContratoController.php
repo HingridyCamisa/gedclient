@@ -235,7 +235,7 @@ class ContratoController extends Controller
        ]);
        
        //file name
-        $namefile = Str::random(32).'anexo'.time();
+        $namefile = Str::random(32).'anexo'.time().Auth::user()->id;
       
         $prospecao->status=0;
         $prospecao->save();

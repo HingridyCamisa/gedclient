@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1><a class="btn btn-danger"  href="{{ url()->previous() }}"><i class="fa fa-fw fa-arrow-left"></i> </a>
-      <a href="{{url('admin/avisode-cobranca-view-all',[$avisosDB[0]->tipo,$avisosDB[0]->contrato_token_id,$avisosDB[0]->token_id])}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
+      <a href="{{url('admin/avisode-cobranca-view-all',[$avisosDB[0]->tipo,$avisosDB[0]->contrato_token_id,$avisosDB[0]->cliente->token_id])}}" class="btn btn-danger pull-right" style="margin-right: 5px;">
             <i class="fa fa-globe"></i> Todos não cobrados
   </a>
     </h1>
