@@ -46,6 +46,7 @@ class ExpiraNotification extends Command
     {   
         $user=User::get()->toArray();
         $today=Carbon::today();
+        $today=$today->addDays(30);
         $contrartos=Contrato::where('data_proximo_pagamento',$today)->where('status',1)->get();
         $prospecao=Prospecao::where('data_prevista_fim',$today)->where('status',1)->get();
 
@@ -61,6 +62,6 @@ class ExpiraNotification extends Command
         
      
 
-        $this->info('Notificacao entregue com sucesso'.$contrartos->count());
+        $this->info('Notificacao entregue com sucesso '.$contrartos->count().' '.$today);
     }
 }

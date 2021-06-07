@@ -60,12 +60,12 @@
           <th width="3%"> {{$i}}º </th>
           <th width="7%"><i class="fa fa-calendar"></i>
             @php
-            $finalData = $startDate->addDays(30)
+            $finalData = new \Carbon\Carbon($inicialData)
             @endphp
 
             {{$inicialData->format('d-m-Y') }}
             -
-            {{$finalData->format('d-m-Y') }}
+            {{$finalData->addDays(30)->format('d-m-Y') }}
              
          </th>
           <td width="10%"> <i class="fa fa-money"></i> &nbsp; {{number_format(round($valor_a_pagar,2), 2, ',', ' ')}}</td> 
@@ -102,16 +102,16 @@
                  @endforeach
 
                  @if($verification == false)
-                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$inicialData,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> {{$finalData->format('d-m-Y') }} - Aviso de Cobrança</a>
+                        <a href="{{url('admin/gerar-aviso-de-cobranca',[$tipo,$contrato->token_id,$cliente->token_id,$i,$valor_a_pagar,$inicialData,\Carbon\Carbon::parse($finalData),$denominador])}}" class="btn bg-olive btn-xs "><i class="fa fa-list"></i> {{$finalData->format('d-m-Y') }} -{{$dia_periodo}} Aviso de Cobrança</a>
                  @endif
             
                  
              </center>
           </td>
          </tr>
-         
-          @php
-            $inicialData = $inicialData->addDays($dia_periodo)
+         <!--$inicialData = $inicialData->addDays($dia_periodo)-->
+          @php   
+            $inicialData = $inicialData->addMonthNoOverflow($dia_periodo)
           @endphp
          @endfor
 
