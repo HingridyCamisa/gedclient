@@ -60,7 +60,7 @@ class AvisosExpiraNotification extends Command
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
                     'message' => 'This use external sorce from avisos.',
-                    'table' => 'avisocobranca_view',
+                    'table_name' => 'avisocobranca_view',
                     'table_id' => 'aviso_expirar',
                     'view_file' => 'exipiraAviso',
                     'type' => 'aviso_expirar',
