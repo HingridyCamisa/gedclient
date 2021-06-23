@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Carbon\Carbon;
+use App\Contrato;
 
 class ExpiraContrato extends Mailable
 {
@@ -17,10 +18,10 @@ class ExpiraContrato extends Mailable
      *
      * @return void
      */
-    public $contrartos;
-    public function __construct($contrartos)
+    public $messg;
+    public function __construct($messg)
     {
-        $this->contrartos=$contrartos;
+        $this->messg=$messg;
     }
 
     /**
@@ -30,8 +31,9 @@ class ExpiraContrato extends Mailable
      */
     public function build()
     {
-        $data=$this->contrartos;
-        $today=Carbon::today();
-        return $this->subject('Contratos a expirar '.$today)->from('info@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraContrato',compact(['data']));
+        $this->messg;
+        $data = Contrato::expirar()->get();
+        
+        return $this->subject($this->messg['assunto'])->from('info@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraContrato',compact(['data']));
     }
 }

@@ -87,7 +87,7 @@
     <div class="small-box bg-red">
               <div class="inner">
                 <h4><strong>{{  $contrato_expira }}</strong></h4>
-                <p>Contratos a expirar</p>
+                <p>Contratos a expirar este mês</p>
               </div>
               <div class="icon">
                 <i class="ion ion-archive"></i>
@@ -99,7 +99,7 @@
     <div class="small-box bg-red">
               <div class="inner">
                 <h4><strong>{{  $saude_expira }}</strong></h4>
-                <p>Saude a expirar</p>
+                <p>Contratos de Saude a expirar este mês</p>
               </div>
               <div class="icon">
                 <i class="ion ion-medkit"></i>
@@ -111,7 +111,7 @@
     <div class="small-box bg-aqua">
               <div class="inner">
                 <h4><strong>{{  $totalcontrato_expira_next }}</strong></h4>
-                <p>A Expirar next month</p>
+                <p>Contratos A Expirar Próximo Mês</p>
               </div>
               <div class="icon">
                 <i class="ion ion-archive"></i>
@@ -132,8 +132,34 @@
             </div>
     </div>
 </div>
-
+<div class="row">
+    <div class="col-md-3">
+    <div class="small-box bg-red">
+              <div class="inner">
+                <h4><strong>{{  $avisos30 }}</strong></h4>
+                <p>Avisos não pagos a expirar em 30 dias</p>
+              </div>
+              <div class="icon">
+                <i class="ion-alert-circled"></i>
+              </div>
+              <a href="{{ url('admin/aviso/expira')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+    <div class="col-md-3">
+    <div class="small-box bg-red">
+              <div class="inner">
+                <h4><strong>{{  $drafts }}</strong></h4>
+                <p>Messagens Pendentes</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-android-drafts"></i>
+              </div>
+              <a href="{{ url('admin/email/all')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+  </div>  
 <hr>
+
 
 <div id="app"> 
         <div class="row">
@@ -201,6 +227,7 @@
         </div>
 
     </div>
+    
 </div>
 
 <div class="modal modal-warning fade" id="modal-warning" style="display: none;">

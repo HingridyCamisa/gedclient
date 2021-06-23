@@ -7,9 +7,10 @@ use Carbon\Carbon;
 use App\Contrato;
 use App\Prospecao;
 use App\user;
-use App\Mail\ExpiraContrato;
-use App\Mail\ExpiraProspecao;
 use Illuminate\Support\Facades\Mail;
+use App\Email;
+use App\Mail\Geral;
+use App\Jobs\SendEmailGeral;
 
 class ExpiraNotification extends Command
 {
@@ -44,24 +45,62 @@ class ExpiraNotification extends Command
      */
     public function handle()
     {   
-        $user=User::get()->toArray();
-        $today=Carbon::today();
-        $today=$today->addDays(30);
-        $contrartos=Contrato::where('data_proximo_pagamento',$today)->where('status',1)->get();
-        $prospecao=Prospecao::where('data_prevista_fim',$today)->where('status',1)->get();
+        $contrartos=Contrato::expirar()->get();
+        $prospecao=Prospecao::expirar()->get();
+        $users=User::get();
 
-        if ($contrartos->count()>0)
+        if ($contrartos->count() !=0)
         {
-            Mail::to($user)->send(new ExpiraContrato($contrartos));	
+            foreach ($users as $key => $user) {
+                $data=[
+                    'to'=> "nhacudimaemidio@gmail.com" /*$user->email*/,
+                    'assunto' => 'Contratos a Espirar nos proximos 30 dias',
+                    'name_cliente' => $user->name,
+                    'user_id' => $user->id,
+                    'message' => 'This use external sorce from contrato.',
+                    'table' => 'contrato',
+                    'table_id' => 'contrato_expirar',
+                    'view_file' => 'exipiraContrato',
+                    'type' => 'contrato_expirar',
+                ];	
+
+                $this->email($data);
+            }
         }
-        if ($prospecao->count()>0)
-        {
-        	Mail::to($user)->send(new ExpiraProspecao($prospecao));
-        }
+
         
+        if ($prospecao->count()!=0)
+        {
+            foreach ($users as $key => $user) {
+                $data=[
+                    'to'=> "nhacudimaemidio@gmail.com" /*$user->email*/,
+                    'assunto' => 'Prospeções a Espirar nos proximos 30 dias',
+                    'name_cliente' => $user->name,
+                    'user_id' => $user->id,
+                    'message' => 'This use external sorce from prospecao.',
+                    'table' => 'prospecao',
+                    'table_id' => 'prospecao_expirar',
+                    'view_file' => 'exipiraProspecao',
+                    'type' => 'prospecao_expirar',
+                ];	
+
+                $this->email($data);
+            }
+        }
         
      
 
-        $this->info('Notificacao entregue com sucesso '.$contrartos->count().' '.$today);
+        $this->info('Notificacao entregue com sucesso ');
+    }
+    
+    private function email($data)
+    { 
+        $id=Email::create($data);
+        $id=$id->id;
+
+        //Mail::to($data['to'])->send(new Geral($data));
+
+        $emailJob = (new SendEmailGeral($data,$id));
+        dispatch($emailJob);
     }
 }

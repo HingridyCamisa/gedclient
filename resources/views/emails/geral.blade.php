@@ -334,7 +334,6 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>Amana Correctores e Consultores de Seguros, SA.</p>
                       </td>
                     </tr>
                   </table>
@@ -350,7 +349,8 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Av. Fernão Magalhães, Nᵒ 932 – R/C</span>
+                    <span class="apple-link">Amana Correctores e Consultores de Seguros, SA.</span>
+                    <br> <span class="apple-link">Aeroporto de Maputo - Terminal de Carga, Escritório Nr. 55</span>
                     <br> Contacte-nos <a href="mailto:info@amanaseguros.co.mz">info@amanaseguros.co.mz</a>.
                   </td>
                 </tr>

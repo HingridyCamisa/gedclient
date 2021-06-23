@@ -13,7 +13,8 @@ use DB;
 use App\User;
 use App\Charts\Charts as grafico;
 use Carbon\Carbon;
-
+use App\AvisoCobrancaView;
+use App\Email;
 
 
 class AdminController extends Controller
@@ -145,10 +146,13 @@ class AdminController extends Controller
         $prospecao = Prospecao::all();
         $segurado = Segurado::all();
         $contrato = Contrato::all()->where('status',1);
+
+        $avisos30=AvisoCobrancaView::expirar()->count();
        
+        $drafts=Email::where('status',1)->count();
     
 
-         return view('admin.home.index',compact('prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next','category_month_perf'));
+         return view('admin.home.index',compact('drafts','avisos30','prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next','category_month_perf'));
     }
 
     function sumItemPremio($items)

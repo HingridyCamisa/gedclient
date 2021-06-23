@@ -143,7 +143,7 @@ return [
 
                                         ],
                                         [
-                                            'text'  => 'A Expirar',
+                                            'text'  => 'A Expirar Este Mês',
                                             'url'   => 'admin/contrato/expira',
                                             'icon'  => 'clock-o',
 
@@ -163,7 +163,7 @@ return [
 
                                         ],
                                         [
-                                            'text'  => 'A Expirar',
+                                            'text'  => 'A Expirar  Este Mês',
                                             'url'   => 'admin/saude/expira',
                                             'icon'  => 'clock-o',
 
@@ -174,6 +174,20 @@ return [
                     'text'  => 'Avisos',
                     'url'   => 'admin/avisode-cobranca-index',
                     'icon'  => 'fax',
+                     'submenu'     => [
+                                        [
+                                            'text'        => ' Avisos',
+                                            'url'         => 'admin/avisode-cobranca-index',
+                                            'icon'  => 'fax',
+
+                                        ],
+                                        [
+                                            'text'  => 'A Expirar Em 30 dias',
+                                            'url'   => 'admin/aviso/expira',
+                                            'icon'  => 'clock-o',
+
+                                        ],
+                                      ]
 
                 ],
             ]

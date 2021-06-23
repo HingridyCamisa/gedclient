@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Contrato extends Model
 {
@@ -33,6 +34,12 @@ class Contrato extends Model
     public function user()
     {
         return $this->belongsTo('App\User','user_id','id');
+    }
+
+        public function scopeExpirar($query)
+    {
+        $expirationDate = Carbon::today()->subDays(30);
+        return $query->where('data_proximo_pagamento', '>=', $expirationDate)->where('status',1);
     }
     
 }

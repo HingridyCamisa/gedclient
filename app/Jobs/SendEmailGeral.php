@@ -10,6 +10,10 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Mail;
 use App\Mail\Geral;
 use App\Email;
+use App\Mail\ExpiraContrato;
+use App\Mail\ExpiraProspecao;
+use App\Mail\ExpiraAvisos;
+use App\User;
 
 class SendEmailGeral implements ShouldQueue
 {
@@ -35,7 +39,25 @@ class SendEmailGeral implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->data['to'])->send(new Geral($this->data));
+        
+        switch ($this->data['type']) {
+            case 'geral':
+                Mail::to($this->data['to'])->send(new Geral($this->data));
+                break;
+            case 'aviso_expirar':
+                Mail::to($this->data['to'])->send(new ExpiraAvisos($this->data));	
+                break;
+            case 'contrato_expirar':
+                Mail::to($this->data['to'])->send(new ExpiraContrato($this->data));	
+                break;
+            case 'prospecao_expirar':
+                Mail::to($this->data['to'])->send(new ExpiraProspecao($this->data));	
+                break;
+            
+            default:
+                # code...
+                break;
+        }
         $data=Email::find($this->id);
         $data->status=0;
         $data->save();

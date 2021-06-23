@@ -314,7 +314,7 @@
 
         #customers tr:hover {background-color: #ddd;}
 
-        #customers th {
+        #customers thead {
           padding-top: 12px;
           padding-bottom: 12px;
           text-align: left;
@@ -342,36 +342,42 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>
                             <table id="customers">
                             <thead>
                                 <tr>
                                   <th> Nº</th>
-                                  <th> Consultor</th>
-                                  <th> Segurado</th>
-                                  <th> Seguradora</th>
-                                  <th> Nº Apólice</th>
-                                  <th> Ramo</th>
-                                  <th> Próximo Pagamento </th>
-                                  <th> Situação </th>
-                                  <th> Estado </th>
+                                  <th> Cliente </th>
+                                  <th> Email </th>
+                                  <th> Telefone 1</th>
+                                  <th> Data fim do Aviso</th>
+                                  <th> Nº do Aviso </th>
+                                  <th> Tipo de Contrato </th>
+                                  <th> Valor  </th>
 
                                 </tr>
                               </thead>
                               <tbody>
                                   @if(isset($data))
-                                  @foreach($data as $i => $contrato)
-                                <tr>
-                                  <th><center>{{ ++$i }}</center></th>
-                                  <td><center>{{$contrato->consultorx->nome_consultor}}</center></td>
-                                  <td><center>{{$contrato->cliente->cliente_nome}}</center></td>
-                                  <td><center>{{$contrato->seguradora->nome_seguradora }}</center></td>
-                                  <td><center> <a href="{{ route ('contratos.show', $contrato->numero_apolice)}}" >{{$contrato->numero_apolice }}</a></center></td>
-                                  <td><center>{{$contrato->ramo['ramo'] }}</center></td>
-                                  <td><center>{{$contrato->data_proximo_pagamento}}</center></td>
-                                  <td><center>{{$contrato->situacao }}</center></td>
-                                  <td><center> Expira em {{\Carbon\Carbon::parse($contrato->data_inicio)->addDays(\Carbon\Carbon::parse($contrato->data_proximo_pagamento)->diffInDays($contrato->data_inicio)+1)->diffForHumans()}}</center></td>
-                              @endforeach
+                                    @foreach($data as $i => $aviso)
+                                        <tr>
+                                        <th>{{++$i}}</th>
+                                        <th><center><a href="{{ route ('clientes.show',$aviso->cliente)}}">{{ $aviso->cliente_nome }}</a></center></th>
+                                        <th><center>{{ $aviso->cliente_email }}</center></th>
+                                        <th><center>{{ $aviso->cliente_telefone_1 }}</center></th>
+                                        <th><center>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}}</center></th>
+                                        <th><center>
+                                            <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> {{str_pad( $aviso->id, 6, "0", STR_PAD_LEFT)}}</a>
+                                        </center></th>
+                                        <th><center>
+                                                @if($aviso->tipo=='saudes')
+                                                <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> Saúde</a>
+                                                @else
+                                                <a href="{{url('admin/showContratoViaAviso',$aviso->id)}}"> Contrato</a>
+                                                @endif
+                                        </center></th>
+                                        <th><center> {{number_format($aviso->aviso_amount , 2, ',', ' ') }}</center></th>
+                                    </tr>
+                                    @endforeach
                               @endif
                               </tr>
                               </tbody>

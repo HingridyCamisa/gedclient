@@ -25,7 +25,19 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('expira:notification')
-        ->dailyAt('08:00')
+        ->weeklyOn(1, '9:00')
+        ->runInBackground();
+
+        $schedule->command('expira:avisoNotification')
+        ->weeklyOn(1, '9:00')
+        ->runInBackground();
+
+        $schedule->command('expira:notification')
+        ->weeklyOn(4, '12:00')
+        ->runInBackground();
+
+        $schedule->command('expira:avisoNotification')
+        ->weeklyOn(4, '12:00')
         ->runInBackground();
     }
 

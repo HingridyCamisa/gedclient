@@ -72,6 +72,7 @@ class EmailController extends Controller
             'message' => 'required|min:3',
             'assunto' => 'required|min:3',
         ));
+        $data['type']="geral";
 
         $id=Email::create($data);
         $id=$id->id;

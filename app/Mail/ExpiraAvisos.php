@@ -7,9 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Carbon\Carbon;
-use App\Prospecao;
+use App\AvisoCobrancaView;
 
-class ExpiraProspecao extends Mailable
+class ExpiraAvisos extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,10 +31,9 @@ class ExpiraProspecao extends Mailable
      */
     public function build()
     {
-     
         $this->messg;
-        $data = Prospecao::expirar()->get();
-        
-        return $this->subject($this->messg['assunto'])->from('info@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.expiraProspecao',compact(['data']));
+        $data = AvisoCobrancaView::expirar()->get();
+
+        return $this->subject($this->messg['assunto'])->from('info@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraAviso',compact(['data']));
     }
 }

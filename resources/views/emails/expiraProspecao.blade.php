@@ -340,7 +340,6 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p><img src="http://www.amanaseguros.co.mz/img/logo.png" alt="logo" height="60" width="100"></p>
                         <p>
                             <table  id="customers">
                                 <thead>
@@ -360,7 +359,7 @@
                                   @foreach($data as $i => $prospecao)
                                     <tr>
                                       <th><center>{{ ++$i }}</center></th>
-                                      <td>{{$prospecao->cliente->cliente_nome }}</td>
+                                      <td><a href="{{ route ('prospecoes.show', $prospecao->id)}}" >{{$prospecao->cliente->cliente_nome }}</a></td>
                                       <td>{{$prospecao->consultor->nome_consultor }}</td>
                                       <td>{{ Carbon\Carbon::parse($prospecao->data_inicio)->format('d-m-Y ') }}</td>
                                       <td>{{ Carbon\Carbon::parse($prospecao->data_prevista_fim)->format('d-m-Y ') }}</td>
@@ -375,7 +374,6 @@
 
 
                         </p>
-                        <p>Amana Correctores e Consultores de Seguros, SA.</p>
                       </td>
                     </tr>
                   </table>
@@ -391,7 +389,8 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Av. Fernão Magalhães, Nᵒ 932 – R/C</span>
+                    <span class="apple-link">Amana Correctores e Consultores de Seguros, SA.</span>
+                    <br> <span class="apple-link">Aeroporto de Maputo - Terminal de Carga, Escritório Nr. 55</span>
                     <br> Contacte-nos <a href="mailto:info@amanaseguros.co.mz">info@amanaseguros.co.mz</a>.
                   </td>
                 </tr>
