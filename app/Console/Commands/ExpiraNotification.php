@@ -73,7 +73,7 @@ class ExpiraNotification extends Command
         {
             foreach ($users as $key => $user) {
                 $data=[
-                    'to'=> "nhacudimaemidio@gmail.com" /*$user->email*/,
+                    'to'=> $user->email,
                     'assunto' => 'Prospeções a Espirar nos proximos 30 dias',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
