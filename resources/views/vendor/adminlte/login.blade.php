@@ -77,7 +77,7 @@
             <hr />
 
             <div class="footer text-muted">
-                <center> <strong>Copyright © 2019 <a href="" class="text-white">Amana Softwares</a>.</strong> All rights reserved.</center>
+                <center> <strong>Copyright © {{date("Y")}} <a href="" class="text-white">Amana Softwares</a>.</strong> All rights reserved.</center>
 	        </div>
         </div>
         <!-- /.login-box-body -->
