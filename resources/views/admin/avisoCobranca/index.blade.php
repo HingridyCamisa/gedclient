@@ -20,6 +20,7 @@
           <th scope="col"><center><i class="fa fa-fw fa-users"></i>  Email</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 1</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-phone"></i> Telefone 2</center></th>
+          <th scope="col"><center><i class="fa fa-fw fa-calendar"></i> Data inicial</center></th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Data fim do Aviso </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-calendar"></i>  Expirado </center> </th>
           <th scope="col"><center><i class="fa fa-fw fa-warning"></i> Nº do Aviso </center></th>
@@ -37,6 +38,7 @@
           <th><center>{{ $aviso->cliente_telefone_1 }}</center></th>
           <th><center>{{ $aviso->cliente_telefone_2 }}</center></th>
           <th><center>{{date('d-m-Y',strtotime($aviso->aviso_data_inicial))}}</center></th>
+          <th><center>{{date('d-m-Y',strtotime($aviso->aviso_data))}}</center></th>
           <th><center>
                  @if(($data=\Carbon\Carbon::parse($aviso->aviso_data))->isPast())
                     <i class="fa fa-close text-red"></i> Expirado  {{$data->diffForHumans()}}

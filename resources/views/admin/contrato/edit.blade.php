@@ -83,7 +83,7 @@
                     </div>
                                 
                     <div class="col-xs-3">
-                    <label for="Data_Inicio"><i class="fa fa-calendar"></i> Data Próximo  Pagamento </label>
+                    <label for="Data_Inicio"><i class="fa fa-calendar"></i> Data Fim de seguro </label>
                          <input class="form-control " name="data_proximo_pagamento" value="{{ $contrato->data_proximo_pagamento}}" type="date">
                                     
                     </div>
