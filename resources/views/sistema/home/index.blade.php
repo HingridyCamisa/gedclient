@@ -120,7 +120,7 @@
             @yield('content')
 
                 <div class="footer text-muted">
-                        <center> <strong>Copyright © 2019 <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
+                        <center> <strong>Copyright © {{date("Y")}} <a href="http://www.amanaseguros.co.mz/" class="text-red">Amana Softwares</a>.</strong> All rights
             reserved.</center>
 	            </div>
         </main>
