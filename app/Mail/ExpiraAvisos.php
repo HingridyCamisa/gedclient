@@ -34,6 +34,6 @@ class ExpiraAvisos extends Mailable
         $this->messg;
         $data = AvisoCobrancaView::expirar()->get();
 
-        return $this->subject($this->messg['assunto'])->from('info@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraAviso',compact(['data']));
+        return $this->subject($this->messg['assunto'])->from('software@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraAviso',compact(['data']));
     }
 }
