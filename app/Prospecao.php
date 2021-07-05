@@ -24,7 +24,8 @@ class Prospecao extends Model
     
         public function scopeExpirar($query)
     {
-        $expirationDate = Carbon::today()->subDays(30);
-        return $query->where('data_prevista_fim', '>=', $expirationDate)->where('status',1);
+        $expirationDate = Carbon::today()->subDays(30)->format('Y-m-d');
+        $today = Carbon::today()->format('Y-m-d');
+        return $query->whereBetween('data_prevista_fim', [$expirationDate,$today])->where('status',1);
     }
 }
