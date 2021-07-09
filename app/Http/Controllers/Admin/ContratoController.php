@@ -43,8 +43,6 @@ class ContratoController extends Controller
     public function expira()
     {
         $this->authorize('contratos');
-        $start = new Carbon('first day of this month');
-        $end = new Carbon('last day of this month');
         $contratos = Contrato::expirarEsteMes()
                                        ->latest()
                                        ->paginate(5000);
