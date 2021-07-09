@@ -49,7 +49,7 @@ class ExpiraNotification extends Command
         $prospecao=Prospecao::expirarEsteMes()->get();
         $users=User::where('status',1)->get();
 
-        dd($contrartos,$prospecao);
+        //dd($contrartos,$prospecao);
 
         if ($contrartos->count() !=0)
         {
