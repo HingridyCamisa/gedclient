@@ -187,6 +187,12 @@ return [
                                             'icon'  => 'clock-o',
 
                                         ],
+                                        [
+                                            'text'  => 'Vencidos Não pagos',
+                                            'url'   => 'admin/aviso/vencidos-nao-pagos',
+                                            'icon'  => 'clock-o',
+
+                                        ],
                                       ]
 
                 ],

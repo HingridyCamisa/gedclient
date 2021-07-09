@@ -34,4 +34,12 @@ class AvisoCobrancaView extends Model
         $today = Carbon::today()->format('Y-m-d');
         return $query->whereBetween('aviso_data_inicial', [$expirationDate,$today])->where('status',1);
     }
+
+        
+    public function scopeVencidosNpagos($query)
+    {
+        $expirationDate = Carbon::today()->subDays(30)->format('Y-m-d');
+        $today = Carbon::today()->format('Y-m-d');
+        return $query->where('aviso_data', '<=', $today)->where('status',1);
+    }
 }

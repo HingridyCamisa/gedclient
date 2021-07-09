@@ -228,7 +228,15 @@ class AvisoDeCobrancaController extends Controller
         $avisos=AvisoCobrancaView::expirarMore()->latest()->paginate(5000);
         return view('admin.avisoCobranca.expirar', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
 
-    }
+    } 
+    
+    public function vencidos_n_pagos()
+    {
+        $this->authorize('avisos');
+        $avisos=AvisoCobrancaView::vencidosNpagos()->latest()->paginate(5000);
+        return view('admin.avisoCobranca.vencidos_n_pagos', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
+
+    } 
 
     public function showContratoViaAviso( $id)
     {

@@ -48,7 +48,7 @@ class AvisosExpiraNotification extends Command
     
     public function handle()
     {   
-        $users=User::get();
+        $users=User::where('status',1)->get();
         $avisos = AvisoCobrancaView::expirar()->get();
 
         if ($avisos->count() != 0)
