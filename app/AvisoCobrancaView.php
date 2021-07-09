@@ -24,7 +24,7 @@ class AvisoCobrancaView extends Model
     {
         $expirationDate = Carbon::today()->subDays(30)->format('Y-m-d');
         $today = Carbon::today()->format('Y-m-d');
-        return $query->where('aviso_data', '>=', $expirationDate)->where('status',1);
+        return $query->whereBetween('aviso_data_inicial', [$expirationDate,$today])->where('status',1);
     }
 
     
