@@ -46,7 +46,7 @@ class Contrato extends Model
     {
         $start = new Carbon('first day of this month');
         $end = new Carbon('last day of this month');
-        return $query->where("prospecaos.status",1)
+        return $query->where("contratos.status",1)
                     ->whereBetween('data_proximo_pagamento',[$start,$end]);
     }
 }
