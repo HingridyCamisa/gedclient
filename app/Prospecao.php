@@ -28,11 +28,12 @@ class Prospecao extends Model
         $today = Carbon::today()->format('Y-m-d');
         return $query->whereBetween('data_prevista_fim', [$expirationDate,$today])->where('status',1);
     }
-
-       {
+       public function scopeExpirarEsteMes($query)
+    {
         $start = new Carbon('first day of this month');
         $end = new Carbon('last day of this month');
         return $query->where("contratos.status",1)
                     ->whereBetween('data_prevista_fim',[$start,$end]);
     }
+    
 }
