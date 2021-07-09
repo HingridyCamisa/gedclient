@@ -45,8 +45,8 @@ class ExpiraNotification extends Command
      */
     public function handle()
     {   
-        $contrartos=Contrato::expirar()->get();
-        $prospecao=Prospecao::expirar()->get();
+        $contrartos=Contrato::expirarEsteMes()->get();
+        $prospecao=Prospecao::expirarEsteMes()->get();
         $users=User::where('status',1)->get();
 
         if ($contrartos->count() !=0)
