@@ -49,11 +49,13 @@ class ExpiraNotification extends Command
         $prospecao=Prospecao::expirarEsteMes()->get();
         $users=User::where('status',1)->get();
 
+        dd($contrartos,$prospecao);
+
         if ($contrartos->count() !=0)
         {
             foreach ($users as $key => $user) {
                 $data=[
-                    'to'=> "nhacudimaemidio@gmail.com" /*$user->email*/,
+                    'to'=> $user->email,
                     'assunto' => 'Contratos a Espirar nos proximos 30 dias',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
