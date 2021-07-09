@@ -45,8 +45,7 @@ class ContratoController extends Controller
         $this->authorize('contratos');
         $start = new Carbon('first day of this month');
         $end = new Carbon('last day of this month');
-        $contratos = Contrato::where("contratos.status",1)
-                                       ->whereBetween('data_proximo_pagamento',[$start,$end])
+        $contratos = Contrato::expirarEsteMes()
                                        ->latest()
                                        ->paginate(5000);
 

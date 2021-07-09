@@ -42,5 +42,11 @@ class Contrato extends Model
         $today = Carbon::today()->format('Y-m-d');
         return $query->whereBetween('data_proximo_pagamento', [$expirationDate,$today])->where('status',1);
     }
-    
+        public function scopeExpirarEsteMes($query)
+    {
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
+        return $query->where("contratos.status",1)
+                    ->whereBetween('data_proximo_pagamento',[$start,$end]);
+    }
 }
