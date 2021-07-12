@@ -56,7 +56,7 @@ class ExpiraNotification extends Command
             foreach ($users as $key => $user) {
                 $data=[
                     'to'=> $user->email,
-                    'assunto' => 'Contratos a Espirar nos proximos 30 dias',
+                    'assunto' => 'Contratos a Espirar Este mês.',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
                     'message' => 'This use external sorce from contrato.',
