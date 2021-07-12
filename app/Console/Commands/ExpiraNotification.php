@@ -102,9 +102,9 @@ class ExpiraNotification extends Command
         $id=Email::create($data);
         $id=$id->id;
 
-        Mail::to($data['to'])->send(new ExpiraContrato($data,$id));
+        //Mail::to($data['to'])->send(new ExpiraContrato($data,$id));
 
-        //$emailJob = (new SendEmailGeral($data,$id));
-        //dispatch($emailJob);
+        $emailJob = (new SendEmailGeral($data,$id));
+        dispatch($emailJob);
     }
 }
