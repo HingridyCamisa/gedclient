@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Email;
 use App\Mail\Geral;
 use App\Jobs\SendEmailGeral;
+use App\Mail\ExpiraContrato;
+use App\Mail\ExpiraProspecao;
 
 class ExpiraNotification extends Command
 {
