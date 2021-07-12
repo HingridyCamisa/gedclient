@@ -56,7 +56,7 @@ class ExpiraNotification extends Command
             foreach ($users as $key => $user) {
                 $data=[
                     'to'=> $user->email,
-                    'assunto' => 'Contratos a Espirar Este mês.',
+                    'assunto' => 'Contratos a Expirar Este mês.',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
                     'message' => 'This use external sorce from contrato.',
@@ -100,9 +100,9 @@ class ExpiraNotification extends Command
         $id=Email::create($data);
         $id=$id->id;
 
-        //Mail::to($data['to'])->send(new Geral($data));
+        Mail::to($data['to'])->send(new SendEmailGeral($data,$id));
 
-        $emailJob = (new SendEmailGeral($data,$id));
-        dispatch($emailJob);
+        //$emailJob = (new SendEmailGeral($data,$id));
+        //dispatch($emailJob);
     }
 }

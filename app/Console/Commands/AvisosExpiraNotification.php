@@ -56,7 +56,7 @@ class AvisosExpiraNotification extends Command
             foreach ($users as $key => $user) {
                 $data=[
                     'to'=> $user->email,
-                    'assunto' => 'Avisos a Espirar nos proximos 30 dias',
+                    'assunto' => 'Avisos a Expirar nos proximos 30 dias',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
                     'message' => 'This use external sorce from avisos.',
