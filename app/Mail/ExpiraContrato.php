@@ -32,7 +32,12 @@ class ExpiraContrato extends Mailable
     public function build()
     {
         $this->messg;
-        $data = Contrato::expirarEsteMes()->get();
+        
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
+        $data = Contrato::where("contratos.status",1)
+                    ->whereBetween('data_proximo_pagamento',[$start,$end])
+                    ->get();
        
         return $this->subject($this->messg['assunto'])->from('software@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraContrato',compact(['data']));
     }
