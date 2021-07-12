@@ -19,9 +19,11 @@ class ExpiraAvisos extends Mailable
      * @return void
      */
     public $messg;
-    public function __construct($messg)
+    public $table_data;
+    public function __construct($messg,$table_data)
     {
         $this->messg=$messg;
+        $this->table_data =$table_data;
     }
 
     /**
@@ -32,7 +34,7 @@ class ExpiraAvisos extends Mailable
     public function build()
     {
         $this->messg;
-        $data = AvisoCobrancaView::expirar()->get();
+        $data = $this->table_data;
 
         return $this->subject($this->messg['assunto'])->from('software@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.exipiraAviso',compact(['data']));
     }

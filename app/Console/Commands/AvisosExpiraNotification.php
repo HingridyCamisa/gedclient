@@ -66,7 +66,7 @@ class AvisosExpiraNotification extends Command
                     'type' => 'aviso_expirar',
                 ];	
 
-                $this->email($data);
+                $this->email($data,$avisos);
             }
         }
         
@@ -75,14 +75,14 @@ class AvisosExpiraNotification extends Command
         $this->info('Notificacao entregue com sucesso ');
     }
 
-    private function email($data)
+    private function email($data,$table_data)
     { 
         $id=Email::create($data);
         $id=$id->id;
 
         //Mail::to($data['to'])->send(new Geral($data));
 
-        $emailJob = (new SendEmailGeral($data,$id));
+        $emailJob = (new SendEmailGeral($data,$id,$table_data));
         dispatch($emailJob);
     }
 

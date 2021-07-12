@@ -68,7 +68,7 @@ class ExpiraNotification extends Command
                     'type' => 'contrato_expirar',
                 ];	
 
-                $this->email($data);
+                $this->email($data,$contrartos);
             }
         }
 
@@ -88,7 +88,7 @@ class ExpiraNotification extends Command
                     'type' => 'prospecao_expirar',
                 ];	
 
-                $this->email($data);
+                $this->email($data,$prospecao);
             }
         }
         
@@ -97,14 +97,14 @@ class ExpiraNotification extends Command
         $this->info('Notificacao entregue com sucesso ');
     }
     
-    private function email($data)
+    private function email($data,$table_data)
     { 
         $id=Email::create($data);
         $id=$id->id;
 
         //Mail::to($data['to'])->send(new ExpiraContrato($data,$id));
 
-        $emailJob = (new SendEmailGeral($data,$id));
+        $emailJob = (new SendEmailGeral($data,$id,$table_data));
         dispatch($emailJob);
     }
 }

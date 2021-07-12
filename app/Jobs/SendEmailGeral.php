@@ -26,10 +26,12 @@ class SendEmailGeral implements ShouldQueue
      */
     public $data;
     public $id;
-    public function __construct($data,$id)
+    public $table_data;
+    public function __construct($data,$id,$table_data)
     {
        $this->data=$data; 
        $this->id=$id;
+       $this->table_data= $table_data;
     }
 
     /**
@@ -45,13 +47,13 @@ class SendEmailGeral implements ShouldQueue
                 Mail::to($this->data['to'])->send(new Geral($this->data));
                 break;
             case 'aviso_expirar':
-                Mail::to($this->data['to'])->send(new ExpiraAvisos($this->data));	
+                Mail::to($this->data['to'])->send(new ExpiraAvisos($this->data,$this->table_data));	
                 break;
             case 'contrato_expirar':
-                Mail::to($this->data['to'])->send(new ExpiraContrato($this->data));	
+                Mail::to($this->data['to'])->send(new ExpiraContrato($this->data,$this->table_data));	
                 break;
             case 'prospecao_expirar':
-                Mail::to($this->data['to'])->send(new ExpiraProspecao($this->data));	
+                Mail::to($this->data['to'])->send(new ExpiraProspecao($this->data,$this->table_data));	
                 break;
             
             default:
