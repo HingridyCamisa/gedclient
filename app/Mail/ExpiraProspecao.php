@@ -35,6 +35,7 @@ class ExpiraProspecao extends Mailable
         $this->messg;
         $data = Prospecao::expirarEsteMes()->get();
         
+        
         return $this->subject($this->messg['assunto'])->from('software@amanaseguros.co.mz','AMANA SEGUROS')->replyTo('noreply@amanaseguros.co.mz', 'Amana Seguros')->view('emails.expiraProspecao',compact(['data']));
     }
 }
