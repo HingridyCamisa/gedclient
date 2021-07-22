@@ -52,6 +52,7 @@
                     <thead >
                         <tr>
                             <th></th>
+                            <th scope="col">#</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Assunto</th>
                             <th scope="col">Time</th>
@@ -104,6 +105,7 @@
                     "defaultContent": "",
                     'name':'assunto'
                 },
+                { "data": "id"},
                 { "data": "name",'name':'users.name' },
                                 {
                   data: null,
