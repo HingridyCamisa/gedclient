@@ -56,6 +56,7 @@
                             <th scope="col">Assunto</th>
                             <th scope="col">Time</th>
                             <th scope="col">Data</th>
+                            <th scope="col">Estado</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -113,6 +114,19 @@
                 },
                 { "data": "created_at" },
                 { "data": "time" },
+                {
+                  data: null,
+                  render: function ( data, type, row ) {
+                    
+                    if (data.status==1) {
+                      $sta='<span class="label label-warning pull-right">Não processado</span>'
+                    }else{
+                      $sta='<span class="label label-primary pull-right">Processado</span>'
+                    }
+                    return $sta;
+                  },
+                  'name':'assunto'
+                },
                 {
                   data: null,
                   render: function ( data, type, row ) {
