@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use DataTables;
 use App\Contrato;
+use App\Prospecao;
+use App\AvisoCobrancaView;
 use DB;
 use App\Email;
 use App\Mail\Geral;
@@ -79,7 +81,7 @@ class EmailController extends Controller
 
         //Mail::to($data['to'])->send(new Geral($data));
 
-        $emailJob = (new SendEmailGeral($data,$id));
+        $emailJob = (new SendEmailGeral($data,$id,null));
         dispatch($emailJob);
         
         return back()->with('success','Email enviado');
@@ -87,13 +89,37 @@ class EmailController extends Controller
 
         public function try($id)
     {
-    $this->authorize('emails');
+        $this->authorize('emails');
 
         $data=Email::find($id)->toArray();
-
-        $emailJob = (new SendEmailGeral($data,$id));
+        $table_data=$this->get_table_data($data);
+        $emailJob = (new SendEmailGeral($data,$id,$table_data));
         dispatch($emailJob);
         
         return back()->with('success','Email enviado');
+    }
+
+    public function get_table_data($email){     
+        switch ($email['type']) {
+            case 'geral':
+                $data=null;
+                break;
+            case 'aviso_expirar':
+                 $data=AvisoCobrancaView::expirar()->get();	
+                break;
+            case 'contrato_expirar':
+                 $data=Contrato::expirarEsteMes()->get();	
+                break;
+            case 'prospecao_expirar':
+                 $data=Prospecao::expirarEsteMes()->get();	
+                break;
+            
+            default:
+                 $data=null;
+                break;
+        }
+
+
+        return $data;
     }
 }
