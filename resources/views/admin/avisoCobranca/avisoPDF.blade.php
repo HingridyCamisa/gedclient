@@ -27,7 +27,7 @@
             font-size: x-small;
         }
         .invoice table {
-            margin: 15px;
+            margin: 5px;
         }
         .invoice h3 {
             margin-left: 15px;
@@ -44,7 +44,7 @@
             margin: 5px;
         }
         .information table {
-            padding: 10px;
+            padding: 5px;
         }
         .box {
               width: 100%;
@@ -167,7 +167,7 @@
                 <thead>
                 <tr>
                   <th width="8%">Nº Aviso</th>
-                  <th width="22%">Periodo de Cobertura</th>
+                  <th width="22%">Periodo de Cobrança</th>
                   <th width="20%">Item Segurado</th>
                   <th width="10%">Periodo de Cobrança</th>
                   <th width="25%">Seguradora</th>
@@ -208,7 +208,7 @@
                   <td width="50%">
                      
                     <div class="box">
-                      <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;  margin: 5px">
+                      <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;  margin: 5px; ">
                         Nos termos dos Artigos 124º 128º  do Decreto-
                         Lei Nº 1 de 2010 de 31 de Dezembro o prémio de duração do contrato de seguro é devido por inteiro, sem prejuizo de poder ser fraccionado para efeitos de pagamento
                         primeira fracção deste, é devido na data da celebração do contrato. As fracções seguintes do prémio inicial, o prémio de anuidades subsequentes e as sucessivas fracções
