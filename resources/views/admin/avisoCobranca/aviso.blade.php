@@ -108,7 +108,7 @@
               <th>Nᵒ Aviso</th>
               <th>Periodo de Cobrança</th>
               <th>Item Segurado</th>
-              <th>Pagamento</th>
+              <th>Periodicidade de Pagamento</th>
               <th>Seguradora</th>
               <th>Valor</th>
             
