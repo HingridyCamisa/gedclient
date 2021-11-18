@@ -169,7 +169,7 @@
                   <th width="8%">Nº Aviso</th>
                   <th width="22%">Periodo de Cobrança</th>
                   <th width="20%">Item Segurado</th>
-                  <th width="10%">Periodo de Cobrança</th>
+                  <th width="10%">Periodicidade de Pagamento</th>
                   <th width="25%">Seguradora</th>
                   <!--<th width="20%">Valor</th>-->
                 
