@@ -142,7 +142,7 @@ class ClientesController extends Controller
 
 
 
-        }elseif ($cliente['cliente_tipo']=='Empresa')
+        }else
         {
         $validatedata = Validator::make($request->all(),[
         //'file.*' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5000',
