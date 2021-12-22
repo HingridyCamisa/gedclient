@@ -182,6 +182,12 @@ return [
 
                                         ],
                                         [
+                                            'text'  => 'A Notificar',
+                                            'url'   => 'admin/aviso/a-notificar',
+                                            'icon'  => 'bell',
+
+                                        ],
+                                        [
                                             'text'  => 'A Expirar Em 30 dias',
                                             'url'   => 'admin/aviso/expira',
                                             'icon'  => 'clock-o',
