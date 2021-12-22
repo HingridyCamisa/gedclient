@@ -148,11 +148,12 @@ class AdminController extends Controller
         $contrato = Contrato::all()->where('status',1)->where('data_proximo_pagamento','>=',$now);
 
         $avisos30=AvisoCobrancaView::expirarMore()->count();
+        $avisosNotificar=AvisoCobrancaView::expirar()->count();
        
         $drafts=Email::where('status',1)->count();
     
 
-         return view('admin.home.index',compact('drafts','avisos30','prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next','category_month_perf'));
+         return view('admin.home.index',compact('drafts','avisos30','avisosNotificar','prospecao','segurado','contrato','emidio','chart','cliente','nu_aniversarios','contrato_expira','saude_expira','graf_seguradora','category_month','totalcontrato_expira_next','category_month_perf'));
     }
 
     function sumItemPremio($items)

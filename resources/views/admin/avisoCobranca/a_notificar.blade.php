@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Avisos Expirar')
+@section('title','Avisos Notificar')
 
 @section('content_header')
 @stop
@@ -9,7 +9,7 @@
 @include('notification')
  <div class="box box-solid box-danger">
    <div class="box-header">
-              <center><h3 class="box-title"><strong><i class="fa fa-fw fa-folder-open"></i> Avisos não pagos a expirar em 30 dias </strong></h3></center>
+              <center><h3 class="box-title"><strong><i class="fa fa-fw fa-folder-open"></i> Avisos a notificar </strong></h3></center>
 
     
      </div>

@@ -230,6 +230,14 @@ class AvisoDeCobrancaController extends Controller
 
     } 
     
+    public function aNotificar()
+    {
+        $this->authorize('avisos');
+        $avisos=AvisoCobrancaView::expirar()->latest()->paginate(5000);
+        return view('admin.avisoCobranca.a_notificar', compact('avisos'))->with('i', (request()->input('page', 1) -1) * 12);
+
+    } 
+    
     public function vencidos_n_pagos()
     {
         $this->authorize('avisos');

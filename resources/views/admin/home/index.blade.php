@@ -136,6 +136,18 @@
     <div class="col-md-3">
     <div class="small-box bg-red">
               <div class="inner">
+                <h4><strong>{{  $avisosNotificar }}</strong></h4>
+                <p>Avisos a notificar</p>
+              </div>
+              <div class="icon">
+                <i class="ion-alert-circled"></i>
+              </div>
+              <a href="{{ url('admin/aviso/a-notificar')}}" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+    <div class="col-md-3">
+    <div class="small-box bg-red">
+              <div class="inner">
                 <h4><strong>{{  $avisos30 }}</strong></h4>
                 <p>Avisos não pagos a expirar em 30 dias</p>
               </div>

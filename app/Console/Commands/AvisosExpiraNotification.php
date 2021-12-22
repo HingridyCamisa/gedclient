@@ -50,13 +50,34 @@ class AvisosExpiraNotification extends Command
     {   
         $users=User::where('status',1)->get();
         $avisos = AvisoCobrancaView::expirar()->get();
+        $avisosMore = AvisoCobrancaView::expirarMore()->get();
+
+        //avisos more
+        if ($avisosMore->count() != 0)
+        {
+            foreach ($users as $key => $user) {
+                $data=[
+                    'to'=> $user->email,
+                    'assunto' => 'Avisos a Expirar nos proximos 30 dias',
+                    'name_cliente' => $user->name,
+                    'user_id' => $user->id,
+                    'message' => 'This use external sorce from avisos.',
+                    'table_name' => 'avisocobranca_view',
+                    'table_id' => 'aviso_expirar',
+                    'view_file' => 'exipiraAviso',
+                    'type' => 'aviso_expirar',
+                ];	
+
+                $this->email($data,$avisosMore);
+            }
+        }
 
         if ($avisos->count() != 0)
         {
             foreach ($users as $key => $user) {
                 $data=[
                     'to'=> $user->email,
-                    'assunto' => 'Avisos a Expirar nos proximos 30 dias',
+                    'assunto' => 'Avisos a notificar',
                     'name_cliente' => $user->name,
                     'user_id' => $user->id,
                     'message' => 'This use external sorce from avisos.',
