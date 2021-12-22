@@ -93,7 +93,7 @@ class AvisosExpiraNotification extends Command
         
      
 
-        $this->info('Notificacao entregue com sucesso '.$avisos->count());
+        $this->info('Notificacao entregue com sucesso. A Notificar:'.$avisos->count().', A expirar: '.$avisosMore->count());
     }
 
     private function email($data,$table_data)
