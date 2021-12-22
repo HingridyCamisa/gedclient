@@ -147,7 +147,7 @@ class AdminController extends Controller
         $segurado = Segurado::all();
         $contrato = Contrato::all()->where('status',1)->where('data_proximo_pagamento','>=',$now);
 
-        $avisos30=AvisoCobrancaView::expirar()->count();
+        $avisos30=AvisoCobrancaView::expirarMore()->count();
        
         $drafts=Email::where('status',1)->count();
     
