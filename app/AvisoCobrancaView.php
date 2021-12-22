@@ -24,15 +24,15 @@ class AvisoCobrancaView extends Model
     {
         $expirationDate = Carbon::today()->subDays(30)->format('Y-m-d');
         $today = Carbon::today()->format('Y-m-d');
-        return $query->whereBetween('aviso_data', [$expirationDate,$today])->where('status',1);
+        return $query->whereBetween('aviso_data_inicial', [$expirationDate,$today])->where('status',1);
     }
 
     
-    public function scopeExpirar($query)
+    public function scopeExpirar($query)//use to notifications
     {
         $expirationDate = Carbon::today()->subDays(30)->format('Y-m-d');
         $today = Carbon::today()->format('Y-m-d');
-        return $query->whereBetween('aviso_data_inicial', [$expirationDate,$today])->where('status',1);
+        return $query->whereBetween('aviso_data', [$expirationDate,$today])->where('status',1);
     }
 
 
